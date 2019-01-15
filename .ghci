@@ -1,0 +1,8 @@
+-- GHCI's configuration file
+-- Enable multiline commands
+-- :set +m
+
+-- Prompt line swag
+:set prompt  "\ESC[0;36m%s\n\ESC[1;35m\STXλ \ESC[0m\STX"
+:set prompt-cont "\ESC[1;35m\STX> \ESC[0m\STX"
+

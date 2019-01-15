@@ -1,0 +1,32 @@
+# Here goes all your vars and PATH settings
+
+# Note this script uses wrapper functions for shells with incompatible
+# syntaxes for exporting variables and PATH additions. Each wrapper should
+# be defined on each shell's config file (e.g.: .bashrc, config.fish, etc)
+
+export EDITOR=nvim
+
+# Text editor and visualization variables used by sudoedit
+export SUDO_EDITOR=nvim
+export VISUAL=nvim
+export EDITOR=nvim
+export PAGER=/usr/bin/less
+
+## Prevent Ranger file manager to read the default 'rc.conf' file
+export RANGER_LOAD_DEFAULT_RC=false
+
+## Stop automatic selection of directories in navigate-as-you-type
+export NNN_NO_AUTOSELECT=1
+export NNN_TMPFILE=/tmp/nnn_last_dir
+export NNN_USE_EDITOR=1
+export DISABLE_FILE_OPEN_ON_NAV=1
+
+# Personal binaries and scripts
+prepend_to_path "$HOME/bin"
+prepend_to_path "$HOME/.local/bin"
+prepend_to_path "$HOME/.local/share/applications"
+prepend_to_path "$HOME/.local/share/custom-scripts"
+
+# Python compilations
+append_to_path "$HOME/.local/share/python/compiled/3.6/bin"
+

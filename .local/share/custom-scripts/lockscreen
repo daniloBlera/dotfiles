@@ -1,0 +1,9 @@
+#!/bin/bash
+# Make a blurred screenshot as lockscreen background
+
+img=/tmp/screenshot.png
+
+scrot $img
+convert $img -blur 0x5 $img
+i3lock -efi $img
+

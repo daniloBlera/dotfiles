@@ -1,0 +1,15 @@
+#!/bin/bash
+# A simple dmenu script to lock/close the WM or to shutdown.
+# Usage: manage_session [DMENU_OPTIONS]
+
+option=$(echo -e 'Cancel\nLock Screen\nExit Window Manager\nShutdown' | dmenu -i $@ -p 'What now chief?')
+
+case "$option" in
+	'Lock Screen')
+        i3lock -eflo;;
+    'Exit Window Manager')
+        pkill -x polybar; bspc quit;;
+    'Shutdown')
+        poweroff;;
+esac
+

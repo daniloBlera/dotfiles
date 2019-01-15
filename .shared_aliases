@@ -1,0 +1,66 @@
+#!/bin/bash
+# Put here all the aliases you want shared between different shells,
+# you can then source this script from your shells' config files
+
+# Shortcuts for configuration files
+alias sharedaliases="$EDITOR ~/.shared_aliases"
+alias localenv="$EDITOR ~/.environment"
+
+alias bashconfig="$EDITOR ~/.bashrc"
+alias bashaliases="$EDITOR ~/.bash_aliases"
+
+alias fishconfig="$EDITOR ~/.config/fish/config.fish"
+alias fishaliases="$EDITOR ~/.config/fish/aliases.fish"
+
+alias bspwmconfig="$EDITOR ~/.config/bspwm/bspwmrc"
+alias sxhkdconfig="$EDITOR ~/.config/sxhkd/sxhkdrc"
+alias polybarconfig="$EDITOR ~/.config/polybar/config"
+
+alias tmuxconfig="$EDITOR ~/.tmux.conf"
+alias nvimconfig="$EDITOR ~/.config/nvim/init.vim"
+alias rangerconfig="$EDITOR ~/.config/ranger/rc.conf"
+
+# Commonly-used
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias ll='ls -AlFh'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias l1='ls -1'
+alias lf='ls -F'
+alias ldf='ls -AF | grep "^\." | grep -v "/\$"' # List dotfiles
+alias lhd='ls -AF | grep "^\." | grep "/\$"'    # List hidden directories
+alias t2='tree -L 2'                            # Two-level tree
+
+alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
+
+alias ip='ip -c'    # Enable colors
+
+# git-related stuff
+alias gcm='git commit -m'
+alias gca='git commit --amend'
+alias gssb='git status --short --branch'
+alias gls='git log --stat --color'
+alias glgo='git log --graph --oneline --decorate --color'
+alias gpom='git push origin master'
+alias gdom='git diff origin/master'
+alias gdnom='git diff --numstat origin/master'
+alias ga='git add'
+alias gaa='git add --all'
+
+# Not so common stuff
+## Print a message for each of the 256 colors
+# alias colortest='for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"'
+
+# Print audio sink information
+alias listsinks="pacmd list-sources | grep -e 'index:' -e 'device.string' -e 'name:'"
+
+## Grep the window class string for WM workspace assignment
+alias xpropwm='xprop | grep -i "WM_CLASS(STRING)"'
+
