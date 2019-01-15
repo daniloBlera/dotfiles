@@ -1,0 +1,21 @@
+# Backup files
+*~
+*.bak
+
+# Fish automatically generated files
+.config/fish/fishd.*
+
+# Fonts extra files
+.local/share/fonts/.uuid
+
+# Neovim text editor
+.config/nvim/.netrwhist
+
+# Ranger file manager
+.config/ranger/bookmarks
+.config/ranger/history
+.config/ranger/tagged
+
+# Other stuff
+.local/share/applications/mimeapps.list
+
