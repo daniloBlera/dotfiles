@@ -22,7 +22,6 @@ bspc config window_gap          6
 bspc config split_ratio         0.50
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
-bspc config single_monocle      true
 
 # RUINER based red-black
 bspc config normal_border_color     "#880005"
