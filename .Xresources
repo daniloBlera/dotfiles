@@ -13,6 +13,7 @@ XTerm*boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16
 ! Extra stuff
 URxvt*saveLines: 1024
 XTerm*saveLines: 1024
+UXTerm*saveLines: 1024
 
 URxvt*scrollBar: false
 URxvt*scrollstyle: rxvt

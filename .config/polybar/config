@@ -17,7 +17,7 @@
 ;==========================================================
 
 [colors]
-foreground = #ffc5c8c6
+foreground = #ffddfafa
 foreground-alt = #ff313131
 base = #ff000000
 primary = #ffd20516
@@ -36,7 +36,7 @@ aubergine = #ff77216f
 [bar/statusbar]
 ; For a description of the options below, see
 ; https://github.com/jaagr/polybar/wiki/Configuration#bar-settings
-font-0 = Ubuntu Nerd Font:pixelsize=10;antialias=true;1
+font-0 = Ubuntu Nerd Font:pixelsize=10;antialias=true
 monitor = ${env:MONITOR:eDP-1}
 width = 100%
 height = 20
@@ -53,7 +53,6 @@ line-color = #f00
 ; Borders around the bar
 border-size = 0
 border-color = ${colors.primary}
-
 padding-left = 2
 padding-right = 2
 

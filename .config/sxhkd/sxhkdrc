@@ -6,6 +6,9 @@
 super + Return
 	urxvt
 
+alt + Return
+    cool-retro-term
+
 # program launcher
 super + Menu
     dmenu_run -nf '#000000' -nb '#d20516' -sf '#d20516' -sb '#000000' -fn 'Ubuntu-11' -p 'Run this'
@@ -33,7 +36,7 @@ XF86AudioMute
 # bspwm hotkeys
 #
 
-# Lock or exit the window manager
+# Lock screen, kill the window manager or shutdown
 # located at '~/.local/share/custom-scripts'
 ctrl + alt + Delete
     manage_session -nb '#000000' -nf '#d20516' -sb '#d20516' -sf '#000000' -fn 'Ubuntu-11'
