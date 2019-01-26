@@ -1,24 +1,23 @@
-#!/bin/bash
 # Put here all the aliases you want shared between different shells,
 # you can then source this script from your shells' config files
 
 # Shortcuts for configuration files
-alias sharedaliases="$EDITOR ~/.shared_aliases"
-alias localenv="$EDITOR ~/.environment"
+alias al="$EDITOR ~/.shared_aliases"
+alias ev="$EDITOR ~/.environment"
 
-alias bashconfig="$EDITOR ~/.bashrc"
-alias bashaliases="$EDITOR ~/.bash_aliases"
+alias cfbsh="$EDITOR ~/.bashrc"
+alias albsh="$EDITOR ~/.bash_aliases"
 
-alias fishconfig="$EDITOR ~/.config/fish/config.fish"
-alias fishaliases="$EDITOR ~/.config/fish/aliases.fish"
+alias cffsh="$EDITOR ~/.config/fish/config.fish"
+alias alfsh="$EDITOR ~/.config/fish/aliases.fish"
 
-alias bspwmconfig="$EDITOR ~/.config/bspwm/bspwmrc"
-alias sxhkdconfig="$EDITOR ~/.config/sxhkd/sxhkdrc"
-alias polybarconfig="$EDITOR ~/.config/polybar/config"
+alias cfbsp="$EDITOR ~/.config/bspwm/bspwmrc"
+alias cfsxh="$EDITOR ~/.config/sxhkd/sxhkdrc"
+alias cfpbr="$EDITOR ~/.config/polybar/config"
 
-alias tmuxconfig="$EDITOR ~/.tmux.conf"
-alias nvimconfig="$EDITOR ~/.config/nvim/init.vim"
-alias rangerconfig="$EDITOR ~/.config/ranger/rc.conf"
+alias cftmx="$EDITOR ~/.tmux.conf"
+alias cfnvm="$EDITOR ~/.config/nvim/init.vim"
+alias cfrfm="$EDITOR ~/.config/ranger/rc.conf"
 
 # Commonly-used
 alias ls='ls --color=auto'
@@ -59,8 +58,8 @@ alias gaa='git add --all'
 # alias colortest='for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"'
 
 # Print audio sink information
-alias listsinks="pacmd list-sources | grep -e 'index:' -e 'device.string' -e 'name:'"
+alias lssnk="pacmd list-sources | grep -e 'index:' -e 'device.string' -e 'name:'"
 
 ## Grep the window class string for WM workspace assignment
-alias xpropwm='xprop | grep -i "WM_CLASS(STRING)"'
+alias xpwmc='xprop | grep -i "WM_CLASS(STRING)"'
 
