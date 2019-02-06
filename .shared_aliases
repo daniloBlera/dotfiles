@@ -13,7 +13,7 @@ alias alfsh="$EDITOR ~/.config/fish/aliases.fish"
 
 alias cfbsp="$EDITOR ~/.config/bspwm/bspwmrc"
 alias cfsxh="$EDITOR ~/.config/sxhkd/sxhkdrc"
-alias cfpbr="$EDITOR ~/.config/polybar/config"
+alias cfbar="$EDITOR ~/.config/polybar/config"
 
 alias cftmx="$EDITOR ~/.tmux.conf"
 alias cfnvm="$EDITOR ~/.config/nvim/init.vim"
