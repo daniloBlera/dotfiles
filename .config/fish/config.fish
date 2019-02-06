@@ -1,20 +1,27 @@
 #!/usr/bin/fish
 
-# Utility functions
+# Utility functions -- handle incompatibilities between shells
 function set_env
-    # Wrapping export into function for bash/zsh/fish interfacing
     set -xg $argv[1] $argv[2]
 end
 
 function source_if_exists
-    # Source file if it exists
     if [ -e "$argv[1]" ]
         source "$argv[1]"
     end
 end
 
-# Configuring initial settings
-set -xg EDITOR nvim
+function append_to_path
+    if [ -d $argv[1] ] && not contains $argv[1] $PATH
+        set -x PATH $PATH $argv[1]
+    end
+end
+
+function prepend_to_path
+    if [ -d $argv[1] ] && not contains $argv[1] $PATH
+        set -x PATH $argv[1] $PATH
+    end
+end
 
 # Configuring path, environment variables and aliases
 source_if_exists "$HOME/.environment"
