@@ -20,7 +20,7 @@
 foreground = #ffddfafa
 foreground-alt = #ff313131
 base = #ff000000
-primary = #ffd20516
+primary = #ffdc122a
 secondary = #ffe60053
 alert = #ffffd700
 

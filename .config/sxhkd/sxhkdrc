@@ -6,21 +6,29 @@
 super + Return
 	urxvt
 
+# I like this one too
 alt + Return
     cool-retro-term
 
 # program launcher
 super + Menu
-    dmenu_run -nf '#000000' -nb '#d20516' -sf '#d20516' -sb '#000000' -fn 'Ubuntu-11' -p 'Run this'
+    dmenu_run -nf '#000000' -nb '#DC122A' -sf '#DC122A' -sb '#000000' -fn 'Ubuntu-11' -p 'Run this'
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
-# Take screenshot
-# located at '~/.local/share/custom-scripts'
+# Capture screenshot to $HOME/Pictures
 Print
-    take_screenshot
+    ~/.local/share/custom-scripts/take_screenshot
+
+# Capture screenshot after a 3s delay
+alt + Print
+    ~/.local/share/custom-scripts/take_screenshot -d 3
+
+# Capture a screenshot of the frame selected with left click
+ctrl + Print
+    ~/.local/share/custom-scripts/take_screenshot -s
 
 # Volume controls
 XF86AudioRaiseVolume
@@ -36,10 +44,10 @@ XF86AudioMute
 # bspwm hotkeys
 #
 
-# Lock screen, kill the window manager or shutdown
+# Lock screen, kill the window manager, restart or shutdown
 # located at '~/.local/share/custom-scripts'
 ctrl + alt + Delete
-    manage_session -nb '#000000' -nf '#d20516' -sb '#d20516' -sf '#000000' -fn 'Ubuntu-11'
+    ~/.local/share/custom-scripts/manage_session -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
 
 # close and kill
 super + {_,shift + }q
