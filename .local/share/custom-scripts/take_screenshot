@@ -1,4 +1,22 @@
 #!/bin/bash
 # Take a screenshot and save it on user's pictures
-scrot "$HOME/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
+
+filename="$HOME/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
+delay=0
+selection=false
+
+while getopts sd: OPTION; do
+    case $OPTION in
+        s)  selection=true;;
+        d)  delay=$OPTARG;;
+    esac
+done
+
+if [[ $selection == true ]]; then
+    scrot -s $filename
+elif [[ $delay -ne 0 ]]; then
+    scrot -d $delay $filename
+else
+    scrot $filename
+fi
 
