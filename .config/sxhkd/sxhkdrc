@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	urxvtc
 
 # I like this one too
 alt + Return

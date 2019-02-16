@@ -60,7 +60,7 @@ bspc rule -a 'discord' desktop='^9'
 bspc rule -a 'Keepassx2' desktop='^10'
 
 # Set background image
-feh --bg-fill "$HOME/Pictures/wallpapers/no-file-large-blur.png"
+feh --bg-fill "$HOME/Pictures/wallpapers/no-file-large-bright.png"
 
 # Enable left pointer cursor
 xsetroot -cursor_name left_ptr

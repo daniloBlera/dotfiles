@@ -38,7 +38,6 @@ alias lhd='ls -AF | grep "^\." | grep "/\$"'    # List hidden directories
 alias t2='tree -L 2'                            # Two-level tree
 
 alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
-
 alias ip='ip -c'    # Enable colors
 
 # git-related stuff
