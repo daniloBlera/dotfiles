@@ -33,7 +33,7 @@ bspc config presel_feedback_color   "#DDFAFA"
 bspc rule -a 'mplayer2' state=floating
 bspc rule -a 'Screenkey' manage=off
 
-# Click on panel to focus
+# Panels can be focused by left clicking
 bspc config click_to_focus button1
 
 # Workspace assignment
@@ -54,13 +54,13 @@ bspc rule -a 'cool-retro-term' desktop='^2'
 bspc rule -a 'Code' desktop='^4'
 bspc rule -a 'Zathura' state=tiled
 bspc rule -a 'VirtualBox Manager' desktop='^8'
-bspc rule -a 'Gimp' desktop='^9'
+bspc rule -a 'Gimp-2.10' desktop='^9'
 bspc rule -a 'Inkscape' desktop='^9'
 bspc rule -a 'discord' desktop='^9'
 bspc rule -a 'Keepassx2' desktop='^10'
 
 # Set background image
-feh --bg-fill "$HOME/Pictures/wallpapers/no-file-large-bright.png"
+feh --bg-fill "$HOME/Pictures/wallpapers/no-file.png"
 
 # Enable left pointer cursor
 xsetroot -cursor_name left_ptr

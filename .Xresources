@@ -17,7 +17,6 @@ UXTerm*saveLines: 1024
 
 URxvt*scrollBar: false
 URxvt*scrollstyle: rxvt
-URxvt*cursorBlink: 1
 
 XTerm.vt100.selectToClipboard: true
 
@@ -30,6 +29,6 @@ URxvt.url-select.launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: true
 
 ! Keyboard text selection
-URxvt.keysym.M-c: perl:keyboard-select:activate
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-f: perl:keyboard-select:search
 

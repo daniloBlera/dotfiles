@@ -30,8 +30,3 @@ set completeopt=noinsert,menuone,noselect
 " Toggle directory tree
 :map <F2> :NERDTreeToggle<CR>
 
-" Disable cursor style override
-:set guicursor=
-autocmd InsertEnter * set cursorline    " Enable cursor line on Insert mode entry
-autocmd InsertLeave * set nocursorline  " Disable cursor line on Insert mode exit
-

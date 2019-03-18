@@ -46,7 +46,7 @@ fixed-center = true
 background = ${colors.base}
 foreground = ${colors.foreground}
 
-; Under-/overline pixel size and argb color
+; Under/overline pixel size and argb color
 line-size = 3
 line-color = #f00
 
@@ -165,7 +165,8 @@ interval = 5
 date-alt = "%A, %d %b %Y"
 time = "%H:%M"
 
-format-prefix-foreground = ${colors.foreground}
+; format-prefix-foreground = ${colors.foreground}
+label-foreground = ${colors.foreground}
 format-underline = ${colors.blue}
 
 label = %date%%time%

@@ -28,11 +28,10 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias ll='ls -AlFh'
-alias la='ls -A'
+alias la='ls -AF'
 alias l='ls -CF'
 
-alias l1='ls -1'
-alias lf='ls -F'
+alias l1='ls -1F'
 alias ldf='ls -AF | grep "^\." | grep -v "/\$"' # List dotfiles
 alias lhd='ls -AF | grep "^\." | grep "/\$"'    # List hidden directories
 alias t2='tree -L 2'                            # Two-level tree

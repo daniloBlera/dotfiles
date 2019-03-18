@@ -5,7 +5,6 @@
 # directory (assuming there is a directory called `.pyenv`)
 alias py2='source ./.pyenv/py2/bin/activate.fish'
 alias py3='source ./.pyenv/py3/bin/activate.fish'
-alias py37='source ./.pyenv/py37/bin/activate.fish'
 alias mlpy='source ./.pyenv/mlpy/bin/activate.fish'
 alias py2h='source ~/.local/share/python/environments/py2/bin/activate.fish'
 alias py3h='source ~/.local/share/python/environments/py3/bin/activate.fish'

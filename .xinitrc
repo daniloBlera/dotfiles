@@ -1,7 +1,7 @@
 # Initial X setup
 # Terminal configuration and colourscheme
 xrdb ~/.Xresources
-xrdb -merge ~/.config/xresources-themes/try-harder-puppy
+xrdb -merge ~/.config/xresources-themes/gjm
 
 cd $HOME
 unclutter &     # Automatically hide mouse cursor when unused
