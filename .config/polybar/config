@@ -165,7 +165,6 @@ interval = 5
 date-alt = "%A, %d %b %Y"
 time = "%H:%M"
 
-; format-prefix-foreground = ${colors.foreground}
 label-foreground = ${colors.foreground}
 format-underline = ${colors.blue}
 

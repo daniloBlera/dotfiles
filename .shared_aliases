@@ -38,6 +38,7 @@ alias t2='tree -L 2'                            # Two-level tree
 
 alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
 alias ip='ip -c'    # Enable colors
+alias p8='ping 8.8.8.8'
 
 # git-related stuff
 alias gcm='git commit -m'
