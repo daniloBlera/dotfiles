@@ -1,7 +1,7 @@
 # Initial X setup
 # Terminal configuration and colourscheme
 xrdb ~/.Xresources
-xrdb -merge ~/.config/xresources-themes/gjm
+xrdb -merge ~/.config/xresources-themes/we-were-never-friends
 
 cd $HOME
 unclutter &     # Automatically hide mouse cursor when unused
