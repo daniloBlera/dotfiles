@@ -37,9 +37,9 @@ function append_to_path() {
 }
 
 # Jump to directory on exit
-export NNN_TMPFILE="/tmp/nnn"
 function n() {
-    nnn "$@"
+    export NNN_TMPFILE=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd
+    nnn -d "$@"
 
     if [ -f $NNN_TMPFILE ]; then
         . $NNN_TMPFILE
