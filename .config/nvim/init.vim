@@ -20,7 +20,7 @@ set linebreak
 set ignorecase              " Case insensitive search on all lowercase regex, case sensitive otherwise
 filetype plugin indent on   " Rely on file plugins to handle indenting
 
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
 " --Normal mode maps--
