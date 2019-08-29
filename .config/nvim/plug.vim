@@ -3,12 +3,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " List of plugins to be used -- must use single-quotes
 " Auto completion
-" Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-tmux'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-jedi'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-jedi'
 
 set completeopt=noinsert,menuone,noselect
 
