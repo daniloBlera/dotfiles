@@ -2,7 +2,7 @@
 # A simple dmenu script to lock/close the WM or to shutdown.
 # Usage: manage_session [DMENU_OPTIONS]
 
-option=$(echo -e 'Cancel\nLock Screen\nExit Window Manager\nReboot\nShutdown' | dmenu -i $@ -p 'What now chief?')
+option=$(echo -e 'Cancel\nLock Screen\nExit Window Manager\nReboot\nShut Down' | dmenu -i $@ -p 'What now chief?')
 
 case "$option" in
 	'Lock Screen')
@@ -11,7 +11,7 @@ case "$option" in
         pkill -x polybar; bspc quit;;
     'Reboot')
         reboot;;
-    'Shutdown')
+    'Shut Down')
         poweroff;;
 esac
 

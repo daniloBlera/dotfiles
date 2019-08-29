@@ -1,5 +1,5 @@
 #!/bin/bash
-# Take a screenshot and save it on user's pictures
+# Capture a screenshot and save it on user's pictures
 
 filename="$HOME/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
 delay=0

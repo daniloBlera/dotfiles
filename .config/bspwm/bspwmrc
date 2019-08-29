@@ -35,10 +35,11 @@ bspc rule -a 'Screenkey' manage=off
 
 # Panels can be focused by left clicking
 bspc config click_to_focus button1
+bspc config swallow_first_click true
 
 # Workspace assignment
 ## Internet browsers
-bspc rule -a 'Firefox' desktop='^1'
+bspc rule -a 'firefox' desktop='^1'
 bspc rule -a 'Vivaldi-stable' desktop='^1'
 bspc rule -a 'Opera' desktop='^1'
 bspc rule -a 'qutebrowser' desktop='^1'

@@ -20,15 +20,23 @@ super + Escape
 
 # Capture screenshot to $HOME/Pictures
 Print
-    ~/.local/share/custom-scripts/take_screenshot
+    ~/.local/share/custom-scripts/capture_screenshot
 
 # Capture screenshot after a 3s delay
 alt + Print
-    ~/.local/share/custom-scripts/take_screenshot -d 3
+    ~/.local/share/custom-scripts/capture_screenshot -d 3
 
 # Capture a screenshot of the frame selected with left click
 ctrl + Print
-    ~/.local/share/custom-scripts/take_screenshot -s
+    ~/.local/share/custom-scripts/capture_screenshot -s
+
+# Launch the NetworkManager dmenu UI
+super + n
+    networkmanager_dmenu
+
+# Open configuration files on 'EDITOR'
+super + e
+    ~/.local/share/custom-scripts/edit_configs -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
 
 # Volume controls
 XF86AudioRaiseVolume
