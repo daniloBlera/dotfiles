@@ -2,15 +2,11 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " List of plugins to be used -- must use single-quotes
-" Auto completion
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-jedi'
+Plug 'tpope/vim-surround'
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
-set completeopt=noinsert,menuone,noselect
+" Autocomplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Tree navigation
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -34,7 +30,7 @@ filetype plugin indent on
 call plug#end()
 
 " Plugins configuration
-let g:vim_markdown_folding_disabled = 1 " Disable folding in markdown
-let g:NERDSpaceDelims = 1               " Enable spaces after comment delimiters
-let g:NERDCommentEmptyLines = 1         " Enable commenting of empty lines
-
+let g:vim_markdown_folding_disabled = 1     " Disable folding in markdown
+let g:NERDSpaceDelims = 1                   " Enable spaces after comment delimiters
+let g:NERDCommentEmptyLines = 1             " Enable commenting of empty lines
+let g:deoplete#enable_at_startup = 1

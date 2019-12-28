@@ -37,17 +37,42 @@ function append_to_path() {
 }
 
 # Jump to directory on exit
-function n() {
-    export NNN_TMPFILE=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd
-    nnn -d "$@"
+# function n() {
+    # export NNN_TMPFILE=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd
+    # nnn -otd "$@"
+# 
+    # if [ -f $NNN_TMPFILE ]; then
+        # . $NNN_TMPFILE
+        # rm -f $NNN_TMPFILE > /dev/null
+    # fi
+# }
 
-    if [ -f $NNN_TMPFILE ]; then
-        . $NNN_TMPFILE
-        rm -f $NNN_TMPFILE > /dev/null
+function n () {
+    # Block nesting of nnn in subshells
+    if [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # To cd on quit only on ^G, export NNN_TMPFILE after the call to nnn
+    # NOTE: NNN_TMPFILE is fixed, should not be modified
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+
+    nnn -otd "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
 
 # Configuring path, environment variables and aliases
 source_if_exists "$HOME/.environment"
 source_if_exists "$HOME/.bash_aliases"
-
+source_if_exists "$HOME/.shared_aliases"

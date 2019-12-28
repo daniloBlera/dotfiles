@@ -18,7 +18,7 @@
 
 [colors]
 foreground = #ffddfafa
-foreground-alt = #ff313131
+foreground-alt = #ff212121
 base = #ff000000
 primary = #ffdc122a
 secondary = #ffe60053
@@ -37,7 +37,7 @@ aubergine = #ff77216f
 ; For a description of the options below, see
 ; https://github.com/jaagr/polybar/wiki/Configuration#bar-settings
 font-0 = Ubuntu Nerd Font:pixelsize=10;antialias=true
-monitor = ${env:MONITOR:eDP-1}
+monitor = ${env:MONITOR:eDP1}
 width = 100%
 height = 20
 radius = 0.0

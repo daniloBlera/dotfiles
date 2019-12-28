@@ -26,4 +26,3 @@ prepend_to_path "$HOME/bin"
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$HOME/.local/share/applications"
 prepend_to_path "$HOME/.local/share/custom-scripts"
-

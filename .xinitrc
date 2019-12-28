@@ -7,4 +7,3 @@ cd $HOME
 unclutter &     # Automatically hide mouse cursor when unused
 urxvtd -q -o -f # Initialize the urxvt daemon to save some memory
 exec bspwm
-

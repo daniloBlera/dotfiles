@@ -31,4 +31,3 @@ pps.: You can use GNU's `stow` to link dotfiles.
 [plug]: https://github.com/junegunn/vim-plug
 [tmux-plugins]: https://github.com/tmux-plugins/tpm
 [nerdfonts]: https://nerdfonts.com/
-

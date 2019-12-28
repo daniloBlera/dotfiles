@@ -31,4 +31,3 @@ URxvt.url-select.underline: true
 ! Keyboard text selection
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-f: perl:keyboard-select:search
-

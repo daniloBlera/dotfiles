@@ -1,9 +1,7 @@
 #
 # ~/.bash_profile
 #
-
-# Importing local environment
-if [ -f "$HOME/.environment" ]; then
+# Sourcing .bashrc
+if [[ -f "$HOME/.bashrc" ]]; then
     source "$HOME/.bashrc"
 fi
-

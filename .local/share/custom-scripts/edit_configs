@@ -1,11 +1,26 @@
 #!/bin/bash
 
-option=$(echo -e 'aliases\nenvironment variables\nbash\nbash aliases\nfish\nfish aliases\nbspwm\nsxhkd\npolybar\ntmux\nnvim\nranger' | dmenu -i $@ -p 'Which config to edit?')
+OPTIONS="Aliases
+Environment variables
+bash
+bash aliases
+fish
+fish aliases
+bspwm
+sxhkd
+sxiv
+polybar
+tmux
+nvim
+ranger
+edit-menu"
+
+option=$(echo -e "$OPTIONS" | dmenu -i $@ -p 'Which config to edit?')
 
 case "$option" in
-    'aliases')
+    'Aliases')
         urxvtc -e $EDITOR ~/.shared_aliases;;
-    'environment variables')
+    'Environment variables')
         urxvtc -e $EDITOR ~/.environment;;
     'bash')
         urxvtc -e $EDITOR ~/.bashrc;;
@@ -19,13 +34,17 @@ case "$option" in
         urxvtc -e $EDITOR ~/.config/bspwm/bspwmrc;;
     'sxhkd')
         urxvtc -e $EDITOR ~/.config/sxhkd/sxhkdrc;;
+    'sxiv')
+        urxvtc -e $EDITOR ~/.config/sxiv/exec/key-handler;;
     'polybar')
         urxvtc -e $EDITOR ~/.config/polybar/config;;
     'tmux')
         urxvtc -e $EDITOR ~/.tmux.conf;;
     'nvim')
         urxvtc -e $EDITOR ~/.config/nvim/init.vim;;
-    'Ranger')
+    'ranger')
         urxvtc -e $EDITOR ~/.config/ranger/rc.conf;;
+    'edit-menu')
+        urxvtc -e $EDITOR ~/.local/share/custom-scripts/edit_configs;;
 esac
 

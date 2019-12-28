@@ -26,6 +26,7 @@ end
 # Configuring path, environment variables and aliases
 source_if_exists "$HOME/.environment"
 source_if_exists "$HOME/.config/fish/aliases.fish"
+source_if_exists "$HOME/.shared_aliases"
 
 # Suppress greetings
 set fish_greeting
