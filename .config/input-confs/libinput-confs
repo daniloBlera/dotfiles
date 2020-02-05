@@ -14,4 +14,3 @@ xinput set-prop "$device" "$tapping" 1
 
 # Enable natural scrolling
 xinput set-prop "$device" "$natural_scroll" 1
-

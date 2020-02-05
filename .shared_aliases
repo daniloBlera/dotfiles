@@ -11,6 +11,9 @@ alias albsh="$EDITOR ~/.bash_aliases"
 alias cffsh="$EDITOR ~/.config/fish/config.fish"
 alias alfsh="$EDITOR ~/.config/fish/aliases.fish"
 
+alias cfzsh="$EDITOR ~/.zshrc"
+alias alzsh="$EDITOR ~/.zsh_aliases"
+
 alias cfbsp="$EDITOR ~/.config/bspwm/bspwmrc"
 alias cfsxh="$EDITOR ~/.config/sxhkd/sxhkdrc"
 alias cfbar="$EDITOR ~/.config/polybar/config"
@@ -36,6 +39,8 @@ alias ldf='ls -AF | grep "^\." | grep -v "/\$"' # List dotfiles
 alias lhd='ls -AF | grep "^\." | grep "/\$"'    # List hidden directories
 alias t2='tree -L 2'                            # Two-level tree
 
+alias ..='cd ..'
+
 alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
 alias ip='ip -c'    # Enable colors
 
@@ -52,14 +57,6 @@ alias gdom='git diff origin/master'             # Changes not staged for commit
 alias gdoms='git diff --staged origin/master'   # Changes to be commited
 
 # Not so common stuff
-## Print a message for each of the 256 colors
-# alias colortest='for code ({000..255}) print -P -- "$code: %F{$code}This is how your text would look like%f"'
-
-## View pacman's upgrade history
-alias uh='cat /var/log/pacman.log | grep "upgraded" | less'
-alias ih='cat /var/log/pacman.log | grep "installed" | less'
-alias rh='cat /var/log/pacman.log | grep "removed" | less'
-
 ## Open all images on current directory (including sub-directories) with sxiv
 alias imgs='sxiv -tq * > /dev/null 2>&1'
 

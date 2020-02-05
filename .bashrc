@@ -36,35 +36,31 @@ function append_to_path() {
     fi
 }
 
-# Jump to directory on exit
-# function n() {
-    # export NNN_TMPFILE=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd
-    # nnn -otd "$@"
-# 
-    # if [ -f $NNN_TMPFILE ]; then
-        # . $NNN_TMPFILE
-        # rm -f $NNN_TMPFILE > /dev/null
-    # fi
-# }
-
+# Enable 'cd' on quit
 function n () {
     # Block nesting of nnn in subshells
-    if [ "${NNNLVL:-0}" -ge 1 ]; then
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
         echo "nnn is already running"
         return
     fi
 
     # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # To cd on quit only on ^G, export NNN_TMPFILE after the call to nnn
+    # To cd on quit only on ^G, remove the "export" as in:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
     # NOTE: NNN_TMPFILE is fixed, should not be modified
-    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
 
     # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
     # stty start undef
     # stty stop undef
     # stty lwrap undef
+    # stty lnext undef
 
-    nnn -otd "$@"
+    ## Options:
+    # ##  -o  Open files on 'ENTER' key press only
+    # ##  -d  Start with 'detail' view
+    # ##  -A  Disable dir auto-select in nav-as-you-type
+    nnn -odA "$@"
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"
@@ -76,3 +72,9 @@ function n () {
 source_if_exists "$HOME/.environment"
 source_if_exists "$HOME/.bash_aliases"
 source_if_exists "$HOME/.shared_aliases"
+
+# Extra stuff
+stty -ixon
+
+## Using 'broot' for the awesome filesystem navigation and fuzzy search
+source $HOME/.config/broot/launcher/bash/br

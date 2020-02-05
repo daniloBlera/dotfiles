@@ -3,4 +3,3 @@
 #   First number    -- the delay before autorepeat starts (in ms)
 #   Second number   -- the repeat number per second
 xset r rate 200 40
-

@@ -30,4 +30,3 @@ source_if_exists "$HOME/.shared_aliases"
 
 # Suppress greetings
 set fish_greeting
-

@@ -4,23 +4,28 @@
 # syntaxes for exporting variables and PATH additions. Each wrapper should
 # be defined on each shell's config file (e.g.: .bashrc, config.fish, etc)
 
-export EDITOR=nvim
+# VARIABLES ##############################################################
+set_env XDG_CACHE_HOME $HOME/.cache
+set_env XDG_CONFIG_HOME $HOME/.config
+set_env XDG_DATA_HOME $HOME/.local/share
 
-# Text editor and visualization variables used by sudoedit
-export SUDO_EDITOR=nvim
-export VISUAL=nvim
-export EDITOR=nvim
-export PAGER=/usr/bin/less
+# Text editors and pagers ################################################
+set_env SUDO_EDITOR nvim
+set_env VISUAL nvim
+set_env EDITOR nvim
+set_env PAGER /usr/bin/less
 
-## Prevent Ranger file manager to read the default 'rc.conf' file
-export RANGER_LOAD_DEFAULT_RC=false
+## Ranger - disable reading the default 'rc.conf'
+set_env RANGER_LOAD_DEFAULT_RC false
 
-## Stop automatic selection of directories in navigate-as-you-type
-export NNN_NO_AUTOSELECT=1
-export NNN_TMPFILE=/tmp/nnn_last_dir
-export NNN_USE_EDITOR=1
-export DISABLE_FILE_OPEN_ON_NAV=1
+set_env NNN_USE_EDITOR 1
+set_env NNN_COPIER "$HOME/.config/nnn/copier.sh"
+set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
 
+# Setting R local libraries directory
+set_env R_LIBS "$HOME/.local/share/r-libs"
+
+# PATH ADDITIONS #########################################################
 # Personal binaries and scripts
 prepend_to_path "$HOME/bin"
 prepend_to_path "$HOME/.local/bin"

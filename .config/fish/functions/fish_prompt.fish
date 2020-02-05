@@ -1,10 +1,10 @@
 # Fish prompt display -- slightly different than the default
 # 
 # from this:
-#   user@host <path>
+#   user@host path>
 #
 # to this:
-#   user@host:<path>
+#   [user@host path]>
 # 
 function fish_prompt --description 'Write out the prompt'
 	set -l color_cwd
@@ -22,6 +22,9 @@ function fish_prompt --description 'Write out the prompt'
             set suffix '>'
     end
 
-    echo -n -s "$USER" @ (prompt_hostname) ':' (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
-end
+    # user@host:path>
+    # echo -n -s "$USER" @ (prompt_hostname) ':' (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
 
+    # [user@host path]>
+    echo -n -s ["$USER" @ (prompt_hostname) ' ' (set_color $color_cwd) (prompt_pwd) (set_color normal)] "$suffix "
+end

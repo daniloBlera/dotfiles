@@ -10,4 +10,3 @@
 
 " let g:python_host_prog  = '/home/<user>/.env/nvim-py2/bin/python'
 " let g:python3_host_prog = '/home/<user>/.env/nvim-py3/bin/python'
-

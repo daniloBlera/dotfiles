@@ -29,4 +29,3 @@ synclient MaxTapTime=90
 # Sets the cursor movement speed
 synclient MinSpeed=1
 synclient MaxSpeed=2
-
