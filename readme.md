@@ -1,30 +1,29 @@
 # My configs
-A place to backup my desktop Arch environment running `bspwm` and `polybar`, [here's an example of how it looks][sample-shot] (spoiler: it's VERY red). Other `Xresources` configurations can be found at `.config/xresources-themes`.
+A place to backup my desktop Arch environment running `bspwm` and `polybar`, 
+[here's an example of how it looks][sample-shot] (spoiler: it's VERY red). 
+Other `Xresources` configurations can be found at `.config/xresources-themes`.
 
 # Some of the programs used here:
 GUI stuff
 *   bspwm;
 *   sxhkd;
-*   polybar;
+*   polybar.
 
 Terminal related
 *   urxvt;
 *   xterm/uxterm;
-*   fish;
-*   bash (to mirror most of fish's config);
-*   tmux -- uses [tpm][tmux-plugins];
+*   bash;
+*   zsh;
 
 Text editors and document viewer
 *   neovim -- uses [vim-plug][plug];
-*   nano (just linter stuff);
-*   zathura;
-*   feh;
+*   zathura.
 
 File managers
-*   nnn;
-*   ranger;
+*   nnn.
 
-ps.: Some of the .files (sxhkd, polybar, Xresources, tmux and zathura) configure the fonts used ([ubuntu mono nerd font mono][nerdfonts] here).
+ps.: Some of the .files (sxhkd, polybar, Xresources, tmux and zathura) 
+configure the fonts used ([ubuntu mono nerd font mono][nerdfonts] here).
 
 pps.: You can use GNU's `stow` to link dotfiles.
 
