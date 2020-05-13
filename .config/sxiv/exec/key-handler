@@ -1,0 +1,39 @@
+#!/bin/bash
+# ^^^^^^^^^ Won't work with dash so I'll be using bash instead ^^^^^^^^^^^^^^^^
+# Custom keyboard shortcuts, press 'Ctrl+x' (C-x) then one of the options below
+
+# y: Copy current image name into X's selection
+# c: Copy selected images' names into X's selection
+# o: Open selected images with Gimp
+# w: Set current image as wallpaper
+
+selection=false
+open_files=false
+fnames=''
+
+function copy_to_selection() {
+    echo -n "$1" | xclip -selection clipboard
+    echo -n "$1" | xclip -selection primary
+}
+
+while read file
+do
+    case "$1" in
+        "y")
+            copy_to_selection "$file";;
+        "c")
+            selection=true
+            [ -z "$fnames" ] && fnames="$file" || fnames="$fnames $file";;
+        "o")
+            open_files=true
+            [ -z "$fnames" ] && fnames="$file" || fnames="$fnames $file";;
+        "w")
+            ~/.local/bin/setxbg "$file";;
+    esac
+done
+
+if [ "$selection" = true ]; then
+    copy_to_selection "$fnames"
+elif [ "$open_files" = true ]; then
+    gimp "$fnames"
+fi
