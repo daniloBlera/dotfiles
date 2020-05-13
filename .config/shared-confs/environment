@@ -18,9 +18,6 @@ set_env NNN_USE_EDITOR 1
 set_env NNN_COPIER "$XDG_CONFIG_HOME/nnn/copier.sh"
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
 
-# R RELATED VARIABLES ####################################################
-set_env R_ENVIRON_USER "$XDG_CONFIG_HOME/r/Renviron"
-
 # PATH ADDITIONS #########################################################
 # Personal binaries and scripts
 prepend_to_path "$HOME/.local/bin"
