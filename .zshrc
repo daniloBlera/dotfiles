@@ -1,5 +1,5 @@
 zstyle ':completion:*' menu select
-zstyle :compinstall filename '/home/dcb/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
