@@ -1,6 +1,6 @@
 #!/bin/sh
 # A simple script to quickly change between Xresources colourschemes
-themes_dir="$XDG_CONFIG_HOME/xresources-themes"
+themes_dir="$XDG_CONFIG_HOME/xres/themes"
 fname="$(ls -1 $themes_dir | dmenu -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11' -p 'Which colourscheme?')"
 theme_path="$themes_dir/$fname"
 
@@ -10,7 +10,7 @@ if [ ! -f $theme_path ]; then
 fi
 
 cp "$theme_path" "$XDG_CONFIG_HOME/xcolourscheme"
-xrdb "$HOME/.Xresources"
+xrdb "$XDG_CONFIG_HOME/xres/Xresources"
 xrdb -merge "$XDG_CONFIG_HOME/xcolourscheme"
 
 echo "Loaded the '$fname' X resource colourscheme"

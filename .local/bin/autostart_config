@@ -3,13 +3,16 @@
 [ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
 
 # Fonts and shared terminal configs
-xrdb ~/.Xresources
+xrdb $XDG_CONFIG_HOME/xres/Xresources
 
 # Colourscheme
 xrdb -merge $XDG_CONFIG_HOME/xcolourscheme
 
+# Set X background
+xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper" || xsetroot -solid #000000
+
 # Custom X event functions
-xbindkeys
+xbindkeys --file $XDG_CONFIG_HOME/xres/xbindkeysrc
 
 # Automatically hide mouse cursor when unused
 unclutter &
@@ -17,9 +20,6 @@ unclutter &
 # Set colour temperature
 # redshift-gtk -m randr -l -8.038958:-34.9574524 &
 redshift -m randr -l -8.038958:-34.9574524 &
-
-# Set X background
-xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper" || xsetroot -solid #000000
 
 # Enable left pointer cursor
 xsetroot -cursor_name left_ptr

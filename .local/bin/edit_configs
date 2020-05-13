@@ -28,19 +28,19 @@ SCRIPTS_HOME=$HOME/.local/bin
 option=$(echo "$OPTIONS" | dmenu -i $@ -p 'Which config to edit?')
 case "$option" in
     'Aliases')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shared-confs/aliases;;
+        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/aliases;;
     'Environment variables')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shared-confs/environment;;
+        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/environment;;
     'Autostart configs')
         urxvtc -e $EDITOR $SCRIPTS_HOME/autostart_config;;
     'bash')
         urxvtc -e $EDITOR $HOME/.bashrc;;
     'bash aliases')
-        urxvtc -e $EDITOR $HOME/.bash_aliases;;
+        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/bash_aliases;;
     'zsh')
         urxvtc -e $EDITOR $HOME/.zshrc;;
     'zsh aliases')
-        urxvtc -e $EDITOR $HOME/.zsh_aliases;;
+        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/zsh_aliases;;
     'bspwm')
         urxvtc -e $EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc;;
     'sxhkd')
@@ -56,9 +56,7 @@ case "$option" in
     'xinit')
         urxvtc -e $EDITOR $HOME/.xinitrc;;
     'xresources')
-        urxvtc -e $EDITOR $HOME/.Xresources;;
-    'dunst')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/dunst/dunstrc;;
+        urxvtc -e $EDITOR $XDG_CONFIG_HOME/xresources/Xresources;;
     'zathura')
         urxvtc -e $EDITOR $XDG_CONFIG_HOME/zathura/zathurarc;;
     'Terminal colourscheme')
