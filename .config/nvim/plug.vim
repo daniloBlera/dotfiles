@@ -26,6 +26,9 @@ Plug 'scrooloose/nerdcommenter'
 " Enhanced C/Bison/Flex syntax highlight
 Plug 'justinmk/vim-syntax-extra'
 
+" Colorize text in the form '#rrggbb'
+Plug 'lilydjwg/colorizer'
+
 filetype plugin indent on
 call plug#end()
 

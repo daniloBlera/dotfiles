@@ -21,7 +21,7 @@ URxvt*scrollstyle: rxvt
 XTerm.vt100.selectToClipboard: true
 
 ! URxvt extensions
-URxvt.perl-ext: default,confirm-paste,url-select,keyboard-select,selection-to-clipboard
+URxvt.perl-ext: default,confirm-paste,url-select,keyboard-select
 
 ! Yankable URLs from keyboard: use 'M-u'
 URxvt.keysym.M-u: perl:url-select:select_next
@@ -31,3 +31,4 @@ URxvt.url-select.underline: true
 ! Keyboard text selection
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-f: perl:keyboard-select:search
+URxvt.keyboard-select.clipboard: true

@@ -6,56 +6,58 @@
 super + Return
 	urxvtc
 
-# I like this one too
-alt + Return
-    cool-retro-term
-
 # program launcher
 super + Menu
     dmenu_run -nf '#000000' -nb '#DC122A' -sf '#DC122A' -sb '#000000' -fn 'Ubuntu-11' -p 'Run this'
 
-# make sxhkd reload its configuration files:
+# Open configuration files on 'EDITOR'
+super + e
+    ~/.local/bin/edit_configs -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
+
+# Lock screen, kill the window manager, restart or shutdown
+ctrl + alt + Delete
+    ~/.local/bin/manage_session_bspwm -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
+
+# Reload sxiv configs
 super + Escape
 	pkill -USR1 -x sxhkd
 
 # Capture screenshot to $HOME/Pictures
 Print
-    ~/.local/share/custom-scripts/capture_screenshot
+    ~/.local/bin/capture_screenshot
 
 # Capture screenshot after a 3s delay
 alt + Print
-    ~/.local/share/custom-scripts/capture_screenshot -d 3
+    ~/.local/bin/capture_screenshot -d 3
 
 # Capture a screenshot of the frame selected with left click
 ctrl + Print
-    ~/.local/share/custom-scripts/capture_screenshot -s
+    ~/.local/bin/capture_screenshot -s
 
 # Launch the NetworkManager dmenu UI
 super + n
     networkmanager_dmenu
 
-# Open configuration files on 'EDITOR'
-super + e
-    ~/.local/share/custom-scripts/edit_configs -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
-
 # Volume controls
 XF86AudioRaiseVolume
-    pactl set-sink-volume 0 +5%
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 XF86AudioLowerVolume
-    pactl set-sink-volume 0 -5%
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 XF86AudioMute
-    pactl set-sink-mute 0 toggle
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Brightness controls
+XF86MonBrightnessDown
+    xbacklight -dec 5
+
+XF86MonBrightnessUp
+    xbacklight -inc 5
 
 #
 # bspwm hotkeys
 #
-
-# Lock screen, kill the window manager, restart or shutdown
-# located at '~/.local/share/custom-scripts'
-ctrl + alt + Delete
-    ~/.local/share/custom-scripts/manage_session -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
 
 # close and kill
 super + {_,shift + }q

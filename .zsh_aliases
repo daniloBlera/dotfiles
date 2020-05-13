@@ -1,4 +1,4 @@
-# Put here your bash exclusive aliases
+# Put here your zsh exclusive aliases
 
 # Attempts to activate Python virtual environments at the current
 # directory (assuming there is a directory called `.pyenv`)

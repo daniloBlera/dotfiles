@@ -1,7 +1,7 @@
 # Visuals
-set font                        'UbuntuMono Nerd Font Mono normal 10'
+set font                        'UbuntuMono Nerd Font 11'
 
-# Matching the red-black colourscheme from bspwm and Xresources
+# Matching the red-black colourscheme from the window manager
 set completion-bg               '#000000'
 set completion-fg               '#DC122A'
 set completion-highlight-bg     '#DC122A'
@@ -24,4 +24,3 @@ set page-padding                3
 set window-title-basename       true
 set statusbar-home-tilde        true
 set selection-clipboard         clipboard
-

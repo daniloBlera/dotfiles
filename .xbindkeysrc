@@ -1,0 +1,13 @@
+# Disable Middle Mouse Button functionality, as suggested here:
+# https://unix.stackexchange.com/a/277488
+
+# Disables pasting only, not the event
+# "echo -n | xsel -n -i; pkill xbindkeys; xdotool click 2; xbindkeys"
+
+# Disables MMB completely
+""
+  b:2 + Release
+
+# Display current bindings
+"xbindkeys_show"
+  control+shift + q

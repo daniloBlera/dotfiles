@@ -1,0 +1,4 @@
+#!/bin/sh
+# Set the given image as the wallpaper
+BG_FILE=$XDG_CONFIG_HOME/wallpaper
+cp $1 $BG_FILE && xwallpaper --zoom $BG_FILE

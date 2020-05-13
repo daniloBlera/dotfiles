@@ -14,4 +14,3 @@ case "$option" in
     'Shut Down')
         poweroff;;
 esac
-

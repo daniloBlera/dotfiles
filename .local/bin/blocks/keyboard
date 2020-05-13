@@ -1,0 +1,20 @@
+#!/bin/sh
+
+get_caps_lock_status() {
+    echo "$(xset q | grep '00:' | sed -e 's/ \+/ /g' -e 's/^ //g' | cut -d ' ' -f 4)"
+}
+
+get_num_lock_status() {
+    echo "$(xset q | grep '00:' | sed -e 's/ \+/ /g' -e 's/^ //g' | cut -d ' ' -f 8)"
+}
+
+get_scroll_lock_status() {
+    echo "$(xset q | grep '00:' | sed -e 's/ \+/ /g' -e 's/^ //g' | cut -d ' ' -f 12)"
+}
+
+layout="$(setxkbmap -query | awk '/layout/{print $2}')"
+[ "$(get_caps_lock_status)" = "on" ] && caps="C" || caps='-'
+[ "$(get_num_lock_status)" = "on" ] && num="N" || num='-'
+[ "$(get_scroll_lock_status)" = "on" ] && scroll="S" || scroll='-'
+
+echo " $caps$num$scroll $layout "

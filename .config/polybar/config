@@ -16,6 +16,9 @@
 ;
 ;==========================================================
 
+; For a description of the options used here, see
+; https://github.com/jaagr/polybar/wiki/Configuration#bar-settings
+
 [colors]
 foreground = #ffddfafa
 foreground-alt = #ff212121
@@ -34,8 +37,6 @@ orange = #ffe95420
 aubergine = #ff77216f
 
 [bar/statusbar]
-; For a description of the options below, see
-; https://github.com/jaagr/polybar/wiki/Configuration#bar-settings
 font-0 = Ubuntu Nerd Font:pixelsize=10;antialias=true
 monitor = ${env:MONITOR:eDP1}
 width = 100%
@@ -63,7 +64,7 @@ module-margin-right = 1
 ; Modules
 modules-left = bspwm xwindow
 modules-center = date
-modules-right = xkeyboard memory cpu temperature battery pulseaudio
+modules-right = xkeyboard memory cpu temperature xbacklight pulseaudio
 
 ; System tray
 tray-position = right
@@ -86,18 +87,18 @@ label-maxlen = 40
 
 [module/xkeyboard]
 type = internal/xkeyboard
+format = <label-indicator> <label-layout>
 
-format-prefix-foreground = ${colors.foreground}
-format-prefix-underline = ${colors.primary}
-
+; Keyboard layout
 label-layout = %layout%
 label-layout-underline = ${colors.primary}
+label-layout-foreground = ${colors.foreground}
 
-label-indicator-padding = 2
+; Caps|Scroll|Num Lock
+label-indicator-padding = 1
 label-indicator-margin = 1
 label-indicator-foreground = ${colors.base}
 label-indicator-background = ${colors.primary}
-label-indicator-underline = ${colors.primary}
 
 [module/bspwm]
 type = internal/bspwm
@@ -123,19 +124,8 @@ label-empty-foreground = ${colors.foreground-alt}
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = –
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = –
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+format = <label>
+label = BL %percentage%%
 
 [module/backlight-acpi]
 inherit = module/xbacklight
@@ -162,7 +152,7 @@ label = %percentage_used%%
 type = internal/date
 interval = 5
 
-date-alt = "%A, %d %b %Y"
+date-alt = "%A, %d %B, %Y"
 time = "%H:%M"
 
 label-foreground = ${colors.foreground}
@@ -174,29 +164,15 @@ label = %date%%time%
 type = internal/pulseaudio
 sink = alsa_output.pci-0000_00_1b.0.analog-stereo
 
-format-volume = <label-volume> <bar-volume>
+; format-volume = <label-volume> <bar-volume>
+format-volume = <label-volume>
 label-volume = VOL %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = VOL –muted–
+; format-muted = <label-muted> <bar-volume>
+format-muted = <label-muted>
+label-muted = VOL %percentage%%
 label-muted-foreground = ${colors.foreground-alt}
-
-bar-volume-width = 9
-bar-volume-foreground-0 = ${colors.green}
-bar-volume-foreground-1 = ${colors.green}
-bar-volume-foreground-2 = ${colors.green}
-bar-volume-foreground-3 = ${colors.green}
-bar-volume-foreground-4 = ${colors.green}
-bar-volume-foreground-5 = ${colors.orange}
-bar-volume-foreground-6 = ${colors.red-alt}
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = –
-bar-volume-fill-font = 2
-bar-volume-empty = –
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery

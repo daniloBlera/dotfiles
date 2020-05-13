@@ -1,9 +1,14 @@
 # Initial X setup
-# Terminal configuration and colourscheme
-xrdb ~/.Xresources
-xrdb -merge ~/.config/xresources-themes/we-were-never-friends
-
 cd $HOME
-unclutter &     # Automatically hide mouse cursor when unused
-urxvtd -q -o -f # Initialize the urxvt daemon to save some memory
-exec bspwm
+
+# Run configuration scripts
+~/.local/bin/autostart_config
+
+# BSPWM
+# sxhkd &
+# polybar statusbar &
+# exec bspwm
+
+# DWM
+dwmblocks &
+exec dwm

@@ -1,24 +1,19 @@
-#
-# ~/.bashrc
-#
+zstyle ':completion:*' menu select
+zstyle :compinstall filename '/home/dcb/.zshrc'
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+autoload -Uz compinit
+compinit
 
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+HISTFILE=/tmp/zsh_history-$(whoami)
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
 
-# Enable extended completion
-if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    source /usr/share/bash-completion/bash_completion
-fi
+PROMPT='[%n@%m %1~]%# '
 
-# Not saving command history
-HISTFILE=/tmp/bash_history-$(whoami)
-
-# Utility functions -- handle incompatibilities between shells
+# Utility functions used to handle incompatibilities between shells (bash, zsh and fish)
 function set_env() {
-    export "$1"="$2"
+    export $1=$2
 }
 
 function source_if_exists() {
@@ -59,11 +54,12 @@ function n () {
     # stty lnext undef
 
     ## Options:
-    # ##  -o  Open files on 'ENTER' key press only
-    # ##  -d  Start with 'detail' view
-    # ##  -A  Disable dir auto-select in nav-as-you-type
-    # ##  -e  Open text files in visual/editor
-    nnn -odAe "$@"
+    #   -o  Open files on 'ENTER' key press only
+    #   -d  Start with 'detail' view
+    #   -A  Disable dir auto-select in nav-as-you-type
+    #   -e  Open text files in visual/editor
+    #   -R Disable rolover at edges
+    nnn -odAeR "$@"
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"
@@ -73,7 +69,7 @@ function n () {
 
 # Configuring path, environment variables and aliases
 source_if_exists "$HOME/.config/shared-confs/environment"
-source_if_exists "$HOME/.bash_aliases"
+source_if_exists "$HOME/.zsh_aliases"
 source_if_exists "$HOME/.config/shared-confs/aliases"
 
 # Extra stuff

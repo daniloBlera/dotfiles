@@ -1,0 +1,36 @@
+#!/bin/sh
+# A script to unify X configuration between window managers
+[ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
+
+# Fonts and shared terminal configs
+xrdb ~/.Xresources
+
+# Colourscheme
+xrdb -merge $XDG_CONFIG_HOME/xcolourscheme
+
+# Custom X event functions
+xbindkeys
+
+# Automatically hide mouse cursor when unused
+unclutter &
+
+# Set colour temperature
+# redshift-gtk -m randr -l -8.038958:-34.9574524 &
+redshift -m randr -l -8.038958:-34.9574524 &
+
+# Set X background
+xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper" || xsetroot -solid #000000
+
+# Enable left pointer cursor
+xsetroot -cursor_name left_ptr
+
+# Custom keyboard and trackpad configuration
+~/.local/bin/libinput-conf
+
+# Configure keyboard repeat rate
+# 200:  Delay before repeat (in ms)
+# 40:   Number of repeats per second
+xset r rate 200 40
+
+# Initialize the urxvt daemon
+urxvtd -q -o -f

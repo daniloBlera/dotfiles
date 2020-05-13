@@ -2,25 +2,17 @@
 # you can then source this script from your shells' config files
 
 # Shortcuts for configuration files
-alias al="$EDITOR ~/.shared_aliases"
-alias ev="$EDITOR ~/.environment"
+alias al="$EDITOR $HOME/.config/shared-confs/aliases"
+alias ev="$EDITOR $HOME/.config/shared-confs/environment"
 
-alias cfbsh="$EDITOR ~/.bashrc"
-alias albsh="$EDITOR ~/.bash_aliases"
-
-alias cffsh="$EDITOR ~/.config/fish/config.fish"
-alias alfsh="$EDITOR ~/.config/fish/aliases.fish"
-
+alias cfbash="$EDITOR ~/.bashrc"
 alias cfzsh="$EDITOR ~/.zshrc"
-alias alzsh="$EDITOR ~/.zsh_aliases"
 
-alias cfbsp="$EDITOR ~/.config/bspwm/bspwmrc"
-alias cfsxh="$EDITOR ~/.config/sxhkd/sxhkdrc"
-alias cfbar="$EDITOR ~/.config/polybar/config"
-
-alias cftmx="$EDITOR ~/.tmux.conf"
-alias cfnvm="$EDITOR ~/.config/nvim/init.vim"
-alias cfrfm="$EDITOR ~/.config/ranger/rc.conf"
+alias cfbspwm="$EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc"
+alias cfsxhkd="$EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc"
+alias cfpolybar="$EDITOR $XDG_CONFIG_HOME/polybar/config"
+alias cfnvim="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
+alias cfdunst="$EDITOR $XDG_CONFIG_HOME/dunst/dunstrc"
 
 # Commonly-used
 alias ls='ls --color=auto'
@@ -37,12 +29,12 @@ alias l='ls -CF'
 alias l1='ls -1F'
 alias ldf='ls -AF | grep "^\." | grep -v "/\$"' # List dotfiles
 alias lhd='ls -AF | grep "^\." | grep "/\$"'    # List hidden directories
-alias t2='tree -L 2'                            # Two-level tree
-
+alias t2='tree -L 2'
 alias ..='cd ..'
-
+alias ~='cd ~/'
 alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
-alias ip='ip -c'    # Enable colors
+alias ip='ip -c'
+alias xreset='xrdb ~/.Xresources; xrdb -merge $XDG_CONFIG_HOME/xcolourscheme'
 
 # git-related stuff
 alias gcm='git commit -m'
@@ -65,3 +57,7 @@ alias lssnk="pacmd list-sources | grep -e 'index:' -e 'device.string' -e 'name:'
 
 ## Grep the window class string for WM workspace assignment
 alias xpwmc='xprop | grep -i "WM_CLASS(STRING)"'
+
+alias mtpls='simple-mtpfs --list-devices'
+alias mtpcn='simple-mtpfs --device 1'
+alias srcconda='source ~/miniconda3/etc/profile.d/conda.sh'

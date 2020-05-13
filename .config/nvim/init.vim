@@ -1,30 +1,30 @@
-" --Python's virtualenv configuration--
-source $HOME/.config/nvim/venv.vim
+" --PYTHON'S VIRTUALENV--
+source $XDG_CONFIG_HOME/nvim/venv.vim
 
-" --Plugins--
-source $HOME/.config/nvim/plug.vim  " Plugins configuration file
+" --PLUGINS--
+source $XDG_CONFIG_HOME/nvim/plug.vim
 
-" --Visuals--
+" --VISUAL--
 set number                  " Set line numbering on
-" colorscheme koehler
-set scrolloff=9             " Number of lines to keep above and below the cursor
+colorscheme murphy
+set scrolloff=10            " Number of lines to keep above and below the cursor
 
-" --Indent and search--
-set tabstop=4               " Maximum width of a TAB in columns
-set shiftwidth=4            " The size of an indent in spaces
-" set softtabstop=4           " Number of spaces a TAB counts on edit operations
+" --INDENT AND SEARCH--
+set tabstop=4               " Number of spaces a TAB counts for
+set shiftwidth=4            " Number of spaces to use for each step of (auto)indent.
+set softtabstop=4           " Number of spaces a TAB counts on edit operations
 set expandtab               " Insert whitespaces when pressing TAB
 set shiftround              " Round indent to a multiple of 'shiftwidth'
-set autoindent
-set linebreak
-set ignorecase              " Case insensitive search on all lowercase regex, case sensitive otherwise
+set autoindent              " Copy current indent level into the next line
+set linebreak               " Wrap long lines
+set ignorecase              " Ignore case on search patterns
 filetype plugin indent on   " Rely on file plugins to handle indenting
 
 " autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
-" --Normal mode maps--
-" Map (capital) 'J' and 'K' to 'Next' and 'Previous' tab, similar to qutebrowser's tab selection
+" --KEYMAPS--
+" Map (capital) 'J' and 'K' to 'Next' and 'Previous' tab
 nnoremap J gt
 nnoremap K gT
 
@@ -47,15 +47,18 @@ noremap <Leader>n :tabnew
 nnoremap j gj
 nnoremap k gk
 
-" Map '\' and 'P' to insert python hashbang and file encoding
+" Map '\' and 'P' to insert python's hashbang and file encoding
 nnoremap <Leader>P ggI#!/usr/bin/env python3<CR># -*- coding: utf-8 -*-<CR><ESC>
 
 " Line highlight
 hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-set cursorline
+" set cursorline
 nnoremap <F4> :set cursorline!<CR>
 
-" Pane navigation
+" Disable last search results hightlight
+nnoremap <M-/> :noh<CR>
+
+" Splits navigation
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>

@@ -1,0 +1,12 @@
+#!/bin/sh
+is_mute() {
+    # Outputs "yes" or "no"
+    echo "$(pactl list sinks | grep '^[[:space:]]Mute:' | cut -d ' ' -f 2)"
+}
+
+get_volume() {
+    # Outputs the sink volume number
+    echo "$(pactl list sinks | grep '^[[:space:]]Volume:' | sed -e 's/ \+/ /g' -e 's/%//g' | cut -d ' ' -f 5)"
+}
+
+[ "$(is_mute)" = "yes" ] && echo " VOL $(get_volume)% (mute) " || echo " VOL $(get_volume)% "
