@@ -72,9 +72,9 @@ function n () {
 }
 
 # Configuring path, environment variables and aliases
-source_if_exists "$HOME/.config/shared-confs/environment"
-source_if_exists "$HOME/.bash_aliases"
-source_if_exists "$HOME/.config/shared-confs/aliases"
+source_if_exists "$HOME/.config/shells/environment"
+source_if_exists "$HOME/.config/shells/bash_aliases"
+source_if_exists "$HOME/.config/shells/aliases"
 
 # Extra stuff
 stty -ixon

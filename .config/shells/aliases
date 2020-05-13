@@ -2,8 +2,8 @@
 # you can then source this script from your shells' config files
 
 # Shortcuts for configuration files
-alias al="$EDITOR $HOME/.config/shared-confs/aliases"
-alias ev="$EDITOR $HOME/.config/shared-confs/environment"
+alias al="$EDITOR $HOME/.config/shells/aliases"
+alias ev="$EDITOR $HOME/.config/shells/environment"
 
 alias cfbash="$EDITOR ~/.bashrc"
 alias cfzsh="$EDITOR ~/.zshrc"
