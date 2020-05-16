@@ -16,7 +16,7 @@ set_env EDITOR /usr/bin/nvim
 set_env PAGER /usr/bin/less
 set_env NNN_USE_EDITOR 1
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
-export NNN_BMS='s:~/.local/bin/;c:~/.config/;t:~/.config/xres/;d:~/Downloads/'
+export NNN_BMS='s:~/.local/bin/;c:~/.config/;t:~/.config/xres/themes/;d:~/Downloads/'
 
 # PATH ADDITIONS #########################################################
 # Personal binaries and scripts

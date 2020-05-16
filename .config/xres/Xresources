@@ -1,14 +1,17 @@
 ! X Resources configuration file
-
 ! Patched nerd fonts with working font-awesome glyphs
-URxvt*font: xft:UbuntuMono Nerd Font Mono:pixelsize=16
-URxvt*boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16
+URxvt.font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+URxvt.boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
 
-UXTerm*font: xft:UbuntuMono Nerd Font Mono:pixelsize=16
-UXTerm*boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16
+UXTerm.font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+UXTerm.boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
 
-XTerm*font: xft:UbuntuMono Nerd Font Mono:pixelsize=16
-XTerm*boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16
+XTerm.font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+XTerm.boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+
+! For st terminal
+*.font: UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+*.font.boldFont: UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
 
 ! Extra stuff
 URxvt*saveLines: 1024

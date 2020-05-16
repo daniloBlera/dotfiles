@@ -54,15 +54,3 @@ URxvt*borderColor:  [100]#060203
 ! Black color that will not be affected by bold highlighting.
 *.color66: #060203
 *color66:  #060203
-
-! Xclock colors.
-XClock*foreground: #f1e198
-XClock*background: #060203
-XClock*majorColor:  rgba:f1/e1/98/ff
-XClock*minorColor:  rgba:f1/e1/98/ff
-XClock*hourColor:   rgba:f1/e1/98/ff
-XClock*minuteColor: rgba:f1/e1/98/ff
-XClock*secondColor: rgba:f1/e1/98/ff
-
-! Set depth to make transparency work.
-URxvt*depth: 32
