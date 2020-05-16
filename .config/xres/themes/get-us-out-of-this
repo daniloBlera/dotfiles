@@ -4,6 +4,8 @@
 *background:        #000000
 *.foreground:       #f2bf88
 *.background:       #000000
+*cursorColor:       #f2bf88
+*.cursorColor:      #f2bf88
 emacs*foreground:   #f2bf88
 emacs*background:   #000000
 URxvt*foreground:   #f2bf88

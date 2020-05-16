@@ -1,4 +1,4 @@
-! google.dark (except fg, bg and cursor) 
+! google.dark
 ! special
 *.foreground:   #c5c8c6
 *.background:   #000000
