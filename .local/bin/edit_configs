@@ -24,43 +24,44 @@ Menu options"
 [ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
 [ -z $XDG_DATA_HOME ] && XDG_DATA_HOME="$HOME/.local/share"
 SCRIPTS_HOME=$HOME/.local/bin
+TERM=st
 
 option=$(echo "$OPTIONS" | dmenu -i $@ -p 'Which config to edit?')
 case "$option" in
     'Aliases')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/aliases;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/aliases;;
     'Environment variables')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/environment;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/environment;;
     'Autostart configs')
-        urxvtc -e $EDITOR $SCRIPTS_HOME/autostart_config;;
+        $TERM -e $EDITOR $SCRIPTS_HOME/autostart_config;;
     'bash')
-        urxvtc -e $EDITOR $HOME/.bashrc;;
+        $TERM -e $EDITOR $HOME/.bashrc;;
     'bash aliases')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/bash_aliases;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/bash_aliases;;
     'zsh')
-        urxvtc -e $EDITOR $HOME/.zshrc;;
+        $TERM -e $EDITOR $HOME/.zshrc;;
     'zsh aliases')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/shells/zsh_aliases;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/zsh_aliases;;
     'bspwm')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc;;
     'sxhkd')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc;;
     'sxiv')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/sxiv/exec/key-handler;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/sxiv/exec/key-handler;;
     'polybar')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/polybar/config;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/polybar/config;;
     'nvim')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/nvim/init.vim;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/nvim/init.vim;;
     'nvim plugins')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/nvim/plug.vim;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/nvim/plug.vim;;
     'xinit')
-        urxvtc -e $EDITOR $HOME/.xinitrc;;
+        $TERM -e $EDITOR $HOME/.xinitrc;;
     'xresources')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/xresources/Xresources;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/xres/Xresources;;
     'zathura')
-        urxvtc -e $EDITOR $XDG_CONFIG_HOME/zathura/zathurarc;;
+        $TERM -e $EDITOR $XDG_CONFIG_HOME/zathura/zathurarc;;
     'Terminal colourscheme')
-        urxvtc -e $EDITOR $SCRIPTS_HOME/setxcolours;;
+        $TERM -e $EDITOR $SCRIPTS_HOME/setxcolours;;
     'Menu options')
-        urxvtc -e $EDITOR $SCRIPTS_HOME/edit_configs;;
+        $TERM -e $EDITOR $SCRIPTS_HOME/edit_configs;;
 esac

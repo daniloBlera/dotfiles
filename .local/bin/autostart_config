@@ -33,4 +33,4 @@ xsetroot -cursor_name left_ptr
 xset r rate 200 40
 
 # Initialize the urxvt daemon
-urxvtd -q -o -f
+# urxvtd -q -o -f
