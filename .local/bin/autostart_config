@@ -2,11 +2,8 @@
 # A script to unify X configuration between window managers
 [ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
 
-# Fonts and shared terminal configs
-xrdb $XDG_CONFIG_HOME/xres/Xresources
-
-# Colourscheme
-xrdb -merge $XDG_CONFIG_HOME/xcolourscheme
+# Shared terminal configs and colourscheme
+xrdb -I$HOME/.config/xres ~/.config/xres/Xresources
 
 # Set X background
 xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper" || xsetroot -solid #000000

@@ -1,2 +1,3 @@
 #!/bin/sh
+# Initiate the urxvt daemon
 urxvtd -q -o -f
