@@ -1,13 +1,17 @@
 #!/bin/bash
 # A simple dmenu script to lock/close the WM or to shutdown.
 # Usage: manage_session [DMENU_OPTIONS]
+OPTIONS='Lock Screen
+Close BSPWM
+Reboot
+Shut Down'
 
-option=$(echo -e 'Cancel\nLock Screen\nExit Window Manager\nReboot\nShut Down' | dmenu -i $@ -p 'What now chief?')
+option=$(echo -e "$OPTIONS" | dmenu -i $@ -p 'What now chief?')
 
 case "$option" in
-	'Lock Screen')
+    'Lock Screen')
         slock;;
-    'Exit Window Manager')
+    'Close BSPWM')
         pkill -x polybar; bspc quit;;
     'Reboot')
         reboot;;

@@ -1,4 +1,5 @@
 #!/bin/sh
+# Pactl sink volume info script for dwmblocks
 is_mute() {
     # Outputs "yes" or "no"
     echo "$(pactl list sinks | grep '^[[:space:]]Mute:' | cut -d ' ' -f 2)"

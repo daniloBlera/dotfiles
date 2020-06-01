@@ -1,21 +1,34 @@
-#!/bin/bash
+#!/bin/sh
 # Capture a screenshot and save it on user's pictures
 
-filename="$HOME/Pictures/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
-delay=0
-selection=false
+fname="screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
+fpath="$HOME/Pictures/$fname"
+delay=3
+interactive=false
 
-while getopts sd: OPTION; do
-    case $OPTION in
-        s)  selection=true;;
-        d)  delay=$OPTARG;;
+notify() {
+    pgrep dunst 1> /dev/null && dunstify "Captured screenshot $1" || echo "Captured $1"
+}
+
+for var in "$@"; do
+    case $var in
+        -i|--interactive)
+            interactive=true;;
     esac
 done
 
-if [[ $selection == true ]]; then
-    scrot -s $filename
-elif [[ $delay -ne 0 ]]; then
-    scrot -d $delay $filename
+if [ $interactive = false ]; then
+    scrot $fpath
+    notify "$fname"
 else
-    scrot $filename
+    option="$(echo 'Selection\nDelayed' | dmenu)"
+
+    case $option in
+        Selection)
+            scrot -s $fpath
+            notify "$fname";;
+        Delayed)
+            scrot -d $delay $fpath
+            notify "$fname";;
+    esac
 fi

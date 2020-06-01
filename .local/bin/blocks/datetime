@@ -1,2 +1,3 @@
 #!/bin/sh
+# Date and time script for dwmblocks
 echo " $(date '+%H:%M - %a, %d %B %Y') "

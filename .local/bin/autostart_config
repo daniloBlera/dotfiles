@@ -31,3 +31,6 @@ xset r rate 200 40
 
 # Initialize the urxvt daemon
 # urxvtd -q -o -f
+
+# Background notification daemon
+dunst &

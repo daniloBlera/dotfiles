@@ -18,50 +18,52 @@ xinit
 xresources
 dunst
 zathura
-Terminal colourscheme
+X colourscheme
 Menu options"
 
 [ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
 [ -z $XDG_DATA_HOME ] && XDG_DATA_HOME="$HOME/.local/share"
 SCRIPTS_HOME=$HOME/.local/bin
-TERM=st
+TERMINAL=st
 
 option=$(echo "$OPTIONS" | dmenu -i $@ -p 'Which config to edit?')
 case "$option" in
     'Aliases')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/aliases;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/shells/aliases;;
     'Environment variables')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/environment;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/shells/environment;;
     'Autostart configs')
-        $TERM -e $EDITOR $SCRIPTS_HOME/autostart_config;;
+        $TERMINAL -e $EDITOR $SCRIPTS_HOME/autostart_config;;
     'bash')
-        $TERM -e $EDITOR $HOME/.bashrc;;
+        $TERMINAL -e $EDITOR $HOME/.bashrc;;
     'bash aliases')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/bash_aliases;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/shells/bash_aliases;;
     'zsh')
-        $TERM -e $EDITOR $HOME/.zshrc;;
+        $TERMINAL -e $EDITOR $HOME/.zshrc;;
     'zsh aliases')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/shells/zsh_aliases;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/shells/zsh_aliases;;
     'bspwm')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc;;
     'sxhkd')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc;;
     'sxiv')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/sxiv/exec/key-handler;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/sxiv/exec/key-handler;;
     'polybar')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/polybar/config;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/polybar/config;;
     'nvim')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/nvim/init.vim;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/nvim/init.vim;;
     'nvim plugins')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/nvim/plug.vim;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/nvim/plug.vim;;
     'xinit')
-        $TERM -e $EDITOR $HOME/.xinitrc;;
+        $TERMINAL -e $EDITOR $HOME/.xinitrc;;
     'xresources')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/xres/Xresources;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/xres/settings;;
+    'dunst')
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/dunst/dunstrc;;
     'zathura')
-        $TERM -e $EDITOR $XDG_CONFIG_HOME/zathura/zathurarc;;
-    'Terminal colourscheme')
-        $TERM -e $EDITOR $SCRIPTS_HOME/setxcolours;;
+        $TERMINAL -e $EDITOR $XDG_CONFIG_HOME/zathura/zathurarc;;
+    'X colourscheme')
+        $TERMINAL -e $EDITOR $SCRIPTS_HOME/setxcolours;;
     'Menu options')
-        $TERM -e $EDITOR $SCRIPTS_HOME/edit_configs;;
+        $TERMINAL -e $EDITOR $SCRIPTS_HOME/edit_configs;;
 esac
