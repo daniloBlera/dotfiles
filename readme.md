@@ -1,7 +1,7 @@
 # My configs
 A place to backup my desktop Arch environment running `bspwm` and `polybar`, 
 [here's an example of how it looks][sample-shot] (spoiler: it's VERY red). 
-Other `Xresources` configurations can be found at `.config/xresources-themes`.
+Other colourschemes can be found at `~/.config/xres/themes`.
 
 # Some of the programs used here:
 GUI stuff
