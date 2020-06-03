@@ -49,7 +49,7 @@ alias gdoms='git diff --staged origin/master'   # Changes to be commited
 
 # Not so common stuff
 ## Open all images on current directory (including sub-directories) with sxiv
-alias imgs='sxiv -tq * > /dev/null 2>&1'
+# alias imgs='sxiv -tq * > /dev/null 2>&1'
 
 ## Print audio sink information
 alias lssnk="pacmd list-sources | grep -e 'index:' -e 'device.string' -e 'name:'"

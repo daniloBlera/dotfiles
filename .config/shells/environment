@@ -16,7 +16,8 @@ set_env EDITOR /usr/bin/nvim
 set_env PAGER /usr/bin/less
 set_env NNN_USE_EDITOR 1
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
-export NNN_BMS='s:~/.local/bin/;c:~/.config/;t:~/.config/xres/themes/;d:~/Downloads/;b:~/Programs/suckless-related'
+set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;t:~/.config/xres/themes/;d:~/Downloads/;b:~/Programs/suckless-related'
+set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:view_images;x:_rm -rf $nnn'
 
 # PATH ADDITIONS #########################################################
 # Personal binaries and scripts

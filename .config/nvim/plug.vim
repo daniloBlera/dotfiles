@@ -31,9 +31,6 @@ Plug 'justinmk/vim-syntax-extra'
 " Colorize text in the form '#rrggbb'
 Plug 'lilydjwg/colorizer'
 
-" Insert/Delete in pairs
-Plug 'jiangmiao/auto-pairs'
-
 filetype plugin indent on
 call plug#end()
 

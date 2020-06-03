@@ -1,7 +1,4 @@
-#!/bin/bash
-# ^^^^^^^^^ Won't work with dash so I'll be using bash instead ^^^^^^^^^^^^^^^^
-# Custom keyboard shortcuts, press 'Ctrl+x' (C-x) then one of the options below
-
+#!/bin/sh
 # y: Copy current image name into X's selection
 # c: Copy selected images' names into X's selection
 # o: Open selected images with Gimp
@@ -11,16 +8,21 @@ selection=false
 open_files=false
 fnames=''
 
-function copy_to_selection() {
+copy_to_selection() {
     echo -n "$1" | xclip -selection clipboard
     echo -n "$1" | xclip -selection primary
+}
+
+notify() {
+    pgrep -x dunst 1> /dev/null && dunstify "$@"
 }
 
 while read file
 do
     case "$1" in
         "y")
-            copy_to_selection "$file";;
+            copy_to_selection "$file"
+            notify 'Copied to clipboard' "$file";;
         "c")
             selection=true
             [ -z "$fnames" ] && fnames="$file" || fnames="$fnames $file";;
@@ -34,6 +36,7 @@ done
 
 if [ "$selection" = true ]; then
     copy_to_selection "$fnames"
+    notify 'Copied to selection' "$fnames"
 elif [ "$open_files" = true ]; then
-    gimp "$fnames"
+    gimp $fnames
 fi
