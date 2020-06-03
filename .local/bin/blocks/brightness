@@ -1,0 +1,3 @@
+#!/bin/sh
+# Brightness script for dwmblocks
+echo " BR $(xbacklight | sed 's/\.[0-9]*$//')% "

@@ -6,14 +6,14 @@ source $XDG_CONFIG_HOME/nvim/plug.vim
 
 " --VISUAL--
 set number                  " Set line numbering on
-colorscheme murphy
+colorscheme koehler
 set scrolloff=10            " Number of lines to keep above and below the cursor
 
 " --INDENT AND SEARCH--
 set tabstop=4               " Number of spaces a TAB counts for
 set shiftwidth=4            " Number of spaces to use for each step of (auto)indent.
 set softtabstop=4           " Number of spaces a TAB counts on edit operations
-set expandtab               " Insert whitespaces when pressing TAB
+" set expandtab               " Insert whitespaces when pressing TAB
 set shiftround              " Round indent to a multiple of 'shiftwidth'
 set autoindent              " Copy current indent level into the next line
 set linebreak               " Wrap long lines
@@ -59,7 +59,7 @@ nnoremap <F4> :set cursorline!<CR>
 nnoremap <M-/> :noh<CR>
 
 " Splits navigation
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
+nnoremap <M-h> <C-W><C-H>
+nnoremap <M-j> <C-W><C-J>
+nnoremap <M-k> <C-W><C-K>
+nnoremap <M-l> <C-W><C-L>
