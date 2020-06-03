@@ -5,8 +5,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-surround'
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
-" Autocomplete
+" Completion framework
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Python autocomplete
+Plug 'deoplete-plugins/deoplete-jedi'
 
 " Tree navigation
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -29,6 +31,9 @@ Plug 'justinmk/vim-syntax-extra'
 " Colorize text in the form '#rrggbb'
 Plug 'lilydjwg/colorizer'
 
+" Insert/Delete in pairs
+Plug 'jiangmiao/auto-pairs'
+
 filetype plugin indent on
 call plug#end()
 
@@ -36,4 +41,4 @@ call plug#end()
 let g:vim_markdown_folding_disabled = 1     " Disable folding in markdown
 let g:NERDSpaceDelims = 1                   " Enable spaces after comment delimiters
 let g:NERDCommentEmptyLines = 1             " Enable commenting of empty lines
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1        " Enable completion automatically
