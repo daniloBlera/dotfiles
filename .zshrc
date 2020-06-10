@@ -53,13 +53,7 @@ function n () {
     # stty lwrap undef
     # stty lnext undef
 
-    ## Options:
-    #   -o  Open files on 'ENTER' key press only
-    #   -d  Start with 'detail' view
-    #   -A  Disable dir auto-select in nav-as-you-type
-    #   -e  Open text files in visual/editor
-    #   -R Disable rolover at edges
-    nnn -odAeR "$@"
+	nnn "$@"
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"

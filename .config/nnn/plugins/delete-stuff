@@ -1,0 +1,18 @@
+#!/bin/sh
+# A wrapper around `rm` for the times when trash-cli won't work
+#
+# Args:
+#	$1: Hovered filename
+#	$2:	Absolute path to the hovered file
+while true
+do
+	read -p "rm -rf '$1'? [y/n] " yn
+	case $yn in
+		[Yy]*)
+			rm -rf "$1"
+			echo "Deleted '$1' from '$2'"
+			break;;
+		[Nn]*)
+			break;;
+	esac
+done

@@ -1,25 +1,26 @@
 # Here goes all your vars and PATH settings
 
-# Note this script uses wrapper functions for shells with incompatible
-# syntaxes for exporting variables and PATH additions. Each wrapper should
-# be defined on each shell's config file (e.g.: .bashrc, config.fish, etc)
+# This script uses wrapper functions to handle incompatible shell sintaxes
+# for exporting variables and PATH additions. Each wrapper should be defined
+# on the shell's config file (e.g.: .bashrc, config.fish, etc)
 
-# VARIABLES ##############################################################
+# VARIABLES
 set_env XDG_CACHE_HOME $HOME/.cache
 set_env XDG_CONFIG_HOME $HOME/.config
 set_env XDG_DATA_HOME $HOME/.local/share
 
-# TEXT EDITORS AND FILE MANAGERS #########################################
+# TEXT EDITORS AND FILE MANAGERS
 set_env SUDO_EDITOR /usr/bin/nvim
 set_env VISUAL /usr/bin/nvim
 set_env EDITOR /usr/bin/nvim
 set_env PAGER /usr/bin/less
 set_env NNN_USE_EDITOR 1
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
-set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;t:~/.config/xres/themes/;d:~/Downloads/;b:~/Programs/suckless-related'
-set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:view_images;x:_rm -rf $nnn'
+set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;t:~/.config/xres/;d:~/Downloads/;b:~/Programs/suckless-related'
+set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:viewimgs;x:delete-stuff'
+set_env NNN_OPTS 'odAeR'
 
-# PATH ADDITIONS #########################################################
+# PATH ADDITIONS
 # Personal binaries and scripts
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
