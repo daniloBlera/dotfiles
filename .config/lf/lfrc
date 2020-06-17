@@ -1,0 +1,6 @@
+# Configuration file for the lf file manager
+set drawbox on
+set number on
+set ratios 1:2:3
+set info size:time
+set color256 on

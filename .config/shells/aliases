@@ -24,7 +24,6 @@ alias diff='diff --color=auto'
 
 alias ll='ls -AlFh'
 alias la='ls -AF'
-alias l='ls -CF'
 
 alias l1='ls -1F'
 alias ldf='ls -AF | grep "^\." | grep -v "/\$"' # List dotfiles

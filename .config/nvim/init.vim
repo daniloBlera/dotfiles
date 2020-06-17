@@ -19,6 +19,7 @@ set autoindent              " Copy current indent level into the next line
 set linebreak               " Wrap long lines
 set ignorecase              " Ignore case on search patterns
 filetype plugin indent on   " Rely on file plugins to handle indenting
+set guicursor=
 
 " autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
@@ -42,6 +43,7 @@ noremap <Leader>y "+y
 
 " Map '\' and 'n' to open 'new tab' prompt
 noremap <Leader>n :tabnew 
+noremap <Leader>w :vsplit 
 
 " Map 'j' and 'k' to move to 'Next' and 'Previous' wrapped lines
 nnoremap j gj
