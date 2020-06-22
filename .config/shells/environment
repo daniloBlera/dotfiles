@@ -5,20 +5,22 @@
 # on the shell's config file (e.g.: .bashrc, config.fish, etc)
 
 # VARIABLES
-set_env XDG_CACHE_HOME $HOME/.cache
-set_env XDG_CONFIG_HOME $HOME/.config
-set_env XDG_DATA_HOME $HOME/.local/share
+set_env XDG_CACHE_HOME "$HOME/.cache"
+set_env XDG_CONFIG_HOME "$HOME/.config"
+set_env XDG_DATA_HOME "$HOME/.local/share"
 
 # TEXT EDITORS AND FILE MANAGERS
-set_env SUDO_EDITOR /usr/bin/nvim
-set_env VISUAL /usr/bin/nvim
-set_env EDITOR /usr/bin/nvim
-set_env PAGER /usr/bin/less
+set_env SUDO_EDITOR '/usr/bin/nvim'
+set_env VISUAL '/usr/bin/nvim'
+set_env EDITOR '/usr/bin/nvim'
+set_env PAGER '/usr/bin/less'
 set_env NNN_USE_EDITOR 1
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
 set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;t:~/.config/xres/;d:~/Downloads/;b:~/Programs/suckless-related'
 set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:viewimgs;x:delete-stuff'
 set_env NNN_OPTS 'odAeR'
+set_env OPENER '/usr/bin/xdg-open'
+set_env TERMINAL '/usr/local/bin/st'
 
 # PATH ADDITIONS
 # Personal binaries and scripts
