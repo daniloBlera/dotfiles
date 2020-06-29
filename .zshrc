@@ -41,6 +41,7 @@ source_if_exists "$HOME/.config/lf/lfcd.sh"
 source_if_exists "$HOME/.config/shells/environment"
 source_if_exists "$HOME/.config/shells/zsh_aliases"
 source_if_exists "$HOME/.config/shells/aliases"
+source_if_exists "$HOME/.config/shells/zsh_keybindings"
 
 # Extra stuff
 stty -ixon
