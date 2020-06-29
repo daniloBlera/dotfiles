@@ -11,4 +11,4 @@ cd $HOME
 
 # DWM
 dwmblocks &
-exec dwm
+exec dwm 2> ~/.cache/dwm.log
