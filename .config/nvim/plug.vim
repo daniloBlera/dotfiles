@@ -3,10 +3,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " List of plugins to be used -- must use single-quotes
 Plug 'tpope/vim-surround'
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 " Completion framework
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 " Python autocomplete
 Plug 'deoplete-plugins/deoplete-jedi'
 
@@ -27,9 +28,6 @@ Plug 'scrooloose/nerdcommenter'
 
 " Enhanced C/Bison/Flex syntax highlight
 Plug 'justinmk/vim-syntax-extra'
-
-" Colorize text in the form '#rrggbb'
-Plug 'lilydjwg/colorizer'
 
 filetype plugin indent on
 call plug#end()
