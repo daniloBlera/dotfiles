@@ -1,0 +1,6 @@
+#!/bin/sh
+# Swallow file opening window
+#
+# Args:
+#	$1: Hovered filename
+swallow xdg-open "$1"

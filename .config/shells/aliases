@@ -29,10 +29,11 @@ alias l1='ls -1F'
 alias ldf='ls -AF | grep "^\." | grep -v "/\$"' # List dotfiles
 alias lhd='ls -AF | grep "^\." | grep "/\$"'    # List hidden directories
 alias t2='tree -L 2'
-alias ..='cd ..'
-alias ~='cd ~/'
 alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
 alias ip='ip -c'
+
+alias f='fzf'
+alias .f='find . | fzf'
 
 # git-related stuff
 alias gcm='git commit -m'

@@ -16,11 +16,13 @@ set_env EDITOR '/usr/bin/nvim'
 set_env PAGER '/usr/bin/less'
 set_env NNN_USE_EDITOR 1
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
-set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;t:~/.config/xres/;d:~/Downloads/;b:~/Programs/suckless-related'
-set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:viewimgs;x:delete-stuff'
+set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;l:~/.local/;t:~/.config/xres/;d:~/Downloads/;b:~/Programs/suckless-related'
+set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:viewimgs;x:delete-stuff;o:swallow-open'
 set_env NNN_OPTS 'odAeR'
 set_env OPENER '/usr/bin/xdg-open'
 set_env TERMINAL '/usr/local/bin/st'
+
+set_env FZF_DEFAULT_OPTS '--bind "f1:execute(less -f {}),ctrl-y:execute-silent(printf {} | xclip -selection clipboard -in)+abort"'
 
 # PATH ADDITIONS
 # Personal binaries and scripts

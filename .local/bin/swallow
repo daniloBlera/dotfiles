@@ -1,0 +1,15 @@
+#!/bin/sh
+# Swallow terminal window while a program is running
+# This is just a basic version of the 'devour' script:
+# https://github.com/salman-abedin/devour
+#
+# Usage:
+#	swallow COMMAND [ARGS]
+#
+# Example:
+#	swallow zathura document.pdf
+#
+WINDOW_ID="$(xdo id)"
+xdo hide
+"$@" 2>&1 > /dev/null
+xdo show "$WINDOW_ID"
