@@ -13,7 +13,7 @@ set scrolloff=10            " Number of lines to keep above and below the cursor
 set tabstop=4               " Number of spaces a TAB counts for
 set shiftwidth=4            " Number of spaces to use for each step of (auto)indent.
 set softtabstop=4           " Number of spaces a TAB counts on edit operations
-set expandtab               " Insert whitespaces when pressing TAB
+" set expandtab               " Insert whitespaces when pressing TAB
 set shiftround              " Round indent to a multiple of 'shiftwidth'
 set autoindent              " Copy current indent level into the next line
 set linebreak               " Wrap long lines
@@ -68,3 +68,8 @@ nnoremap <M-h> <C-W><C-H>
 nnoremap <M-j> <C-W><C-J>
 nnoremap <M-k> <C-W><C-K>
 nnoremap <M-l> <C-W><C-L>
+
+" Visualizing special characters
+set listchars=eol:$,tab:<-,space:.,trail:~,extends:>,precedes:<
+set list
+nnoremap <F5> :set list!<CR>

@@ -3,7 +3,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " List of plugins to be used -- must use single-quotes
 Plug 'tpope/vim-surround'
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 " Completion framework
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -29,6 +28,9 @@ Plug 'scrooloose/nerdcommenter'
 " Enhanced C/Bison/Flex syntax highlight
 Plug 'justinmk/vim-syntax-extra'
 
+" Python development
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+
 filetype plugin indent on
 call plug#end()
 
@@ -37,3 +39,4 @@ let g:vim_markdown_folding_disabled = 1     " Disable folding in markdown
 let g:NERDSpaceDelims = 1                   " Enable spaces after comment delimiters
 let g:NERDCommentEmptyLines = 1             " Enable commenting of empty lines
 let g:deoplete#enable_at_startup = 1        " Enable completion automatically
+let g:pymode_indent = 1
