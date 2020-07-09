@@ -44,6 +44,7 @@ alias glgo='git log --graph --oneline --decorate --color'
 alias gpom='git push origin master'
 alias ga='git add'
 alias gaa='git add --all'
+alias gd='git diff'
 alias gdom='git diff origin/master'             # Changes not staged for commit
 alias gdoms='git diff --staged origin/master'   # Changes to be commited
 

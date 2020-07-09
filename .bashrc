@@ -10,7 +10,7 @@ PS1='[\u@\h \W]\$ '
 
 # Enable extended completion
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    source /usr/share/bash-completion/bash_completion
+	source /usr/share/bash-completion/bash_completion
 fi
 
 # Not saving command history
@@ -18,24 +18,24 @@ HISTFILE=/tmp/bash_history-$(whoami)
 
 # Utility functions -- handle incompatibilities between shells
 function set_env() {
-    export "$1"="$2"
+	export "$1"="$2"
 }
 
 function source_if_exists() {
-    [[ -f "$1" ]] && source "$1"
+	[[ -f "$1" ]] && source "$1"
 }
 
 # If the directory exists and is not included in PATH, return TRUE
 function not_in_path() {
-    [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]] && return 0 || return 1
+	[[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]] && return 0 || return 1
 }
 
 function prepend_to_path() {
-    not_in_path "$1" && export PATH="$1:$PATH"
+	not_in_path "$1" && export PATH="$1:$PATH"
 }
 
 function append_to_path() {
-    not_in_path "$1" && export PATH="$PATH:$1"
+	not_in_path "$1" && export PATH="$PATH:$1"
 }
 
 # Enable file managers cd on quit
@@ -49,6 +49,3 @@ source_if_exists "$HOME/.config/shells/aliases"
 
 # Extra stuff
 stty -ixon
-
-## Using 'broot' for the awesome filesystem navigation and fuzzy search
-source $HOME/.config/broot/launcher/bash/br
