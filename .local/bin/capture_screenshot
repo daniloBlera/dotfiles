@@ -1,34 +1,43 @@
 #!/bin/sh
 # Capture a screenshot and save it on user's pictures
-
+#
+# Usage
+#   capture_screenshot [OPTIONS]
+#
+# OPTIONS
+#   -i, --interactive
+#       Capture screenshot by window selection or delayed
 fname="screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
 fpath="$HOME/Pictures/$fname"
 delay=3
-interactive=false
+selection=false
+
+# For dmenu's theme
+FN='Ubuntu:size=11'
+COL1="#DC122A"
+COL2="#000000"
+
+print_help() {
+    echo 'USAGE'
+    echo '    capture_screenshot [OPTIONS]'
+    echo ''
+    echo 'OPTIONS'
+    echo '    -h, --help              Print this help message'
+    echo '    -s, --selection         Capture screenshot by window selection'
+}
 
 notify() {
-    pgrep dunst 1> /dev/null && dunstify "Captured screenshot" "$1" || echo "Captured $1"
+	pgrep dunst 1> /dev/null && dunstify "Captured screenshot" "$1" || echo "Captured $1"
 }
 
 for var in "$@"; do
-    case $var in
-        -i|--interactive)
-            interactive=true;;
-    esac
+	case $var in
+        -h|--help)
+            print_help && exit 0;;
+		-s|--selection)
+            selection=true;;
+	esac
 done
 
-if [ $interactive = false ]; then
-    scrot $fpath
-    notify "$fname"
-else
-    option="$(echo 'Selection\nDelayed' | dmenu)"
-
-    case $option in
-        Selection)
-            scrot -s $fpath
-            notify "$fname";;
-        Delayed)
-            scrot -d $delay $fpath
-            notify "$fname";;
-    esac
-fi
+[ "$selection" = false ] && scrot "$fpath" || scrot -s "$fpath"
+notify "$fname"

@@ -1,0 +1,21 @@
+#!/bin/sh
+# A simple script to quickly change between Xresources colourschemes
+
+# Print message to desktop notification or stdin
+notify () {
+	pgrep dunst 1> /dev/null && dunstify "Colourscheme loaded" "$1" || echo "Loaded the '$notif_message' colourscheme"
+}
+
+themes_dir="$XDG_CONFIG_HOME/xres/dwm-themes"
+fname="$(ls -1 $themes_dir | dmenu -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11' -p 'Which colourscheme?')"
+
+if [ ! -f "$themes_dir/$fname" ]; then
+	echo "Invalid '$fname' theme, doing nothing..."
+	exit 1
+fi
+
+cp $themes_dir/$fname ~/.config/xresources-dwm
+xrdb ~/.config/xres/settings
+xrdb -merge ~/.config/xresources-term
+xrdb -merge ~/.config/xresources-dwm
+notify $fname

@@ -68,7 +68,7 @@ case "$option" in
 	'zathura')
 		edit_file $XDG_CONFIG_HOME/zathura/zathurarc;;
 	'X colourscheme')
-		edit_file $SCRIPTS_HOME/setxcolours;;
+		edit_file $SCRIPTS_HOME/setxtheme;;
 	'Menu options')
 		edit_file $SCRIPTS_HOME/edit_configs;;
 esac

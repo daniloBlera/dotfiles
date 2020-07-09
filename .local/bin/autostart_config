@@ -3,7 +3,9 @@
 [ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
 
 # Shared terminal configs and colourscheme
-xrdb -I$HOME/.config/xres ~/.config/xres/Xresources
+[ -f $XDG_CONFIG_HOME/xres/settings ] && xrdb $XDG_CONFIG_HOME/xres/settings
+[ -f $XDG_CONFIG_HOME/xresources-term ] && xrdb -merge $XDG_CONFIG_HOME/xresources-term
+[ -f $XDG_CONFIG_HOME/xresources-dwm ] && xrdb -merge $XDG_CONFIG_HOME/xresources-dwm
 
 # Set X background
 xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper" || xsetroot -solid #000000
@@ -14,23 +16,28 @@ xbindkeys --file $XDG_CONFIG_HOME/xres/xbindkeysrc
 # Automatically hide mouse cursor when unused
 unclutter &
 
-# Set colour temperature
-# redshift-gtk -m randr -l -8.038958:-34.9574524 &
-redshift -m randr -l -8.038958:-34.9574524 &
-
-# Enable left pointer cursor
-xsetroot -cursor_name left_ptr
-
-# Custom keyboard and trackpad configuration
-~/.local/bin/libinput-conf
-
-# Configure keyboard repeat rate
-# 200:  Delay before repeat (in ms)
-# 40:   Number of repeats per second
-xset r rate 200 40
-
 # Initialize the urxvt daemon
 # urxvtd -q -o -f
 
 # Background notification daemon
 dunst &
+
+# Set colour temperature (use redshift-gtk instead for the widget)
+redshift -m randr -l -8.038958:-34.9574524 &
+
+# Enable left pointer cursor
+xsetroot -cursor_name left_ptr
+
+# Configure keyboard repeat rate
+## 200ms delay before repeat, 40 repeats/sec
+xset r rate 200 40
+
+# Trackpad configuration
+## Disable horizontal scroll
+xinput --set-prop 'ETPS/2 Elantech Touchpad' 'libinput Horizontal Scroll Enabled' 0
+
+## Enable tap as left mouse button
+xinput --set-prop 'ETPS/2 Elantech Touchpad' 'libinput Tapping Enabled' 1
+
+## Enable natural scrolling
+xinput --set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1

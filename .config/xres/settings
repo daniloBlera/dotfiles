@@ -1,0 +1,39 @@
+! X Resources configuration file
+! Patched nerd fonts with working font-awesome glyphs
+URxvt*font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+URxvt*boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+
+UXTerm.vt100.font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+UXTerm.vt100.boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+
+XTerm.vt100.font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+XTerm.vt100.boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+
+! For st terminal
+*font: UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
+*font.boldFont: UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+
+rofi.font: Ubuntu:pixelsize=11
+
+! Extra stuff
+URxvt*saveLines: 1024
+XTerm*saveLines: 1024
+UXTerm*saveLines: 1024
+
+URxvt*scrollBar: false
+URxvt*scrollstyle: rxvt
+
+XTerm.vt100.selectToClipboard: true
+
+! URxvt extensions
+URxvt.perl-ext: default,confirm-paste,url-select,keyboard-select
+
+! Yankable URLs from keyboard: use 'M-u'
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+! Keyboard text selection
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-f: perl:keyboard-select:search
+URxvt.keyboard-select.clipboard: true

@@ -9,12 +9,12 @@ Shut Down'
 option=$(echo -e "$OPTIONS" | dmenu -i $@ -p 'What now chief?')
 
 case "$option" in
-    'Lock Screen')
-        slock;;
-    'Close BSPWM')
-        pkill -x polybar; bspc quit;;
-    'Reboot')
-        reboot;;
-    'Shut Down')
-        poweroff;;
+	'Lock Screen')
+		slock;;
+	'Close BSPWM')
+		pkill -x polybar; bspc quit;;
+	'Reboot')
+		reboot;;
+	'Shut Down')
+		poweroff;;
 esac
