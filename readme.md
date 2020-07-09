@@ -5,22 +5,23 @@ Other colourschemes can be found at `~/.config/xres/themes`.
 
 # Some of the programs used here:
 GUI stuff
-*   bspwm;
-*   sxhkd;
-*   polybar.
+*	bspwm;
+*	sxhkd;
+*	polybar.
 
 Terminal related
-*   urxvt;
-*   xterm/uxterm;
-*   bash;
-*   zsh;
+*	urxvt;
+*	xterm/uxterm;
+*	bash;
+*	zsh;
 
 Text editors and document viewer
-*   neovim -- uses [vim-plug][plug];
-*   zathura.
+*	neovim -- uses [vim-plug][plug];
+*	zathura.
 
 File managers
-*   nnn.
+*	nnn;
+*	lf.
 
 ps.: Some of the .files (sxhkd, polybar, Xresources, tmux and zathura) 
 configure the fonts used ([ubuntu mono nerd font mono][nerdfonts] here).
