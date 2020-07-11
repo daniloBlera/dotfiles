@@ -10,7 +10,7 @@ option=$(echo -e "$OPTIONS" | dmenu -i $@ -p 'What now chief?')
 
 case "$option" in
 	'Lock Screen')
-		slock;;
+		slock -m "$(fortune -s | cowsay -nf tux)";;
 	'Close DWM')
 		pkill dwm;;
 	'Reboot')
