@@ -22,7 +22,7 @@ function set_env() {
 }
 
 function source_if_exists() {
-	[[ -f "$1" ]] && source "$1"
+	[ -f "$1" ] && source "$1"
 }
 
 # If the directory exists and is not included in PATH, return TRUE
@@ -41,6 +41,9 @@ function append_to_path() {
 # Enable file managers cd on quit
 source_if_exists "$HOME/.config/nnn/misc/quitcd.sh"
 source_if_exists "$HOME/.config/lf/lfcd.sh"
+
+# Enabling fuzzyfind
+source_if_exists "$HOME/.fzf.bash"
 
 # Configuring path, environment variables and aliases
 source_if_exists "$HOME/.config/shells/environment"

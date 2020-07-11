@@ -21,8 +21,7 @@ set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:viewimgs;x:delete-stuff;o:swallow-ope
 set_env NNN_OPTS 'odAeR'
 set_env OPENER '/usr/bin/xdg-open'
 set_env TERMINAL '/usr/local/bin/st'
-
-set_env FZF_DEFAULT_OPTS '--bind "f1:execute(less -f {}),ctrl-y:execute-silent(printf {} | xclip -selection clipboard -in)+abort"'
+set_env FZF_DEFAULT_OPTS '--color "fg:#ea1646,fg+:#000000,bg+:#ea1646,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#ea1646,info:#ddfafa,spinner:#ddfafa"'
 
 # PATH ADDITIONS
 # Personal binaries and scripts
