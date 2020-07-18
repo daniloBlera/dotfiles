@@ -17,24 +17,24 @@ fi
 HISTFILE=/tmp/bash_history-$(whoami)
 
 # Utility functions -- handle incompatibilities between shells
-function set_env() {
+set_env() {
 	export "$1"="$2"
 }
 
-function source_if_exists() {
+source_if_exists() {
 	[ -f "$1" ] && source "$1"
 }
 
 # If the directory exists and is not included in PATH, return TRUE
-function not_in_path() {
+not_in_path() {
 	[[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]] && return 0 || return 1
 }
 
-function prepend_to_path() {
+prepend_to_path() {
 	not_in_path "$1" && export PATH="$1:$PATH"
 }
 
-function append_to_path() {
+append_to_path() {
 	not_in_path "$1" && export PATH="$PATH:$1"
 }
 
