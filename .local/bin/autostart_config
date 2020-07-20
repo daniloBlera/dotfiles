@@ -1,17 +1,17 @@
 #!/bin/sh
 # A script to unify X configuration between window managers
-[ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
+[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
 
 # Shared terminal configs and colourscheme
-[ -f $XDG_CONFIG_HOME/xres/settings ] && xrdb $XDG_CONFIG_HOME/xres/settings
-[ -f $XDG_CONFIG_HOME/xresources-term ] && xrdb -merge $XDG_CONFIG_HOME/xresources-term
-[ -f $XDG_CONFIG_HOME/xresources-dwm ] && xrdb -merge $XDG_CONFIG_HOME/xresources-dwm
+[ -f "$XDG_CONFIG_HOME/xres/settings" ] && xrdb "$XDG_CONFIG_HOME/xres/settings"
+[ -f "$XDG_CONFIG_HOME/xresources-term" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-term"
+[ -f "$XDG_CONFIG_HOME/xresources-dwm" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-dwm"
 
 # Set X background
 xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper" || xsetroot -solid #000000
 
 # Custom X event functions
-xbindkeys --file $XDG_CONFIG_HOME/xres/xbindkeysrc
+xbindkeys --file "$XDG_CONFIG_HOME/xres/xbindkeysrc"
 
 # Automatically hide mouse cursor when unused
 unclutter &

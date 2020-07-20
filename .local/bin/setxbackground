@@ -3,7 +3,7 @@
 
 # Print message to desktop notification or stdin
 notify () {
-	pgrep dunst 1> /dev/null && dunstify "Background changed" "$1" || echo "Changed the background to '$notif_message'"
+	pgrep dunst 1> /dev/null && dunstify "Background changed" "$1" || echo "Changed the background to '$1'"
 }
 
 BG_FILE="$XDG_CONFIG_HOME/wallpaper"

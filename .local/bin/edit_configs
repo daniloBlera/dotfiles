@@ -21,54 +21,54 @@ zathura
 X colourscheme
 Menu options"
 
-[ -z $XDG_CONFIG_HOME ] && XDG_CONFIG_HOME="$HOME/.config"
-[ -z $XDG_DATA_HOME ] && XDG_DATA_HOME="$HOME/.local/share"
-[ -z $TERMINAL ] && TERMINAL='st'
+[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
+[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="$HOME/.local/share"
+[ -z "$TERMINAL" ] && TERMINAL='st'
 SCRIPTS_HOME="$HOME/.local/bin"
 
 # Wrapping how text files should be opened
 edit_file() {
-	$TERMINAL -e $EDITOR $1
+	"$TERMINAL" -e "$EDITOR" "$1"
 }
 
-option=$(echo "$OPTIONS" | dmenu -i $@ -p 'Which config to edit?')
+option=$(echo "$OPTIONS" | dmenu -i "$@" -p 'Which config to edit?')
 case "$option" in
 	'Aliases')
-		edit_file $XDG_CONFIG_HOME/shells/aliases;;
+		edit_file "$XDG_CONFIG_HOME/shells/aliases";;
 	'Environment variables')
-		edit_file $XDG_CONFIG_HOME/shells/environment;;
+		edit_file "$XDG_CONFIG_HOME/shells/environment";;
 	'Autostart configs')
-		edit_file $SCRIPTS_HOME/autostart_config;;
+		edit_file "$SCRIPTS_HOME/autostart_config";;
 	'bash')
-		edit_file $HOME/.bashrc;;
+		edit_file "$HOME/.bashrc";;
 	'bash aliases')
-		edit_file $XDG_CONFIG_HOME/shells/bash_aliases;;
+		edit_file "$XDG_CONFIG_HOME/shells/bash_aliases";;
 	'zsh')
-		edit_file $HOME/.zshrc;;
+		edit_file "$HOME/.zshrc";;
 	'zsh aliases')
-		edit_file $XDG_CONFIG_HOME/shells/zsh_aliases;;
+		edit_file "$XDG_CONFIG_HOME/shells/zsh_aliases";;
 	'bspwm')
-		edit_file $XDG_CONFIG_HOME/bspwm/bspwmrc;;
+		edit_file "$XDG_CONFIG_HOME/bspwm/bspwmrc";;
 	'sxhkd')
-		edit_file $XDG_CONFIG_HOME/sxhkd/sxhkdrc;;
+		edit_file "$XDG_CONFIG_HOME/sxhkd/sxhkdrc";;
 	'sxiv')
-		edit_file $XDG_CONFIG_HOME/sxiv/exec/key-handler;;
+		edit_file "$XDG_CONFIG_HOME/sxiv/exec/key-handler";;
 	'polybar')
-		edit_file $XDG_CONFIG_HOME/polybar/config;;
+		edit_file "$XDG_CONFIG_HOME/polybar/config";;
 	'nvim')
-		edit_file $XDG_CONFIG_HOME/nvim/init.vim;;
+		edit_file "$XDG_CONFIG_HOME/nvim/init.vim";;
 	'nvim plugins')
-		edit_file $XDG_CONFIG_HOME/nvim/plug.vim;;
+		edit_file "$XDG_CONFIG_HOME/nvim/plug.vim";;
 	'xinit')
-		edit_file $HOME/.xinitrc;;
+		edit_file "$HOME/.xinitrc";;
 	'xresources')
-		edit_file $XDG_CONFIG_HOME/xres/settings;;
+		edit_file "$XDG_CONFIG_HOME/xres/settings";;
 	'dunst')
-		edit_file $XDG_CONFIG_HOME/dunst/dunstrc;;
+		edit_file "$XDG_CONFIG_HOME/dunst/dunstrc";;
 	'zathura')
-		edit_file $XDG_CONFIG_HOME/zathura/zathurarc;;
+		edit_file "$XDG_CONFIG_HOME/zathura/zathurarc";;
 	'X colourscheme')
-		edit_file $SCRIPTS_HOME/setxtheme;;
+		edit_file "$SCRIPTS_HOME/setxtheme";;
 	'Menu options')
-		edit_file $SCRIPTS_HOME/edit_configs;;
+		edit_file "$SCRIPTS_HOME/edit_configs";;
 esac

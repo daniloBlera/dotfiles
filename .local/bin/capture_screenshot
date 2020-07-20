@@ -2,42 +2,47 @@
 # Capture a screenshot and save it on user's pictures
 #
 # Usage
-#   capture_screenshot [OPTIONS]
+#	capture_screenshot [OPTIONS]
 #
 # OPTIONS
-#   -i, --interactive
-#       Capture screenshot by window selection or delayed
-fname="screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"
-fpath="$HOME/Pictures/$fname"
-delay=3
+#	-s, --selection
+#		Capture screenshot by window selection
+fname="screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"	# The filename format
+fpath="$HOME/Pictures/$fname"						# The image path
 selection=false
 
-# For dmenu's theme
-FN='Ubuntu:size=11'
-COL1="#DC122A"
-COL2="#000000"
-
 print_help() {
-    echo 'USAGE'
-    echo '    capture_screenshot [OPTIONS]'
-    echo ''
-    echo 'OPTIONS'
-    echo '    -h, --help              Print this help message'
-    echo '    -s, --selection         Capture screenshot by window selection'
+	echo 'USAGE'
+	echo '	capture_screenshot [OPTIONS]'
+	echo ''
+	echo 'OPTIONS'
+	echo '	-h, --help				Print this help message'
+	echo '	-s, --selection			Capture screenshot by window selection'
 }
 
 notify() {
-	pgrep dunst 1> /dev/null && dunstify "Captured screenshot" "$1" || echo "Captured $1"
+	if pgrep -x dunst > /dev/null
+	then
+		dunstify "Captured screenshot" "$1"
+	else
+		echo "Captured $1"
+	fi
 }
 
 for var in "$@"; do
 	case $var in
-        -h|--help)
-            print_help && exit 0;;
+		-h|--help)
+			print_help && exit 0;;
 		-s|--selection)
-            selection=true;;
+			selection=true;;
 	esac
 done
 
-[ "$selection" = false ] && scrot "$fpath" || scrot -s "$fpath"
+if [ "$selection" = 'false' ]
+then
+	scrot "$fpath"
+else
+	scrot -s "$fpath"
+fi
+
 notify "$fname"

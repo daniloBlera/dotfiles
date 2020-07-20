@@ -11,5 +11,5 @@
 #
 WINDOW_ID="$(xdo id)"
 xdo hide
-"$@" 2>&1 > /dev/null
+"$@" > /dev/null 2>&1 
 xdo show "$WINDOW_ID"
