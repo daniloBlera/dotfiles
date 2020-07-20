@@ -3,4 +3,4 @@
 #
 # Args:
 #	$1: Hovered filename
-swallow xdg-open "$1"
+[ -f "$1" ] && swallow xdg-open "$1"
