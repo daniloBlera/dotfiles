@@ -20,7 +20,7 @@ set linebreak               " Wrap long lines
 set ignorecase              " Ignore case on search patterns
 filetype plugin indent on   " Rely on file plugins to handle indenting
 
-" autocmd BufEnter * call ncm2#enable_for_buffer()
+" Insert mode completion
 set completeopt=noinsert,menuone,noselect
 
 " --KEYMAPS--
@@ -52,12 +52,8 @@ noremap <Leader>w :vsplit
 nnoremap j gj
 nnoremap k gk
 
-" Map '\' and 'P' to insert python's hashbang and file encoding
-nnoremap <Leader>P ggI#!/usr/bin/env python3<CR># -*- coding: utf-8 -*-<CR><ESC>
-
 " Line highlight
 hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-" set cursorline
 nnoremap <F4> :set cursorline!<CR>
 
 " Disable last search results hightlight
@@ -70,6 +66,6 @@ nnoremap <M-k> <C-W><C-K>
 nnoremap <M-l> <C-W><C-L>
 
 " Visualizing special characters
-set listchars=eol:$,tab:<-,space:.,trail:~,extends:>,precedes:<
+set listchars=eol:$,tab:<-,trail:~,extends:>,precedes:<
 set list
 nnoremap <F5> :set list!<CR>
