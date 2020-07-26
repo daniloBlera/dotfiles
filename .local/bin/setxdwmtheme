@@ -7,7 +7,7 @@ notify () {
 }
 
 themes_dir="$XDG_CONFIG_HOME/xres/dwm-themes"
-fname=$(find "$themes_dir" -type f -printf '%f\n' | dmenu -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11' -p 'Which colourscheme?')
+fname=$(find "$themes_dir" -type f -printf '%f\n' | sort | dmenu -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11' -p 'Which colourscheme?')
 
 if [ ! -f "$themes_dir/$fname" ]; then
 	echo "Invalid '$fname' theme, doing nothing..."
