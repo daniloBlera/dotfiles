@@ -4,10 +4,10 @@
 # https://github.com/salman-abedin/devour
 #
 # Usage:
-#	swallow-open FILE
+#   swallow-open FILE
 #
 # Example:
-#	swallow-open document.pdf
+#   swallow-open document.pdf
 #
 WINDOW_ID="$(xdo id)"
 xdo hide

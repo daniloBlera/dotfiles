@@ -1,2 +1,11 @@
 #!/bin/sh
-find "$1" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' | sort | sxiv -iqt > /dev/null 2>&1
+# find "$1" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' | sort | sxiv -iqt > /dev/null 2>&1
+# find "$1" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' 
+if [ "$#" -eq 0 ]
+then
+    ROOT_DIR="$(pwd)"
+else
+    ROOT_DIR="$1"
+fi
+
+find "$ROOT_DIR" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' | sort | sxiv -iqt > /dev/null 2>&1

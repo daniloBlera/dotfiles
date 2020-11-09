@@ -1,7 +1,7 @@
 ! DWM Colours
-dwm.normbordercolor:	#aaaaaa
-dwm.normbgcolor:		#000000
-dwm.normfgcolor:		#aaaaaa
-dwm.selbordercolor:		#ffffff
-dwm.selbgcolor:			#ffffff
-dwm.selfgcolor:			#212121
+dwm.normbordercolor:    #aaaaaa
+dwm.normbgcolor:        #000000
+dwm.normfgcolor:        #aaaaaa
+dwm.selbordercolor:     #ffffff
+dwm.selbgcolor:         #ffffff
+dwm.selfgcolor:         #212121

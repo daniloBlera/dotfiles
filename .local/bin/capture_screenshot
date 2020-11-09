@@ -2,47 +2,47 @@
 # Capture a screenshot and save it on user's pictures
 #
 # Usage
-#	capture_screenshot [OPTIONS]
+#   capture_screenshot [OPTIONS]
 #
 # OPTIONS
-#	-s, --selection
-#		Capture screenshot by window selection
-fname="screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"	# The filename format
-fpath="$HOME/Pictures/$fname"						# The image path
+#   -s, --selection
+#       Capture screenshot by window selection
+fname="screenshot_$(date +%Y-%m-%d_%H-%M-%S).png"   # The filename format
+fpath="$HOME/Pictures/$fname"                       # The image path
 selection=false
 
 print_help() {
-	echo 'USAGE'
-	echo '	capture_screenshot [OPTIONS]'
-	echo ''
-	echo 'OPTIONS'
-	echo '	-h, --help				Print this help message'
-	echo '	-s, --selection			Capture screenshot by window selection'
+    echo 'USAGE'
+    echo '  capture_screenshot [OPTIONS]'
+    echo ''
+    echo 'OPTIONS'
+    echo '  -h, --help              Print this help message'
+    echo '  -s, --selection         Capture screenshot by window selection'
 }
 
 notify() {
-	if pgrep -x dunst > /dev/null
-	then
-		dunstify "Captured screenshot" "$1"
-	else
-		echo "Captured $1"
-	fi
+    if pgrep -x dunst > /dev/null
+    then
+        dunstify "Captured screenshot" "$1"
+    else
+        echo "Captured $1"
+    fi
 }
 
 for var in "$@"; do
-	case $var in
-		-h|--help)
-			print_help && exit 0;;
-		-s|--selection)
-			selection=true;;
-	esac
+    case $var in
+        -h|--help)
+            print_help && exit 0;;
+        -s|--selection)
+            selection=true;;
+    esac
 done
 
 if [ "$selection" = 'false' ]
 then
-	scrot "$fpath"
+    scrot "$fpath"
 else
-	scrot -s "$fpath"
+    scrot -s "$fpath"
 fi
 
 notify "$fname"
