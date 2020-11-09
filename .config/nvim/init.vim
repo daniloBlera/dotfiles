@@ -13,7 +13,7 @@ set scrolloff=10            " Number of lines to keep above and below the cursor
 set tabstop=4               " Number of spaces a TAB counts for
 set shiftwidth=4            " Number of spaces to use for each step of (auto)indent.
 set softtabstop=4           " Number of spaces a TAB counts on edit operations
-" set expandtab               " Insert whitespaces when pressing TAB
+set expandtab               " Insert whitespaces when pressing TAB
 set shiftround              " Round indent to a multiple of 'shiftwidth'
 set autoindent              " Copy current indent level into the next line
 set linebreak               " Wrap long lines
@@ -36,17 +36,20 @@ nnoremap <F3> :set nonumber!<CR>
 
 " Text selection
 " Map '\' and 'p' to paste X11's clipboard into selection
-" Map '\' and 'y' to yank selection into X11's clipboard
+" Map '\' and 'y' to yank the character selection into X11's clipboard
 noremap <Leader>p "+p
 noremap <Leader>y "+y
 
-" Copy the current line to selection then go to next line
-" Useful to send sequence of lines to clipboard managers
+" Map (capital) 'y' to copy the current line into selection then jump to the
+" next. This is useful to send a sequence of lines to clipboard managers
 noremap Y V"+yj
 
 " Map '\' and 'n' to open 'new tab' prompt
 noremap <Leader>n :tabnew 
-noremap <Leader>w :vsplit 
+
+" Map '\' and '/' or '-' for (saner) vertical and horizontal pane splitting.
+noremap <Leader>/ :vsplit<CR>
+noremap <Leader>- :split<CR>
 
 " Map 'j' and 'k' to move to 'Next' and 'Previous' wrapped lines
 nnoremap j gj
@@ -59,13 +62,13 @@ nnoremap <F4> :set cursorline!<CR>
 " Disable last search results hightlight
 nnoremap <M-/> :noh<CR>
 
-" Splits navigation
+" Map 'Alt' and 'h|j|k|l' to navigate pane splits
 nnoremap <M-h> <C-W><C-H>
 nnoremap <M-j> <C-W><C-J>
 nnoremap <M-k> <C-W><C-K>
 nnoremap <M-l> <C-W><C-L>
 
-" Visualizing special characters
+" Displaying special characters
 set listchars=eol:$,tab:<-,trail:~,extends:>,precedes:<
 set list
 nnoremap <F5> :set list!<CR>

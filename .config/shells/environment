@@ -27,3 +27,4 @@ set_env FZF_DEFAULT_OPTS '--color "fg:#ea1646,fg+:#000000,bg+:#ea1646,hl:#ddfafa
 # Personal binaries and scripts
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
+append_to_path "$HOME/.gem/ruby/2.7.0/bin"

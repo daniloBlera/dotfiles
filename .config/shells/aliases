@@ -12,6 +12,7 @@ alias cfbspwm='"$EDITOR" "$XDG_CONFIG_HOME/bspwm/bspwmrc"'
 alias cfsxhkd='"$EDITOR" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
 alias cfpolybar='"$EDITOR" "$XDG_CONFIG_HOME/polybar/config"'
 alias cfnvim='"$EDITOR" "$XDG_CONFIG_HOME/nvim/init.vim"'
+alias cftmux='"$EDITOR" ~/.tmux.conf'
 
 # Commonly-used
 alias ls='ls --color=auto'
@@ -41,12 +42,9 @@ alias gca='git commit --amend'
 alias gssb='git status --short --branch'
 alias gls='git log --stat --color'
 alias glgo='git log --graph --oneline --decorate --color'
-alias gpom='git push origin master'
 alias ga='git add'
 alias gaa='git add --all'
 alias gd='git diff'
-alias gdom='git diff origin/master'             # Changes not staged for commit
-alias gdoms='git diff --staged origin/master'   # Changes to be commited
 
 # Not so common stuff
 ## Grep the window class string for WM workspace assignment
