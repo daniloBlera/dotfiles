@@ -37,25 +37,28 @@ nnoremap <F3> :set nonumber!<CR>
 " Text selection
 " Map '\' and 'p' to paste X11's clipboard into selection
 " Map '\' and 'y' to yank the character selection into X11's clipboard
-noremap <Leader>p "+p
-noremap <Leader>y "+y
+vnoremap <Leader>p "+p
+vnoremap <Leader>y "+y
 
 " Map (capital) 'y' to copy the current line into selection then jump to the
 " next. This is useful to send a sequence of lines to clipboard managers
-noremap Y V"+yj
+nnoremap Y V"+yj
+
+" Map (capital) 'l' to copy the current line into selection.
+nnoremap L V"+y
 
 " Map '\' and 'n' to open 'new tab' prompt
-noremap <Leader>n :tabnew 
+nnoremap <Leader>n :tabnew 
 
-" Map '\' and '/' or '-' for (saner) vertical and horizontal pane splitting.
-noremap <Leader>/ :vsplit<CR>
-noremap <Leader>- :split<CR>
+" Map '\' and '/' or '-' for vertical and horizontal pane splitting.
+nnoremap <Leader>/ :vsplit<CR>
+nnoremap <Leader>- :split<CR>
 
 " Map 'j' and 'k' to move to 'Next' and 'Previous' wrapped lines
 nnoremap j gj
 nnoremap k gk
 
-" Line highlight
+" Toggle Line highlight
 hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 nnoremap <F4> :set cursorline!<CR>
 
@@ -68,7 +71,7 @@ nnoremap <M-j> <C-W><C-J>
 nnoremap <M-k> <C-W><C-K>
 nnoremap <M-l> <C-W><C-L>
 
-" Displaying special characters
+" Toggle special characters display
 set listchars=eol:$,tab:<-,trail:~,extends:>,precedes:<
 set list
 nnoremap <F5> :set list!<CR>
