@@ -10,7 +10,6 @@ option=$(echo -e "$OPTIONS" | dmenu -i $@ -p 'What now chief?')
 
 case "$option" in
     'Lock Screen')
-        # slock -m "$(fortune -s | cowsay -nf tux)";;
         slock -m "$(cat ~/.local/bin/chars-arch.txt)";;
     'Close BSPWM')
         pkill -x polybar; bspc quit;;

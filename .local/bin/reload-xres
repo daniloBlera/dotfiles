@@ -1,3 +1,0 @@
-#!/bin/sh
-# Reload Xresources configuration and current colourscheme
-xrdb -I$HOME/.config/xres ~/.config/xres/Xresources

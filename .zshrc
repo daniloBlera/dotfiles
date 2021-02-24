@@ -16,24 +16,24 @@ PROMPT='[%n@%m %1~]%# '
 
 # Utility functions used to handle incompatibilities between shells (bash, zsh and fish)
 set_env() {
-	export $1=$2
+    export $1=$2
 }
 
 source_if_exists() {
-	[ -f "$1" ] && source "$1"
+    [ -f "$1" ] && source "$1"
 }
 
 # If the directory exists and is not included in PATH, return TRUE
 not_in_path() {
-	[[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]] && return 0 || return 1
+    [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]] && return 0 || return 1
 }
 
 prepend_to_path() {
-	not_in_path "$1" && export PATH="$1:$PATH"
+    not_in_path "$1" && export PATH="$1:$PATH"
 }
 
 append_to_path() {
-	not_in_path "$1" && export PATH="$PATH:$1"
+    not_in_path "$1" && export PATH="$PATH:$1"
 }
 
 # Enable file managers cd on quit
