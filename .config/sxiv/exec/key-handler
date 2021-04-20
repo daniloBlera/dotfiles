@@ -14,7 +14,7 @@ copy_to_selection() {
 }
 
 notify() {
-	pgrep -x dunst 1> /dev/null && dunstify "$@"
+    pgrep -x dunst 1> /dev/null && dunstify "$@"
 }
 
 while read file
@@ -22,7 +22,7 @@ do
     case "$1" in
         "y")
             copy_to_selection "$file"
-			notify 'Copied to clipboard' "$file";;
+            notify 'Copied to clipboard' "$file";;
         "c")
             selection=true
             [ -z "$fnames" ] && fnames="$file" || fnames="$fnames $file";;
@@ -36,7 +36,7 @@ done
 
 if [ "$selection" = true ]; then
     copy_to_selection "$fnames"
-	notify 'Copied to selection' "$fnames"
+    notify 'Copied to selection' "$fnames"
 elif [ "$open_files" = true ]; then
     gimp $fnames
 fi
