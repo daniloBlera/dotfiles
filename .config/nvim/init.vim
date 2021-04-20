@@ -4,10 +4,14 @@ source $XDG_CONFIG_HOME/nvim/venv.vim
 " --PLUGINS--
 source $XDG_CONFIG_HOME/nvim/plug.vim
 
+" --COLOURSCHEME--
+source $XDG_CONFIG_HOME/nvim/colourschemes/ruiner.vim
+
 " --VISUAL--
 set number                  " Set line numbering on
-colorscheme koehler
+" colorscheme koehler
 set scrolloff=10            " Number of lines to keep above and below the cursor
+set showcmd                 " Show partial (<Leader> char) commands on the status line
 
 " --INDENT AND SEARCH--
 set tabstop=4               " Number of spaces a TAB counts for
@@ -18,39 +22,49 @@ set shiftround              " Round indent to a multiple of 'shiftwidth'
 set autoindent              " Copy current indent level into the next line
 set linebreak               " Wrap long lines
 set ignorecase              " Ignore case on search patterns
+set splitright              " Put new split to the right
+set splitbelow              " Put new split below
 filetype plugin indent on   " Rely on file plugins to handle indenting
 
 " Insert mode completion
 set completeopt=noinsert,menuone,noselect
 
 " --KEYMAPS--
+" Disable the cursor movement and map the spacebar as the Leader key
+noremap <Space> <Nop>
+let mapleader=" "
+
 " Map (capital) 'J' and 'K' to 'Next' and 'Previous' tab
 nnoremap J gt
 nnoremap K gT
 
 " Toggle directory tree
-nmap <F2> :NERDTreeToggle<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
 
 " Toggle line numbering
 nnoremap <F3> :set nonumber!<CR>
 
 " Text selection
-" Map '\' and 'p' to paste X11's clipboard into selection
-" Map '\' and 'y' to yank the character selection into X11's clipboard
+" Map 'Leader' and 'p' to paste X11's clipboard
+" Map 'Leader' and 'y' to yank the selected text into the clipboard
 vnoremap <Leader>p "+p
 vnoremap <Leader>y "+y
 
+" Select current line's visible chars
+nnoremap <Leader>v ^vg_
+
 " Map (capital) 'y' to copy the current line into selection then jump to the
 " next. This is useful to send a sequence of lines to clipboard managers
-nnoremap Y V"+yj
+" nnoremap Y ^vg_ "+yj
+nmap Y <Leader>v"+yj
 
 " Map (capital) 'l' to copy the current line into selection.
-nnoremap L V"+y
+nmap L <Leader>v"+y
 
-" Map '\' and 'n' to open 'new tab' prompt
+" Map 'Leader' and 'n' to open 'new tab' prompt
 nnoremap <Leader>n :tabnew 
 
-" Map '\' and '/' or '-' for vertical and horizontal pane splitting.
+" Map 'Leader' and '/' or '-' for vertical or horizontal pane splitting.
 nnoremap <Leader>/ :vsplit<CR>
 nnoremap <Leader>- :split<CR>
 
@@ -59,19 +73,47 @@ nnoremap j gj
 nnoremap k gk
 
 " Toggle Line highlight
-hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-nnoremap <F4> :set cursorline!<CR>
+nnoremap <F4> :set cursorline!<CR>:set cursorcolumn!<CR>
 
-" Disable last search results hightlight
-nnoremap <M-/> :noh<CR>
+" Map '<Leader>' then 'h|j|k|l' to navigate pane splits
+nnoremap <Leader>h <C-W><C-H>
+nnoremap <Leader>j <C-W><C-J>
+nnoremap <Leader>k <C-W><C-K>
+nnoremap <Leader>l <C-W><C-L>
 
-" Map 'Alt' and 'h|j|k|l' to navigate pane splits
-nnoremap <M-h> <C-W><C-H>
-nnoremap <M-j> <C-W><C-J>
-nnoremap <M-k> <C-W><C-K>
-nnoremap <M-l> <C-W><C-L>
+" Configuring list mode characters
+" To use a basic set of characters, uncomment the line below
+" set listchars=tab:<-,extends:>,precedes:<,nbsp:+,trail:~,eol:$
 
-" Toggle special characters display
-set listchars=eol:$,tab:<-,trail:~,extends:>,precedes:<
+" To use more visual unicode characters, uncomment the next listchars command
+" * tab:        U+00AB[U+2014]
+" * extends:    U+203A
+" * precedes:   U+2039
+" * nbsp:       U+25CA
+" * trail:      U+00B7
+" * eol:        U+E33F  (UbuntuMono Nerd Font Mono)
+set listchars=tab:«—,extends:›,precedes:‹,nbsp:◊,trail:·,eol:
 set list
+
+" Toggle list mode
 nnoremap <F5> :set list!<CR>
+
+" Toggle line wrap
+nnoremap <F6> :set wrap!<CR>
+
+" Colour configuration
+" Enable TrueColor if the terminal supports it -- see:
+"   :help term-dependent-settings
+if $TERM =~ '^\(st\|screen\|tmux\)\(-.*\)\?$'
+    set termguicolors
+elseif $TERM == 'linux'
+    " If we're using the linux tty, enable ascii listchars
+    set listchars=tab:<-,extends:>,precedes:<,nbsp:+,trail:~,eol:$
+endif
+
+" Concealing Lambda expressions
+autocmd VimEnter * syntax match Statement '\vlambda +' conceal cchar=λ
+autocmd VimEnter *.hs syntax match Statement '\\ *' conceal cchar=λ
+autocmd VimEnter *.hs syntax match Statement ' \. ' conceal cchar=∘
+autocmd VimEnter * hi! link Conceal Statement
+autocmd VimEnter * set conceallevel=2
