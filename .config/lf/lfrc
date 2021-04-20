@@ -3,3 +3,10 @@ set drawbox on
 set number on
 set ratios 1:2:3
 set info size:time
+
+# Deleting files with 'trash-cli'
+## Map (Capital) D to trash files
+map D $trash $f
+
+## Create the 'trash' command
+cmd trash %trash-put $fx
