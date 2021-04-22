@@ -1,4 +1,9 @@
 #!/bin/sh
+# Open all images with sxiv
+# USAGE:
+#   imgs [PATH]
+#
+# PATH Defaults to `pwd`
 if [ "$#" -eq 0 ]
 then
     ROOT_DIR="$(pwd)"

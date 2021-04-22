@@ -1,6 +1,7 @@
 #!/bin/bash
 # A simple dmenu script to lock/close the WM or to shutdown.
-# Usage: manage_session [DMENU_OPTIONS]
+# Usage:
+#   manage_session [DMENU_OPTIONS]
 OPTIONS='Lock Screen
 Close BSPWM
 Reboot

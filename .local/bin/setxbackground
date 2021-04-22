@@ -1,5 +1,7 @@
 #!/bin/sh
 # Set the given image as the wallpaper
+# USAGE
+#   setxbackground IMAGE_PATH
 
 # Print message to desktop notification or stdin
 notify () {

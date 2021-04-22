@@ -7,7 +7,9 @@ Other colourschemes can be found at `~/.config/xres/themes`.
 GUI stuff
 *   bspwm;
 *   sxhkd;
-*   polybar.
+*   polybar;
+*   dwmblocks (statusbar elements for dwm);
+*   dunst.
 
 Terminal related
 *   X resources;
@@ -19,13 +21,14 @@ Terminal related
 
 Text editors and document viewer
 *   neovim -- uses [vim-plug][plug];
-*   zathura.
+*   zathura;
+*   sxiv.
 
 File managers
 *   nnn;
 *   lf.
 
-ps.: Some of the .files (sxhkd, polybar, Xresources, tmux and zathura)
+ps.: Some of the dotfiles (sxhkd, polybar, Xresources, tmux and zathura)
 configure the fonts used ([ubuntu mono nerd font mono][nerdfonts] here).
 
 pps.: You can use GNU's `stow` to link dotfiles.
