@@ -1,7 +1,7 @@
 #!/bin/sh
-# Swallow the terminal window after xdg-open'ing
-# This is just a basic version of the 'devour' script:
-# https://github.com/salman-abedin/devour
+# Swallow the terminal window after xdg-open'ing the argument file
+# This is a basic version of the 'devour' script:
+#   https://github.com/salman-abedin/devour
 #
 # Usage:
 #   swallow-open FILE

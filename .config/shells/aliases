@@ -2,17 +2,17 @@
 # you can then source this script from your shells' config files
 
 # Shortcuts for configuration files
-alias al='"$EDITOR" "$HOME/.config/shells/aliases"'
-alias ev='"$EDITOR" "$HOME/.config/shells/environment"'
+alias al='"$VISUAL" "$HOME/.config/shells/aliases"'
+alias ev='"$VISUAL" "$HOME/.config/shells/environment"'
 
-alias cfbash='"$EDITOR" ~/.bashrc'
-alias cfzsh='"$EDITOR" ~/.zshrc'
+alias cfbash='"$VISUAL" ~/.bashrc'
+alias cfzsh='"$VISUAL" ~/.zshrc'
 
-alias cfbspwm='"$EDITOR" "$XDG_CONFIG_HOME/bspwm/bspwmrc"'
-alias cfsxhkd='"$EDITOR" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
-alias cfpolybar='"$EDITOR" "$XDG_CONFIG_HOME/polybar/config"'
-alias cfnvim='"$EDITOR" "$XDG_CONFIG_HOME/nvim/init.vim"'
-alias cftmux='"$EDITOR" ~/.tmux.conf'
+alias cfbspwm='"$VISUAL" "$XDG_CONFIG_HOME/bspwm/bspwmrc"'
+alias cfsxhkd='"$VISUAL" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
+alias cfpolybar='"$VISUAL" "$XDG_CONFIG_HOME/polybar/config"'
+alias cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
+alias cftmux='"$VISUAL" ~/.tmux.conf'
 
 # Commonly-used
 alias ls='ls --color=auto'
@@ -23,18 +23,15 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 
-alias ll='ls -AlFh'
+alias ll='ls -AFhl'
 alias la='ls -AF'
-
+alias lb='lsblk --fs'
 alias l1='ls -1F'
 alias ldf='ls -AF | grep "^\." | grep -v "/\$"' # List dotfiles
-alias lhd='ls -AF | grep "^\." | grep "/\$"'    # List hidden directories
+alias lhd='dir -A1 | grep "^\."'                # List hidden directories
 alias t2='tree -L 2'
 alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
 alias ip='ip -c'
-
-alias f='fzf'
-alias .f='find . | fzf'
 
 # git-related stuff
 alias gcm='git commit -m'

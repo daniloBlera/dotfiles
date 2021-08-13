@@ -10,6 +10,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Python autocomplete
 Plug 'deoplete-plugins/deoplete-jedi'
 
+" Tmux adjacent pane words
+Plug 'wellle/tmux-complete.vim'
+
 " Tree navigation
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 
@@ -35,8 +38,10 @@ filetype plugin indent on
 call plug#end()
 
 " Plugins configuration
-let g:vim_markdown_folding_disabled = 1     " Disable folding in markdown
+" let g:vim_markdown_folding_disabled = 1     " Disable folding in markdown
 let g:NERDSpaceDelims = 1                   " Enable spaces after comment delimiters
 let g:NERDCommentEmptyLines = 1             " Enable commenting of empty lines
 let g:deoplete#enable_at_startup = 1        " Enable completion automatically
 let g:pymode_indent = 1
+" let g:pymode = 0                            " Disable pymode
+let g:pymode_doc = 0

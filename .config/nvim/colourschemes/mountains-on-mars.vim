@@ -1,4 +1,4 @@
-" A colourscheme based on the Mountain on Mars image
+" A colourscheme based on the Mountains on Mars image
 hi CursorLine   cterm=NONE          ctermbg=DarkGray                        gui=NONE    guibg=#505050
 hi CursorColumn                     ctermbg=DarkGray                                    guibg=#505050
 hi IncSearch    cterm=NONE          ctermbg=Yellow      ctermfg=Black       gui=NONE    guibg=#ffd700   guifg=#170420

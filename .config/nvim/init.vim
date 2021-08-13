@@ -9,6 +9,7 @@ source $XDG_CONFIG_HOME/nvim/colourschemes/ruiner.vim
 
 " --VISUAL--
 set number                  " Set line numbering on
+set relativenumber          " Set line numbering relative to the cursor
 " colorscheme koehler
 set scrolloff=10            " Number of lines to keep above and below the cursor
 set showcmd                 " Show partial (<Leader> char) commands on the status line
@@ -29,6 +30,9 @@ filetype plugin indent on   " Rely on file plugins to handle indenting
 " Insert mode completion
 set completeopt=noinsert,menuone,noselect
 
+" Disable the creation of ShaDa files
+set shada="NONE"
+
 " --KEYMAPS--
 " Disable the cursor movement and map the spacebar as the Leader key
 noremap <Space> <Nop>
@@ -38,11 +42,14 @@ let mapleader=" "
 nnoremap J gt
 nnoremap K gT
 
+" Open the help menu in a separated tab
+nnoremap <F1> :tab help<CR>
+
 " Toggle directory tree
 nnoremap <F2> :NERDTreeToggle<CR>
 
 " Toggle line numbering
-nnoremap <F3> :set nonumber!<CR>
+nnoremap <F3> :set nonumber!<CR>:set norelativenumber<CR>
 
 " Text selection
 " Map 'Leader' and 'p' to paste X11's clipboard
@@ -69,11 +76,13 @@ nnoremap <Leader>/ :vsplit<CR>
 nnoremap <Leader>- :split<CR>
 
 " Map 'j' and 'k' to move to 'Next' and 'Previous' wrapped lines
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
-" Toggle Line highlight
+" Toggle line and column highlight
 nnoremap <F4> :set cursorline!<CR>:set cursorcolumn!<CR>
+set cursorline
+set cursorcolumn
 
 " Map '<Leader>' then 'h|j|k|l' to navigate pane splits
 nnoremap <Leader>h <C-W><C-H>
@@ -101,6 +110,9 @@ nnoremap <F5> :set list!<CR>
 " Toggle line wrap
 nnoremap <F6> :set wrap!<CR>
 
+" Toggle relative line numbering
+nnoremap <F7> :set relativenumber!<CR>
+
 " Colour configuration
 " Enable TrueColor if the terminal supports it -- see:
 "   :help term-dependent-settings
@@ -112,8 +124,36 @@ elseif $TERM == 'linux'
 endif
 
 " Concealing Lambda expressions
-autocmd VimEnter * syntax match Statement '\vlambda +' conceal cchar=λ
+autocmd VimEnter *.py syntax keyword Statement lambda conceal cchar=λ
+autocmd VimEnter *.hs syntax match Statement '\vlambda +' conceal cchar=λ
 autocmd VimEnter *.hs syntax match Statement '\\ *' conceal cchar=λ
 autocmd VimEnter *.hs syntax match Statement ' \. ' conceal cchar=∘
 autocmd VimEnter * hi! link Conceal Statement
 autocmd VimEnter * set conceallevel=2
+
+" Disable 'Ex Mode'
+nnoremap Q <Nop>
+nnoremap gQ <Nop>
+
+" Movement keys
+" Scroll one line up|down
+" Ctrl + E|Y
+"
+" Scroll half a screen up|down
+" Ctrl + U|D
+"
+" Center screen on cursor line
+" zz
+"
+" Break long line into multiple shorter lines
+" gq
+"
+" Move inside wrapped lines
+" g j|k
+"
+" Open file under cursor line
+" gf
+"
+" Join multiple (selected) lines
+" J
+" gJ

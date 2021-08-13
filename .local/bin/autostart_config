@@ -16,9 +16,6 @@ xbindkeys --file "$XDG_CONFIG_HOME/xres/xbindkeysrc"
 # Automatically hide mouse cursor when unused
 unclutter &
 
-# Initialize the urxvt daemon
-# urxvtd -q -o -f
-
 # Background notification daemon
 dunst &
 

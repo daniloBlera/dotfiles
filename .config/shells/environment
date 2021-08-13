@@ -15,21 +15,26 @@ set_env VISUAL '/usr/bin/nvim'
 set_env EDITOR '/usr/bin/nvim'
 # set_env PAGER '/usr/bin/less'
 set_env PAGER '/usr/bin/bat'
+set_env BAT_PAGER 'less -R'
 set_env MANPAGER "sh -c 'col -bx | bat --language man -p'"
 set_env NNN_USE_EDITOR 1
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
-set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;l:~/.local/;t:~/.config/xres/;d:~/Downloads/;b:~/Programs/suckless-related;p:~/Pictures;w:~/Pictures/wallpapers'
-set_env NNN_PLUG 'u:_fusermount -u $nnn*;v:viewimgs;x:delete-stuff;o:swallow-open'
-set_env NNN_OPTS 'odAeRU'
+set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;l:~/.local/;t:~/.config/xres/;d:~/Downloads/;b:~/Programs/suckless-and-related;p:~/Pictures;w:~/Pictures/wallpapers'
+set_env NNN_PLUG 'u:fuse-unmount;v:viewimgs;x:delete-stuff;o:swallow-open'
+set_env NNN_OPTS 'AdeoRU'
 set_env NNN_LOCKER 'slock'
 set_env OPENER '/usr/bin/xdg-open'
 set_env TERMINAL '/usr/local/bin/st'
 
-# fzf's colourscheme -- Ruiner
-set_env FZF_DEFAULT_OPTS '--color "fg:#dc122a,fg+:#000000,bg+:#dc122a,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#dc122a,info:#ddfafa,spinner:#ddfafa"'
+# FZF's options
+# Ruiner Theme
+# set_env FZF_DEFAULT_OPTS "--color 'fg:#dc122a,fg+:#000000,bg+:#dc122a,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#dc122a,info:#ddfafa,spinner:#ddfafa'"
 
-# fzf's colourscheme -- Mountain on mars
-# set_env FZF_DEFAULT_OPTS '--color "fg:#ea1646,fg+:#000000,bg+:#ea1646,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#ea1646,info:#ddfafa,spinner:#ddfafa"'
+# Mountains on mars Theme
+# set_env FZF_DEFAULT_OPTS "--color 'fg:#ea1646,fg+:#170420,bg+:#ea1646,hl:#ddfafa,hl+:#ddfafa,pointer:#170420,prompt:#ea1646,info:#ddfafa,spinner:#ddfafa'"
+
+# Red star Theme
+set_env FZF_DEFAULT_OPTS "--color 'fg:#ed1c24,fg+:#1d1d1d,bg+:#ed1c24,hl:#ddfafa,hl+:#ddfafa,pointer:#1d1d1d,prompt:#ed1c24,info:#ddfafa,spinner:#ddfafa'"
 
 # PATH ADDITIONS
 # Personal binaries and scripts
