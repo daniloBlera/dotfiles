@@ -41,3 +41,26 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
     add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
     add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
+
+# FuzzyFinder widget
+__fzf-sel() {
+    local fzfcmd="find . | sed 's|^./||' | fzf -m"
+
+    eval "$fzfcmd" | while read item
+    do
+        echo -n "${(q)item} "
+    done
+
+    local ret=$?
+    echo
+    return $ret
+}
+
+_fzf-widget() {
+    LBUFFER="${LBUFFER}$(__fzf-sel)"
+    local ret=$?
+    zle reset-prompt
+    return $ret
+}
+zle -N _fzf-widget
+bindkey '\ee' _fzf-widget

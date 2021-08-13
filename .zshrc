@@ -43,10 +43,11 @@ source_if_exists "$HOME/.config/lf/lfcd.sh"
 # Enabling fuzzyfind
 source_if_exists "$HOME/.fzf.zsh"
 
-# Configuring path, environment variables and aliases
+# Configuring path, environment variables, aliases and extra functions
 source_if_exists "$HOME/.config/shells/environment"
 source_if_exists "$HOME/.config/shells/zsh_aliases"
 source_if_exists "$HOME/.config/shells/aliases"
+source_if_exists "$HOME/.local/bin/fuzzyfuncs.sh"
 source_if_exists "$HOME/.config/shells/zsh_keybindings"
 
 # Extra stuff
