@@ -18,6 +18,10 @@ set index-active-fg             '#000000'
 set index-bg                    '#000000'
 set index-fg                    '#DC122A'
 
+set highlight-color             '#450005'
+set highlight-fg                '#000000'
+set highlight-active-color      '#DC122A'
+
 # Functionality
 set incremental-search          true
 set page-padding                3
