@@ -5,12 +5,14 @@ source $XDG_CONFIG_HOME/nvim/venv.vim
 source $XDG_CONFIG_HOME/nvim/plug.vim
 
 " --COLOURSCHEME--
-source $XDG_CONFIG_HOME/nvim/colourschemes/ruiner.vim
+source $XDG_CONFIG_HOME/nvim/colourschemes/red-star.vim
+
+" --GENERAL OPTIONS--
+set shada="NONE"            " Disable the creation of ShaDa files
+set mouse=a                 " Enable mouse support on all modes
 
 " --VISUAL--
 set number                  " Set line numbering on
-set relativenumber          " Set line numbering relative to the cursor
-" colorscheme koehler
 set scrolloff=10            " Number of lines to keep above and below the cursor
 set showcmd                 " Show partial (<Leader> char) commands on the status line
 
@@ -28,10 +30,7 @@ set splitbelow              " Put new split below
 filetype plugin indent on   " Rely on file plugins to handle indenting
 
 " Insert mode completion
-set completeopt=noinsert,menuone,noselect
-
-" Disable the creation of ShaDa files
-set shada="NONE"
+set completeopt=noinsert,menuone,noselect,preview
 
 " --KEYMAPS--
 " Disable the cursor movement and map the spacebar as the Leader key
@@ -49,7 +48,7 @@ nnoremap <F1> :tab help<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
 
 " Toggle line numbering
-nnoremap <F3> :set nonumber!<CR>:set norelativenumber<CR>
+nnoremap <F3> :set nonumber!<CR>
 
 " Text selection
 " Map 'Leader' and 'p' to paste X11's clipboard
@@ -74,10 +73,6 @@ nnoremap <Leader>n :tabnew
 " Map 'Leader' and '/' or '-' for vertical or horizontal pane splitting.
 nnoremap <Leader>/ :vsplit<CR>
 nnoremap <Leader>- :split<CR>
-
-" Map 'j' and 'k' to move to 'Next' and 'Previous' wrapped lines
-" nnoremap j gj
-" nnoremap k gk
 
 " Toggle line and column highlight
 nnoremap <F4> :set cursorline!<CR>:set cursorcolumn!<CR>
@@ -113,6 +108,10 @@ nnoremap <F6> :set wrap!<CR>
 " Toggle relative line numbering
 nnoremap <F7> :set relativenumber!<CR>
 
+" Toggle mouse support
+nnoremap <Leader>m :set mouse=a<CR>
+nnoremap <Leader>M :set mouse=""<CR>
+
 " Colour configuration
 " Enable TrueColor if the terminal supports it -- see:
 "   :help term-dependent-settings
@@ -137,10 +136,10 @@ nnoremap gQ <Nop>
 
 " Movement keys
 " Scroll one line up|down
-" Ctrl + E|Y
+" Ctrl + e|y
 "
 " Scroll half a screen up|down
-" Ctrl + U|D
+" Ctrl + d|d
 "
 " Center screen on cursor line
 " zz
