@@ -23,7 +23,7 @@ print_help() {
 notify() {
     if pgrep -x dunst > /dev/null
     then
-        dunstify "Captured screenshot" "$1"
+        dunstify -h 'string:x-dunst-stack-tag:screenshot' 'Captured screenshot' "$1"
     else
         echo "Captured $1"
     fi
@@ -42,7 +42,7 @@ if [ "$selection" = 'false' ]
 then
     scrot "$fpath"
 else
-    scrot -s "$fpath"
+    scrot -s "$fpath" || exit 1
 fi
 
 notify "$fname"

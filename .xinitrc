@@ -1,6 +1,4 @@
 # Initial X setup
-cd $HOME
-
 # Run configuration scripts
 ~/.local/bin/autostart_config
 

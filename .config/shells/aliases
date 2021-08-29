@@ -12,7 +12,7 @@ alias cfbspwm='"$VISUAL" "$XDG_CONFIG_HOME/bspwm/bspwmrc"'
 alias cfsxhkd='"$VISUAL" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
 alias cfpolybar='"$VISUAL" "$XDG_CONFIG_HOME/polybar/config"'
 alias cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
-alias cftmux='"$VISUAL" ~/.tmux.conf'
+alias cftmux='"$VISUAL" "$HOME/.tmux.conf"'
 
 # Commonly-used
 alias ls='ls --color=auto'
