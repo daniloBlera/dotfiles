@@ -1,0 +1,7 @@
+#!/bin/sh
+# nnn plugin -- Open the file using xdg-open and swallow the window
+#
+# Args:
+#   $1: Hovered filename
+#   $2: Absolute path to the hovered file (not used)
+[ -f "$1" ] && swallow-open "$1"

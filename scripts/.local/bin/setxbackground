@@ -1,0 +1,13 @@
+#!/bin/sh
+# Set the given image as the wallpaper
+# USAGE
+#   setxbackground IMAGE_PATH
+
+# Print message to desktop notification or stdin
+notify() {
+    pgrep dunst 1> /dev/null && dunstify "Background changed" "$1" || echo "Changed the background to '$1'"
+}
+
+BG_FILE="$XDG_CONFIG_HOME/wallpaper"
+cp "$1" "$BG_FILE" && xwallpaper --zoom "$BG_FILE"
+notify "$1"

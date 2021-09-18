@@ -1,0 +1,8 @@
+! DWM Colours - Based on the Mono Theme colourscheme
+! https://terminal.sexy/#AAAA____AAAAa2trxMTEs7OzmZmZcXFxioqKtcq7ICAgRkZG-Pj47u7ufHx8ra2twMDAmaye
+dwm.normbordercolor:    #aaaaaa
+dwm.normbgcolor:        #000000
+dwm.normfgcolor:        #aaaaaa
+dwm.selbordercolor:     #ffffff
+dwm.selbgcolor:         #ffffff
+dwm.selfgcolor:         #212121

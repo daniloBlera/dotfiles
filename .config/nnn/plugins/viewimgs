@@ -1,6 +1,0 @@
-#!/bin/sh
-# Open all images in the current directory
-WINDOW_ID="$(xdo id)"
-xdo hide
-find "$2" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' -printf '%f\n' | sort -g | sxiv -iqtp > /dev/null 2>&1
-xdo show "$WINDOW_ID"

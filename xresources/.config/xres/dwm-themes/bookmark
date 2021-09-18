@@ -1,0 +1,8 @@
+! DWM Colours - Based on the image Bookmark
+! http://simpledesktops.com/browse/desktops/2010/aug/24/bookmark/
+dwm.normbordercolor:    #2f0807
+dwm.normbgcolor:        #000c12
+dwm.normfgcolor:        #ddfafa
+dwm.selbordercolor:     #9c1513
+dwm.selbgcolor:         #9c1513
+dwm.selfgcolor:         #ddfafa

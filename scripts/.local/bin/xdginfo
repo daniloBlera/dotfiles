@@ -1,0 +1,21 @@
+#!/bin/sh
+# Print XDG Mime's filetype and default app information
+#
+# USAGE:
+#   xdginfo FILE_PATH
+#
+print_info() {
+    filetype="$(xdg-mime query filetype "$1")"
+    default_app="$(xdg-mime query default "$filetype")"
+
+    echo "FILE NAME:    $1"
+    echo "FILE TYPE:    $filetype"
+    echo "DEFAULT APP:  ${default_app:-NONE}"
+}
+
+[ "$#" -eq 0 ] && exit
+
+for arg in "$@"
+do
+    print_info "$arg"
+done

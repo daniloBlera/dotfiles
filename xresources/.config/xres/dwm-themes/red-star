@@ -1,0 +1,8 @@
+! DWM Colours - Based on the Red Star image
+! http://simpledesktops.com/browse/desktops/2013/nov/10/red-star/
+dwm.normbordercolor:    #793533
+dwm.normbgcolor:        #1d1d1d
+dwm.normfgcolor:        #ddfafa
+dwm.selbordercolor:     #ed1c24
+dwm.selbgcolor:         #ed1c24
+dwm.selfgcolor:         #ddfafa

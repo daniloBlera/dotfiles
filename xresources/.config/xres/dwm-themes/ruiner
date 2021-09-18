@@ -1,0 +1,8 @@
+! DWM Colours - Based on the art for the game RUINER
+! https://www.artstation.com/artwork/vQPZ3
+dwm.normbordercolor:    #770005
+dwm.normbgcolor:        #000000
+dwm.normfgcolor:        #ddfafa
+dwm.selbordercolor:     #dc122a
+dwm.selbgcolor:         #dc122a
+dwm.selfgcolor:         #ddfafa

@@ -1,6 +1,0 @@
-#!/bin/sh
-# Swallow file opening window
-#
-# Args:
-#   $1: Hovered filename
-[ -f "$1" ] && swallow-open "$1"
