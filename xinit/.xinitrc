@@ -1,6 +1,6 @@
 # Initial X setup
 # Run configuration scripts
-~/.local/bin/autostart-config
+~/.local/scripts/autostart-config
 
 # BSPWM
 # sxhkd &
@@ -8,5 +8,8 @@
 # exec bspwm
 
 # DWM
-dwmblocks &
-exec dwm 2> ~/.cache/dwm.log
+# dwmblocks &
+# exec dwm 2> ~/.cache/dwm.log
+
+# StumpWM
+exec stumpwm.ros
