@@ -1,18 +1,32 @@
 #!/bin/sh
-# nnn plugin -- A wrapper around `rm` for the times when trash-cli won't work
+# nnn plugin -- A wrapper around `rm` for the times when trash-cli won't work.
 #
-# Args:
-#   $1: Hovered filename
-#   $2: Absolute path to the hovered file
-while true
-do
-    read -p "rm -rf '$1'? [y/n] " yn
-    case $yn in
-        [Yy]*)
-            rm -rf "$1"
-            echo "Deleted '$1' from '$2'"
-            break;;
-        [Nn]*)
-            break;;
-    esac
-done
+# ARGUMENTS
+#   $1          The name of the hovered file.
+#   $2          Absolute path to the current directory.
+
+promptuser() {
+    [ "$#" -eq 1 ] && echo "$1\n"
+    read -p "Press 'Enter' to continue" keypress
+    echo ""
+}
+
+# Comment conditional block below if you want to be free to use `rm` in a git
+# repository.
+if [ -d '.git' ]
+then
+    promptuser "WARNING: This plugin was disabled as the current directory \n\n\
+\t$2\n\nseems to be a git repository."
+    exit
+fi
+
+read -p "rm -rf '$1'? [y/n] " yn
+case $yn in
+    [Yy]*)
+        rm -rf "$1"
+        promptuser "Deleted '$1' from '$2'"
+        ;;
+    *)
+        promptuser 'Aborted removing files.'
+        ;;
+esac

@@ -16,11 +16,21 @@ xbindkeys --file "$XDG_CONFIG_HOME/xres/xbindkeysrc"
 # Automatically hide mouse cursor when unused
 unclutter &
 
+# Synchronize PRIMARY and CLIPBOARD selections
+autocutsel &
+
 # Background notification daemon
 dunst &
 
 # Set colour temperature (use redshift-gtk instead for the widget)
-redshift -m randr -l -8.038958:-34.9574524 &
+# redshift -m randr -l -8.038958:-34.9574524 &
+
+# Configure screensaver and DPMS times (in seconds)
+xset s 600                  # 10m
+xset dpms 900 1200 1800     # 15m 20m 30m
+
+# Configure lockscreen on screensaver
+xss-lock --ignore-sleep -- lockscreen-cmd &
 
 # Enable left pointer cursor
 xsetroot -cursor_name left_ptr

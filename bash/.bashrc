@@ -47,8 +47,10 @@ source_if_exists "$HOME/.fzf.bash"
 
 # Configuring path, environment variables, aliases and extra functions
 source_if_exists "$HOME/.config/shells/environment"
-source_if_exists "$HOME/.config/shells/bash_aliases"
 source_if_exists "$HOME/.config/shells/aliases"
+source_if_exists "$HOME/.config/shells/bash_aliases"
+source_if_exists '/usr/share/fzf/completion.bash'
+source_if_exists '/usr/share/fzf/key-bindings.bash'
 source_if_exists "$HOME/.local/bin/fuzzyfuncs.sh"
 
 # Extra stuff

@@ -1,20 +1,24 @@
 ! X Resources configuration file
 ! Patched nerd fonts with working font-awesome glyphs
-URxvt*font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
-URxvt*boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+URxvt*font:             xft:UbuntuMono Nerd Font:size=12:style=regular:antialias=true
+URxvt*boldFont:         xft:UbuntuMono Nerd Font:size=12:style=bold:antialias=true
 
-UXTerm.vt100.font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
-UXTerm.vt100.boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+UXTerm.vt100.font:      xft:UbuntuMono Nerd Font:size=12:style=regular:antialias=true
+UXTerm.vt100.boldFont:  xft:UbuntuMono Nerd Font:size=12:style=bold:antialias=true
 
-XTerm.vt100.font: xft:UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
-XTerm.vt100.boldFont: xft:UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+XTerm.vt100.font:       xft:UbuntuMono Nerd Font:size=12:style=regular:antialias=true
+XTerm.vt100.boldFont:   xft:UbuntuMono Nerd Font:size=12:style=bold:antialias=true
 
 ! For st terminal
-*font: UbuntuMono Nerd Font Mono:pixelsize=16:antialias=true
-*font.boldFont: UbuntuMono Nerd Font Mono:bold:pixelsize=16:antialias=true
+! *font:                UbuntuMono Nerd Font:size=12:style=regular:antialias=true
+! *font.boldFont:       UbuntuMono Nerd Font:size=12:style=bold:antialias=true
+*.font:               FiraCode Nerd Font:size=11:style=regular:antialias=true
+*.font.boldFont:      FiraCode Nerd Font:style=bold:size=11:antialias=true
+! *.font:                 Jetbrains Mono:size=11:style=regular:antialias=true
+! *.font.boldFont:        Jetbrains Mono:style=bold:size=11:antialias=true
 
-! Configuring Rofi font for programs that use it
-rofi.font: Ubuntu:pixelsize=11
+! Dmenu related configs
+dmenu.font: Ubuntu:size=12
 
 ! Extra stuff
 URxvt*termName: rxvt-unicode

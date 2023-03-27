@@ -1,0 +1,15 @@
+#!/bin/bash
+# Search and copy unicode glyphs to the clipboard
+NF="$(xrdb -query | grep 'dmenu.nf' | cut -d '	' -f 2)"
+NB="$(xrdb -query | grep 'dmenu.nb' | cut -d '	' -f 2)"
+SF="$(xrdb -query | grep 'dmenu.sf' | cut -d '	' -f 2)"
+SB="$(xrdb -query | grep 'dmenu.sb' | cut -d '	' -f 2)"
+
+
+if [ -n "$NF" ] && [ -n "$NB" ] && [ -n "$SF" ] && [ -n "$SB" ]
+then
+    unipicker --copy --command "dmenu -i -l 20 -p 'Symbol' -fn 'UbuntuMono Nerd Font:11' -nb '$NF' -nf '$NB' -sb '$SF' -sf '$SB'"
+else
+    unipicker --copy --command "dmenu -i -l 20 -p 'Symbol' -fn 'UbuntuMono Nerd Font:11'"
+fi
+

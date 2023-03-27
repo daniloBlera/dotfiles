@@ -12,41 +12,62 @@ set_env XDG_CACHE_HOME "$HOME/.cache"
 set_env XDG_CONFIG_HOME "$HOME/.config"
 set_env XDG_DATA_HOME "$HOME/.local/share"
 
-set_env PYTHONSTARTUP "$XDG_CONFIG_HOME/python/pythonstartup.py"
+# set_env PYTHONSTARTUP "$XDG_CONFIG_HOME/python/pythonstartup.py"
+set_env PYTHONBREAKPOINT 'ipdb.set_trace'
+set_env WINEPREFIX "$XDG_CACHE_HOME/wine"
+set_env WINEARCH "win32"
+
+set_env ROSWELL_HOME "$XDG_CACHE_HOME/roswell"
+set_env PYENV_ROOT "$XDG_CACHE_HOME/pyenv"
+set_env WEECHAT_HOME "$XDG_CONFIG_HOME/weechat"
 
 # TEXT EDITORS AND FILE MANAGERS
 set_env SUDO_EDITOR 'nvim'
 set_env VISUAL 'nvim'
 set_env EDITOR 'nvim'
 set_env PAGER 'bat'
+# set_env BAT_PAGER 'less -RF'
 set_env BAT_PAGER 'less -R'
 set_env MANPAGER "sh -c 'col -bx | bat --language man -p'"
 set_env NNN_USE_EDITOR 1
 set_env NNN_TRASH 1     # Use 'trash-cli' instead of 'rm'
-set_env NNN_BMS 's:~/.local/bin/;c:~/.config/;l:~/.local/;t:~/.config/xres/;d:~/Downloads/;b:~/Programs/suckless-and-related;e:~/.local/share/applications;p:~/Pictures;w:~/Pictures/wallpapers'
-set_env NNN_PLUG 'u:fuse-unmount;v:viewimgs;x:delete-stuff;o:swallow-open'
+set_env NNN_BMS 's:~/.local/bin;c:~/.config;l:~/.local;t:~/.config/xres;d:~/Downloads;b:~/Programs/source-builds;e:~/.local/share/applications;p:~/Pictures;w:~/Pictures/wallpapers;q:~/.local/share/common-lisp/source;r:~/.cache/roswell/'
+set_env NNN_PLUG 'u:fuse-unmount;v:viewimgs;x:delete-stuff;o:swallow-open;s:simplify;a:playaudio'
 set_env NNN_OPTS 'AdeoRUr'
 set_env NNN_LOCKER 'cmatrix'
 set_env NNN_OPENER 'xdg-open'
+set_env NNN_COLORS '6532'
 set_env OPENER 'xdg-open'
-set_env ROVER_OPEN "$HOME/.local/bin/swallow-open"
 set_env CLIP '/tmp/clipboard'
 
 # FZF's options
+# set_env FZF_DEFAULT_COMMAND 'find . 2>/dev/null | sed "s|^./||"'
+set_env FZF_DEFAULT_COMMAND 'fd --hidden --type f'
+
 # Ruiner Theme
 # set_env FZF_DEFAULT_OPTS "--color 'fg:#dc122a,fg+:#000000,bg+:#dc122a,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#dc122a,info:#ddfafa,spinner:#ddfafa'"
 
 # Mountains on mars Theme
-# set_env FZF_DEFAULT_OPTS "--color 'fg:#ea1646,fg+:#170420,bg+:#ea1646,hl:#ddfafa,hl+:#ddfafa,pointer:#170420,prompt:#ea1646,info:#ddfafa,spinner:#ddfafa'"
+set_env FZF_DEFAULT_OPTS "--color 'fg:#ea1646,fg+:#170420,bg+:#ea1646,hl:#ddfafa,hl+:#ddfafa,pointer:#170420,prompt:#ea1646,info:#ddfafa,spinner:#ddfafa'"
 
 # Red star Theme
-set_env FZF_DEFAULT_OPTS "--color 'fg:#ed1c24,fg+:#1d1d1d,bg+:#ed1c24,hl:#ddfafa,hl+:#ddfafa,pointer:#1d1d1d,prompt:#ed1c24,info:#ddfafa,spinner:#ddfafa'"
+# set_env FZF_DEFAULT_OPTS "--color 'fg:#ed1c24,fg+:#1d1d1d,bg+:#ed1c24,hl:#ddfafa,hl+:#ddfafa,pointer:#1d1d1d,prompt:#ed1c24,info:#ddfafa,spinner:#ddfafa,marker:#1d1d1d,query:#ddfafa'"
+
+# Nord theme
+# set_env FZF_DEFAULT_OPTS "--color 'fg:#d8dee9,fg+:#d8dee9,bg+:#4c556a,hl:#ebcb8b,hl+:#ebcb8b,pointer:#d8dee0,prompt:#ebcb8b,info:#88c0d0,spinner:#88c0d0,marker:#88c0d0,query:#ebcb8b'"
 
 # PATH ADDITIONS
 # Personal binaries and scripts
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
+prepend_to_path "$HOME/.emacs.d/bin"
+prepend_to_path "$PYENV_ROOT/bin"
+prepend_to_path "$HOME/.local/scripts"
+prepend_to_path "$HOME/.local/npm"
 append_to_path "$HOME/.gem/ruby/2.7.0/bin"
+# append_to_path "$HOME/.local/share/neo4j-community-4.4.12/bin"
+append_to_path "$HOME/.local/share/neo4j-community-5.2.0/bin"
+append_to_path "$ROSWELL_HOME/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing

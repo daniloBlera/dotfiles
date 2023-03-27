@@ -1,5 +1,8 @@
 #!/bin/sh
 # A unified menu for various configuration script selection
+[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
+[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="$HOME/.local/share"
+SCRIPTS_HOME="$HOME/.local/bin"
 
 OPTIONS="Aliases
 Environment variables
@@ -14,6 +17,8 @@ sxiv
 polybar
 nvim
 nvim plugins
+doom emacs
+doom emacs plugins
 tmux
 xinit
 xresources
@@ -22,25 +27,14 @@ zathura
 X colourscheme
 Menu options"
 
-[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
-[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="$HOME/.local/share"
-SCRIPTS_HOME="$HOME/.local/bin"
-
-COLOUR1="$(xrdb -query | grep 'dmenu.foreground' | cut -d '	' -f 2)"
-COLOUR2="$(xrdb -query | grep 'dmenu.background' | cut -d '	' -f 2)"
-
-[ -z "$COLOUR1" ] && COLOUR1='#dadada'
-[ -z "$COLOUR2" ] && COLOUR2='#000000'
-
-option=$(echo "$OPTIONS" | dmenu -i -nb "$COLOUR2" -nf "$COLOUR1" -sb "$COLOUR1" -sf "$COLOUR2" -fn 'Ubuntu-11' -p 'Which config to edit?')
-
+option=$(echo "$OPTIONS" | dmenu_xres 'Which config to edit?')
 case "$option" in
     'Aliases')
         xdg-open "$XDG_CONFIG_HOME/shells/aliases";;
     'Environment variables')
         xdg-open "$XDG_CONFIG_HOME/shells/environment";;
     'Autostart configs')
-        xdg-open "$SCRIPTS_HOME/autostart_config";;
+        xdg-open "$SCRIPTS_HOME/autostart-config";;
     'bash')
         xdg-open "$HOME/.bashrc";;
     'bash aliases')
@@ -61,6 +55,10 @@ case "$option" in
         xdg-open "$XDG_CONFIG_HOME/nvim/init.vim";;
     'nvim plugins')
         xdg-open "$XDG_CONFIG_HOME/nvim/plug.vim";;
+    'doom emacs')
+        xdg-open "$HOME/.doom.d/config.el";;
+    'doom emacs plugins')
+        xdg-open "$HOME/.doom.d/init.el";;
     'tmux')
         xdg-open "$HOME/.tmux.conf";;
     'xinit')
@@ -74,7 +72,7 @@ case "$option" in
     'X colourscheme')
         xdg-open "$SCRIPTS_HOME/setxtheme";;
     'Menu options')
-        xdg-open "$SCRIPTS_HOME/edit_configs";;
+        xdg-open "$SCRIPTS_HOME/edit-configs";;
     *)
         echo 'Error: Invalid option -- Doing nothing.';;
 esac

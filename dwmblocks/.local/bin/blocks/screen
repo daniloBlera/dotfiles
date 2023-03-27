@@ -1,0 +1,18 @@
+#!/bin/sh
+# Display DPMS and screensaver timer info
+if xset q | grep -qi 'dpms is enabled'
+then
+    dpms='D'
+else
+    dpms='-'
+fi
+
+timeout="$(xset q | grep 'timeout' | tr -s '[:space:]' | cut -d ' ' -f 3)"
+if [ "$timeout" -eq 0 ]
+then
+    screen='-'
+else
+    screen='S'
+fi
+
+echo " ${dpms}${screen} "

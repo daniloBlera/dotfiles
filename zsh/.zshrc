@@ -1,16 +1,41 @@
 #
 # ~/.zshrc
 #
+
+# NEW LINES
+# Lines configured by zsh-newuser-install
+# HISTFILE=~/.histfile
+HISTFILE=/tmp/$(whoami)-zsh_histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd extendedglob nomatch
+unsetopt beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
 zstyle ':completion:*' menu select
-zstyle :compinstall filename "$HOME/.zshrc"
+zstyle :compinstall filename '/home/dcb/.zshrc'
 
 autoload -Uz compinit
 compinit
+# End of lines added by compinstall
+# NEW LINES
 
-HISTFILE=/tmp/zsh_history-$(whoami)
-HISTSIZE=1000
-SAVEHIST=1000
+# OLD LINES
+# zstyle ':completion:*' menu select
+# zstyle :compinstall filename "$HOME/.zshrc"
+# 
+# autoload -Uz compinit
+# compinit
+
+# Reset history on reboots or shutdowns. To prevent saving any history file,
+# unset HISTFILE and set SAVEHIST to 0, commenting the history lines below.
+# HISTFILE=/tmp/zsh_history-$(whoami)
+# HISTSIZE=1000
+# SAVEHIST=1000
+
 bindkey -e
+# OLD LINES
 
 PROMPT='[%n@%m %1~]%# '
 
@@ -45,10 +70,16 @@ source_if_exists "$HOME/.fzf.zsh"
 
 # Configuring path, environment variables, aliases and extra functions
 source_if_exists "$HOME/.config/shells/environment"
-source_if_exists "$HOME/.config/shells/zsh_aliases"
 source_if_exists "$HOME/.config/shells/aliases"
-source_if_exists "$HOME/.local/bin/fuzzyfuncs.sh"
+source_if_exists "$HOME/.config/shells/zsh_aliases"
 source_if_exists "$HOME/.config/shells/zsh_keybindings"
+source_if_exists '/usr/share/fzf/completion.zsh'
+source_if_exists '/usr/share/fzf/key-bindings.zsh'
+source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
+
+# pyenv stuff
+eval "$(pyenv init - --no-rehash)"
+source /usr/share/zsh/site-functions/_pyenv
 
 # Extra stuff
 stty -ixon

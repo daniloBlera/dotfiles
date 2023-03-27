@@ -1,0 +1,7 @@
+#!/bin/sh
+# A wrapper to unify the lock screen command accross
+# different window managers and programs
+#
+# USAGE:
+#   lockscreen-cmd
+slock -m "$(cat ~/.local/scripts/chars-slock.txt)"

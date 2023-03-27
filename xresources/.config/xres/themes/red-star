@@ -4,6 +4,8 @@
 *background:        #1d1d1d
 *.foreground:       #c58180
 *.background:       #1d1d1d
+*cursorColor:       #c58180
+*.cursorColor:      #c58180
 emacs*foreground:   #c58180
 emacs*background:   #000C12
 URxvt*foreground:   #c58180
@@ -16,8 +18,11 @@ URxvt*cursorColor:  #c58180
 XTerm*cursorColor:  #c58180
 UXTerm*cursorColor: #c58180
 URxvt*borderColor:  [100]#000C12
-dmenu.background:   #1d1d1d
-dmenu.foreground:   #ed1c24
+
+dmenu.nf:           #1d1d1d
+dmenu.nb:           #ed1c24
+dmenu.sf:           #ed1c24
+dmenu.sb:           #1d1d1d
 
 ! Colors 0-15.
 *.color0: #000C12

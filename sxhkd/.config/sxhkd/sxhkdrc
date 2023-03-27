@@ -12,11 +12,11 @@ super + Menu
 
 # Open configuration files on 'EDITOR'
 super + e
-    ~/.local/bin/edit_configs -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
+    ~/.local/bin/edit-configs -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
 
 # Lock screen, kill the window manager, restart or shutdown
 ctrl + alt + Delete
-    ~/.local/bin/manage_session_bspwm -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
+    ~/.local/bin/manage-session-bspwm -nb '#000000' -nf '#DC122A' -sb '#DC122A' -sf '#000000' -fn 'Ubuntu-11'
 
 # Reload sxiv configs
 super + Escape
@@ -24,11 +24,11 @@ super + Escape
 
 # Capture screenshot to $HOME/Pictures
 Print
-    ~/.local/bin/capture_screenshot
+    ~/.local/bin/capture-screenshot
 
 # Capture selection or after a delay
 alt + Print
-    ~/.local/bin/capture_screenshot --interactive
+    ~/.local/bin/capture-screenshot --interactive
 
 # Launch the NetworkManager dmenu UI
 super + n

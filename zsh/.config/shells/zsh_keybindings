@@ -44,7 +44,7 @@ fi
 
 # FuzzyFinder file selection function
 __fzf-sel() {
-    elements="$(find . | sed 's|^./||' | fzf -m | tr '\n' ' ')"
+    elements="$(find . 2>/dev/null | sed 's|^./||' | fzf -m | tr '\n' ' ')"
     local ret=$?
     echo "$elements"
     return $ret
@@ -56,7 +56,7 @@ __fzf-sel() {
 # terminal cursor. The resulting selected paths can be used as input for other
 # commands.
 #
-# Keybinding:   Alt + e
+# Keybinding:   Alt + f
 _fzf-widget() {
     RBUFFER="${RBUFFER}$(__fzf-sel)"   # place items to the right of the cursor
     local ret=$?
@@ -64,4 +64,4 @@ _fzf-widget() {
     return $ret
 }
 zle -N _fzf-widget
-bindkey '\ee' _fzf-widget
+bindkey '\ef' _fzf-widget

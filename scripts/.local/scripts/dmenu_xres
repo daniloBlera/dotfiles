@@ -1,0 +1,16 @@
+#!/bin/sh
+# A shortcut for dmenu with Xresources configuration
+
+FONT="$(xrdb -query | grep 'dmenu.font' | cut -d '	' -f 2)"
+PROMPT='Which colourscheme?'
+NF="$(xrdb -query | grep 'dmenu.nf' | cut -d '	' -f 2)"
+NB="$(xrdb -query | grep 'dmenu.nb' | cut -d '	' -f 2)"
+SF="$(xrdb -query | grep 'dmenu.sf' | cut -d '	' -f 2)"
+SB="$(xrdb -query | grep 'dmenu.sb' | cut -d '	' -f 2)"
+
+if [ -z "$NF" ] || [ -z "$NB" ] || [ -z "$SF" ] || [ -z "$SB" ] || [ -z "$FONT" ]
+then
+    dmenu -i -p "$PROMPT"
+else
+    dmenu -i -nb "$NB" -nf "$NF" -sb "$SB" -sf "$SF" -fn "$FONT" -p "$1"
+fi

@@ -142,7 +142,7 @@ fpdf() {
         searchdir="$(dirname "$1")"
     fi
 
-    selection="$(find "$searchdir" -type f -name '*.pdf' | fzf)"
+    selection="$(find "$searchdir" -type f -name '*.pdf' 2> /dev/null | fzf)"
     if [ -n "$selection" ]
     then
         swallow-open "$selection"

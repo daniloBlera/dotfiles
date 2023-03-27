@@ -1,7 +1,6 @@
 # Put here your bash exclusive aliases
 
 # Source python virtual environments
-alias p2h='source ~/.local/share/python/environments/p2h/bin/activate'
-alias p3h='source ~/.local/share/python/environments/p3h/bin/activate'
-alias mlh='source ~/.local/share/python/environments/mlh/bin/activate'
+alias p3='source ~/.local/share/python/environments/p3h/bin/activate'
+alias ml='source ~/.local/share/python/environments/mlh/bin/activate'
 alias venv='source .venv/bin/activate'

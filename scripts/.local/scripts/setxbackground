@@ -8,6 +8,12 @@ notify() {
     pgrep dunst 1> /dev/null && dunstify "Background changed" "$1" || echo "Changed the background to '$1'"
 }
 
+if [ "$#" -ne 1 ]
+then
+    echo "ERROR: Illegal number of arguments!"
+    exit 1
+fi
+
 BG_FILE="$XDG_CONFIG_HOME/wallpaper"
 cp "$1" "$BG_FILE" && xwallpaper --zoom "$BG_FILE"
 notify "$1"

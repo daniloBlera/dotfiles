@@ -5,8 +5,11 @@
 *.background:   #170420
 *.foreground:   #db8097
 *.cursorColor:  #db8097
-dmenu.background:   #170420
-dmenu.foreground:   #ea1646
+
+dmenu.nf:       #170420
+dmenu.nb:       #ea1646
+dmenu.sf:       #ea1646
+dmenu.sb:       #170420
 
 ! colors
 *color0:        #0c0212

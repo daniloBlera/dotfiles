@@ -7,8 +7,11 @@
 *.foreground:   #B2B2B2
 *cursorColor:   #B2B2B2
 *.cursorColor:  #B2B2B2
-dmenu.background:   #170420
-dmenu.foreground:   #ea1646
+
+dmenu.nf:       #170420
+dmenu.nb:       #ea1646
+dmenu.sf:       #ea1646
+dmenu.sb:       #170420
 
 ! black
 *.color0:       #000000

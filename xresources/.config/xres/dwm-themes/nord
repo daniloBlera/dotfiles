@@ -1,0 +1,8 @@
+! DWM Colours - Based on the nord theme for VIM
+! https://www.nordtheme.com/ports/vim/
+dwm.normbordercolor:    #363d4b
+dwm.normbgcolor:        #2e3440
+dwm.normfgcolor:        #d8dee0
+dwm.selbordercolor:     #4c566a
+dwm.selbgcolor:         #4c566a
+dwm.selfgcolor:         #d8dee0

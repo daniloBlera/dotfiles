@@ -1,0 +1,4 @@
+#!/bin/sh
+[ -f "$XDG_CONFIG_HOME/xres/settings" ] && xrdb "$XDG_CONFIG_HOME/xres/settings"
+[ -f "$XDG_CONFIG_HOME/xresources-term" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-term"
+[ -f "$XDG_CONFIG_HOME/xresources-dwm" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-dwm"

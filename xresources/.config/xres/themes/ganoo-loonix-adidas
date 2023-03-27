@@ -1,16 +1,16 @@
 /* I'd like to interject for a moment... */
 /* This should be pretty close to the linux terminal colors */
 ! Colors
-*background:    #000000
-*foreground:    #B2B2B2
-*.background:   #000000
-*.foreground:   #B2B2B2
-*cursorColor:   #B2B2B2
-*.cursorColor:  #B2B2B2
+*background:    #0066c4
+*foreground:    #ffffff
+*.background:   #0066c4
+*.foreground:   #ffffff
+*cursorColor:   #ffffff
+*.cursorColor:  #ffffff
 
 dmenu.nf:       #000000
-dmenu.nb:       #dc122a
-dmenu.sf:       #dc122a
+dmenu.nb:       #0066c4
+dmenu.sf:       #0066c4
 dmenu.sb:       #000000
 
 ! black
