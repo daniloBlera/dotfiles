@@ -63,13 +63,13 @@
 
 (defcommand prompt-poweroff () ()
   "Prompt the user to confirm powering off"
-  (if (y-or-n-p (format nil "Power off? "))
+  (if (y-or-n-p "Power off? ")
       (run-shell-command "poweroff")
       (xlib:unmap-window (screen-message-window (current-screen)))))
 
 (defcommand prompt-reboot () ()
   "Prompt the user to confirm rebooting"
-  (if (y-or-n-p (format nil "Reboot? "))
+  (if (y-or-n-p "Reboot? ")
       (run-shell-command "reboot")
       (xlib:unmap-window (screen-message-window (current-screen)))))
 

@@ -12,7 +12,6 @@ set_env XDG_CACHE_HOME "$HOME/.cache"
 set_env XDG_CONFIG_HOME "$HOME/.config"
 set_env XDG_DATA_HOME "$HOME/.local/share"
 
-# set_env PYTHONSTARTUP "$XDG_CONFIG_HOME/python/pythonstartup.py"
 set_env PYTHONBREAKPOINT 'ipdb.set_trace'
 set_env WINEPREFIX "$XDG_CACHE_HOME/wine"
 set_env WINEARCH "win32"
@@ -26,7 +25,6 @@ set_env SUDO_EDITOR 'nvim'
 set_env VISUAL 'nvim'
 set_env EDITOR 'nvim'
 set_env PAGER 'bat'
-# set_env BAT_PAGER 'less -RF'
 set_env BAT_PAGER 'less -R'
 set_env MANPAGER "sh -c 'col -bx | bat --language man -p'"
 set_env NNN_USE_EDITOR 1
@@ -65,7 +63,6 @@ prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
 prepend_to_path "$HOME/.local/npm"
 append_to_path "$HOME/.gem/ruby/2.7.0/bin"
-# append_to_path "$HOME/.local/share/neo4j-community-4.4.12/bin"
 append_to_path "$HOME/.local/share/neo4j-community-5.2.0/bin"
 append_to_path "$ROSWELL_HOME/bin"
 

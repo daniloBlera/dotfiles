@@ -16,10 +16,7 @@ alias cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
 alias cftmux='"$VISUAL" "$HOME/.tmux.conf"'
 alias cfgit='"$VISUAL" "$XDG_CONFIG_HOME/git/config"'
 alias cfdoom='"$VISUAL" "$HOME/.doom.d/config.el"'
-alias cfirc='"$VISUAL" "$WEECHAT_HOME/irc.conf"'
-
 alias cfstump='"$VISUAL" "$XDG_CONFIG_HOME/stumpwm/config"'
-
 alias cfmime='"$VISUAL" "$XDG_CONFIG_HOME/mimeapps.list"'
 
 # Commonly-used
@@ -63,9 +60,6 @@ alias xk='xev -event keyboard'
 
 ## List wifi hotspots (requires NetworkManager)
 alias nmls='nmcli device wifi list --rescan yes'
-
-## Copy unicode characters to clipboard
-# alias uni='unipicker --copy'
 
 ## Wrap common lisp REPL with readline for command history
 alias repl='rlwrap ros run'

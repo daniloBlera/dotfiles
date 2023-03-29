@@ -1,6 +1,6 @@
 # A bunch of configuration files
 
-A place to backup my desktop Arch environment configuration.
+A place to backup my system's configuration.
 
 ## About the repository structure
 
@@ -19,8 +19,8 @@ root-dir
 
 and each package includes their respective configuration files tree structure.
 Note that the package contents match the directory tree structure from your
-user's home. For example, the `tmux` and `neovim` packages contain the following
-structures:
+user's home. As an example, the `tmux` and `neovim` packages contain the
+following structures:
 
 ```text
 tmux
@@ -46,7 +46,6 @@ wich means, you could simply copy the contents of a package's root directory
 (the `.tmux.conf` file or the `.config` folder) and paste them on your user's
 home.
 
-
 ## Manual installation
 
 The easiest way to install the configs is to clone this repository and then,
@@ -71,9 +70,9 @@ stow [--no-folding] -d STOW -t TARGET PACKAGE ...
 
 where `STOW` is the path to the root of the cloned repository, `TARGET` is the
 root to where the files should be installed (the user's home) and `--no-folding`
-is an option if you would want to disable folding (more on the section *2.1
-About directory folding*). For example, to install the `zsh`, `nvim`,  `tmux`,
-and `xinit` configuration packages you would run
+is an option if you would want to disable folding (more on the section
+[About directory folding](#about-directory-folding)). For example, to install
+the `zsh`, `nvim`,  `tmux`, and `xinit` configuration packages you would run
 
 ```zsh
 stow -d ConfigFiles -t ~/ zsh nvim tmux xinit
