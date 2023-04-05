@@ -8,29 +8,33 @@
 [ -f "$XDG_CONFIG_HOME/xresources-dwm" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-dwm"
 
 # Set X background
-xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper" || xsetroot -solid #000000
+if [ -f "$XDG_CONFIG_HOME/wallpaper" ]
+then
+    xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper"
+else
+    xsetroot -solid #000000
+fi
 
 # Custom X event functions
 xbindkeys --file "$XDG_CONFIG_HOME/xres/xbindkeysrc"
 
 # Automatically hide mouse cursor when unused
-unclutter &
+pidof -x unclutter > /dev/null || unclutter &
 
 # Synchronize PRIMARY and CLIPBOARD selections
-autocutsel &
+pidof -x autocutsel > /dev/null && pkill -x autocutsel
+autocutsel -s CLIPBOARD &
+autocutsel -s PRIMARY &
 
 # Background notification daemon
-dunst &
-
-# Set colour temperature (use redshift-gtk instead for the widget)
-# redshift -m randr -l -8.038958:-34.9574524 &
+pidof -x dunst > /dev/null || dunst &
 
 # Configure screensaver and DPMS times (in seconds)
 xset s 600                  # 10m
 xset dpms 900 1200 1800     # 15m 20m 30m
 
 # Configure lockscreen on screensaver
-xss-lock --ignore-sleep -- lockscreen-cmd &
+pidof -x xss-lock > /dev/null || xss-lock --ignore-sleep -- lockscreen-cmd &
 
 # Enable left pointer cursor
 xsetroot -cursor_name left_ptr
