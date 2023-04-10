@@ -1,4 +1,4 @@
-;;; $DOOMDIR/config.el - *- lexical-binding: t; -*-
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
@@ -6,8 +6,47 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Your Full Name Here"
-      user-mail-address "your.email@account.here")
+(setq user-full-name "John Doe"
+      user-mail-address "john@doe.com")
+
+;; Doom exposes five (optional) variables for controlling fonts in Doom:
+;;
+;; - `doom-font' -- the primary font to use
+;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
+;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;;   presentations or streaming.
+;; - `doom-unicode-font' -- for unicode glyphs
+;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
+;;
+;; See 'C-h v doom-font' for documentation and more examples of what they
+;; accept. For example:
+;;
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 15 :weight 'regular)
+     doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+
+;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
+;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
+;; refresh your font settings. If Emacs still can't find your font, it likely
+;; wasn't installed correctly. Font issues are rarely Doom issues!
+
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function. This is the default:
+;; (setq doom-theme 'doom-one)
+;; (setq doom-theme 'doom-molokai)
+;; (setq doom-theme 'doom-moonlight)
+;; (setq doom-theme 'doom-old-hope)
+(setq doom-theme 'doom-outrun-electric)
+
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type t)
+(global-display-line-numbers-mode)
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/Documents/org/")
 
 (setq scroll-margin 10) ; Min lines above/below the cursor
 (setq hscroll-margin 5) ; Min columns to the left/right of the cursor
@@ -25,42 +64,6 @@
 ;; Display fill column margin indicator
 (global-display-fill-column-indicator-mode)
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;; (setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-(setq doom-font (font-spec :family "FiraCode Nerd Font"
-                           :size 15
-                           :weight 'regular))
-
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `Doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-;; (setq doom-theme 'doom-molokai)
-;; (setq doom-theme 'doom-moonlight)
-;; (setq doom-theme 'doom-old-hope)
-(setq doom-theme 'doom-outrun-electric)
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-(global-display-line-numbers-mode)
-
 ;; Enable placing the cursor past EOL and disable VIM's move-cursor-left after
 ;; transitioning from INSERT to NORMAL mode.
 (setq evil-move-cursor-back nil)
@@ -70,11 +73,6 @@
 (map! :n "G" (cmd! (evil-goto-line) (evil-scroll-line-to-center nil)))
 (map! :n "n" (cmd! (evil-ex-search-next) (evil-scroll-line-to-center nil)))
 (map! :n "N" (cmd! (evil-ex-search-previous) (evil-scroll-line-to-center nil)))
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-;; (setq org-directory "~/org/")
-(setq org-directory "~/Documents/org/")
 
 ;; Enable deletion by system's trash
 (setq delete-by-moving-to-trash t)
@@ -89,6 +87,7 @@
 ;; As instructed by
 ;; https://github.com/doomemacs/doomemacs/blob/develop/modules/lang/python/README.org
 (setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
+
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -121,8 +120,3 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;; (use-package lsp-pyright
-;;   :ensure t
-;;   :hook (python-mode . (lambda ()
-;;                           (require 'lsp-pyright)
-;;                           (lsp))))  ; or lsp-deferred

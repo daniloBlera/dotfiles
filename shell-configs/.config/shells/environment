@@ -58,13 +58,12 @@ set_env FZF_DEFAULT_OPTS "--color 'fg:#ea1646,fg+:#170420,bg+:#ea1646,hl:#ddfafa
 # Personal binaries and scripts
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
-prepend_to_path "$HOME/.emacs.d/bin"
+prepend_to_path "$XDG_CONFIG_HOME/emacs/bin"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
 prepend_to_path "$HOME/.local/npm"
 append_to_path "$HOME/.gem/ruby/2.7.0/bin"
 append_to_path "$HOME/.local/share/neo4j-community-5.2.0/bin"
-append_to_path "$ROSWELL_HOME/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
