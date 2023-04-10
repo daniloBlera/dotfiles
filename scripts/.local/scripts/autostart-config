@@ -1,13 +1,13 @@
 #!/bin/sh
-# A script to unify X configuration between window managers
-[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
+# The commands to run when starting window managers
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
 # Shared terminal configs and colourscheme
 [ -f "$XDG_CONFIG_HOME/xres/settings" ] && xrdb "$XDG_CONFIG_HOME/xres/settings"
 [ -f "$XDG_CONFIG_HOME/xresources-term" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-term"
 [ -f "$XDG_CONFIG_HOME/xresources-dwm" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-dwm"
 
-# Set X background
+# Set the background
 if [ -f "$XDG_CONFIG_HOME/wallpaper" ]
 then
     xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper"
@@ -15,16 +15,18 @@ else
     xsetroot -solid #000000
 fi
 
+# Enable compositing
+pidof -x picom > /dev/null || picom &
+
 # Custom X event functions
 xbindkeys --file "$XDG_CONFIG_HOME/xres/xbindkeysrc"
 
 # Automatically hide mouse cursor when unused
 pidof -x unclutter > /dev/null || unclutter &
 
-# Synchronize PRIMARY and CLIPBOARD selections
+# Synchronize X server clipboard and cutbuffer
 pidof -x autocutsel > /dev/null && pkill -x autocutsel
 autocutsel -s CLIPBOARD &
-autocutsel -s PRIMARY &
 
 # Background notification daemon
 pidof -x dunst > /dev/null || dunst &
@@ -39,7 +41,7 @@ pidof -x xss-lock > /dev/null || xss-lock --ignore-sleep -- lockscreen-cmd &
 # Enable left pointer cursor
 xsetroot -cursor_name left_ptr
 
-# Configure keyboard repeat rate
+# Faster keyboard repeat rate like the linux tty
 ## 200ms delay before repeat, 40 repeats/sec
 xset r rate 200 40
 

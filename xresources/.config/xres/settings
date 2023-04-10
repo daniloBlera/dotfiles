@@ -13,7 +13,7 @@ XTerm.vt100.boldFont:   xft:UbuntuMono Nerd Font:size=12:style=bold:antialias=tr
 ! *font:                UbuntuMono Nerd Font:size=12:style=regular:antialias=true
 ! *font.boldFont:       UbuntuMono Nerd Font:size=12:style=bold:antialias=true
 *.font:               FiraCode Nerd Font:size=11:style=regular:antialias=true
-*.font.boldFont:      FiraCode Nerd Font:style=bold:size=11:antialias=true
+*.font.boldFont:      FiraCode Nerd Font:size=11:style=bold:antialias=true
 ! *.font:                 Jetbrains Mono:size=11:style=regular:antialias=true
 ! *.font.boldFont:        Jetbrains Mono:style=bold:size=11:antialias=true
 
