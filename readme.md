@@ -24,7 +24,9 @@ following structures:
 
 ```text
 tmux
-└── .tmux.conf
+└── .config
+    └── tmux
+        └── tmux.conf
 ```
 
 and
@@ -43,8 +45,7 @@ neovim
 ```
 
 wich means, you could simply copy the contents of a package's root directory
-(the `.tmux.conf` file or the `.config` folder) and paste them on your user's
-home.
+(their `.config` folder) and paste them on your user's home.
 
 ## Manual installation
 
@@ -53,10 +54,11 @@ copy the contents of the required packages directly onto your user's home.
 
 ## Installation using GNU Stow
 
-First, note that since `stow` can't overwrite files. If a conflict is found
-during the installation process then the whole operation is aborted, hopefully
-this will help avoiding unstable configuration situations. With that in mind,
-you can go ahead and clone this repository somewhere on your machine
+If using `stow` to install configurations, note that [it first checks for
+conflicts between the target and destination directories before making any
+change to the filesystem][deferred-op], which will reduce the chances that the
+target directory will be left in an inconsistent state. With that in mind, you
+can go ahead and clone this repository if you didn't already
 
 ```zsh
 git clone https://github.com/daniloBlera/ConfigFiles.git
@@ -99,4 +101,4 @@ matching the same structure from the source files and populating it with
 symlinks to the individual source files instead of placing a single symlink
 pointing to the root of the package's tree.
 
-[stow]: https://www.gnu.org/software/stow/
+[deferred-op]: https://www.gnu.org/software/stow/manual/stow.html#Deferred-Operation-1
