@@ -42,15 +42,9 @@ pidof -x xss-lock > /dev/null || xss-lock --ignore-sleep -- lockscreen-cmd &
 xsetroot -cursor_name left_ptr
 
 # Faster keyboard repeat rate like the linux tty
-## 200ms delay before repeat, 40 repeats/sec
-xset r rate 200 40
+## configuration under "$XDG_CONFIG_HOME/xautocfg.cfg"
+xautocfg &
 
-# Trackpad configuration
-## Disable horizontal scroll
-xinput --set-prop 'ETPS/2 Elantech Touchpad' 'libinput Horizontal Scroll Enabled' 0
-
-## Enable tap as left mouse button
-xinput --set-prop 'ETPS/2 Elantech Touchpad' 'libinput Tapping Enabled' 1
-
-## Enable natural scrolling
-xinput --set-prop 'ETPS/2 Elantech Touchpad' 'libinput Natural Scrolling Enabled' 1
+# Run configurations specific to this system (e.g.: configuring trackpad
+# and keyboards
+[ -f ~/.local/scripts/local-configs ] && ~/.local/scripts/local-configs
