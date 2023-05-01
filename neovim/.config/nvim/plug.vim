@@ -2,13 +2,11 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " List of plugins to be used -- must use single-quotes
+" Operate on surroundings
 Plug 'tpope/vim-surround'
 
-" Nord theme
-" Plug 'arcticicestudio/nord-vim'
-
-" Tree navigation
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+" A tree explorer plugin
+Plug 'preservim/nerdtree'
 
 " Syntax
 Plug 'tpope/vim-git', {'for': 'git'}
@@ -25,14 +23,11 @@ Plug 'scrooloose/nerdcommenter'
 " Enhanced C/Bison/Flex syntax highlight
 Plug 'justinmk/vim-syntax-extra'
 
-" Conceal some statements
-Plug 'ehamberg/vim-cute-python'
-
-" Python development
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-
-" CoC
+" VSCode-like extensions and language servers
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Shorten some statements with unicode symbols
+Plug 'ehamberg/vim-cute-python'
 
 " Better python syntax highlight
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
@@ -40,14 +35,14 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 " Tab and status lines
 Plug 'vim-airline/vim-airline'
 
-" Minimalist motion
-" Plug 'justinmk/vim-sneak'
+" Better normal mode motion
+Plug 'easymotion/vim-easymotion'
 
-" More complete normal mode motion
-" Plug 'easymotion/vim-easymotion'
+" Show keybindings in pop-up
+Plug 'liuchengxu/vim-which-key'
 
-" Plug 'luukvbaal/nnn.nvim'
-" call plug#end()
+" Automatically insert matching pairs (quotes, parens, etc)
+Plug 'jiangmiao/auto-pairs'
 
 " lua << EOF
 " require("nnn").setup()
@@ -60,10 +55,6 @@ call plug#end()
 " let g:vim_markdown_folding_disabled = 1     " Disable folding in markdown
 let g:NERDSpaceDelims = 1                   " Enable spaces after comment delimiters
 let g:NERDCommentEmptyLines = 1             " Enable commenting of empty lines
-" let g:deoplete#enable_at_startup = 1        " Enable completion automatically
-" let g:pymode_indent = 1
-" let g:pymode = 0                            " Disable pymode
-" let g:pymode_doc = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_section_z = airline#section#create_right(['%l:%c'])

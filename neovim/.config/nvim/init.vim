@@ -84,6 +84,9 @@ filetype plugin indent on   " Rely on file plugins to handle indenting
 noremap <Space> <Nop>
 let mapleader=" "
 
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+set timeoutlen=500
+
 "" Unbind F keys
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
@@ -140,8 +143,15 @@ nnoremap <Leader>bi :buffers<CR>:buffer<Space>
 
 "" Close current buffer, tab and window
 nnoremap <Leader>bd :bdelete<CR>
+nnoremap <Leader>bD :bdelete!<CR>
 nnoremap <Leader>td :tabclose<CR>
 nnoremap <Leader>wd :close<CR>
+nnoremap <Leader>wD :close!<CR>
+nnoremap <Leader>wq :qa<CR>
+nnoremap <Leader>wQ :qa!<CR>
+
+"" Save current buffer
+nnoremap <Leader>bs :w<CR>
 
 "" Toggle directory tree
 nnoremap <Leader>op :NERDTreeToggle<CR>
@@ -172,6 +182,12 @@ inoremap <kDown> <Down><C-o>zz
 inoremap <kRight> <Right><C-o>zz
 inoremap <kUp> <Up><C-o>zz
 
+"" Cursor movement in insert mode
+imap <C-left> <C-o>0
+imap <C-down> <C-o>j
+imap <C-up> <C-o>k
+imap <C-right> <C-o>$
+
 " KEYMAPS -- Visual stuff
 "" Toggle list mode
 nnoremap <Leader>vl :set list!<CR>
@@ -187,45 +203,6 @@ nnoremap <Leader>vr :set relativenumber!<CR>
 
 "" Toggle line and column highlight
 nnoremap <Leader>vh :set cursorline!<CR>:set cursorcolumn!<CR>
-
-" Vim-Sneak related
-" 2-character Sneak (default)
-nmap <Leader>s <Plug>Sneak_s
-nmap <Leader><S-s> <Plug>Sneak_S
-" visual-mode
-xmap <Leader>s <Plug>Sneak_s
-xmap <Leader><S-s> <Plug>Sneak_S
-" operator-pending-mode
-omap <Leader>s <Plug>Sneak_s
-omap <Leader><S-s> <Plug>Sneak_S
-
-" repeat motion
-" map ? <Plug>Sneak_;
-" map ? <Plug>Sneak_,
-
-" 1-character enhanced 'f'
-" nmap ? <Plug>Sneak_f
-" nmap ? <Plug>Sneak_F
-" visual-mode
-" xmap ? <Plug>Sneak_f
-" xmap ? <Plug>Sneak_F
-" operator-pending-mode
-" omap ? <Plug>Sneak_f
-" omap ? <Plug>Sneak_F
-
-" 1-character enhanced 't'
-" nmap ? <Plug>Sneak_t
-" nmap ? <Plug>Sneak_T
-" visual-mode
-" xmap ? <Plug>Sneak_t
-" xmap ? <Plug>Sneak_T
-" operator-pending-mode
-" omap ? <Plug>Sneak_t
-" omap ? <Plug>Sneak_T
-
-" label-mode
-" nmap ? <Plug>SneakLabel_s
-" nmap ? <Plug>SneakLabel_S
 
 " CoC
 " Use tab for trigger completion with characters ahead and navigate.
@@ -243,10 +220,3 @@ omap <Leader><S-s> <Plug>Sneak_S
 " <C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" KEYMAPS -- Misc
-"" Insert shebangs
-" nnoremap sbp ggI#!/usr/bin/env python3<CR># -*- coding: utf-8 -*-<CR><Esc>
-" nnoremap sbd ggI#!/bin/sh<CR><Esc>
-" nnoremap sbb ggI#!/bin/bash<CR><Esc>
-" nnoremap sbz ggI#!/bin/zsh<CR><Esc>
