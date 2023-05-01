@@ -38,7 +38,6 @@
 ;; (setq doom-theme 'doom-old-hope)
 (setq doom-theme 'doom-outrun-electric)
 
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -86,8 +85,8 @@
 
 ;; As instructed by
 ;; https://github.com/doomemacs/doomemacs/blob/develop/modules/lang/python/README.org
-(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
-
+(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info")
+      +python-jupyter-repl-args '("--simple-prompt"))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -120,3 +119,11 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(require 'transpose-frame)
+
+;; Automatically start tree-sitter
+(require 'tree-sitter-langs)
+(require 'tree-sitter)
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
