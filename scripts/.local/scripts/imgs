@@ -11,4 +11,4 @@ else
     ROOT_DIR="$1"
 fi
 
-find "$ROOT_DIR" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' | sort | sxiv -iqtp > /dev/null 2>&1
+find "$ROOT_DIR" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' | sort | nsxiv -iqtp > /dev/null 2>&1

@@ -11,7 +11,7 @@ Power-off'
 option=$(echo "$OPTIONS" | dmenu_xres 'What now, chief?')
 case "$option" in
     'Lock screen')
-        lockscreen-cmd;;
+        xset s activate;;
     'Close BSPWM')
         pkill -x polybar; bspc quit;;
     'Reboot')
