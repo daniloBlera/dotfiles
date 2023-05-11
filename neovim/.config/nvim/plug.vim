@@ -32,6 +32,9 @@ Plug 'ehamberg/vim-cute-python'
 " Better python syntax highlight
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
+" Colorize parenthesis for better visibility of nested structures
+Plug 'luochen1990/rainbow'
+
 " Tab and status lines
 Plug 'vim-airline/vim-airline'
 
@@ -58,3 +61,4 @@ let g:NERDCommentEmptyLines = 1             " Enable commenting of empty lines
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_section_z = airline#section#create_right(['%l:%c'])
+let g:rainbow_active = 1

@@ -1,8 +1,4 @@
 " Neovim configuration file
-" version: source build from v0.8.0-dev+568-g664efa497
-
-" PYTHON'S ENV
-" source $XDG_CONFIG_HOME/nvim/venv.vim
 
 " PLUGINS
 source $XDG_CONFIG_HOME/nvim/plug.vim
@@ -15,15 +11,23 @@ set shada="NONE"            " Disable the creation of ShaDa files
 set mouse=a                 " Enable mouse support on all modes
 set virtualedit=onemore     " Enable moving the cursor past the last char
 set clipboard=unnamedplus   " Use system's clipboard
-
-" VISUAL OPTIONS
+set tabstop=4               " Number of spaces a TAB counts for
+set shiftwidth=4            " Number of spaces to use for each step of (auto)indent.
+set softtabstop=4           " Number of spaces a TAB counts on edit operations
+set expandtab               " Insert whitespaces when pressing TAB
+set shiftround              " Round indent to a multiple of 'shiftwidth'
+set autoindent              " Copy current indent level into the next line
+set linebreak               " Wrap long lines
+set ignorecase              " Ignore case on search patterns
+set splitbelow              " Put new split below
 set number                  " Set line numbering on
+set relativenumber          " Set numbering relative to the current line
 set scrolloff=10            " Min lines above/below the cursor
 set sidescrolloff=5         " Min columns to the left/right of the cursor
 set showcmd                 " Show partial commands on the status line
-" set cursorline              " Hightlight the cursor's line
-" set cursorcolumn            " Hightlight the cursor's column
 set list                    " Display special chars
+let &showbreak='↳ '
+filetype plugin indent on   " Rely on file plugins to handle indenting
 
 "" Enable TrueColor if the terminal supports it. For more
 "" information, see the help for 'term-dependent-settings'
@@ -35,7 +39,7 @@ elseif $TERM =~ '^\(st\|screen\|tmux\)-256color$'
     set termguicolors
     " List mode characters - use special chars to display tabs, nbsp's, trailing
     " whitespaces and more.
-    set listchars=eol:¬,tab:+-,space:·,multispace:···+,leadmultispace:\│···,trail:•,extends:⟩,precedes:⟨,nbsp:◊
+    set listchars=eol:¬,tab:-->,space:·,multispace:···+,leadmultispace:\│···,trail:•,extends:⟩,precedes:⟨,nbsp:◊
 endif
 
 "" Filetype specific settings
@@ -64,20 +68,6 @@ cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
 cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
 cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
 cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
-
-" --INDENT AND SEARCH--
-set tabstop=4               " Number of spaces a TAB counts for
-set shiftwidth=4            " Number of spaces to use for each step of (auto)indent.
-set softtabstop=4           " Number of spaces a TAB counts on edit operations
-set expandtab               " Insert whitespaces when pressing TAB
-set shiftround              " Round indent to a multiple of 'shiftwidth'
-set autoindent              " Copy current indent level into the next line
-set linebreak               " Wrap long lines
-set ignorecase              " Ignore case on search patterns
-set splitright              " Put new split to the right
-set splitbelow              " Put new split below
-filetype plugin indent on   " Rely on file plugins to handle indenting
-
 
 " KEYMAPS -- global
 "" Map the spacebar as the Leader key
