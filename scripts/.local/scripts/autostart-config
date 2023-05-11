@@ -44,7 +44,3 @@ xsetroot -cursor_name left_ptr
 # Faster keyboard repeat rate like the linux tty
 ## configuration under "$XDG_CONFIG_HOME/xautocfg.cfg"
 xautocfg &
-
-# Run configurations specific to this system (e.g.: configuring trackpad
-# and keyboards
-[ -f ~/.local/scripts/local-configs ] && ~/.local/scripts/local-configs
