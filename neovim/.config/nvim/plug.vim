@@ -32,6 +32,9 @@ Plug 'ehamberg/vim-cute-python'
 " Better python syntax highlight
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
+" Auto adjusting parens
+Plug 'gpanders/nvim-parinfer'
+
 " Colorize parenthesis for better visibility of nested structures
 Plug 'luochen1990/rainbow'
 

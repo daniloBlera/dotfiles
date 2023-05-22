@@ -40,7 +40,9 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
+
+;; Enable line numbering by default
 (global-display-line-numbers-mode)
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -120,6 +122,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Enable transposing and rotating frames
 (require 'transpose-frame)
 
 ;; Automatically start tree-sitter

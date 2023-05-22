@@ -49,8 +49,9 @@ wich means, you could simply copy the contents of a package's root directory
 
 ## Manual installation
 
-The easiest way to install the configs is to clone this repository and then,
-copy the contents of the required packages directly onto your user's home.
+A *simple* way to install the configs is to clone this repository and then,
+copy the contents of the required files into your system, making the necessary
+changes to deal with hard-coded paths.
 
 ## Installation using GNU Stow
 
