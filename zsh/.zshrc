@@ -1,44 +1,28 @@
-#
-# ~/.zshrc
-#
+# Configuring how the prompt should look
+#   '[<user>@<host> <lastdir>]<prompt> '
+PROMPT='[%n@%m %1~]%# '
 
-# NEW LINES
-# Lines configured by zsh-newuser-install
-# HISTFILE=~/.histfile
-HISTFILE=/tmp/$(whoami)-zsh_histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt autocd extendedglob nomatch
-unsetopt beep
-bindkey -e
-# End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle ':completion:*' menu select
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
+zstyle ':completion:*' menu select=0
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle :compinstall filename '/home/dcb/.zshrc'
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-# NEW LINES
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd
+# bindkey -e
+# End of lines configured by zsh-newuser-install
 
-# OLD LINES
-# zstyle ':completion:*' menu select
-# zstyle :compinstall filename "$HOME/.zshrc"
-# 
-# autoload -Uz compinit
-# compinit
-
-# Reset history on reboots or shutdowns. To prevent saving any history file,
-# unset HISTFILE and set SAVEHIST to 0, commenting the history lines below.
-# HISTFILE=/tmp/zsh_history-$(whoami)
-# HISTSIZE=1000
-# SAVEHIST=1000
-
-bindkey -e
-# OLD LINES
-
-PROMPT='[%n@%m %1~]%# '
-
+# USER CONFIGURATIONS
 # Utility functions used to handle incompatibilities between shells (bash, zsh and fish)
 set_env() {
     export $1=$2
@@ -81,5 +65,11 @@ source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
 eval "$(pyenv init - --no-rehash)"
 source /usr/share/zsh/site-functions/_pyenv
 
+# vi-mode
+source ~/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # Extra stuff
 stty -ixon
+
+# Disable redirect if the destination file exists
+set -o noclobber
