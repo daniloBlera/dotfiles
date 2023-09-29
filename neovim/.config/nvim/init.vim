@@ -6,9 +6,12 @@ source $XDG_CONFIG_HOME/nvim/plug.vim
 " COLOURSCHEME
 source $XDG_CONFIG_HOME/nvim/colourschemes/ruiner.vim
 
+" CoC configuration
+source $XDG_CONFIG_HOME/nvim/coc-configuration.vim
+
 " GENERAL OPTIONS
 set shada="NONE"            " Disable the creation of ShaDa files
-set mouse=a                 " Enable mouse support on all modes
+set mouse=nvi               " Enable mouse support on all modes
 set virtualedit=onemore     " Enable moving the cursor past the last char
 set clipboard=unnamedplus   " Use system's clipboard
 set tabstop=4               " Number of spaces a TAB counts for
@@ -19,6 +22,7 @@ set shiftround              " Round indent to a multiple of 'shiftwidth'
 set autoindent              " Copy current indent level into the next line
 set linebreak               " Wrap long lines
 set ignorecase              " Ignore case on search patterns
+set smartcase
 set splitbelow              " Put new split below
 set number                  " Set line numbering on
 set relativenumber          " Set numbering relative to the current line
@@ -26,8 +30,9 @@ set scrolloff=10            " Min lines above/below the cursor
 set sidescrolloff=5         " Min columns to the left/right of the cursor
 set showcmd                 " Show partial commands on the status line
 set list                    " Display special chars
+set nowrapscan              " Disable wrapping when searching
 let &showbreak='↳ '
-filetype plugin indent on   " Rely on file plugins to handle indenting
+" filetype plugin indent on   " Rely on file plugins to handle indenting
 
 "" Enable TrueColor if the terminal supports it. For more
 "" information, see the help for 'term-dependent-settings'
@@ -72,7 +77,7 @@ cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
 " KEYMAPS -- global
 "" Map the spacebar as the Leader key
 noremap <Space> <Nop>
-let mapleader=" "
+let mapleader="\<Space>"
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 set timeoutlen=500
@@ -143,6 +148,9 @@ nnoremap <Leader>wQ :qa!<CR>
 "" Save current buffer
 nnoremap <Leader>bs :w<CR>
 
+"" Save and close current buffer"
+nnoremap <Leader>bx :x<CR>
+
 "" Toggle directory tree
 nnoremap <Leader>op :NERDTreeToggle<CR>
 
@@ -155,6 +163,12 @@ nnoremap <Leader>wh <C-W><C-H>
 nnoremap <Leader>wj <C-W><C-J>
 nnoremap <Leader>wk <C-W><C-K>
 nnoremap <Leader>wl <C-W><C-L>
+
+"" Insert mode navigation with Alt + <home row keys>
+inoremap <M-j> <Left>
+inoremap <M-k> <Down>
+inoremap <M-l> <Up>
+inoremap <M-;> <Right>
 
 "" Center screen after commands
 nnoremap G Gzz
@@ -172,11 +186,10 @@ inoremap <kDown> <Down><C-o>zz
 inoremap <kRight> <Right><C-o>zz
 inoremap <kUp> <Up><C-o>zz
 
-"" Cursor movement in insert mode
-imap <C-left> <C-o>0
-imap <C-down> <C-o>j
-imap <C-up> <C-o>k
-imap <C-right> <C-o>$
+"" Easymotion
+nmap s <Plug>(easymotion-overwin-f2)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
 
 " KEYMAPS -- Visual stuff
 "" Toggle list mode
@@ -193,20 +206,3 @@ nnoremap <Leader>vr :set relativenumber!<CR>
 
 "" Toggle line and column highlight
 nnoremap <Leader>vh :set cursorline!<CR>:set cursorcolumn!<CR>
-
-" CoC
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-"       \ coc#pum#visible() ? coc#pum#next(1) :
-"       \ CheckBackspace() ? "\<Tab>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

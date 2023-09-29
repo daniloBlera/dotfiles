@@ -5,6 +5,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Operate on surroundings
 Plug 'tpope/vim-surround'
 
+" Readline keybindings for movement in insert mode
+Plug 'tpope/vim-rsi'
+
 " A tree explorer plugin
 Plug 'preservim/nerdtree'
 
@@ -32,23 +35,26 @@ Plug 'ehamberg/vim-cute-python'
 " Better python syntax highlight
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
-" Auto adjusting parens
-Plug 'gpanders/nvim-parinfer'
-
 " Colorize parenthesis for better visibility of nested structures
 Plug 'luochen1990/rainbow'
 
 " Tab and status lines
-Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 
-" Better normal mode motion
+" Extra normal mode motion
 Plug 'easymotion/vim-easymotion'
+
+" Normal mode motions for erlang, in the spirit of lispy for emacs
+Plug 'edkolev/erlang-motions.vim'
 
 " Show keybindings in pop-up
 Plug 'liuchengxu/vim-which-key'
 
 " Automatically insert matching pairs (quotes, parens, etc)
 Plug 'jiangmiao/auto-pairs'
+
+" Zen mode for biggus charactus
+Plug 'folke/zen-mode.nvim'
 
 " lua << EOF
 " require("nnn").setup()
@@ -61,7 +67,4 @@ call plug#end()
 " let g:vim_markdown_folding_disabled = 1     " Disable folding in markdown
 let g:NERDSpaceDelims = 1                   " Enable spaces after comment delimiters
 let g:NERDCommentEmptyLines = 1             " Enable commenting of empty lines
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_section_z = airline#section#create_right(['%l:%c'])
 let g:rainbow_active = 1

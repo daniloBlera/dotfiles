@@ -75,11 +75,22 @@
 (map! :n "n" (cmd! (evil-ex-search-next) (evil-scroll-line-to-center nil)))
 (map! :n "N" (cmd! (evil-ex-search-previous) (evil-scroll-line-to-center nil)))
 
+;; Toggle on/off text centering with olivetti-mode
+(map! :leader
+      (:prefix ("t" . "Toggle")
+       :desc "Olivetti mode" "o"
+       #'olivetti-mode))
+
 ;; Enable deletion by system's trash
 (setq delete-by-moving-to-trash t)
 
 ;; Configuring Sly to use the REPL environment from roswell
 (setq inferior-lisp-program "ros -Q run")
+
+;; Set the dashboard's splash image, if it exists
+(let ((filepath "~/Pictures/emacs.png"))
+  (and (file-exists-p filepath)
+       (setq fancy-splash-image filepath)))
 
 ;; Setting the minimap's minimum width
 (after! minimap
@@ -126,7 +137,7 @@
 (require 'transpose-frame)
 
 ;; Automatically start tree-sitter
-(require 'tree-sitter-langs)
-(require 'tree-sitter)
-(global-tree-sitter-mode)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+(use-package! tree-sitter
+  :hook (prog-mode . turn-on-tree-sitter-mode)
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+  :config (require 'tree-sitter-langs))
