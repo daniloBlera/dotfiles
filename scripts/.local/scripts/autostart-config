@@ -44,3 +44,6 @@ xsetroot -cursor_name left_ptr
 # Faster keyboard repeat rate like the linux tty
 ## configuration under "$XDG_CONFIG_HOME/xautocfg.cfg"
 xautocfg &
+
+# Disable keyboard autorepeat except for specific keys
+configure-autorepeat &

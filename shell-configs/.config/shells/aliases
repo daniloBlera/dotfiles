@@ -13,12 +13,14 @@ alias cfzsh='"$VISUAL" ~/.zshrc'
 # alias cfsxhkd='"$VISUAL" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
 # alias cfpolybar='"$VISUAL" "$XDG_CONFIG_HOME/polybar/config"'
 alias cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
+alias cfnvimplug='"$VISUAL" "$XDG_CONFIG_HOME/nvim/plug.vim"'
 # alias cftmux='"$VISUAL" "$HOME/.tmux.conf"'
 alias cftmux='"$VISUAL" "$XDG_CONFIG_HOME/tmux/tmux.conf"'
 alias cfgit='"$VISUAL" "$XDG_CONFIG_HOME/git/config"'
 alias cfdoom='"$VISUAL" "$HOME/.doom.d/config.el"'
 alias cfstump='"$VISUAL" "$XDG_CONFIG_HOME/stumpwm/config"'
 alias cfmime='"$VISUAL" "$XDG_CONFIG_HOME/mimeapps.list"'
+alias cfzathura='"$VISUAL" "$XDG_CONFIG_HOME/zathura/zathurarc"'
 
 # Commonly-used
 alias ls='ls --color=auto'
@@ -37,7 +39,7 @@ alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xatt
 alias ip='ip -c'
 alias ipa='ip -br addr'
 alias ipl='ip -br link'
-alias sxiv='sxiv -p'    # Disable writing cache or temp files
+alias nsxiv='nsxiv -p'    # Disable writing cache or temp files
 alias t='tmux'          # Because I use this a lot
 alias fd='fd --no-ignore-parent'
 alias fdu='fd --unrestricted'
@@ -62,10 +64,12 @@ alias xk='xev -event keyboard'
 ## List wifi hotspots (requires NetworkManager)
 alias nmls='nmcli device wifi list --rescan yes'
 
-## Wrap common lisp REPL with readline for command history
-alias repl='rlwrap ros run'
+## Wrap REPLs with readline for history and other stuff
+alias clrepl='rlwrap ros run'
+alias errepl='rlwrap --always-readline erl'
 
 ## To insert STDIN contents to both PRIMARY and CLIPBOARD
+## usage: <something-stdout> | xclipin
 alias xclipin='xclip -i -f -selection primary | xclip -i -selection clipboard'
 
 ## Clear X's selection and clipboard
@@ -73,3 +77,6 @@ alias xclipcl="printf '' | xclipin"
 
 ## CURL google to test connection
 alias coogl='curl www.google.com'
+
+## The Zen of Python
+alias zenp='python -m this'
