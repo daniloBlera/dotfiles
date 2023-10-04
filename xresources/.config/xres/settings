@@ -1,43 +1,21 @@
 ! X Resources configuration file
 ! Patched nerd fonts with working font-awesome glyphs
-URxvt*font:             xft:UbuntuMono Nerd Font Mono:size=12:style=regular:antialias=true
-URxvt*boldFont:         xft:UbuntuMono Nerd Font Mono:size=12:style=bold:antialias=true
-
 UXTerm.vt100.font:      xft:UbuntuMono Nerd Font Mono:size=12:style=regular:antialias=true
 UXTerm.vt100.boldFont:  xft:UbuntuMono Nerd Font Mono:size=12:style=bold:antialias=true
-
 XTerm.vt100.font:       xft:UbuntuMono Nerd Font Mono:size=12:style=regular:antialias=true
 XTerm.vt100.boldFont:   xft:UbuntuMono Nerd Font Mono:size=12:style=bold:antialias=true
 
 ! For st terminal
-*.font:               FiraCode Nerd Font Mono:size=11:style=regular:antialias=true
-*.font.boldFont:      FiraCode Nerd Font Mono:size=11:style=bold:antialias=true
+*.font:               UbuntuMono Nerd Font:size=12:style=regular:antialias=true
+*.font.boldFont:      UbuntuMono Nerd Font:size=12:style=bold:antialias=true
 
 ! Dmenu related configs
-dmenu.font: Ubuntu:size=12
+dmenu.font: Ubuntu Nerd Font:size=11
 
 ! Extra stuff
-URxvt*termName: rxvt-unicode
-URxvt*saveLines: 1024
 XTerm*saveLines: 1024
 UXTerm*saveLines: 1024
-
-URxvt*scrollBar: false
-URxvt*scrollstyle: rxvt
-
 XTerm.vt100.selectToClipboard: true
 XTerm*metaSendsEscape: true
 UXTerm*metaSendsEscape: true
 
-! URxvt extensions
-URxvt.perl-ext: default,confirm-paste,url-select,keyboard-select
-
-! Yankable URLs from keyboard: use 'M-u'
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
-
-! Keyboard text selection
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-f: perl:keyboard-select:search
-URxvt.keyboard-select.clipboard: true
