@@ -41,9 +41,9 @@ pidof -x xss-lock > /dev/null || xss-lock --ignore-sleep -- lockscreen-cmd &
 # Enable left pointer cursor
 xsetroot -cursor_name left_ptr
 
-# Faster keyboard repeat rate like the linux tty
-## configuration under "$XDG_CONFIG_HOME/xautocfg.cfg"
+# Faster keyboard repeat rate like the linux tty -- the configuration 
+# file is under "$XDG_CONFIG_HOME/xautocfg.cfg"
 xautocfg &
 
 # Disable keyboard autorepeat except for specific keys
-configure-autorepeat &
+~/.local/scripts/configure-autorepeat &
