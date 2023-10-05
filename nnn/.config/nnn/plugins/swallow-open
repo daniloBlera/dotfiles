@@ -3,5 +3,9 @@
 #
 # Args:
 #   $1: Hovered filename
-#   $2: Absolute path to the hovered file (not used)
-[ -f "$1" ] && swallow-open "$1"
+#   $2: Absolute path to the current directory (not used)
+
+if [ -f "$1" ]
+then
+    swallow-open "$1"
+fi
