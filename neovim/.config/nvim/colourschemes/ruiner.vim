@@ -1,3 +1,4 @@
+let color
 " A colourscheme based on Ruiner's red and black colours
 hi CursorLine   cterm=NONE          ctermbg=DarkGray                        gui=NONE    guibg=#505050
 hi CursorColumn                     ctermbg=DarkGray                                    guibg=#505050

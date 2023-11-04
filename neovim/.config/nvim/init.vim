@@ -3,8 +3,8 @@
 " PLUGINS
 source $XDG_CONFIG_HOME/nvim/plug.vim
 
-" COLOURSCHEME
-source $XDG_CONFIG_HOME/nvim/colourschemes/ruiner.vim
+" COLORSCHEME
+source $XDG_CONFIG_HOME/nvim/colourschemes/mountains-on-mars.vim
 
 " CoC configuration
 source $XDG_CONFIG_HOME/nvim/coc-configuration.vim
@@ -32,24 +32,22 @@ set showcmd                 " Show partial commands on the status line
 set list                    " Display special chars
 set nowrapscan              " Disable wrapping when searching
 let &showbreak='↳ '
-" filetype plugin indent on   " Rely on file plugins to handle indenting
 
 "" Enable TrueColor if the terminal supports it. For more
 "" information, see the help for 'term-dependent-settings'
-if $TERM =~ '^\(linux\|screen\)$'
-    " If using the linux tty, enable ASCII listchars
-    "" ASCII symbols
-    set listchars=eol:$,tab:-->,multispace:---+,trail:-,extends:>,precedes:<,nbsp:§
-elseif $TERM =~ '^\(st\|screen\|tmux\)-256color$'
+if $TERM =~ '^\(st\|screen\|tmux\|xterm\)-256color$'
     set termguicolors
     " List mode characters - use special chars to display tabs, nbsp's, trailing
     " whitespaces and more.
     set listchars=eol:¬,tab:-->,space:·,multispace:···+,leadmultispace:\│···,trail:•,extends:⟩,precedes:⟨,nbsp:◊
+else
+    " If using the linux tty, enable ASCII listchars
+    "" ASCII symbols
+    set listchars=eol:$,tab:-->,multispace:---+,trail:-,extends:>,precedes:<,nbsp:§
 endif
 
 "" Filetype specific settings
 " autocmd Filetype python syntax keyword Statement lambda conceal cchar=λ
-
 autocmd Filetype haskell syntax match Statement '\vlambda +' conceal cchar=λ
 autocmd Filetype haskell syntax match Statement '\\ *' conceal cchar=λ
 autocmd Filetype haskell syntax match Statement ' \. ' conceal cchar=∘
@@ -186,10 +184,9 @@ inoremap <kDown> <Down><C-o>zz
 inoremap <kRight> <Right><C-o>zz
 inoremap <kUp> <Up><C-o>zz
 
-"" Easymotion
-nmap s <Plug>(easymotion-overwin-f2)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
+"" Easymotion -- making it closer to `avy` on doom emacs
+nmap gss <Plug>(easymotion-overwin-f2)
+nmap gsw <Plug>(easymotion-overwin-w)
 
 " KEYMAPS -- Visual stuff
 "" Toggle list mode
@@ -206,3 +203,6 @@ nnoremap <Leader>vr :set relativenumber!<CR>
 
 "" Toggle line and column highlight
 nnoremap <Leader>vh :set cursorline!<CR>:set cursorcolumn!<CR>
+
+"" Toggle tree-sitter syntax highlight
+nnoremap <Leader>vt :TSToggle highlight<CR>
