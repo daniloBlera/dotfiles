@@ -1,4 +1,5 @@
 ; -*-lisp-*-
+; vim:fileencoding=utf-8:filetype=lisp
 ;;;; StumpWM configuration file.
 ;;;; reminder: eval `(loadrc)` to reload configs
 
@@ -158,7 +159,7 @@
 (define-key *top-map* (kbd "s-ISO_Left_Tab") "gother")
 
 ;; Take screenshot
-(define-key *top-map* (kbd "SunPrint_Screen") "exec capture-screenshot")
-(define-key *top-map* (kbd "Sys_Req") "exec capture-screenshot -s")
+(define-key *top-map* (kbd "SunPrint_Screen") "exec flameshot screen -p ~/Pictures/screenshots")
+(define-key *top-map* (kbd "Sys_Req") "exec flameshot gui")
 
 (spatial-groups:install-default-keybinds)
