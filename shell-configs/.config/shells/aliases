@@ -14,13 +14,16 @@ alias cfzsh='"$VISUAL" ~/.zshrc'
 # alias cfpolybar='"$VISUAL" "$XDG_CONFIG_HOME/polybar/config"'
 alias cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
 alias cfnvimplug='"$VISUAL" "$XDG_CONFIG_HOME/nvim/plug.vim"'
-# alias cftmux='"$VISUAL" "$HOME/.tmux.conf"'
 alias cftmux='"$VISUAL" "$XDG_CONFIG_HOME/tmux/tmux.conf"'
+alias cfkitty='"$VISUAL" "$XDG_CONFIG_HOME/kitty/kitty.conf"'
 alias cfgit='"$VISUAL" "$XDG_CONFIG_HOME/git/config"'
-alias cfdoom='"$VISUAL" "$HOME/.doom.d/config.el"'
+alias cfdoom='"$VISUAL" "$XDG_CONFIG_HOME/doom/config.el"'
 alias cfstump='"$VISUAL" "$XDG_CONFIG_HOME/stumpwm/config"'
 alias cfmime='"$VISUAL" "$XDG_CONFIG_HOME/mimeapps.list"'
 alias cfzathura='"$VISUAL" "$XDG_CONFIG_HOME/zathura/zathurarc"'
+alias cfgpg='"$VISUAL" "~/.gnupg/gpg.conf"'
+alias cfagent='"$VISUAL" "~/.gnupg/gpg-agent.conf"'
+alias reloadagent='gpg-connect-agent reloadagent /bye; gpg-connect-agent updatestartuptty /bye'
 
 # Commonly-used
 alias ls='ls --color=auto'
@@ -45,28 +48,25 @@ alias fd='fd --no-ignore-parent'
 alias fdu='fd --unrestricted'
 
 # git-related stuff
-alias gcm='git commit -m'
-alias gca='git commit --amend'
-alias gssb='git status --short --branch'
+alias gss='git status --short --branch'
 alias gls='git log --stat --color'
-alias glgo='git log --graph --oneline --decorate --color'
-alias ga='git add'
-alias gaa='git add --all'
-alias gd='git diff'
+alias glg='git log --graph --oneline --decorate --color'
+alias gdu='git diff' # unstaged
+alias gds='git diff --staged'
 
 # Not so common stuff
 ## Grep the window class string for WM workspace assignment
 alias xpwmc='xprop | grep -i "WM_CLASS(STRING)"'
 
 ## Shortcut to xev keyboard events
-alias xk='xev -event keyboard'
+alias xek='xev -event keyboard'
 
 ## List wifi hotspots (requires NetworkManager)
 alias nmls='nmcli device wifi list --rescan yes'
 
 ## Wrap REPLs with readline for history and other stuff
-alias clrepl='rlwrap ros run'
-alias errepl='rlwrap --always-readline erl'
+alias replcl='rlwrap ros run'
+alias repler='rlwrap --always-readline erl'
 
 ## To insert STDIN contents to both PRIMARY and CLIPBOARD
 ## usage: <something-stdout> | xclipin
@@ -75,8 +75,5 @@ alias xclipin='xclip -i -f -selection primary | xclip -i -selection clipboard'
 ## Clear X's selection and clipboard
 alias xclipcl="printf '' | xclipin"
 
-## CURL google to test connection
-alias coogl='curl www.google.com'
-
 ## The Zen of Python
-alias zenp='python -m this'
+alias zenpy='python -m this'
