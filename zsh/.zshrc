@@ -15,19 +15,14 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE="/tmp/$(whoami)_zsh_history"
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd
-# bindkey -e
+bindkey -e
 # End of lines configured by zsh-newuser-install
 
 # USER CONFIGURATIONS
-# Utility functions used to handle incompatibilities between shells (bash, zsh and fish)
-set_env() {
-    export $1=$2
-}
-
 source_if_exists() {
     [ -f "$1" ] && source "$1"
 }
@@ -65,11 +60,18 @@ source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
 eval "$(pyenv init - --no-rehash)"
 source /usr/share/zsh/site-functions/_pyenv
 
-# vi-mode
-source ~/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
 # Extra stuff
 stty -ixon
 
 # Disable redirect if the destination file exists
 set -o noclobber
+
+# Enable broot fuzzy search finder/navigator
+source_if_exists "$HOME/.config/broot/launcher/bash/br"
+
+alias srccfg="echo 'sourcing ~/.zshrc...' ; source ~/.zshrc; echo 'done!'"
+
+# Enable editing a command with $EDITOR -- shortcut: <c-x>, <c-e>
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
