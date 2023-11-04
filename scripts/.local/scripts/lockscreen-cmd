@@ -4,4 +4,8 @@
 #
 # USAGE:
 #   lockscreen-cmd
+
+# adding a small delay to let dmenu or the WM popup's to disappear
+# before activating slock
+sleep 0.1
 slock -m "$(cat ~/.local/scripts/chars-slock.txt)"

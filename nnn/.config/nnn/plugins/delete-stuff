@@ -6,7 +6,7 @@
 #   $2          Absolute path to the current directory.
 
 promptuser() {
-    [ "$#" -eq 1 ] && echo "$1\n"
+    [ "$#" -eq 1 ] && echo -e "$1\n"
     read -p "Press 'Enter' to continue" keypress
     echo ""
 }
