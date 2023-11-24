@@ -1,6 +1,4 @@
 # Put here your zsh exclusive aliases
 
 # Source python virtual environments
-alias p3='source ~/.local/share/python/environments/p3/bin/activate'
-alias ml='source ~/.local/share/python/environments/mlh/bin/activate'
 alias venv='source .venv/bin/activate'

@@ -69,7 +69,8 @@ set -o noclobber
 # Enable broot fuzzy search finder/navigator
 source_if_exists "$HOME/.config/broot/launcher/bash/br"
 
-alias srccfg="echo 'sourcing ~/.zshrc...' ; source ~/.zshrc; echo 'done!'"
+# Reload zsh's config
+alias srccfg="echo 'sourcing ~/.zshrc...'; source ~/.zshrc; echo 'done!'"
 
 # Enable editing a command with $EDITOR -- shortcut: <c-x>, <c-e>
 autoload -z edit-command-line

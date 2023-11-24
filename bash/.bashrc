@@ -14,13 +14,9 @@ if [[ -f /usr/share/bash-completion/bash_completion ]]; then
 fi
 
 # Not saving command history
-HISTFILE=/tmp/bash_history-$(whoami)
+HISTFILE="/tmp/$(whoami)_zsh_history"
 
-# Utility functions -- handle incompatibilities between shells
-set_env() {
-    export "$1"="$2"
-}
-
+# USER CONFIGURATIONS
 source_if_exists() {
     [ -f "$1" ] && source "$1"
 }
@@ -53,5 +49,14 @@ source_if_exists '/usr/share/fzf/completion.bash'
 source_if_exists '/usr/share/fzf/key-bindings.bash'
 source_if_exists "$HOME/.local/bin/fuzzyfuncs.sh"
 
+# pyenv stuff
+eval "$(pyenv init - --no-rehash)"
+
 # Extra stuff
 stty -ixon
+
+# Disable redirect if the destination file exists
+set -o noclobber
+
+# Enable broot fuzzy search finder/navigator
+source_if_exists "$HOME/.config/broot/launcher/bash/br"
