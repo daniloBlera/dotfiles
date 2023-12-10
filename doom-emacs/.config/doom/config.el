@@ -36,7 +36,8 @@
 ;; (setq doom-theme 'doom-molokai)
 ;; (setq doom-theme 'doom-moonlight)
 ;; (setq doom-theme 'doom-old-hope)
-(setq doom-theme 'doom-outrun-electric)
+;; (setq doom-theme 'doom-outrun-electric)
+(setq doom-theme 'doom-shades-of-purple)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -65,6 +66,10 @@
 ;; Display fill column margin indicator
 (global-display-fill-column-indicator-mode)
 
+;; Configure fill-column and olivetti-mode body width
+(setq-default fill-column 90)
+(setq-default olivetti-body-width 100)
+
 ;; Enable placing the cursor past EOL and disable VIM's move-cursor-left after
 ;; transitioning from INSERT to NORMAL mode.
 (setq evil-move-cursor-back nil)
@@ -92,14 +97,15 @@
   (and (file-exists-p filepath)
        (setq fancy-splash-image filepath)))
 
-;; Setting the minimap's minimum width
+;; Setting the minimap's minimum width and location
 (after! minimap
-  (setq minimap-minimum-width 20))
+  (setq minimap-minimum-width 20)
+  (setq minimap-window-location 'left))
 
 ;; As instructed by
 ;; https://github.com/doomemacs/doomemacs/blob/develop/modules/lang/python/README.org
-(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info")
-      +python-jupyter-repl-args '("--simple-prompt"))
+(setq +python-ipython-repl-args '("-i" "--simple-prompt" "--no-color-info"))
+(setq +python-jupyter-repl-args '("--simple-prompt"))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
