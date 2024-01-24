@@ -94,11 +94,11 @@
 (let ((fpath (probe-file "~/.config/wallpaper")))
   (if fpath (run-shell-command (format nil "xwallpaper --zoom ~s" (namestring fpath)))))
 
-;; Font configuration - you can use `xfontsel` to query font configurations
+;; Font configuration - use `xfontsel` to query available configurations
 (or (set-font "-*-terminus-medium-r-normal-*-14-*-*-*-*-*-*-*")
     (set-font "9x15bold"))
 
-;;; Configuring mode-line (also known as "status bar")
+;;; Configuring mode-line (the status bar)
 (setf *window-format* "%m%n%s%c")
 
 ;; Datetime format
@@ -158,8 +158,29 @@
 (define-key *top-map* (kbd "s-TAB") "other-window")
 (define-key *top-map* (kbd "s-ISO_Left_Tab") "gother")
 
-;; Take screenshot
+;; Capture screenshot
 (define-key *top-map* (kbd "SunPrint_Screen") "exec flameshot screen -p ~/Pictures/screenshots")
 (define-key *top-map* (kbd "Sys_Req") "exec flameshot gui")
 
-(spatial-groups:install-default-keybinds)
+;; Spatial groups
+;; `Shift + arrows` - move between splits in the current group
+(define-key *groups-map* (kbd "S-Left")     "move-focus left")
+(define-key *groups-map* (kbd "S-Down")     "move-focus down")
+(define-key *groups-map* (kbd "S-Up")       "move-focus up")
+(define-key *groups-map* (kbd "S-Right")    "move-focus right")
+
+;; `Control + arrows` - move between groups in the current desktop
+(define-key *groups-map* (kbd "Left")       "coord-left")
+(define-key *groups-map* (kbd "Down")       "coord-down")
+(define-key *groups-map* (kbd "Up")         "coord-up")
+(define-key *groups-map* (kbd "Right")      "coord-right")
+
+;; `Super + left|right` - move betwen desktops
+(define-key *groups-map* (kbd "s-Left")     "coord-taskleft")
+(define-key *groups-map* (kbd "s-Right")    "coord-taskright")
+
+;; `Super + up` - jump to the current desktop's origin group (x: 0, y: 0)
+(define-key *groups-map* (kbd "s-Up")       "coord-taskorigin")
+
+;; `Super + down` - jump to the last visited group
+(define-key *groups-map* (kbd "s-Down")     "coord-taskpop")
