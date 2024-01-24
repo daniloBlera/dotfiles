@@ -71,8 +71,3 @@ source_if_exists "$HOME/.config/broot/launcher/bash/br"
 
 # Reload zsh's config
 alias srccfg="echo 'sourcing ~/.zshrc...'; source ~/.zshrc; echo 'done!'"
-
-# Enable editing a command with $EDITOR -- shortcut: <c-x>, <c-e>
-autoload -z edit-command-line
-zle -N edit-command-line
-bindkey "^X^E" edit-command-line
