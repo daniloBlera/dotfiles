@@ -1,0 +1,4 @@
+#!/bin/sh
+# A shorthand to start emacs daemon, if not running already, and connect to it
+pidof -qx emacs || dunstify 'Emacs client' 'Initializing daemon, please wait...'
+emacsclient --create-frame --alternate-editor=''
