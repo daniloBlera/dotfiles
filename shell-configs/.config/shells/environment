@@ -7,10 +7,10 @@
 # Also, to avoid having to specify the paths to executables, source this script
 # after the lines that configure your shell's PATH variable.
 
-# VARIABLES
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 export PYTHONBREAKPOINT='ipdb.set_trace'
 export WINEPREFIX="$XDG_CACHE_HOME/wine"
@@ -24,44 +24,41 @@ export GHCUP_USE_XDG_DIRS="set to non-empty to use XDG-ish directories - https:/
 # enable pinentry on the terminal instead of using GTK2
 export GPG_TTY="$(tty)"
 
-# TEXT EDITORS AND FILE MANAGERS
 export SUDO_EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 export EDITOR='/usr/bin/nvim'
-export NNN_USE_EDITOR=1
-export NNN_TRASH=1     # Use 'trash-cli' instead of 'rm'
-export NNN_BMS='c:~/.config;l:~/.local;d:~/Downloads;b:~/Programs/source-builds;p:~/Pictures;r:~/.cache/roswell/'
-export NNN_PLUG='v:viewimgs;x:delete-stuff;s:simplify;a:!mpv --no-video "$nnn"'
+
+# nnn file manager configuration
 export NNN_OPTS='AdeoRUr'
-export NNN_LOCKER='/usr/bin/bash-pipes'
 export NNN_OPENER='/usr/bin/xdg-open'
+export NNN_BMS='c:~/.config;C:~/.cache;l:~/.local;d:~/Downloads;b:~/Programs/source-builds;p:~/Pictures'
+export NNN_PLUG='v:viewimgs;x:delete-stuff;s:simplify;a:!mpv --no-video "$nnn";A:!mpv --no-video --loop "$nnn"'
 export NNN_COLORS='6532'
-export OPENER='/usr/bin/xdg-open'
-export CLIP='/tmp/clipboard'
+export NNN_TRASH=1  # use trash instead of `rm` -- 1: 'trash-cli', 2: `gio`
+export NNN_SEL='/tmp/nnn_sel'
+export NNN_SEL='/tmp/nnn_fifo'
+export NNN_LOCKER='/usr/bin/bash-pipes'
+export NNN_HELP='fortune'
 
 # FZF's options
 export FZF_DEFAULT_COMMAND='fd --hidden --type f'
 
-# Ruiner Theme
-export FZF_DEFAULT_OPTS="--color 'fg:#dc122a,fg+:#000000,bg+:#dc122a,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#dc122a,info:#ddfafa,spinner:#ddfafa'"
+# Theme: Ruiner
+# export FZF_DEFAULT_OPTS="--color 'fg:#dc122a,fg+:#000000,bg+:#dc122a,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#dc122a,info:#ddfafa,spinner:#ddfafa'"
 
-# Mountains on mars Theme
+# Theme: Mountains on mars
 export FZF_DEFAULT_OPTS="--color 'fg:#ea1646,fg+:#170420,bg+:#ea1646,hl:#ddfafa,hl+:#ddfafa,pointer:#170420,prompt:#ea1646,info:#ddfafa,spinner:#ddfafa'"
 
-# Red star Theme
-export FZF_DEFAULT_OPTS="--color 'fg:#ed1c24,fg+:#1d1d1d,bg+:#ed1c24,hl:#ddfafa,hl+:#ddfafa,pointer:#1d1d1d,prompt:#ed1c24,info:#ddfafa,spinner:#ddfafa,marker:#1d1d1d,query:#ddfafa'"
+# Theme: Red star
+# export FZF_DEFAULT_OPTS="--color 'fg:#ed1c24,fg+:#1d1d1d,bg+:#ed1c24,hl:#ddfafa,hl+:#ddfafa,pointer:#1d1d1d,prompt:#ed1c24,info:#ddfafa,spinner:#ddfafa,marker:#1d1d1d,query:#ddfafa'"
 
-# PATH ADDITIONS
-# Personal binaries and scripts
+# PATH insertions
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
 prepend_to_path "$XDG_CONFIG_HOME/emacs/bin"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
-prepend_to_path "$HOME/.local/npm/bin"
 prepend_to_path "$HOME/.cache/rebar3/bin"
-append_to_path "$HOME/.gem/ruby/2.7.0/bin"
-append_to_path "$HOME/.gem/ruby/3.0.0/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing

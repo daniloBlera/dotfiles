@@ -21,8 +21,8 @@ alias cfdoom='"$VISUAL" "$XDG_CONFIG_HOME/doom/config.el"'
 alias cfstump='"$VISUAL" "$XDG_CONFIG_HOME/stumpwm/config"'
 alias cfmime='"$VISUAL" "$XDG_CONFIG_HOME/mimeapps.list"'
 alias cfzathura='"$VISUAL" "$XDG_CONFIG_HOME/zathura/zathurarc"'
-alias cfgpg='"$VISUAL" "~/.gnupg/gpg.conf"'
-alias cfagent='"$VISUAL" "~/.gnupg/gpg-agent.conf"'
+alias cfgpg='"$VISUAL" ~/.gnupg/gpg.conf'
+alias cfagent='"$VISUAL" ~/.gnupg/gpg-agent.conf'
 alias reloadagent='gpg-connect-agent reloadagent /bye; gpg-connect-agent updatestartuptty /bye'
 
 # Commonly-used
@@ -42,8 +42,8 @@ alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xatt
 alias ip='ip -c'
 alias ipa='ip -br addr'
 alias ipl='ip -br link'
-alias nsxiv='nsxiv -p'    # Disable writing cache or temp files
-alias t='tmux'          # Because I use this a lot
+alias nsxiv='nsxiv -p'      # Disable writing cache or temp files
+alias t='tmux'              # It makes sense given how often I use it
 alias fd='fd --no-ignore-parent'
 alias fdu='fd --unrestricted'
 
@@ -53,6 +53,7 @@ alias gls='git log --stat --color'
 alias glg='git log --graph --oneline --decorate --color'
 alias gdu='git diff' # unstaged
 alias gds='git diff --staged'
+alias gbv='git branch -vv'
 
 # Not so common stuff
 ## Grep the window class string for WM workspace assignment
