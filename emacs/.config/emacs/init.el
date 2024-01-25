@@ -13,7 +13,6 @@
 (package-initialize)
 
 ;; Configure the font
-;; some options:
 (let ((name "FiraCode Nerd Font Mono-11"))
   (add-to-list 'default-frame-alist `(font . ,name))
   (set-face-attribute 'default t :font name))
@@ -43,13 +42,6 @@
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2)
-
-;; Customize the chars to display
-;; (setq whitespace-style'(face
-;; 			tabs tab-mark
-;; 			spaces space-mark
-;; 			trailing lines-trail
-;; 			newline newline-mark))
 
 ;; Keymapsa
 (keymap-global-set "<XF86Paste>" 'clipboard-yank)
