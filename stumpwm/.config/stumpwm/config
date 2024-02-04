@@ -2,11 +2,9 @@
 ; vim:fileencoding=utf-8:filetype=lisp
 ;;;; StumpWM configuration file.
 ;;;; reminder: eval `(loadrc)` to reload configs
-
-;; Warning: we're using the stumpwm namespace to avoid using its prefix
 (in-package :stumpwm)
 
-;; Loading contrib modules
+;;; Loading contrib modules
 ;; https://github.com/stumpwm/stumpwm/wiki/Modules#contrib-repository
 ;; https://github.com/stumpwm/stumpwm-contrib
 (load-module "cpu")
@@ -30,33 +28,48 @@
          (vol-l (parse-integer (svref vol-values 0)))
          (vol-r (parse-integer (svref vol-values 1)))
          (*record-last-msg-override* t))
-    (format t "~s, ~s, ~s~%" mute-p vol-l vol-r)
-    (message "Vol: ~:[~;(MUTE) ~]~d%, ~d%" mute-p vol-l vol-r)))
+    (message "Volume: ~:[~;(MUTE) ~]~d%, ~d%" mute-p vol-l vol-r)))
 
 (defcommand volume- () ()
   "Decrease volume by 5%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ -5%")
+  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ -5%" t)
   (display-volume-info))
 
 (defcommand volume-- () ()
   "Decrease volume by 25%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ -25%")
+  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ -25%" t)
   (display-volume-info))
 
 (defcommand volume+ () ()
   "Increase volume by 5%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ +5%")
+  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ +5%" t)
   (display-volume-info))
 
 (defcommand volume++ () ()
   "Increase volume by 25%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ +25%")
+  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ +25%" t)
   (display-volume-info))
 
 (defcommand toggle-mute () ()
   "Toggle mute on/off"
-  (run-shell-command "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+  (run-shell-command "pactl set-sink-mute @DEFAULT_SINK@ toggle" t)
   (display-volume-info))
+
+(defun display-brightness-message ()
+  "Get the integer part of the brightness value"
+  (message "Brightness: ~a~%" (run-shell-command "xbacklight -get | cut -d . -f 1" t)))
+
+(defcommand brightness- () ()
+  "Decrease the monitor's brightness by 10%"
+  (let ((*record-last-msg-override* t))
+    (run-shell-command "xbacklight -dec 10" t)
+    (display-brightness-message)))
+
+(defcommand brightness+ () ()
+  "Increase the monitor's brightness by 10%"
+  (let ((*record-last-msg-override* t))
+    (run-shell-command "xbacklight -inc 10" t)
+    (display-brightness-message)))
 
 (defcommand prompt-poweroff () ()
   "Prompt the user to confirm powering off"
@@ -133,7 +146,7 @@
 (define-key *root-map* (kbd "t") "toggle-bar")
 
 ;; Run programs
-(define-key *top-map* (kbd "s-Menu") "exec dmenu_run_xres")
+(define-key *root-map* (kbd "Menu") "exec dmenu_run_xres")
 (define-key *top-map* (kbd "s-RET") "exec st")
 
 ;; Volume controls
@@ -143,10 +156,18 @@
 (define-key *top-map* (kbd "S-XF86AudioRaiseVolume") "volume++")
 (define-key *top-map* (kbd "XF86AudioMute") "toggle-mute")
 
+;; Screen brightness controls
+(define-key *top-map* (kbd "XF86MonBrightnessDown") "brightness-")
+(define-key *top-map* (kbd "XF86MonBrightnessUp") "brightness+")
+
 ;; Lock screen, reboot, and poweroff
 (define-key *root-map* (kbd "s-l") "exec xset s activate")
 (define-key *root-map* (kbd "s-r") "prompt-reboot")
 (define-key *root-map* (kbd "s-p") "prompt-poweroff")
+
+;; Capture screenshot
+(define-key *top-map* (kbd "SunPrint_Screen") "exec flameshot screen -p ~/Pictures/screenshots")
+(define-key *top-map* (kbd "Sys_Req") "exec flameshot gui")
 
 ;; Group and window navigation
 (define-key *top-map* (kbd "s-N") "gnext")
@@ -158,29 +179,25 @@
 (define-key *top-map* (kbd "s-TAB") "other-window")
 (define-key *top-map* (kbd "s-ISO_Left_Tab") "gother")
 
-;; Capture screenshot
-(define-key *top-map* (kbd "SunPrint_Screen") "exec flameshot screen -p ~/Pictures/screenshots")
-(define-key *top-map* (kbd "Sys_Req") "exec flameshot gui")
-
 ;; Spatial groups
 ;; `Shift + arrows` - move between splits in the current group
-(define-key *groups-map* (kbd "S-Left")     "move-focus left")
-(define-key *groups-map* (kbd "S-Down")     "move-focus down")
-(define-key *groups-map* (kbd "S-Up")       "move-focus up")
-(define-key *groups-map* (kbd "S-Right")    "move-focus right")
+(define-key *groups-map* (kbd "S-Left") "move-focus left")
+(define-key *groups-map* (kbd "S-Down") "move-focus down")
+(define-key *groups-map* (kbd "S-Up") "move-focus up")
+(define-key *groups-map* (kbd "S-Right") "move-focus right")
 
 ;; `Control + arrows` - move between groups in the current desktop
-(define-key *groups-map* (kbd "Left")       "coord-left")
-(define-key *groups-map* (kbd "Down")       "coord-down")
-(define-key *groups-map* (kbd "Up")         "coord-up")
-(define-key *groups-map* (kbd "Right")      "coord-right")
+(define-key *groups-map* (kbd "Left") "coord-left")
+(define-key *groups-map* (kbd "Down") "coord-down")
+(define-key *groups-map* (kbd "Up") "coord-up")
+(define-key *groups-map* (kbd "Right") "coord-right")
 
 ;; `Super + left|right` - move betwen desktops
-(define-key *groups-map* (kbd "s-Left")     "coord-taskleft")
-(define-key *groups-map* (kbd "s-Right")    "coord-taskright")
+(define-key *groups-map* (kbd "C-Left") "coord-taskleft")
+(define-key *groups-map* (kbd "C-Right") "coord-taskright")
 
 ;; `Super + up` - jump to the current desktop's origin group (x: 0, y: 0)
-(define-key *groups-map* (kbd "s-Up")       "coord-taskorigin")
+(define-key *groups-map* (kbd "C-Up") "coord-taskorigin")
 
 ;; `Super + down` - jump to the last visited group
-(define-key *groups-map* (kbd "s-Down")     "coord-taskpop")
+(define-key *groups-map* (kbd "C-Down") "coord-taskpop")
