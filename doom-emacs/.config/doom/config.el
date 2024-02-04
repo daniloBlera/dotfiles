@@ -36,8 +36,8 @@
 ;; (setq doom-theme 'doom-molokai)
 ;; (setq doom-theme 'doom-moonlight)
 ;; (setq doom-theme 'doom-old-hope)
-;; (setq doom-theme 'doom-outrun-electric)
-(setq doom-theme 'doom-shades-of-purple)
+(setq doom-theme 'doom-outrun-electric)
+;; (setq doom-theme 'doom-shades-of-purple)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -85,6 +85,11 @@
       (:prefix ("t" . "Toggle")
        :desc "Olivetti mode" "o"
        #'olivetti-mode))
+
+;; Map clipboard paste, copy and cut
+(map! "<XF86Paste>" #'clipboard-yank)
+(map! "<XF86Copy>" #'clipboard-kill-ring-save)
+(map! "<XF86Cut>" #'clipboard-kill-region)
 
 ;; Enable deletion by system's trash
 (setq delete-by-moving-to-trash t)
