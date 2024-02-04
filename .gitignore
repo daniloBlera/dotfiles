@@ -1,6 +1,7 @@
 # Backup files
 *~
 *.bak
+\#*\#
 
 # Neovim text editor
 nvim/.config/nvim/.netrwhist
