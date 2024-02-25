@@ -1,0 +1,27 @@
+# The colourscheme configuration
+set completion-bg               '#170420'
+set completion-fg               '#ea1646'
+set completion-highlight-bg     '#ea1646'
+set completion-highlight-fg     '#000000'
+
+## Input/status bar
+set inputbar-bg                 '#ea1646'
+set inputbar-fg                 '#000000'
+set statusbar-bg                '#212121'
+set statusbar-fg                '#dadada'
+
+# Index/Table of contents
+set index-active-bg             '#ea1646'
+set index-active-fg             '#170420'
+set index-bg                    '#170420'
+set index-fg                    '#ea1646'
+
+## Search highlight
+set highlight-fg                '#170420'   # text colour of all search highlight results
+set highlight-color             '#fccb00'   # background of all search highlight results
+set highlight-active-color      '#ea1646'   # background of the current highlight
+
+## Configuring recoloring of light and dark colours for a less bright reading
+set recolor-keephue             true
+set recolor-lightcolor          '#170420'
+set recolor-darkcolor           '#ea1646'
