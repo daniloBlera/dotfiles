@@ -115,6 +115,7 @@
 (setf *window-format* "%m%n%s%c")
 
 ;; Datetime format
+;;  <day-of-week>, <day> <month> <year> - <hour>:<minutes>
 (setf *time-modeline-string* "%a, %d %B %Y - %R")
 
 ;; Elements to display
@@ -132,7 +133,7 @@
 ;; The number of seconds between updates
 (setf *mode-line-timeout* 10)
 
-;; And remember to enable mode-line AFTER configuring it
+;; Enable mode-line after configuring it
 (enable-mode-line (current-screen) (current-head) t)
 
 ;;; Keybindings
@@ -179,25 +180,25 @@
 (define-key *top-map* (kbd "s-TAB") "other-window")
 (define-key *top-map* (kbd "s-ISO_Left_Tab") "gother")
 
-;; Spatial groups
-;; `Shift + arrows` - move between splits in the current group
+;;; Spatial groups keybindings
+;; Move between splits in the current group
 (define-key *groups-map* (kbd "S-Left") "move-focus left")
 (define-key *groups-map* (kbd "S-Down") "move-focus down")
 (define-key *groups-map* (kbd "S-Up") "move-focus up")
 (define-key *groups-map* (kbd "S-Right") "move-focus right")
 
-;; `Control + arrows` - move between groups in the current desktop
+;; Move between groups in the current desktop
 (define-key *groups-map* (kbd "Left") "coord-left")
 (define-key *groups-map* (kbd "Down") "coord-down")
 (define-key *groups-map* (kbd "Up") "coord-up")
 (define-key *groups-map* (kbd "Right") "coord-right")
 
-;; `Super + left|right` - move betwen desktops
-(define-key *groups-map* (kbd "C-Left") "coord-taskleft")
-(define-key *groups-map* (kbd "C-Right") "coord-taskright")
+;; Move betwen desktops
+(define-key *groups-map* (kbd "p") "coord-taskleft")
+(define-key *groups-map* (kbd "n") "coord-taskright")
 
-;; `Super + up` - jump to the current desktop's origin group (x: 0, y: 0)
-(define-key *groups-map* (kbd "C-Up") "coord-taskorigin")
+;; Jump to the current desktop's origin group (x: 0, y: 0)
+(define-key *groups-map* (kbd "c") "coord-taskorigin")
 
-;; `Super + down` - jump to the last visited group
-(define-key *groups-map* (kbd "C-Down") "coord-taskpop")
+;; Jump to the last visited group
+(define-key *groups-map* (kbd "TAB") "coord-taskpop")

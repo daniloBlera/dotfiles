@@ -13,7 +13,7 @@
 (package-initialize)
 
 ;; Configure the font
-(let ((name "FiraCode Nerd Font Mono-11"))
+(let ((name "UbuntuMono Nerd Font-13"))
   (add-to-list 'default-frame-alist `(font . ,name))
   (set-face-attribute 'default t :font name))
 
@@ -43,8 +43,12 @@
       kept-new-versions 6
       kept-old-versions 2)
 
-;; Keymapsa
-(keymap-global-set "<XF86Paste>" 'clipboard-yank)
-(keymap-global-set "<XF86Copy>" 'clipboard-kill-ring-save)
-(keymap-global-set "<XF86Cut>" 'clipboard-kill-region)
+;; Keymaps
 (keymap-global-set "C-c t o" 'olivetti-mode)
+
+;; Disable suspend
+(global-unset-key (kbd "C-z"))
+
+;; Re-enable uppercase/losercase region `C-x C-u' and `C-x C-l', respectively
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
