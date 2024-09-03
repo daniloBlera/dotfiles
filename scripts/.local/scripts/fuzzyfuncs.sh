@@ -1,19 +1,19 @@
 #!/bin/sh
 # Implementing some fzf-based utilities
-# 
+#
 # To use these functions, export this script from your shell's config file.
 
 # Fuzzy-Search directory (or file) and `cd` to it
 #
-# USAGE:
+# Usage:
 #   fcd [SEARCH_PATH]
 #
-# ARGUMENTS
+# Arguments:
 #   SEARCH_PATH     The path where the fuzzy search should be applied. If given
 #                   the path to a file, `cd` to the directory containing this
 #                   file.
 #
-fcd() {
+,fcd() {
     searchdir=''
     if [ "$#" -eq 0 ]
     then
@@ -36,15 +36,16 @@ fcd() {
 # Edit one or more files
 #
 # Fuzzy-Search files and open them with `VISUAL`
-# USAGE:
+#
+# Usage:
 #   fed [SEARCH_PATH]
 #
-# ARGUMENTS:
+# Arguments:
 #   SEARCH_PATH     The root path where the fuzzy search should be applied. if
 #                   the argument is a path to a file, its `dirname` will be
 #                   used instead.
 #
-fed() {
+,fed() {
     searchdir=''
     if [ "$#" -eq 0 ]
     then
@@ -66,11 +67,11 @@ fed() {
 # Kill one or more processes
 #
 # Select multiple processes to kill with `Tab` or `Shift+Tab`
-# 
-# USAGE:
+#
+# Usage:
 #   fkill
 #
-fkill() {
+,fkill() {
     search_result="$(ps -e -o pid= -o cmd= | fzf -m)"
     if [ -n "$search_result" ]
     then
@@ -86,10 +87,10 @@ fkill() {
 #
 # Select multiple items to remove from trash with `Tab` or `Shift+Tab`
 #
-# USAGE:
+# Usage:
 #   fclean
 #
-ftrash() {
+,ftrash() {
     selection="$(trash-list | fzf -m)"
 
     if [ -n "$selection" ]
@@ -104,10 +105,10 @@ ftrash() {
 # If inside a git repository, list all files differing from the working tree
 # and display the selected ones with `git diff`
 #
-# USAGE:
+# Usage:
 #   fgd
 #
-fgd() {
+,fgd() {
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1
     then
         selection="$(git status --porcelain | fzf -m | cut -c 4- | tr '\n' ' ')"
@@ -124,13 +125,13 @@ fgd() {
 # List all pdf files in the search directory (defaults to ~/Documents) and open
 # the selected one using xdg-open.
 #
-# USAGE:
-#   fpdf [SEARCH_DIR]
+# Usage:
+#   fpdf [DIRECTORY]
 #
-# ARGUMENTS
-#   SEARCH_DIR      The path to the root of the search directory
+# Arguments:
+#   DIRECTORY       The path to the root of the search directory
 #
-fpdf() {
+,fpdf() {
     searchdir=''
     if [ "$#" -eq 0 ]
     then
@@ -145,6 +146,15 @@ fpdf() {
     selection="$(find "$searchdir" -type f -name '*.pdf' 2> /dev/null | fzf)"
     if [ -n "$selection" ]
     then
-        swallow-open "$selection"
+        zathura "$selection"
     fi
+}
+
+# Search all available font names
+#
+# Usage:
+#   ffc
+#
+,ffc() {
+    fc-list : family | cut -d ',' -f 1 | sort | uniq | sed 's/^  *//' | fzf --multi
 }

@@ -6,8 +6,8 @@ XTerm.vt100.font:       xft:UbuntuMono Nerd Font Mono:size=12:style=regular:anti
 XTerm.vt100.boldFont:   xft:UbuntuMono Nerd Font Mono:size=12:style=bold:antialias=true
 
 ! For st terminal
-*.font:               UbuntuMono Nerd Font:size=12:style=regular:antialias=true
-*.font.boldFont:      UbuntuMono Nerd Font:size=12:style=bold:antialias=true
+*.font:                 UbuntuMono Nerd Font Mono:size=12:style=regular:antialias=true
+*.font.boldFont:        UbuntuMono Nerd Font Mono:size=12:style=bold:antialias=true
 
 ! Dmenu related configs
 dmenu.font: Ubuntu Nerd Font:size=11
@@ -18,4 +18,3 @@ UXTerm*saveLines: 1024
 XTerm.vt100.selectToClipboard: true
 XTerm*metaSendsEscape: true
 UXTerm*metaSendsEscape: true
-

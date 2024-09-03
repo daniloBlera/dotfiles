@@ -20,7 +20,7 @@ then
     exit
 fi
 
-read -p "rm -rf '$1'? [y/n] " yn
+read -p "rm -rf '$1'? [y/N] " yn
 case $yn in
     [Yy]*)
         rm -rf "$1"

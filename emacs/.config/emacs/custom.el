@@ -12,20 +12,24 @@
    '("6752a763be62c7da5c70d04cd5f559c2f96479caa18809c54612cb918ba08708" default))
  '(delete-by-moving-to-trash t)
  '(display-line-numbers-type t)
- '(electric-pair-mode t)
  '(fill-column 90)
  '(frame-resize-pixelwise t)
  '(global-company-mode t)
  '(global-display-fill-column-indicator-mode t)
  '(global-display-line-numbers-mode t)
  '(global-hl-line-mode t)
+ '(global-prettify-symbols-mode t)
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(mouse-wheel-progressive-speed nil)
+ '(nyan-mode t)
  '(olivetti-body-width 100)
  '(olivetti-style 'fancy)
  '(package-selected-packages
-   '(multiple-cursors eat transpose-frame cider dape sly shades-of-purple-theme unicode-fonts editorconfig rainbow-delimiters company vundo olivetti which-key))
+   '(ace-window breadcrumb company dape direnv flycheck format-all jinx lua-mode
+		multiple-cursors nyan-mode olivetti paredit rainbow-delimiters
+		shades-of-purple-theme sly transpose-frame tree-sitter-langs treemacs
+		unicode-fonts vterm vundo))
  '(pixel-scroll-precision-mode t)
  '(scroll-bar-mode nil)
  '(tab-bar-mode t)
@@ -38,7 +42,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(cursor ((t (:background "gold"))))
  '(italic ((t (:slant italic))))
  '(tab-bar ((t nil)))
  '(tab-bar-tab ((t (:background "gold1" :foreground "black" :box (:line-width (1 . 1) :style released-button)))))

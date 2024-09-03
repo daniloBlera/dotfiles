@@ -1,13 +1,22 @@
-# Disable Middle Mouse Button functionality, as suggested here:
-# https://unix.stackexchange.com/a/277488
+###########################
+# xbindkeys configuration #
+###########################
+#
+# Version: 1.8.7
+#
 
-# Disables pasting only, not the event
-# "echo -n | xsel -n -i; pkill xbindkeys; xdotool click 2; xbindkeys"
-
-# Disables MMB completely
-""
-  b:2 + Release
-
-# Left-Alt + Left-Mouse-Button acts as Right-Mouse-Button
-"xte 'mouseclick 3'"
+# send `MMB` on `M-LMB`
+"xte 'mouseclick 2'"
   Mod1 + b:1 + Release
+
+# send `RMB` on `C-LMB`
+"xte 'mouseclick 3'"
+  Control + b:1 + Release
+
+# show available bindings
+"xbindkeys_show -f ~/.config/xres/xbindkeysrc"
+  Control + Shift + q
+
+##################################
+# End of xbindkeys configuration #
+##################################

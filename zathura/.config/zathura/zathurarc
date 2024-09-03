@@ -1,13 +1,14 @@
 # General
-set font                        'UbuntuMono Nerd Font 11'
+set font                        'ComicShannsMono Nerd Font Mono 10'
 set incremental-search          true
 set page-padding                3
 set window-title-basename       true
 set statusbar-home-tilde        true
 set selection-clipboard         clipboard
+set database                    sqlite
+set adjust-open                 best-fit
+set recolor                     false
+set statusbar-page-percent true
 
 # Theme
 include mountains-on-mars
-
-# increasing the highlight opacity for better visibility
-set highlight-transparency 0.85

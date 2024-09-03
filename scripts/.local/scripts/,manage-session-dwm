@@ -3,7 +3,6 @@
 # Usage:
 #   manage_session
 OPTIONS='Lock screen
-Toggle screensaver
 Close DWM
 Reboot
 Power-off'
@@ -11,9 +10,7 @@ Power-off'
 option=$(echo "$OPTIONS" | dmenu_xres 'What now, chief?')
 case "$option" in
     'Lock screen')
-        xset s activate;;
-    'Toggle screensaver')
-        toggle-screensaver;;
+        xscreensaver-command --lock;;
     'Close DWM')
         pkill -x dwm;;
     'Reboot')

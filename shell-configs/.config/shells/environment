@@ -24,6 +24,7 @@ export GHCUP_USE_XDG_DIRS="set to non-empty to use XDG-ish directories - https:/
 # enable pinentry on the terminal instead of using GTK2
 export GPG_TTY="$(tty)"
 
+# the text editors of choice
 export SUDO_EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 export EDITOR='/usr/bin/nvim'
@@ -32,25 +33,17 @@ export EDITOR='/usr/bin/nvim'
 export NNN_OPTS='AdeoRUr'
 export NNN_OPENER='/usr/bin/xdg-open'
 export NNN_BMS='c:~/.config;C:~/.cache;l:~/.local;d:~/Downloads;b:~/Programs/source-builds;p:~/Pictures'
-export NNN_PLUG='v:viewimgs;x:delete-stuff;s:simplify;a:!mpv --no-video "$nnn";A:!mpv --no-video --loop "$nnn"'
+export NNN_PLUG='v:viewimgs;x:delete-stuff;s:simplify-single;S:simplify-multiple;a:!mpv --no-video "$nnn";A:!mpv --no-video --loop "$nnn"'
 export NNN_COLORS='6532'
 export NNN_TRASH=1  # use trash instead of `rm` -- 1: 'trash-cli', 2: `gio`
 export NNN_SEL='/tmp/nnn_sel'
-export NNN_SEL='/tmp/nnn_fifo'
+export NNN_FIFO='/tmp/nnn_fifo'
 export NNN_LOCKER='/usr/bin/bash-pipes'
 export NNN_HELP='fortune'
 
 # FZF's options
-export FZF_DEFAULT_COMMAND='fd --hidden --type f'
-
-# Theme: Ruiner
-# export FZF_DEFAULT_OPTS="--color 'fg:#dc122a,fg+:#000000,bg+:#dc122a,hl:#ddfafa,hl+:#ddfafa,pointer:#000000,prompt:#dc122a,info:#ddfafa,spinner:#ddfafa'"
-
-# Theme: Mountains on mars
-export FZF_DEFAULT_OPTS="--color 'fg:#ea1646,fg+:#170420,bg+:#ea1646,hl:#ddfafa,hl+:#ddfafa,pointer:#170420,prompt:#ea1646,info:#ddfafa,spinner:#ddfafa'"
-
-# Theme: Red star
-# export FZF_DEFAULT_OPTS="--color 'fg:#ed1c24,fg+:#1d1d1d,bg+:#ed1c24,hl:#ddfafa,hl+:#ddfafa,pointer:#1d1d1d,prompt:#ed1c24,info:#ddfafa,spinner:#ddfafa,marker:#1d1d1d,query:#ddfafa'"
+export FZF_DEFAULT_COMMAND='fd --hidden --type file'
+export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/config"
 
 # PATH insertions
 prepend_to_path "$HOME/.local/bin"
@@ -59,6 +52,7 @@ prepend_to_path "$XDG_CONFIG_HOME/emacs/bin"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
 prepend_to_path "$HOME/.cache/rebar3/bin"
+prepend_to_path "$HOME/.cache/roswell/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing

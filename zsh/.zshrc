@@ -1,5 +1,5 @@
 # Configuring how the prompt should look
-#   '[<user>@<host> <lastdir>]<prompt> '
+#   '[<user>@<host> <cwd-last-segment>]<prompt> '
 PROMPT='[%n@%m %1~]%# '
 
 # The following lines were added by compinstall
@@ -14,15 +14,14 @@ zstyle :compinstall filename '/home/dcb/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-# Lines configured by zsh-newuser-install
-HISTFILE="/tmp/$(whoami)_zsh_history"
+
+HISTFILE="$HOME/.local/state/zsh_history"
 HISTSIZE=1000
 SAVEHIST=1000
+setopt HIST_IGNORE_DUPS
 setopt autocd
 bindkey -e
-# End of lines configured by zsh-newuser-install
 
-# USER CONFIGURATIONS
 source_if_exists() {
     [ -f "$1" ] && source "$1"
 }
@@ -60,6 +59,9 @@ source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
 eval "$(pyenv init - --no-rehash)"
 source /usr/share/zsh/site-functions/_pyenv
 
+# direnv hook
+eval "$(direnv hook zsh)"
+
 # Extra stuff
 stty -ixon
 
@@ -68,6 +70,3 @@ set -o noclobber
 
 # Enable broot fuzzy search finder/navigator
 source_if_exists "$HOME/.config/broot/launcher/bash/br"
-
-# Reload zsh's config
-alias srccfg="echo 'sourcing ~/.zshrc...'; source ~/.zshrc; echo 'done!'"

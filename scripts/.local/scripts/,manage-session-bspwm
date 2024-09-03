@@ -3,19 +3,23 @@
 # Usage:
 #   manage_session
 OPTIONS='Lock screen
-Toggle screensaver
 Close BSPWM
 Reboot
 Power-off'
 
-option=$(echo "$OPTIONS" | dmenu_xres 'What now, chief?')
+option=$(echo "$OPTIONS" | ,dmenu_xres 'What now, chief?')
 case "$option" in
     'Lock screen')
-        xset s activate;;
+        xscreensaver-command --lock;;
     'Close BSPWM')
-        pkill -x polybar; bspc quit;;
+        pkill -x polybar
+        bspc quit;;
     'Reboot')
+        pkill -x polbar
+        bspc quit
         reboot;;
     'Power-off')
+        pkill -x polbar
+        bspc quit
         poweroff;;
 esac

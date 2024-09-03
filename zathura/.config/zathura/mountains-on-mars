@@ -1,27 +1,27 @@
 # The colourscheme configuration
-set completion-bg               '#170420'
-set completion-fg               '#ea1646'
-set completion-highlight-bg     '#ea1646'
-set completion-highlight-fg     '#000000'
+set completion-bg               rgba(23,4,32,0.8)
+set completion-fg               rgba(234,22,70,1.0)
+set completion-highlight-bg     rgba(234,22,70,0.8)
+set completion-highlight-fg     rgba(0,0,0,1.0)
 
 ## Input/status bar
-set inputbar-bg                 '#ea1646'
-set inputbar-fg                 '#000000'
-set statusbar-bg                '#212121'
-set statusbar-fg                '#dadada'
+set inputbar-bg                 rgba(23,4,32,1.0)
+set inputbar-fg                 rgba(234,22,70,1.0)
+set statusbar-bg                rgba(23,4,32,1.0)
+set statusbar-fg                rgba(234,22,70,1.0)
 
 # Index/Table of contents
-set index-active-bg             '#ea1646'
-set index-active-fg             '#170420'
-set index-bg                    '#170420'
-set index-fg                    '#ea1646'
+set index-active-bg             rgba(234,22,70,1.0)
+set index-active-fg             rgba(23,4,32,1.0)
+set index-bg                    rgba(23,4,32,1.0)
+set index-fg                    rgba(234,22,70,1.0)
 
 ## Search highlight
-set highlight-fg                '#170420'   # text colour of all search highlight results
-set highlight-color             '#fccb00'   # background of all search highlight results
-set highlight-active-color      '#ea1646'   # background of the current highlight
+set highlight-fg                rgba(23,4,32,1.0)       # text colour of all search highlight results
+set highlight-color             rgba(252,203,0,0.8)     # background of all search highlight results
+set highlight-active-color      rgba(234,22,70,0.8)     # background of the current highlight
 
 ## Configuring recoloring of light and dark colours for a less bright reading
 set recolor-keephue             true
-set recolor-lightcolor          '#170420'
-set recolor-darkcolor           '#ea1646'
+set recolor-lightcolor          rgba(23,4,32,1.0)
+set recolor-darkcolor           rgba(234,22,70,1.0)

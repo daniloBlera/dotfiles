@@ -10,7 +10,7 @@ notify() {
 
 if [ "$#" -ne 1 ]
 then
-    echo "ERROR: Illegal number of arguments!"
+    echo "ERROR: incorrect number of arguments so we're doing nothing..."
     exit 1
 fi
 

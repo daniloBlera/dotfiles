@@ -4,26 +4,28 @@
 # Shortcuts for configuration files
 # alias al='"$VISUAL" "$HOME/.config/shells/aliases"'
 # alias ev='"$VISUAL" "$HOME/.config/shells/environment"'
-alias al='"$VISUAL" ~/.config/shells/aliases'
-alias ev='"$VISUAL" ~/.config/shells/environment'
+alias ,al='"$VISUAL" ~/.config/shells/aliases'
+alias ,ev='"$VISUAL" ~/.config/shells/environment'
 
-alias cfbash='"$VISUAL" ~/.bashrc'
-alias cfzsh='"$VISUAL" ~/.zshrc'
-# alias cfbspwm='"$VISUAL" "$XDG_CONFIG_HOME/bspwm/bspwmrc"'
-# alias cfsxhkd='"$VISUAL" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
-# alias cfpolybar='"$VISUAL" "$XDG_CONFIG_HOME/polybar/config"'
-alias cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
-alias cfnvimplug='"$VISUAL" "$XDG_CONFIG_HOME/nvim/plug.vim"'
-alias cftmux='"$VISUAL" "$XDG_CONFIG_HOME/tmux/tmux.conf"'
-alias cfkitty='"$VISUAL" "$XDG_CONFIG_HOME/kitty/kitty.conf"'
-alias cfgit='"$VISUAL" "$XDG_CONFIG_HOME/git/config"'
-alias cfdoom='"$VISUAL" "$XDG_CONFIG_HOME/doom/config.el"'
-alias cfstump='"$VISUAL" "$XDG_CONFIG_HOME/stumpwm/config"'
-alias cfmime='"$VISUAL" "$XDG_CONFIG_HOME/mimeapps.list"'
-alias cfzathura='"$VISUAL" "$XDG_CONFIG_HOME/zathura/zathurarc"'
-alias cfgpg='"$VISUAL" ~/.gnupg/gpg.conf'
-alias cfagent='"$VISUAL" ~/.gnupg/gpg-agent.conf'
-alias reloadagent='gpg-connect-agent reloadagent /bye; gpg-connect-agent updatestartuptty /bye'
+alias ,cfbash='"$VISUAL" ~/.bashrc'
+alias ,cfzsh='"$VISUAL" ~/.zshrc'
+# alias ,cfbspwm='"$VISUAL" "$XDG_CONFIG_HOME/bspwm/bspwmrc"'
+# alias ,cfsxhkd='"$VISUAL" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
+# alias ,cfpolybar='"$VISUAL" "$XDG_CONFIG_HOME/polybar/config"'
+alias ,cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
+# alias ,cfnvimplug='"$VISUAL" "$XDG_CONFIG_HOME/nvim/plug.vim"'
+alias ,cftmux='"$VISUAL" "$XDG_CONFIG_HOME/tmux/tmux.conf"'
+alias ,cfgit='"$VISUAL" "$XDG_CONFIG_HOME/git/config"'
+alias ,cfmime='"$VISUAL" "$XDG_CONFIG_HOME/mimeapps.list"'
+alias ,cfzathura='"$VISUAL" "$XDG_CONFIG_HOME/zathura/zathurarc"'
+alias ,cfgpg='"$VISUAL" ~/.gnupg/gpg.conf'
+alias ,cfagent='"$VISUAL" ~/.gnupg/gpg-agent.conf'
+alias ,reloadgpg='gpg-connect-agent reloadagent /bye; gpg-connect-agent updatestartuptty /bye'
+
+# start a terminal emacs client
+alias ,ect='emacsclient --create-frame --alternate-editor="" --no-window-system'
+alias ,ecstart='emacs --daemon'
+alias ,ecstop='emacsclient -e "(kill-emacs)"'
 
 # Commonly-used
 alias ls='ls --color=auto'
@@ -33,48 +35,54 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
-alias ll='ls -AFhl'
-alias la='ls -AF'
-alias lb='lsblk --fs'
-alias l1='ls -1F'
-alias tree='tree -F'
-alias cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
+alias ,ll='ls -AFhl'
+alias ,la='ls -AF'
+alias ,lb='lsblk --fs -p'
+alias ,l1='ls -1F'
+alias tree='tree -FC'
+alias ,cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
 alias ip='ip -c'
-alias ipa='ip -br addr'
-alias ipl='ip -br link'
-alias nsxiv='nsxiv -p'      # Disable writing cache or temp files
+alias ,ipa='ip -br addr'
+alias ,ipl='ip -br link'
+alias ,nsxiv='nsxiv -p'      # Disable writing cache or temp files
 alias t='tmux'              # It makes sense given how often I use it
 alias fd='fd --no-ignore-parent'
-alias fdu='fd --unrestricted'
+alias ,fdu='fd --unrestricted'
 
 # git-related stuff
-alias gss='git status --short --branch'
-alias gls='git log --stat --color'
-alias glg='git log --graph --oneline --decorate --color'
-alias gdu='git diff' # unstaged
-alias gds='git diff --staged'
-alias gbv='git branch -vv'
+alias ,gss='git status --short --branch'
+alias ,gls='git log --stat --color'
+alias ,glg='git log --graph --oneline --decorate --color'
+alias ,gdu='git difftool' # unstaged
+alias ,gds='git difftool --staged'
+alias ,gbv='git branch -vv'
 
 # Not so common stuff
 ## Grep the window class string for WM workspace assignment
-alias xpwmc='xprop | grep -i "WM_CLASS(STRING)"'
+alias ,xpwmc='xprop | grep -i "WM_CLASS(STRING)"'
 
 ## Shortcut to xev keyboard events
-alias xek='xev -event keyboard'
+alias ,xek='xev -event keyboard'
 
-## List wifi hotspots (requires NetworkManager)
-alias nmls='nmcli device wifi list --rescan yes'
+## Fuzzy-search available python interpreter versions
+alias ,pyenvls='pyenv install --list | fzf'
 
 ## Wrap REPLs with readline for history and other stuff
-alias replcl='rlwrap ros run'
-alias repler='rlwrap --always-readline erl'
+alias ,replcl='rlwrap sbcl'
+alias ,repler='rlwrap --always-readline erl'
 
 ## To insert STDIN contents to both PRIMARY and CLIPBOARD
-## usage: <something-stdout> | xclipin
-alias xclipin='xclip -i -f -selection primary | xclip -i -selection clipboard'
+## usage: <something-stdout> | ,clipin
+alias ,clipin='xclip -i -f -selection primary | xclip -i -selection clipboard'
 
 ## Clear X's selection and clipboard
-alias xclipcl="printf '' | xclipin"
+alias ,clipcl="printf '' | ,clipin"
 
 ## The Zen of Python
-alias zenpy='python -m this'
+alias ,zen='python -m this'
+
+## Create and source a python venv
+alias ,svenv='echo "Creating a new and updated venv, be back in a jiffy"; python -m venv .venv; source .venv/bin/activate; pip install --upgrade pip setuptools wheel build'
+
+## terminal countdown
+alias ,tm='termdown -f roman -t "20min countdown ended!" "20m"'

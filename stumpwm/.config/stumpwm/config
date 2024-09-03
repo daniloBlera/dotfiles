@@ -1,18 +1,22 @@
 ; -*-lisp-*-
 ; vim:fileencoding=utf-8:filetype=lisp
 ;;;; StumpWM configuration file.
-;;;; reminder: eval `(loadrc)` to reload configs
+;;;; note: to reload the config, do `<prefix> : (loadrc) RET`
 (in-package :stumpwm)
 
-;;; Loading contrib modules
+;;; 1 LOADING CONTRIB MODULES
 ;; https://github.com/stumpwm/stumpwm/wiki/Modules#contrib-repository
 ;; https://github.com/stumpwm/stumpwm-contrib
+
+;; cpu information on the mode-line
 (load-module "cpu")
+
+;; turn groups into a (x, y, z) coordinate system
 (load-module "spatial-groups")
 
-;;; Custom utilities
+;;; 2 UTILITIES
 (defcommand toggle-bar () ()
-  "Toggle mode-line on and off"
+  "Toggle the status bar on and off"
   (toggle-mode-line (current-screen) (current-head)))
 
 (defun display-volume-info ()
@@ -83,18 +87,20 @@
       (run-shell-command "reboot")
       (xlib:unmap-window (screen-message-window (current-screen)))))
 
-;;; General behaviour
-;; Display the keybindings window when pressing pressing prefix
+(defcommand prompt-lockscreen () ()
+  "Prompt the user to confirm locking the screen"
+  (if (y-or-n-p "Lock screen? ")
+      (run-shell-command "xscreensaver-command --lock")
+      (xlib:unmap-window (screen-message-window (current-screen)))))
+
+;;; GENERAL STUFF
+;; enable which-key (display available keybindings)
 (add-hook *key-press-hook* 'which-key-mode-key-press-hook)
 
-;; Reorder after destroying windows
-(add-hook *destroy-window-hook* #'(lambda (win) (repack-window-numbers)))
-
-;;; Visual and colours
-;;                 dark     bright1   bright2    white
+;;; 3 VISUAL AND COLOURS
+;;                 dark     bright1   bright2  white-ish
 (setf *colors* `("#170420" "#ea1646" "#870d2c" "#ddfafa"))
 (setf *default-bg-color* (first *colors*))
-
 (set-border-color (fourth *colors*))
 (set-focus-color (second *colors*))
 (set-unfocus-color (first *colors*))
@@ -103,102 +109,113 @@
 (setf *normal-border-width* 1)
 (setf *transient-border-width* 1)
 
-;; Set wallpaper if it exists
-(let ((fpath (probe-file "~/.config/wallpaper")))
-  (if fpath (run-shell-command (format nil "xwallpaper --zoom ~s" (namestring fpath)))))
-
-;; Font configuration - use `xfontsel` to query available configurations
+;;; 4 FONT CONFIGURATION
+;; use `xfontsel` to query available fonts
 (or (set-font "-*-terminus-medium-r-normal-*-14-*-*-*-*-*-*-*")
     (set-font "9x15bold"))
 
-;;; Configuring mode-line (the status bar)
+;;; 5 MODE-LINE
+;; the windows module
+;; check available segments in stumpwm's `primitives.lisp`
 (setf *window-format* "%m%n%s%c")
 
-;; Datetime format
-;;  <day-of-week>, <day> <month> <year> - <hour>:<minutes>
+;; the datetime module
+;;   <day-of-week-abbr>, <DD> <month-name> <YYYY> - <HH>:<MM>
 (setf *time-modeline-string* "%a, %d %B %Y - %R")
 
-;; Elements to display
-;;   <group-name> <group-windows> <right-align> <cpu> " | " <date>
-(setf *screen-mode-line-format*
-      (list "[^B%n^b]" "%W" "^>" "%C" " | " "%d"))
+;; setting the modules to display
+;;   %n     current group module (configured with `stumpwm::*group-format*`)
+;;   %W     windows module for the current group (configured with `stumpwm::*window-format*`)
+;;   %^>    justify right the rest of the string
+;;   %C     CPU module (requires the `cpu` contrib module configured with `cpu::*cpu-modeline-fmt*`)
+;;   %d     datetime module (configured with `stumpwm::*time-modeline-string*`)
+(setf *screen-mode-line-format* (list "[%n]" "%W" "^>" "%C" " | " "%d"))
 
-;; Colours
+;; colours
 (setf *mode-line-background-color* (first *colors*))
 (setf *mode-line-foreground-color* (second *colors*))
 (setf *mode-line-border-color* (first *colors*))
 (setf *mode-line-border-width* 0)
 (setf *mode-line-position* :bottom)
 
-;; The number of seconds between updates
+;; the number of seconds between updates
 (setf *mode-line-timeout* 10)
 
-;; Enable mode-line after configuring it
+;; enable mode-line AFTER configuring it
 (enable-mode-line (current-screen) (current-head) t)
 
-;;; Keybindings
-;; Make Super+Space the prefix
+;;; 6 KEYBINDINGS
+;; modifiers: control (C-), alt (A-), meta (M-), super (s-), shift (S-), and hyper (H-)
+;; use Super+Space as the prefix
 (set-prefix-key (kbd "s-SPC"))
 
-;; Change focus on mouse click
+;; change focus on mouse click
 (setf *mouse-focus-policy* :click)
 
-;; Toggle mode-line/statusbar
+;; toggle mode-line/statusbar
 (define-key *root-map* (kbd "t") "toggle-bar")
 
-;; Run programs
-(define-key *root-map* (kbd "Menu") "exec dmenu_run_xres")
+;; run programs
 (define-key *top-map* (kbd "s-RET") "exec st")
+(define-key *root-map* (kbd "Menu") "exec ,dmenu_run_xres")
+(define-key *root-map* (kbd "b") "exec librewolf")
+(define-key *root-map* (kbd "B") "exec qutebrowser")
+(define-key *root-map* (kbd "z") "exec zeal")
+(define-key *root-map* (kbd "C-e") "exec emacs")
+(define-key *root-map* (kbd "e") "exec emacsclient -ca ''")
 
-;; Volume controls
+;; volume controls
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "volume-")
 (define-key *top-map* (kbd "S-XF86AudioLowerVolume") "volume--")
 (define-key *top-map* (kbd "XF86AudioRaiseVolume") "volume+")
 (define-key *top-map* (kbd "S-XF86AudioRaiseVolume") "volume++")
 (define-key *top-map* (kbd "XF86AudioMute") "toggle-mute")
 
-;; Screen brightness controls
+;; screen brightness controls
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "brightness-")
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "brightness+")
 
-;; Lock screen, reboot, and poweroff
-(define-key *root-map* (kbd "s-l") "exec xset s activate")
+;; lock screen, reboot, and poweroff
+(define-key *root-map* (kbd "s-l") "prompt-lockscreen")
 (define-key *root-map* (kbd "s-r") "prompt-reboot")
 (define-key *root-map* (kbd "s-p") "prompt-poweroff")
 
-;; Capture screenshot
+;; screenshots
 (define-key *top-map* (kbd "SunPrint_Screen") "exec flameshot screen -p ~/Pictures/screenshots")
-(define-key *top-map* (kbd "Sys_Req") "exec flameshot gui")
+(define-key *top-map* (kbd "Sys_Req") "exec flameshot gui")  ; shift + print-screen
 
-;; Group and window navigation
-(define-key *top-map* (kbd "s-N") "gnext")
-(define-key *top-map* (kbd "s-P") "gprev")
+;; navigate windows in a group
 (define-key *top-map* (kbd "s-n") "next-in-frame")
 (define-key *top-map* (kbd "s-p") "prev-in-frame")
 (define-key *top-map* (kbd "s-M-n") "next")
 (define-key *top-map* (kbd "s-M-p") "prev")
 (define-key *top-map* (kbd "s-TAB") "other-window")
-(define-key *top-map* (kbd "s-ISO_Left_Tab") "gother")
 
-;;; Spatial groups keybindings
-;; Move between splits in the current group
+;;; 6.1 spatial groups
+;; move between splits in the current group
 (define-key *groups-map* (kbd "S-Left") "move-focus left")
 (define-key *groups-map* (kbd "S-Down") "move-focus down")
 (define-key *groups-map* (kbd "S-Up") "move-focus up")
 (define-key *groups-map* (kbd "S-Right") "move-focus right")
 
-;; Move between groups in the current desktop
+;; move between groups in the current desktop
 (define-key *groups-map* (kbd "Left") "coord-left")
 (define-key *groups-map* (kbd "Down") "coord-down")
 (define-key *groups-map* (kbd "Up") "coord-up")
 (define-key *groups-map* (kbd "Right") "coord-right")
 
-;; Move betwen desktops
+;; move betwen desktops
 (define-key *groups-map* (kbd "p") "coord-taskleft")
 (define-key *groups-map* (kbd "n") "coord-taskright")
 
-;; Jump to the current desktop's origin group (x: 0, y: 0)
+;; jump to the current desktop's origin group (x: 0, y: 0)
 (define-key *groups-map* (kbd "c") "coord-taskorigin")
 
-;; Jump to the last visited group
+;; jump to the previous group
 (define-key *groups-map* (kbd "TAB") "coord-taskpop")
+
+;; repack the window numbering to remove gaps
+(define-key *root-map* (kbd "Delete") "repack-window-numbers")
+
+;; kill all windows in the current group
+(define-key *groups-map* (kbd "K") "kill-windows-current-group")

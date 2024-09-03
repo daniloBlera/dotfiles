@@ -56,7 +56,7 @@ __fzf-sel() {
 # terminal cursor. The resulting selected paths can be used as input for other
 # commands.
 #
-# Keybinding:   Alt + f
+# Keybinding:   M-f
 _fzf-widget() {
     RBUFFER="${RBUFFER}$(__fzf-sel)"   # place items to the right of the cursor
     local ret=$?
@@ -66,7 +66,7 @@ _fzf-widget() {
 zle -N _fzf-widget
 bindkey '\ef' _fzf-widget
 
-# Enable editing a command with $EDITOR -- shortcut: <c-x>, <c-e>
+# Enable editing a command with $EDITOR -- shortcut: C-x C-e
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
