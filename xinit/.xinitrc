@@ -12,3 +12,6 @@
 
 # StumpWM
 exec stumpwm
+
+# TWM
+# exec twm
