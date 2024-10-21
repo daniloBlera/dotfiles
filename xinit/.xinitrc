@@ -3,8 +3,8 @@
 ~/.local/scripts/,autostart-config
 
 # BSPWM
-#sxhkd &
-#exec bspwm
+# sxhkd &
+# exec bspwm
 
 # DWM
 # dwmblocks &
