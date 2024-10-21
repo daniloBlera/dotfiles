@@ -20,7 +20,7 @@
 (load-module "spatial-groups")
 
 ;;; 2 UTILITIES
-(defcommand toggle-mode-line () ()
+(defcommand toggle-status-bar () ()
   "Toggle the mode line/status bar"
   (toggle-mode-line (current-screen) (current-head)))
 
@@ -162,7 +162,7 @@
 (setf *mouse-focus-policy* :click)
 
 ;; toggle mode-line/status bar
-(define-key *root-map* (kbd "t") "toggle-mode-line")
+(define-key *root-map* (kbd "t") "toggle-status-bar")
 
 ;; running commands
 ;; defining a new keymap
@@ -185,7 +185,7 @@
 (define-key *programs-map* (kbd "ESC") "abort")
 
 ;; placing the commands keymap under the root's "d" key for "do"
-(define-key *root-map* (kbd "d") '*programs-map*)
+(define-key *root-map* (kbd "d") *programs-map*)
 
 ;; volume controls
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "volume- 5")
