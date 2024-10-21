@@ -1,101 +1,108 @@
 ; -*-lisp-*-
 ; vim:fileencoding=utf-8:filetype=lisp
-;;;; StumpWM configuration file.
-;;;; note: to reload the config, do `<prefix> : (loadrc) RET`
+;;;; Configuration file for the Stump Window Manager.
+;;;;
+;;;; for more information, read the fantastic manual on
+;;;; - https://stumpwm.github.io/documentation.html
+
+;; use the `stumpwm` package prefix by default - a bad habit just to save a few keystrokes
 (in-package :stumpwm)
 
-;;; 1 LOADING CONTRIB MODULES
-;; https://github.com/stumpwm/stumpwm/wiki/Modules#contrib-repository
-;; https://github.com/stumpwm/stumpwm-contrib
+;;; 1 CONTRIB MODULES
+;; more on the available contrib modules on
+;; - https://github.com/stumpwm/stumpwm/wiki/Modules#contrib-repository
+;; - https://github.com/stumpwm/stumpwm-contrib
 
 ;; cpu information on the mode-line
 (load-module "cpu")
 
-;; turn groups into a (x, y, z) coordinate system
+;; turn groups/workspaces into a 3d coordinate system
 (load-module "spatial-groups")
 
 ;;; 2 UTILITIES
-(defcommand toggle-bar () ()
-  "Toggle the status bar on and off"
+(defcommand toggle-mode-line () ()
+  "Toggle the mode line/status bar"
   (toggle-mode-line (current-screen) (current-head)))
 
+(defun mute-p ()
+  "Check if the default sink is mute"
+  (string= (uiop:run-program (list "pactl" "get-sink-mute" "@DEFAULT_SINK@")
+                             :output '(:string :stripped t))
+           "Mute: yes"))
+
+(defun get-left-and-right-volumes ()
+  "Return the volumes of the left and right channels from the default sink"
+  (let* ((output (uiop:run-program (list "pactl" "get-sink-volume" "@DEFAULT_SINK@")
+                                   :output :string))
+         (channels (nth-value 1 (cl-ppcre:scan-to-strings "((\\d+%)+)" output))))
+    (list (svref channels 0) (svref channels 1))))
+
 (defun display-volume-info ()
-  "Print the current volume info, i.e., if mute, left, and right volumes"
-  (let* ((raw-output (run-shell-command "pactl list sinks" t))
-         (mute-value (nth-value 1 (cl-ppcre:scan-to-strings
-                                   "Mute: ([a-z]+)"
-                                   raw-output)))
-         (mute-p (string= (svref mute-value 0) "yes"))
-         (vol-values (nth-value 1 (cl-ppcre:scan-to-strings
-                                   "Volume: .+/\\s+(\\d+).+/.+/\\s+(\\d+).+/"
-                                   raw-output)))
-         (vol-l (parse-integer (svref vol-values 0)))
-         (vol-r (parse-integer (svref vol-values 1)))
-         (*record-last-msg-override* t))
-    (message "Volume: ~:[~;(MUTE) ~]~d%, ~d%" mute-p vol-l vol-r)))
+  "Print the current volume and mute status"
+  (let ((*record-last-msg-override* t))
+    (destructuring-bind (volume-left volume-right) (get-left-and-right-volumes)
+      (message "~:[~;(MUTE) ~]Volume: ~a, ~a" (mute-p) volume-left volume-right))))
 
-(defcommand volume- () ()
-  "Decrease volume by 5%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ -5%" t)
+(defun set-sink-volume (value)
+  "Run the pactl command to set the default sink value"
+  (uiop:run-program (list "pactl" "set-sink-volume" "@DEFAULT_SINK@" value)
+                    :output :string))
+
+(defcommand volume- (value) ((:number "decrease volume by: "))
+  "Decrease volume by a relative value"
+  (set-sink-volume (format nil "-~a%" value))
   (display-volume-info))
 
-(defcommand volume-- () ()
-  "Decrease volume by 25%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ -25%" t)
-  (display-volume-info))
-
-(defcommand volume+ () ()
-  "Increase volume by 5%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ +5%" t)
-  (display-volume-info))
-
-(defcommand volume++ () ()
-  "Increase volume by 25%"
-  (run-shell-command "pactl set-sink-volume @DEFAULT_SINK@ +25%" t)
+(defcommand volume+ (value) ((:number "increase volume by: "))
+  "Increase volume by a relative value"
+  (set-sink-volume (format nil "+~a%" value))
   (display-volume-info))
 
 (defcommand toggle-mute () ()
   "Toggle mute on/off"
-  (run-shell-command "pactl set-sink-mute @DEFAULT_SINK@ toggle" t)
+  (uiop:run-program (list "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"))
   (display-volume-info))
 
 (defun display-brightness-message ()
   "Get the integer part of the brightness value"
-  (message "Brightness: ~a~%" (run-shell-command "xbacklight -get | cut -d . -f 1" t)))
+  (let ((*record-last-msg-override* t))
+    (message "Brightness: ~a~%"
+             (floor (read-from-string
+                     (uiop:run-program (list "xbacklight" "-get")
+                                       :output '(:string :stripped t)))))))
 
 (defcommand brightness- () ()
   "Decrease the monitor's brightness by 10%"
-  (let ((*record-last-msg-override* t))
-    (run-shell-command "xbacklight -dec 10" t)
-    (display-brightness-message)))
+  (uiop:run-program (list "xbacklight" "-dec" "10"))
+  (display-brightness-message))
 
 (defcommand brightness+ () ()
   "Increase the monitor's brightness by 10%"
-  (let ((*record-last-msg-override* t))
-    (run-shell-command "xbacklight -inc 10" t)
-    (display-brightness-message)))
+  (uiop:run-program (list "xbacklight" "-inc" "10"))
+  (display-brightness-message))
 
 (defcommand prompt-poweroff () ()
   "Prompt the user to confirm powering off"
   (if (y-or-n-p "Power off? ")
-      (run-shell-command "poweroff")
+      (uiop:launch-program "poweroff")
       (xlib:unmap-window (screen-message-window (current-screen)))))
 
 (defcommand prompt-reboot () ()
   "Prompt the user to confirm rebooting"
   (if (y-or-n-p "Reboot? ")
-      (run-shell-command "reboot")
+      (uiop:launch-program "reboot")
       (xlib:unmap-window (screen-message-window (current-screen)))))
 
 (defcommand prompt-lockscreen () ()
   "Prompt the user to confirm locking the screen"
   (if (y-or-n-p "Lock screen? ")
-      (run-shell-command "xscreensaver-command --lock")
+      (uiop:launch-program (list "xscreensaver-command" "--lock"))
       (xlib:unmap-window (screen-message-window (current-screen)))))
 
-;;; GENERAL STUFF
-;; enable which-key (display available keybindings)
-(add-hook *key-press-hook* 'which-key-mode-key-press-hook)
+(defcommand clear-selections () ()
+  "Clear primary, secondary, and clipboard selections"
+  (uiop:launch-program (list ",clipcl"))
+  (message "Cleared primary, secondary, and clipboard selections"))
 
 ;;; 3 VISUAL AND COLOURS
 ;;                 dark     bright1   bright2  white-ish
@@ -103,13 +110,15 @@
 (setf *default-bg-color* (first *colors*))
 (set-border-color (fourth *colors*))
 (set-focus-color (second *colors*))
-(set-unfocus-color (first *colors*))
+(set-unfocus-color (third *colors*))
 (set-float-focus-color (second *colors*))
 (set-float-unfocus-color (third *colors*))
 (setf *normal-border-width* 1)
 (setf *transient-border-width* 1)
 
-;;; 4 FONT CONFIGURATION
+;; enable which-key (display available keybindings)
+(add-hook *key-press-hook* 'which-key-mode-key-press-hook)
+
 ;; use `xfontsel` to query available fonts
 (or (set-font "-*-terminus-medium-r-normal-*-14-*-*-*-*-*-*-*")
     (set-font "9x15bold"))
@@ -134,7 +143,7 @@
 ;; colours
 (setf *mode-line-background-color* (first *colors*))
 (setf *mode-line-foreground-color* (second *colors*))
-(setf *mode-line-border-color* (first *colors*))
+;;(setf *mode-line-border-color* (second *colors*))
 (setf *mode-line-border-width* 0)
 (setf *mode-line-position* :bottom)
 
@@ -144,7 +153,7 @@
 ;; enable mode-line AFTER configuring it
 (enable-mode-line (current-screen) (current-head) t)
 
-;;; 6 KEYBINDINGS
+;;; 6 KEY BINDINGS
 ;; modifiers: control (C-), alt (A-), meta (M-), super (s-), shift (S-), and hyper (H-)
 ;; use Super+Space as the prefix
 (set-prefix-key (kbd "s-SPC"))
@@ -152,23 +161,37 @@
 ;; change focus on mouse click
 (setf *mouse-focus-policy* :click)
 
-;; toggle mode-line/statusbar
-(define-key *root-map* (kbd "t") "toggle-bar")
+;; toggle mode-line/status bar
+(define-key *root-map* (kbd "t") "toggle-mode-line")
 
-;; run programs
-(define-key *top-map* (kbd "s-RET") "exec st")
-(define-key *root-map* (kbd "Menu") "exec ,dmenu_run_xres")
-(define-key *root-map* (kbd "b") "exec librewolf")
-(define-key *root-map* (kbd "B") "exec qutebrowser")
-(define-key *root-map* (kbd "z") "exec zeal")
-(define-key *root-map* (kbd "C-e") "exec emacs")
-(define-key *root-map* (kbd "e") "exec emacsclient -ca ''")
+;; running commands
+;; defining a new keymap
+(defvar *programs-map* (make-sparse-keymap))
+
+(define-key *programs-map* (kbd "C-g") "abort")
+(define-key *programs-map* (kbd "ESC") "abort")
+(define-key *programs-map* (kbd "b") "exec librewolf")
+(define-key *programs-map* (kbd "B") "exec qutebrowser")
+(define-key *programs-map* (kbd "C-c") "clear-selections")
+(define-key *programs-map* (kbd "e") "exec emacsclient -ca ''")
+(define-key *programs-map* (kbd "C-e") "exec emacs")
+(define-key *programs-map* (kbd "C-g") "abort")
+(define-key *programs-map* (kbd "m") "exec ,dmenu_run_xres")
+(define-key *programs-map* (kbd "p") "exec alacritty -e bpython")
+(define-key *programs-map* (kbd "s-r") "loadrc")
+(define-key *programs-map* (kbd "t") "exec alacritty")
+(define-key *programs-map* (kbd "T") "exec alacritty -e tmux")
+(define-key *programs-map* (kbd "z") "exec zeal")
+(define-key *programs-map* (kbd "ESC") "abort")
+
+;; placing the commands keymap under the root's "d" key for "do"
+(define-key *root-map* (kbd "d") '*programs-map*)
 
 ;; volume controls
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "volume-")
-(define-key *top-map* (kbd "S-XF86AudioLowerVolume") "volume--")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "volume+")
-(define-key *top-map* (kbd "S-XF86AudioRaiseVolume") "volume++")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "volume- 5")
+(define-key *top-map* (kbd "S-XF86AudioLowerVolume") "volume- 25")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "volume+ 5")
+(define-key *top-map* (kbd "S-XF86AudioRaiseVolume") "volume+ 25")
 (define-key *top-map* (kbd "XF86AudioMute") "toggle-mute")
 
 ;; screen brightness controls
@@ -198,13 +221,13 @@
 (define-key *groups-map* (kbd "S-Up") "move-focus up")
 (define-key *groups-map* (kbd "S-Right") "move-focus right")
 
-;; move between groups in the current desktop
+;; move between groups in the current desktop (x and y axis)
 (define-key *groups-map* (kbd "Left") "coord-left")
 (define-key *groups-map* (kbd "Down") "coord-down")
 (define-key *groups-map* (kbd "Up") "coord-up")
 (define-key *groups-map* (kbd "Right") "coord-right")
 
-;; move betwen desktops
+;; move betwen desktops (z axis)
 (define-key *groups-map* (kbd "p") "coord-taskleft")
 (define-key *groups-map* (kbd "n") "coord-taskright")
 
@@ -213,9 +236,6 @@
 
 ;; jump to the previous group
 (define-key *groups-map* (kbd "TAB") "coord-taskpop")
-
-;; repack the window numbering to remove gaps
-(define-key *root-map* (kbd "Delete") "repack-window-numbers")
 
 ;; kill all windows in the current group
 (define-key *groups-map* (kbd "K") "kill-windows-current-group")

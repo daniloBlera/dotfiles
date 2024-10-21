@@ -39,7 +39,7 @@ alias ,ll='ls -AFhl'
 alias ,la='ls -AF'
 alias ,lb='lsblk --fs -p'
 alias ,l1='ls -1F'
-alias tree='tree -FC'
+alias ,tree='tree -FC'
 alias ,cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
 alias ip='ip -c'
 alias ,ipa='ip -br addr'
@@ -68,15 +68,13 @@ alias ,xek='xev -event keyboard'
 alias ,pyenvls='pyenv install --list | fzf'
 
 ## Wrap REPLs with readline for history and other stuff
-alias ,replcl='rlwrap sbcl'
-alias ,repler='rlwrap --always-readline erl'
+alias ,cl='rlwrap sbcl'
+alias ,erl='rlwrap --always-readline erl'
+alias ,py='bpython'
 
 ## To insert STDIN contents to both PRIMARY and CLIPBOARD
 ## usage: <something-stdout> | ,clipin
-alias ,clipin='xclip -i -f -selection primary | xclip -i -selection clipboard'
-
-## Clear X's selection and clipboard
-alias ,clipcl="printf '' | ,clipin"
+alias ,clipin='xclip -i -f -selection primary | xclip -i -f -selection secondary | xclip -i -selection clipboard'
 
 ## The Zen of Python
 alias ,zen='python -m this'

@@ -1,4 +1,11 @@
 #!/bin/bash
+
+if ! command -v unipicker 2>&1 >/dev/null
+then
+    echo "Error: missing command 'unipicker'..."
+    exit 1
+fi
+
 # Search and copy unicode glyphs to the clipboard
 NF="$(xrdb -query | grep 'dmenu.nf' | cut -d '	' -f 2)"
 NB="$(xrdb -query | grep 'dmenu.nb' | cut -d '	' -f 2)"

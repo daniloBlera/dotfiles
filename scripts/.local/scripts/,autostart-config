@@ -69,4 +69,4 @@ fi
 xset r rate 220 45
 
 # configure which keys should auto-repeat when held down
-. $HOME/.local/scripts/configure-autorepeat.sh &
+$HOME/.local/scripts/configure-autorepeat.sh &

@@ -15,13 +15,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-HISTFILE="$HOME/.local/state/zsh_history"
-HISTSIZE=1000
-SAVEHIST=1000
-setopt HIST_IGNORE_DUPS
-setopt autocd
-bindkey -e
-
+# Check if file exists before trying to source it
 source_if_exists() {
     [ -f "$1" ] && source "$1"
 }
@@ -43,9 +37,6 @@ append_to_path() {
 source_if_exists "$HOME/.config/nnn/misc/quitcd.sh"
 source_if_exists "$HOME/.config/lf/lfcd.sh"
 
-# Enabling fuzzyfind
-source_if_exists "$HOME/.fzf.zsh"
-
 # Configuring path, environment variables, aliases and extra functions
 source_if_exists "$HOME/.config/shells/environment"
 source_if_exists "$HOME/.config/shells/aliases"
@@ -62,11 +53,19 @@ source /usr/share/zsh/site-functions/_pyenv
 # direnv hook
 eval "$(direnv hook zsh)"
 
+# Enable broot finder/navigator
+source_if_exists "$HOME/.config/broot/launcher/bash/br"
+
 # Extra stuff
+HISTFILE="${XDG_STATE_HOME:-~/.local}/zsh_history"
+HISTSIZE=1000
+SAVEHIST=1000
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt autocd
+bindkey -e
+
 stty -ixon
 
-# Disable redirect if the destination file exists
+# Disable overwriting files with redirection
 set -o noclobber
-
-# Enable broot fuzzy search finder/navigator
-source_if_exists "$HOME/.config/broot/launcher/bash/br"

@@ -13,6 +13,13 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 export PYTHONBREAKPOINT='ipdb.set_trace'
+
+# experimental python 3.13 stuff -- for more information, check:
+#   https://docs.python.org/3/whatsnew/3.13.html#free-threaded-cpython
+#   https://docs.python.org/3/whatsnew/3.13.html#an-experimental-just-in-time-jit-compiler
+export PYTHON_GIL=0     # disable the GIL
+export PYTHON_JIT=1     # enable the experimental JIT
+
 export WINEPREFIX="$XDG_CACHE_HOME/wine"
 export WINEARCH="win32"
 
@@ -28,6 +35,12 @@ export GPG_TTY="$(tty)"
 export SUDO_EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 export EDITOR='/usr/bin/nvim'
+
+# GNU indent configuration profile for C formatting
+export INDENT_PROFILE="$XDG_CONFIG_HOME/indent/indent.pro"
+
+# qt theme configuration
+export QT_STYLE_OVERRIDE=kvantum
 
 # nnn file manager configuration
 export NNN_OPTS='AdeoRUr'
@@ -51,8 +64,8 @@ prepend_to_path "$XDG_DATA_HOME/applications"
 prepend_to_path "$XDG_CONFIG_HOME/emacs/bin"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
-prepend_to_path "$HOME/.cache/rebar3/bin"
 prepend_to_path "$HOME/.cache/roswell/bin"
+prepend_to_path "$HOME/.cache/rebar3/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
