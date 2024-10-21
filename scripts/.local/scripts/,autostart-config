@@ -65,8 +65,5 @@ then
     redshift &
 fi
 
-# faster keyboard autorepeat rate -- values: ms_delay Hz
-xset r rate 220 45
-
-# configure which keys should auto-repeat when held down
-$HOME/.local/scripts/configure-autorepeat.sh &
+# configure auto-repeat delay, rate, and which keys should repeat when held down
+. $HOME/.local/scripts/configure-autorepeat.sh &
