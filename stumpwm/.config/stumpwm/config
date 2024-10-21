@@ -185,7 +185,7 @@
 (define-key *programs-map* (kbd "ESC") "abort")
 
 ;; placing the commands keymap under the root's "d" key for "do"
-(define-key *root-map* (kbd "d") *programs-map*)
+(define-key *root-map* (kbd "d") '*programs-map*)
 
 ;; volume controls
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "volume- 5")
