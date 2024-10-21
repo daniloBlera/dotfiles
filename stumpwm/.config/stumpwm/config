@@ -25,7 +25,7 @@
   (toggle-mode-line (current-screen) (current-head)))
 
 (defun mute-p ()
-  "Check if the default sink is mute"
+  "Return T if the default sink is mute. NIL otherwise"
   (string= (uiop:run-program (list "pactl" "get-sink-mute" "@DEFAULT_SINK@")
                              :output '(:string :stripped t))
            "Mute: yes"))
@@ -43,19 +43,9 @@
     (destructuring-bind (volume-left volume-right) (get-left-and-right-volumes)
       (message "~:[~;(MUTE) ~]Volume: ~a, ~a" (mute-p) volume-left volume-right))))
 
-(defun set-sink-volume (value)
-  "Run the pactl command to set the default sink value"
-  (uiop:run-program (list "pactl" "set-sink-volume" "@DEFAULT_SINK@" value)
-                    :output :string))
-
-(defcommand volume- (value) ((:number "decrease volume by: "))
-  "Decrease volume by a relative value"
-  (set-sink-volume (format nil "-~a%" value))
-  (display-volume-info))
-
-(defcommand volume+ (value) ((:number "increase volume by: "))
-  "Increase volume by a relative value"
-  (set-sink-volume (format nil "+~a%" value))
+(defcommand change-volume (value) ((:string "change volume by: "))
+  "Control the volume through `pactl`"
+  (uiop:run-program (list "pactl" "set-sink-volume" "@DEFAULT_SINK@" value))
   (display-volume-info))
 
 (defcommand toggle-mute () ()
@@ -188,10 +178,10 @@
 (define-key *root-map* (kbd "d") '*programs-map*)
 
 ;; volume controls
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "volume- 5")
-(define-key *top-map* (kbd "S-XF86AudioLowerVolume") "volume- 25")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "volume+ 5")
-(define-key *top-map* (kbd "S-XF86AudioRaiseVolume") "volume+ 25")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "change-volume -5%")
+(define-key *top-map* (kbd "S-XF86AudioLowerVolume") "change-volume -25%")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "change-volume +5%")
+(define-key *top-map* (kbd "S-XF86AudioRaiseVolume") "change-volume +25%")
 (define-key *top-map* (kbd "XF86AudioMute") "toggle-mute")
 
 ;; screen brightness controls
