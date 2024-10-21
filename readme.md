@@ -4,7 +4,7 @@ A place to backup my system's configuration.
 
 ## About the repository structure
 
-This repo uses a directory tree structure of *packages*, wich are organized as:
+This repo uses a directory tree structure of *packages*, which are organized as:
 
 ```text
 root-dir
@@ -43,9 +43,9 @@ neovim/
         └── plug.vim
 ```
 
-wich means, you could copy and paste the contents of a package's root directory
+which means, you could copy and paste the contents of a package's root directory
 into your user's home. Just remember to backup things first before copy-pasting
-anyting, ok?
+anything, OK?
 
 ## Manual installation
 
@@ -57,7 +57,7 @@ deal with hard-coded paths.
 
 If using `stow` to install configurations, note that [it first checks for
 conflicts between the target and destination directories before making any
-change to the filesystem][deferred-op], which will reduce the chances that the
+change to the file system][deferred-op], which will reduce the chances that the
 target directory will be left in an inconsistent state. With that in mind, you
 can go ahead and clone this repository if you didn't already
 
