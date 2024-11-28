@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+
+<menu id="apps-tools-menu" label="Tools">
+  <item label="Gimp">
+    <action name="Execute">
+      <command>gimp</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="Inkscape">
+    <action name="Execute">
+      <command>inkscape</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="KeePassXC">
+    <action name="Execute">
+      <command>keepassxc</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>KeePassXC</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
+<menu id="apps-editors-menu" label="Editors">
+  <item label="Emacs">
+    <action name="Execute">
+      <command>emacs</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Emacs</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="Emacs (client)">
+    <action name="Execute">
+      <command>emacsclient --create-frame --alternate-editor ''</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Emacs</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
+<menu id="apps-term-menu" label="Terminals">
+  <item label="Alacritty">
+    <action name="Execute">
+      <command>alacritty</command>
+    </action>
+  </item>
+
+  <item label="Alacritty (tmux)">
+    <action name="Execute">
+      <command>alacritty -e tmux</command>
+    </action>
+  </item>
+
+  <item label="St">
+    <action name="Execute">
+      <command>st</command>
+    </action>
+  </item>
+
+  <item label="St (tmux)">
+    <action name="Execute">
+      <command>st -e tmux</command>
+    </action>
+  </item>
+</menu>
+
+<menu id="apps-term-repl" label="REPLs">
+  <item label="Common Lisp">
+    <action name="Execute">
+      <command>st -e rlwrap sbcl</command>
+    </action>
+  </item>
+
+  <item label="Erlang">
+    <action name="Execute">
+      <command>st -e rlwrap --always-readline erl</command>
+    </action>
+  </item>
+
+  <item label="Python">
+    <action name="Execute">
+      <command>st -e python</command>
+    </action>
+  </item>
+
+  <item label="Python (bpython)">
+    <action name="Execute">
+      <command>st -e bpython</command>
+    </action>
+  </item>
+
+  <item label="Python (ipython)">
+    <action name="Execute">
+      <command>st -e ipython</command>
+    </action>
+  </item>
+</menu>
+
+<menu id="apps-net-menu" label="Internet">
+  <item label="Firefox">
+    <action name="Execute">
+      <command>firefox</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Firefox</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="Librewolf">
+    <action name="Execute">
+      <command>librewolf</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Librewolf</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="Qutebrowser">
+    <action name="Execute">
+      <command>qutebrowser</command>
+    </action>
+  </item>
+
+  <item label="Zen Browser">
+    <action name="Execute">
+      <command>zen-browser</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>ZenBrowser</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
+<menu id="system-menu" label="System">
+  <item label="Openbox Configuration Manager">
+    <action name="Execute">
+      <command>obconf</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
+
+  <separator />
+
+  <item label="Reconfigure Openbox">
+    <action name="Reconfigure" />
+  </item>
+</menu>
+
+<menu id="root-menu" label="Openbox 3">
+  <separator label="Applications" />
+
+  <menu id="apps-tools-menu"/>
+  <menu id="apps-editors-menu"/>
+  <menu id="apps-net-menu"/>
+  <menu id="apps-term-menu"/>
+  <menu id="apps-term-repl"/>
+
+  <separator label="System" />
+  <menu id="system-menu"/>
+  <separator />
+
+  <item label="Log Out">
+    <action name="Exit">
+      <prompt>yes</prompt>
+    </action>
+  </item>
+</menu>
+
+</openbox_menu>
