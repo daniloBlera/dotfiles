@@ -22,9 +22,16 @@ alias ,cfgpg='"$VISUAL" ~/.gnupg/gpg.conf'
 alias ,cfagent='"$VISUAL" ~/.gnupg/gpg-agent.conf'
 alias ,reloadgpg='gpg-connect-agent reloadagent /bye; gpg-connect-agent updatestartuptty /bye'
 
-# start a terminal emacs client
+# start an emacs daemon, if not running, and connect to it without a graphical environment
 alias ,ect='emacsclient --create-frame --alternate-editor="" --no-window-system'
+
+# start an emacs daemon, if not running, and connect to it with a graphical environment
+alias ,ecg='emacsclient --create-frame --alternate-editor=""'
+
+# start an emacs daemon
 alias ,ecstart='emacs --daemon'
+
+# stop a running emacs daemon
 alias ,ecstop='emacsclient -e "(kill-emacs)"'
 
 # Commonly-used
@@ -48,6 +55,7 @@ alias ,nsxiv='nsxiv -p'      # Disable writing cache or temp files
 alias t='tmux'              # It makes sense given how often I use it
 alias fd='fd --no-ignore-parent'
 alias ,fdu='fd --unrestricted'
+#alias ,a='acme -ab &!'      # start acme with click-to-focus and autoinden
 
 # git-related stuff
 alias ,gss='git status --short --branch'
@@ -70,7 +78,6 @@ alias ,pyenvls='pyenv install --list | fzf'
 ## Wrap REPLs with readline for history and other stuff
 alias ,cl='rlwrap sbcl'
 alias ,erl='rlwrap --always-readline erl'
-alias ,py='bpython'
 
 ## To insert STDIN contents to both PRIMARY and CLIPBOARD
 ## usage: <something-stdout> | ,clipin
@@ -79,8 +86,5 @@ alias ,clipin='xclip -i -f -selection primary | xclip -i -f -selection secondary
 ## The Zen of Python
 alias ,zen='python -m this'
 
-## Create and source a python venv
-alias ,svenv='echo "Creating a new and updated venv, be back in a jiffy"; python -m venv .venv; source .venv/bin/activate; pip install --upgrade pip setuptools wheel build'
-
-## terminal countdown
-alias ,tm='termdown -f roman -t "20min countdown ended!" "20m"'
+## Source a python venv on the current directory
+alias ,v='[ ! -d .venv ] && echo "creating venv... pls wait" && python -m venv .venv; source .venv/bin/activate'

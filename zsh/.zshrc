@@ -1,6 +1,7 @@
 # Configuring how the prompt should look
 #   '[<user>@<host> <cwd-last-segment>]<prompt> '
-PROMPT='[%n@%m %1~]%# '
+PROMPT='%n@%m:%1~%# '
+[ -n "$NNNLVL" ] && PROMPT="N$NNNLVL $PROMPT"
 
 # The following lines were added by compinstall
 
@@ -53,8 +54,8 @@ source /usr/share/zsh/site-functions/_pyenv
 # direnv hook
 eval "$(direnv hook zsh)"
 
-# Enable broot finder/navigator
-source_if_exists "$HOME/.config/broot/launcher/bash/br"
+# enable zoxide
+eval "$(zoxide init zsh)"
 
 # Extra stuff
 HISTFILE="${XDG_STATE_HOME:-~/.local}/zsh_history"

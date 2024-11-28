@@ -17,7 +17,7 @@ if [ -f "$XDG_CONFIG_HOME/wallpaper" ]
 then
     xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper"
 else
-    xsetroot -solid #000000
+    xsetroot -solid #140420
 fi
 
 # enable compositing

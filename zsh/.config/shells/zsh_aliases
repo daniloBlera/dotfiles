@@ -1,7 +1,4 @@
 # Put here your zsh exclusive aliases
 
-# source python virtual environments
-alias ,venv='source .venv/bin/activate'
-
 # reload zsh's config
 alias ,reloadcfg="echo 'sourcing ~/.zshrc...'; source ~/.zshrc; echo 'done!'"

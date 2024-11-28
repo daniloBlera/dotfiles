@@ -57,6 +57,3 @@ stty -ixon
 
 # Disable redirect if the destination file exists
 set -o noclobber
-
-# Enable broot fuzzy search finder/navigator
-source_if_exists "$HOME/.config/broot/launcher/bash/br"
