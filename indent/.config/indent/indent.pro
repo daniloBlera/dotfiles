@@ -13,7 +13,7 @@
 -br     // keep braces on `if` line
 -brf    // keep braces on function definition line
 -brs    // keep braces on struct declaration line
--cdw    // keep `while` on the same line as the closing `do` brace in a `do-while`
+-cdw    // keep `while` on the same line as the closing `do` brace (in a `do-while`)
 -ce     // keep `else` on the same line as its preceeding closing brace
 -ci4    // indent continuations with 4 spaces
 -cli4   // indent `case` labels with 4 spaces

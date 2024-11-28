@@ -98,6 +98,8 @@
 ;;                 dark     bright1   bright2  white-ish
 (setf *colors* `("#170420" "#ea1646" "#870d2c" "#ddfafa"))
 (setf *default-bg-color* (first *colors*))
+(set-fg-color (fourth *colors*))
+(set-bg-color (first *colors*))
 (set-border-color (fourth *colors*))
 (set-focus-color (second *colors*))
 (set-unfocus-color (third *colors*))
@@ -155,27 +157,40 @@
 (define-key *root-map* (kbd "t") "toggle-status-bar")
 
 ;; running commands
-;; defining a new keymap
+;; defining a new keymap for user commands
 (defvar *programs-map* (make-sparse-keymap))
 
-(define-key *programs-map* (kbd "C-g") "abort")
-(define-key *programs-map* (kbd "ESC") "abort")
-(define-key *programs-map* (kbd "b") "exec librewolf")
+;; defining the bindings inside the commands keymap
+(define-key *programs-map* (kbd "b") "exec zen-browser")
 (define-key *programs-map* (kbd "B") "exec qutebrowser")
-(define-key *programs-map* (kbd "C-c") "clear-selections")
-(define-key *programs-map* (kbd "e") "exec emacsclient -ca ''")
-(define-key *programs-map* (kbd "C-e") "exec emacs")
-(define-key *programs-map* (kbd "C-g") "abort")
+(define-key *programs-map* (kbd "c") "exec chromium")
+(define-key *programs-map* (kbd "e") "exec emacs")
+(define-key *programs-map* (kbd "E") "exec emacsclient -ca ''")
+(define-key *programs-map* (kbd "k") "exec keepassxc")
 (define-key *programs-map* (kbd "m") "exec ,dmenu_run_xres")
 (define-key *programs-map* (kbd "p") "exec alacritty -e bpython")
-(define-key *programs-map* (kbd "s-r") "loadrc")
-(define-key *programs-map* (kbd "t") "exec alacritty")
-(define-key *programs-map* (kbd "T") "exec alacritty -e tmux")
+(define-key *programs-map* (kbd "t") "exec st")
+(define-key *programs-map* (kbd "T") "exec alacritty")
 (define-key *programs-map* (kbd "z") "exec zeal")
+(define-key *programs-map* (kbd "C-g") "abort")
 (define-key *programs-map* (kbd "ESC") "abort")
 
-;; placing the commands keymap under the root's "d" key for "do"
+;; placing the commands keymap under the root's "d" key
 (define-key *root-map* (kbd "d") '*programs-map*)
+
+;; defining a system/wm management commands keymap
+(defvar *system-map* (make-sparse-keymap))
+
+(define-key *system-map* (kbd "c") "clear-selections")
+(define-key *system-map* (kbd "l") "prompt-lockscreen")
+(define-key *system-map* (kbd "p") "prompt-poweroff")
+(define-key *system-map* (kbd "r") "prompt-reboot")
+(define-key *system-map* (kbd "s-r") "loadrc")
+(define-key *system-map* (kbd "C-g") "abort")
+(define-key *system-map* (kbd "ESC") "abort")
+
+;; placing the system keymap under the root's Super + d
+(define-key *root-map* (kbd "s-d") '*system-map*)
 
 ;; volume controls
 (define-key *top-map* (kbd "XF86AudioLowerVolume") "change-volume -5%")
@@ -187,11 +202,6 @@
 ;; screen brightness controls
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "brightness-")
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "brightness+")
-
-;; lock screen, reboot, and poweroff
-(define-key *root-map* (kbd "s-l") "prompt-lockscreen")
-(define-key *root-map* (kbd "s-r") "prompt-reboot")
-(define-key *root-map* (kbd "s-p") "prompt-poweroff")
 
 ;; screenshots
 (define-key *top-map* (kbd "SunPrint_Screen") "exec flameshot screen -p ~/Pictures/screenshots")
@@ -205,12 +215,6 @@
 (define-key *top-map* (kbd "s-TAB") "other-window")
 
 ;;; 6.1 spatial groups
-;; move between splits in the current group
-(define-key *groups-map* (kbd "S-Left") "move-focus left")
-(define-key *groups-map* (kbd "S-Down") "move-focus down")
-(define-key *groups-map* (kbd "S-Up") "move-focus up")
-(define-key *groups-map* (kbd "S-Right") "move-focus right")
-
 ;; move between groups in the current desktop (x and y axis)
 (define-key *groups-map* (kbd "Left") "coord-left")
 (define-key *groups-map* (kbd "Down") "coord-down")
