@@ -308,6 +308,37 @@
       <command>kfmclient openProfile filemanagement</command>
     </action>
   </keybind>
+
+  <!-- Volume and brightness controls -->
+  <keybind key="XF86AudioLowerVolume">
+    <action name="Execute">
+      <command>pactl set-sink-volume @DEFAULT_SINK@ -5%</command>
+    </action>
+  </keybind>
+
+  <keybind key="XF86AudioRaiseVolume">
+    <action name="Execute">
+      <command>pactl set-sink-volume @DEFAULT_SINK@ +5%</command>
+    </action>
+  </keybind>
+
+  <keybind key="XF86AudioMute">
+    <action name="Execute">
+      <command>pactl set-sink-mute @DEFAULT_SINK@ toggle</command>
+    </action>
+  </keybind>
+
+  <keybind key="XF86MonBrightnessDown">
+    <action name="Execute">
+      <command>xbacklight -dec 10</command>
+    </action>
+  </keybind>
+
+  <keybind key="XF86MonBrightnessUp">
+    <action name="Execute">
+      <command>xbacklight -inc 10</command>
+    </action>
+  </keybind>
 </keyboard>
 
 <mouse>
