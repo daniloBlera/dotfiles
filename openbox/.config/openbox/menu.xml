@@ -2,36 +2,6 @@
 
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
 
-<menu id="apps-tools-menu" label="Tools">
-  <item label="Gimp">
-    <action name="Execute">
-      <command>gimp</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-
-  <item label="Inkscape">
-    <action name="Execute">
-      <command>inkscape</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-      </startupnotify>
-    </action>
-  </item>
-
-  <item label="KeePassXC">
-    <action name="Execute">
-      <command>keepassxc</command>
-      <startupnotify>
-        <enabled>yes</enabled>
-        <wmclass>KeePassXC</wmclass>
-      </startupnotify>
-    </action>
-  </item>
-</menu>
-
 <menu id="apps-editors-menu" label="Editors">
   <item label="Emacs">
     <action name="Execute">
@@ -80,7 +50,7 @@
   </item>
 </menu>
 
-<menu id="apps-term-repl" label="REPLs">
+<menu id="apps-repls-menu" label="REPLs">
   <item label="Common Lisp">
     <action name="Execute">
       <command>st -e rlwrap sbcl</command>
@@ -112,7 +82,17 @@
   </item>
 </menu>
 
-<menu id="apps-net-menu" label="Internet">
+<menu id="apps-internet-menu" label="Internet">
+  <item label="Chromium">
+    <action name="Execute">
+      <command>chromium</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Chromium</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+
   <item label="Firefox">
     <action name="Execute">
       <command>firefox</command>
@@ -136,6 +116,10 @@
   <item label="Qutebrowser">
     <action name="Execute">
       <command>qutebrowser</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Qutebrowser</wmclass>
+      </startupnotify>
     </action>
   </item>
 
@@ -150,11 +134,59 @@
   </item>
 </menu>
 
+<menu id="apps-utils-menu" label="Utils">
+  <item label="Flameshot">
+    <action name="Execute">
+      <command>flameshot gui</command>
+    </action>
+  </item>
+
+  <item label="Gimp">
+    <action name="Execute">
+      <command>gimp</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="Inkscape">
+    <action name="Execute">
+      <command>inkscape</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="KeePassXC">
+    <action name="Execute">
+      <command>keepassxc</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>KeePassXC</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+
+  <item label="Zeal">
+    <action name="Execute">
+      <command>zeal</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+        <wmclass>Zeal</wmclass>
+      </startupnotify>
+    </action>
+  </item>
+</menu>
+
 <menu id="system-menu" label="System">
   <item label="Openbox Configuration Manager">
     <action name="Execute">
       <command>obconf</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
     </action>
   </item>
 
@@ -165,24 +197,46 @@
   </item>
 </menu>
 
-<menu id="root-menu" label="Openbox 3">
-  <separator label="Applications" />
-
-  <menu id="apps-tools-menu"/>
-  <menu id="apps-editors-menu"/>
-  <menu id="apps-net-menu"/>
-  <menu id="apps-term-menu"/>
-  <menu id="apps-term-repl"/>
-
-  <separator label="System" />
-  <menu id="system-menu"/>
-  <separator />
-
+<menu id="session-management-menu" label="Session Management">
   <item label="Log Out">
     <action name="Exit">
       <prompt>yes</prompt>
     </action>
   </item>
+
+  <separator />
+
+  <item label="Lock Screen">
+    <action name="Execute">
+      <command>xscreensaver-command --lock</command>
+    </action>
+  </item>
+
+  <item label="Reboot">
+    <action name="Execute">
+      <command>reboot</command>
+    </action>
+  </item>
+
+  <item label="Poweroff">
+    <action name="Execute">
+      <command>poweroff</command>
+    </action>
+  </item>
+</menu>
+
+<menu id="root-menu" label="Openbox 3">
+  <separator label="Programs" />
+
+  <menu id="apps-editors-menu"/>
+  <menu id="apps-internet-menu"/>
+  <menu id="apps-repls-menu"/>
+  <menu id="apps-term-menu"/>
+  <menu id="apps-utils-menu"/>
+
+  <separator label="System" />
+  <menu id="system-menu"/>
+  <menu id="session-management-menu"/>
 </menu>
 
 </openbox_menu>

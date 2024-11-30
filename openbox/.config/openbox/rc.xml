@@ -128,7 +128,7 @@
 
        use obconf if you want to change these without having to log out
        and back in -->
-  <number>1</number>
+  <number>4</number>
   <firstdesk>1</firstdesk>
   <names>
     <!-- set names up here if you want to, like this:
@@ -316,9 +316,21 @@
     </action>
   </keybind>
 
+  <keybind key="S-XF86AudioLowerVolume">
+    <action name="Execute">
+      <command>pactl set-sink-volume @DEFAULT_SINK@ -25%</command>
+    </action>
+  </keybind>
+
   <keybind key="XF86AudioRaiseVolume">
     <action name="Execute">
       <command>pactl set-sink-volume @DEFAULT_SINK@ +5%</command>
+    </action>
+  </keybind>
+
+  <keybind key="S-XF86AudioRaiseVolume">
+    <action name="Execute">
+      <command>pactl set-sink-volume @DEFAULT_SINK@ +25%</command>
     </action>
   </keybind>
 
