@@ -31,6 +31,10 @@
   :defer t
   :hook (prog-mode . breadcrumb-mode))
 
+(use-package company
+  :ensure t
+  :config (setq global-company-mode t))
+
 (use-package envrc
   :ensure t
   :defer t
@@ -50,8 +54,7 @@
   :ensure t
   :defer t
   :bind ("C-c t o" . olivetti-mode)
-  :config (setq olivetti-body-width 100
-                olivetti-style 'fancy)
+  :config (setq olivetti-body-width 100 olivetti-style 'fancy)
   :hook ((org-mode prog-mode text-mode) . olivetti-mode))
 
 (use-package paredit
