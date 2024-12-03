@@ -54,7 +54,7 @@
   :ensure t
   :defer t
   :bind ("C-c t o" . olivetti-mode)
-  :config (setq olivetti-body-width 100 olivetti-style 'fancy)
+  :init (setq olivetti-body-width 100 olivetti-style 'fancy)
   :hook ((org-mode prog-mode text-mode) . olivetti-mode))
 
 (use-package paredit
