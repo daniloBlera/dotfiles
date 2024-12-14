@@ -34,10 +34,6 @@ append_to_path() {
     not_in_path "$1" && export PATH="$PATH:$1"
 }
 
-# Enable file managers cd on quit
-source_if_exists "$HOME/.config/nnn/misc/quitcd.sh"
-source_if_exists "$HOME/.config/lf/lfcd.sh"
-
 # Configuring path, environment variables, aliases and extra functions
 source_if_exists "$HOME/.config/shells/environment"
 source_if_exists "$HOME/.config/shells/aliases"
@@ -46,6 +42,7 @@ source_if_exists "$HOME/.config/shells/zsh_keybindings"
 source_if_exists '/usr/share/fzf/completion.zsh'
 source_if_exists '/usr/share/fzf/key-bindings.zsh'
 source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
+source_if_exists "$HOME/.config/nnn/misc/quitcd.bash_sh_zsh"
 
 # pyenv stuff
 eval "$(pyenv init - --no-rehash)"
