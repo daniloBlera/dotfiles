@@ -101,7 +101,7 @@ putting personal or sensitive data from a tool's configuration root into the rep
 For illustration, here's the result from installing the neovim config package without
 `--no-folding`:
 
-```zsh
+```text
 .config
 └── nvim -> ../Programs/ConfigFiles/neovim/.config/nvim
 ```
@@ -109,7 +109,7 @@ For illustration, here's the result from installing the neovim config package wi
 with a single symlink at `~/.config`, compared to a tree of symlinks with folding
 disabled:
 
-```zsh
+```text
 .config/nvim
 ├── init.lua -> ../../Programs/ConfigFiles/neovim/.config/nvim/init.lua
 └── lua
