@@ -110,13 +110,14 @@ with a single symlink at `~/.config`, compared to a tree of symlinks with foldin
 disabled:
 
 ```text
-.config/nvim
-├── init.lua -> ../../Programs/ConfigFiles/neovim/.config/nvim/init.lua
-└── lua
-    ├── config
-    │   └── lazy.lua -> ../../../../Programs/ConfigFiles/neovim/.config/nvim/lua/config/lazy.lua
-    └── plugins
-        └── plugins.lua -> ../../../../Programs/ConfigFiles/neovim/.config/nvim/lua/plugins/plugins.lua
+.config
+└── nvim
+    ├── init.lua -> ../../Programs/ConfigFiles/neovim/.config/nvim/init.lua
+    └── lua
+        ├── config
+        │   └── lazy.lua -> ../../../../Programs/ConfigFiles/neovim/.config/nvim/lua/config/lazy.lua
+        └── plugins
+            └── plugins.lua -> ../../../../Programs/ConfigFiles/neovim/.config/nvim/lua/plugins/plugins.lua
 ```
 
 [stow]: https://www.gnu.org/software/stow/
