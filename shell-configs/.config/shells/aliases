@@ -2,18 +2,12 @@
 # you can then source this script from your shells' config files
 
 # Shortcuts for configuration files
-# alias al='"$VISUAL" "$HOME/.config/shells/aliases"'
-# alias ev='"$VISUAL" "$HOME/.config/shells/environment"'
 alias ,al='"$VISUAL" ~/.config/shells/aliases'
 alias ,ev='"$VISUAL" ~/.config/shells/environment'
 
 alias ,cfbash='"$VISUAL" ~/.bashrc'
 alias ,cfzsh='"$VISUAL" ~/.zshrc'
-# alias ,cfbspwm='"$VISUAL" "$XDG_CONFIG_HOME/bspwm/bspwmrc"'
-# alias ,cfsxhkd='"$VISUAL" "$XDG_CONFIG_HOME/sxhkd/sxhkdrc"'
-# alias ,cfpolybar='"$VISUAL" "$XDG_CONFIG_HOME/polybar/config"'
-alias ,cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.vim"'
-# alias ,cfnvimplug='"$VISUAL" "$XDG_CONFIG_HOME/nvim/plug.vim"'
+alias ,cfnvim='"$VISUAL" "$XDG_CONFIG_HOME/nvim/init.lua"'
 alias ,cftmux='"$VISUAL" "$XDG_CONFIG_HOME/tmux/tmux.conf"'
 alias ,cfgit='"$VISUAL" "$XDG_CONFIG_HOME/git/config"'
 alias ,cfmime='"$VISUAL" "$XDG_CONFIG_HOME/mimeapps.list"'
@@ -22,16 +16,13 @@ alias ,cfgpg='"$VISUAL" ~/.gnupg/gpg.conf'
 alias ,cfagent='"$VISUAL" ~/.gnupg/gpg-agent.conf'
 alias ,reloadgpg='gpg-connect-agent reloadagent /bye; gpg-connect-agent updatestartuptty /bye'
 
-# start an emacs daemon, if not running, and connect to it without a graphical environment
+# start an emacs daemon if not running and connect to it (graphical and terminal,
+# respectively)
+#alias ,ecg='emacsclient --create-frame --alternate-editor=""'
 alias ,ect='emacsclient --create-frame --alternate-editor="" --no-window-system'
 
-# start an emacs daemon, if not running, and connect to it with a graphical environment
-alias ,ecg='emacsclient --create-frame --alternate-editor=""'
-
-# start an emacs daemon
+# start and stop running emacs daemons
 alias ,ecstart='emacs --daemon'
-
-# stop a running emacs daemon
 alias ,ecstop='emacsclient -e "(kill-emacs)"'
 
 # Commonly-used
@@ -47,23 +38,13 @@ alias ,la='ls -AF'
 alias ,lb='lsblk --fs -p'
 alias ,l1='ls -1F'
 alias ,tree='tree -FC'
-alias ,cpx='cp --preserve=mode,ownership,timestamps,xattr'   # Also preserve xattr on copy
+alias ,cpx='cp --preserve=mode,ownership,timestamps,xattr'   # preserve xattr on copy
 alias ip='ip -c'
 alias ,ipa='ip -br addr'
 alias ,ipl='ip -br link'
-alias ,nsxiv='nsxiv -p'      # Disable writing cache or temp files
-alias t='tmux'              # It makes sense given how often I use it
+alias t='tmux'
 alias fd='fd --no-ignore-parent'
 alias ,fdu='fd --unrestricted'
-#alias ,a='acme -ab &!'      # start acme with click-to-focus and autoinden
-
-# git-related stuff
-alias ,gss='git status --short --branch'
-alias ,gls='git log --stat --color'
-alias ,glg='git log --graph --oneline --decorate --color'
-alias ,gdu='git difftool' # unstaged
-alias ,gds='git difftool --staged'
-alias ,gbv='git branch -vv'
 
 # Not so common stuff
 ## Grep the window class string for WM workspace assignment
@@ -73,7 +54,7 @@ alias ,xpwmc='xprop | grep -i "WM_CLASS(STRING)"'
 alias ,xek='xev -event keyboard'
 
 ## Fuzzy-search available python interpreter versions
-alias ,pyenvls='pyenv install --list | fzf'
+alias ,pyenvls='pyenv install --list | fzf --reverse'
 
 ## Wrap REPLs with readline for history and other stuff
 alias ,cl='rlwrap sbcl'
@@ -87,4 +68,4 @@ alias ,clipin='xclip -i -f -selection primary | xclip -i -f -selection secondary
 alias ,zen='python -m this'
 
 ## Source a python venv on the current directory
-alias ,v='[ ! -d .venv ] && echo "creating venv... pls wait" && python -m venv .venv; source .venv/bin/activate'
+alias ,v='[ ! -d .venv ] && { echo "creating venv... pls wait"; python -m venv .venv }; source .venv/bin/activate'
