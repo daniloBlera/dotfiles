@@ -9,8 +9,7 @@
  '(cursor-type 'bar)
  '(custom-enabled-themes '(ef-summer))
  '(custom-safe-themes
-   '("a57c3c53d60e99f39ad3272729810e0ea19a41c1fff2751888201695423714a9"
-     "b41d0a9413fb0034cea34eb8c9f89f6e243bdd76bccecf8292eb1fefa42eaf0a"
+   '("b41d0a9413fb0034cea34eb8c9f89f6e243bdd76bccecf8292eb1fefa42eaf0a"
      "2551f2b4bc12993e9b8560144fb072b785d4cddbef2b6ec880c602839227b8c7"
      "a0e9bc5696ce581f09f7f3e7228b949988d76da5a8376e1f2da39d1d026af386"
      "da69584c7fe6c0acadd7d4ce3314d5da8c2a85c5c9d0867c67f7924d413f4436"
@@ -43,10 +42,11 @@
      "a3a71b922fb6cbf9283884ac8a9109935e04550bcc5d2a05414a58c52a8ffc47"
      "ae20535e46a88faea5d65775ca5510c7385cbf334dfa7dde93c0cd22ed663ba0"
      "00d7122017db83578ef6fba39c131efdcb59910f0fac0defbe726da8072a0729"
-     "36c5acdaf85dda0dad1dd3ad643aacd478fb967960ee1f83981d160c52b3c8ac" default))
+     "36c5acdaf85dda0dad1dd3ad643aacd478fb967960ee1f83981d160c52b3c8ac"
+     "a57c3c53d60e99f39ad3272729810e0ea19a41c1fff2751888201695423714a9" default))
  '(delete-by-moving-to-trash t)
  '(delete-selection-mode t)
- '(display-line-numbers-type t)
+ '(display-line-numbers-type 'relative)
  '(editorconfig-mode t)
  '(electric-pair-mode t)
  '(fill-column 90)
@@ -69,7 +69,10 @@
  '(tab-bar-tab-hints t)
  '(tab-width 4)
  '(tool-bar-mode nil)
- '(which-key-mode t))
+ '(which-key-mode t)
+ '(whitespace-style
+   '(face trailing tabs spaces newline missing-newline-at-eof empty indentation
+          space-after-tab space-before-tab space-mark tab-mark newline-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

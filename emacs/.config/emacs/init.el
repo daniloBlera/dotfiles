@@ -46,9 +46,9 @@
   :bind ("C-c t j" . jinx-mode)
   :hook ((org-mode prog-mode text-mode) . jinx-mode))
 
-(use-package nyan-mode
+(use-package magit
   :ensure t
-  :config (nyan-mode t))
+  :defer t)
 
 (use-package olivetti
   :ensure t
@@ -91,7 +91,7 @@
       kept-old-versions 2)
 
 ;; setting the default font
-(add-to-list 'default-frame-alist '(font . "Departure Mono-10"))
+(add-to-list 'default-frame-alist '(font . "MonaspiceRn Nerd Font Mono-10"))
 
 ;; scroll line-by-line instead of in chunks
 (setq scroll-step 1
