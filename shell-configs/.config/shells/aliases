@@ -16,9 +16,7 @@ alias ,cfgpg='"$VISUAL" ~/.gnupg/gpg.conf'
 alias ,cfagent='"$VISUAL" ~/.gnupg/gpg-agent.conf'
 alias ,reloadgpg='gpg-connect-agent reloadagent /bye; gpg-connect-agent updatestartuptty /bye'
 
-# start an emacs daemon if not running and connect to it (graphical and terminal,
-# respectively)
-#alias ,ecg='emacsclient --create-frame --alternate-editor=""'
+# start an emacs daemon if not running and connect to it
 alias ,ect='emacsclient --create-frame --alternate-editor="" --no-window-system'
 
 # start and stop running emacs daemons
@@ -35,7 +33,7 @@ alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias ,ll='ls -AFhl'
 alias ,la='ls -AF'
-alias ,lb='lsblk --fs -p'
+alias ,lb='lsblk --fs --path'
 alias ,l1='ls -1F'
 alias ,tree='tree -FC'
 alias ,cpx='cp --preserve=mode,ownership,timestamps,xattr'   # preserve xattr on copy

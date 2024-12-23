@@ -15,18 +15,17 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # experimental python 3.13 stuff -- for more information, check:
 #   https://docs.python.org/3/whatsnew/3.13.html#free-threaded-cpython
 #   https://docs.python.org/3/whatsnew/3.13.html#an-experimental-just-in-time-jit-compiler
-export PYTHON_GIL=0     # disable the GIL
+export PYTHON_GIL=1     # enable old GIL
 export PYTHON_JIT=1     # enable the experimental JIT
 
 # configure the debugger to call on `breakpoint`
 export PYTHONBREAKPOINT='pudb.set_trace'
 
+# running windows stuff
 export WINEPREFIX="$XDG_CACHE_HOME/wine"
 export WINEARCH="win32"
 
-export ROSWELL_HOME="$XDG_CACHE_HOME/roswell"
 export PYENV_ROOT="$XDG_CACHE_HOME/pyenv"
-export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 export GHCUP_USE_XDG_DIRS="set to non-empty to use XDG-ish directories - https://ghcup.readthedocs.io/en/latest/guide/#xdg-support"
 
 # enable pinentry on the terminal instead of using GTK2

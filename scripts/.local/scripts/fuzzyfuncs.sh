@@ -6,7 +6,7 @@
 # Fuzzy-Search directory (or file) and `cd` to it
 #
 # Usage:
-#   fcd [SEARCH_PATH]
+#   ,fcd [SEARCH_PATH]
 #
 # Arguments:
 #   SEARCH_PATH     The path where the fuzzy search should be applied. If given
@@ -38,7 +38,7 @@
 # Fuzzy-Search files and open them with `VISUAL`
 #
 # Usage:
-#   fed [SEARCH_PATH]
+#   ,fed [SEARCH_PATH]
 #
 # Arguments:
 #   SEARCH_PATH     The root path where the fuzzy search should be applied. if
@@ -69,7 +69,7 @@
 # Select multiple processes to kill with `Tab` or `Shift+Tab`
 #
 # Usage:
-#   fkill
+#   ,fkill
 #
 ,fkill() {
     search_result="$(ps -e -o pid= -o cmd= | fzf -m)"
@@ -88,7 +88,7 @@
 # Select multiple items to remove from trash with `Tab` or `Shift+Tab`
 #
 # Usage:
-#   fclean
+#   ,fclean
 #
 ,ftrash() {
     selection="$(trash-list | fzf -m)"
@@ -106,7 +106,7 @@
 # and display the selected ones with `git diff`
 #
 # Usage:
-#   fgd
+#   ,fgd
 #
 ,fgd() {
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1
@@ -126,7 +126,7 @@
 # the selected one using xdg-open.
 #
 # Usage:
-#   fpdf [DIRECTORY]
+#   ,fpdf [DIRECTORY]
 #
 # Arguments:
 #   DIRECTORY       The path to the root of the search directory
@@ -146,15 +146,32 @@
     selection="$(find "$searchdir" -type f -name '*.pdf' 2> /dev/null | fzf)"
     if [ -n "$selection" ]
     then
+        window_id=$(xdo id)
+        xdo hide
         zathura "$selection"
+        xdo show ${window_id}
     fi
 }
 
 # Search all available font names
 #
 # Usage:
-#   ffc
+#   ,ffc
 #
 ,ffc() {
     fc-list : family | cut -d ',' -f 1 | sort | uniq | sed 's/^  *//' | fzf --multi
+}
+
+# Search pacman and AUR packages
+#
+# Usage:
+#   ,fpacq
+#   ,fpacs
+#
+,fpacq() {
+    paru -Qq | fzf --reverse --preview "paru -Qi {}" --bind "enter:execute(paru -Qil {} | less)"
+}
+
+,fpacs() {
+    paru -Slq | fzf --reverse --bind "enter:execute(paru -Si {} | less)"
 }
