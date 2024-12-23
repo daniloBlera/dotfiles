@@ -3,5 +3,5 @@
 *.bak
 \#*\#
 
-# Neovim text editor
-nvim/.config/nvim/.netrwhist
+# lazy.nvim package manager
+neovim/.config/nvim/lazy-lock.json

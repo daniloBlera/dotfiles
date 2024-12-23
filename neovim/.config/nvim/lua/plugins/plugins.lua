@@ -15,11 +15,13 @@ return {
   {
     "justinmk/vim-sneak",
     keys = {
+      -- two characters jump
       { 's', '<Plug>Sneak_s', mode = 'n' },
       { 'S', '<Plug>Sneak_S', mode = 'n' },
       { 's', '<Plug>Sneak_s', mode = 'x' },
       { 'S', '<Plug>Sneak_S', mode = 'x' },
 
+      -- replacing the f and t built-ins
       { 'f', '<Plug>Sneak_f', mode = 'n' },
       { 'F', '<Plug>Sneak_F', mode = 'n' },
       { 'f', '<Plug>Sneak_f', mode = 'x' },

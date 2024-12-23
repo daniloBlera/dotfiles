@@ -161,14 +161,15 @@
 (defvar *programs-map* (make-sparse-keymap))
 
 ;; defining the bindings inside the commands keymap
-(define-key *programs-map* (kbd "b") "exec zen-browser")
+(define-key *programs-map* (kbd "b") "exec librewolf")
 (define-key *programs-map* (kbd "B") "exec qutebrowser")
 (define-key *programs-map* (kbd "c") "exec chromium")
 (define-key *programs-map* (kbd "e") "exec emacs")
-(define-key *programs-map* (kbd "E") "exec emacsclient -ca ''")
+(define-key *programs-map* (kbd "f") "exec st -e nnn")
 (define-key *programs-map* (kbd "k") "exec keepassxc")
 (define-key *programs-map* (kbd "m") "exec ,dmenu_run_xres")
-(define-key *programs-map* (kbd "p") "exec alacritty -e bpython")
+(define-key *programs-map* (kbd "p") "exec st -e python")
+(define-key *programs-map* (kbd "P") "exec st -e bpython")
 (define-key *programs-map* (kbd "t") "exec st")
 (define-key *programs-map* (kbd "T") "exec alacritty")
 (define-key *programs-map* (kbd "z") "exec zeal")

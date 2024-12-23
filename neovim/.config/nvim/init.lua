@@ -68,6 +68,7 @@ else
   -- probably using something like the linux TTY
   vim.opt.termguicolors = false
   vim.cmd("set t_Co=8")
+  vim.cmd("colorscheme slate")
 
   -- indicator that the line is visually wrapped
   vim.opt.showbreak ='> '
@@ -152,7 +153,7 @@ vim.keymap.set('n', '<Leader>wQ', '<Cmd>qa!<CR>')
 vim.keymap.set('n', '<Leader>bs', '<Cmd>w<CR>')
 vim.keymap.set('n', '<Leader>bx', '<Cmd>x<CR>')
 
--- center the screen on the cursor's line after making a jump
+-- center the screen on the cursor's line after a jump
 vim.keymap.set('n', 'G', 'Gzz')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
@@ -163,23 +164,20 @@ vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', '<Down>', 'g<Down>')
 vim.keymap.set('n', '<Up>', 'g<Up>')
 
---visual stuff
+-- toggle list mode and soft line wrapping
 vim.keymap.set('n', '<Leader>vl', '<Cmd>set list!<CR>')
 vim.keymap.set('n', '<Leader>vw', '<Cmd>set wrap!<CR>')
 
--- line and column highlight
-vim.keymap.set(
-  'n',
-  '<Leader>vh',
-  '<Cmd>set cursorline!<CR>'
-)
+-- line highlight
+vim.keymap.set('n', '<Leader>vh', '<Cmd>set cursorline!<CR>')
 
--- lua-specific indenting with two whitespaces
+-- language-specific indenting with two whitespaces
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
+  pattern = { "lua", "markdown" },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
     vim.opt_local.shiftwidth = 2
   end,
 })
+
