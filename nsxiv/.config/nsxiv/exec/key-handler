@@ -33,7 +33,7 @@ do
             open_files=true
             [ -z "$fnames" ] && fnames="$file" || fnames="$fnames $file";;
         "w")
-            ~/.local/scripts/setxbackground "$file";;
+            ~/.local/scripts/,setxbackground "$file";;
     esac
 done
 

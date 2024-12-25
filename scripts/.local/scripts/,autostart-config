@@ -5,19 +5,24 @@
 # without restaring multiple copies of the same processes.
 #
 # set xdg home locally, if not already set externally
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+# XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+
+CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
+SCRIPTS="$HOME/.local/scripts"
 
 # shared terminal configs and colourschemes
-[ -f "$XDG_CONFIG_HOME/xres/settings" ] && xrdb "$XDG_CONFIG_HOME/xres/settings"
-[ -f "$XDG_CONFIG_HOME/xresources-term" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-term"
-[ -f "$XDG_CONFIG_HOME/xresources-dwm" ] && xrdb -merge "$XDG_CONFIG_HOME/xresources-dwm"
+[ -f "$CONFIG/xres/settings" ] && xrdb "$CONFIG/xres/settings"
+[ -f "$CONFIG/xresources-term" ] && xrdb -merge "$CONFIG/xresources-term"
+[ -f "$CONFIG/xresources-dwm" ] && xrdb -merge "$CONFIG/xresources-dwm"
 
 # set the background wallpaper or solid color
-if [ -f "$XDG_CONFIG_HOME/wallpaper" ]
+#IMG="$CONFIG/wallpaper"
+if [ -f "${IMAGE:=$CONFIG/wallpaper}" ]
 then
-    xwallpaper --zoom "$XDG_CONFIG_HOME/wallpaper"
+    # xwallpaper --zoom "$IMAGE"
+    hsetroot -cover "$IMAGE"
 else
-    xsetroot -solid #140420
+    hsetroot -solid '#170420'
 fi
 
 # enable compositing
@@ -29,7 +34,7 @@ fi
 # associate keyboard and mouse events in X with commands
 if ! pidof -x xbindkeys > /dev/null
 then
-    xbindkeys --file "$XDG_CONFIG_HOME/xres/xbindkeysrc"
+    xbindkeys --file "$CONFIG/xres/xbindkeysrc"
 fi
 
 # hide the cursor after a period of inactivity
@@ -66,4 +71,4 @@ then
 fi
 
 # configure auto-repeat delay, rate, and which keys should repeat when held down
-. $HOME/.local/scripts/configure-autorepeat.sh &
+. $SCRIPTS/configure-autorepeat.sh &

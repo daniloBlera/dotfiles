@@ -5,15 +5,17 @@
 
 # Print message to desktop notification or stdin
 notify() {
-    pgrep dunst 1> /dev/null && dunstify "Background changed" "$1" || echo "Changed the background to '$1'"
+    pidof -x dunst > /dev/null && dunstify "Background changed" "$1" || echo "Changed the background to '$1'"
 }
 
 if [ "$#" -ne 1 ]
 then
-    echo "ERROR: incorrect number of arguments so we're doing nothing..."
+    echo "Error: expected a single argument (the path to an image file) but received $#. Aborting."
+    echo "Usage:"
+    echo "    ,setxbackground FILE"
     exit 1
 fi
 
-BG_FILE="$XDG_CONFIG_HOME/wallpaper"
-cp "$1" "$BG_FILE" && xwallpaper --zoom "$BG_FILE"
+IMAGE_PATH="${XDG_CONFIG_HOME:-"$HOME/.config"}/wallpaper"
+cp "$1" "$IMAGE_PATH" && hsetroot -cover "$IMAGE_PATH"
 notify "$1"
