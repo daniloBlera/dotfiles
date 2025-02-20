@@ -6,8 +6,8 @@ find useful.
 
 ## The tl;dr version
 
-* [GNU Stow][stow];
-* individual tools have their separated directory tree.
+* individual tools have their separated directory tree;
+* uses [GNU Stow][stow].
 
 ## About the repository structure
 
@@ -84,7 +84,7 @@ where the files should be installed (the user's home in the case for this reposi
 As an example, to install configuration files for `neovim`, `tmux`, and `zsh`, do:
 
 ```zsh
-stow -d ConfigFiles -t ~/ neovim tmux zsh
+stow -d dotfiles -t ~/ neovim tmux zsh
 ```
 
 Assuming that no conflicts happened - as stow won't overwrite existing files - the
@@ -103,7 +103,7 @@ For illustration, here's the result from installing the neovim config package wi
 
 ```text
 .config
-└── nvim -> ../Programs/ConfigFiles/neovim/.config/nvim
+└── nvim -> ../Programs/dotfiles/neovim/.config/nvim
 ```
 
 with a single symlink at `~/.config`, compared to a tree of symlinks with folding
@@ -112,12 +112,12 @@ disabled:
 ```text
 .config
 └── nvim
-    ├── init.lua -> ../../Programs/ConfigFiles/neovim/.config/nvim/init.lua
+    ├── init.lua -> ../../Programs/dotfiles/neovim/.config/nvim/init.lua
     └── lua
         ├── config
-        │   └── lazy.lua -> ../../../../Programs/ConfigFiles/neovim/.config/nvim/lua/config/lazy.lua
+        │   └── lazy.lua -> ../../../../Programs/dotfiles/neovim/.config/nvim/lua/config/lazy.lua
         └── plugins
-            └── plugins.lua -> ../../../../Programs/ConfigFiles/neovim/.config/nvim/lua/plugins/plugins.lua
+            └── plugins.lua -> ../../../../Programs/dotfiles/neovim/.config/nvim/lua/plugins/plugins.lua
 ```
 
 [stow]: https://www.gnu.org/software/stow/
