@@ -8,17 +8,28 @@ import = [
 size = 9.0
 
 [font.bold]
-family = "ComicShannsMono Nerd Font Mono"
+family = "0xProto Nerd Font Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "ComicShannsMono Nerd Font Mono"
+family = "0xProto Nerd Font Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "ComicShannsMono Nerd Font Mono"
+family = "0xProto Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "ComicShannsMono Nerd Font Mono"
+family = "0xProto Nerd Font Mono"
 style = "Regular"
+
+[cursor.style]
+shape = "Block"
+blinking = "Always"
+
+[cursor.vi_mode_style]
+shape = "Block"
+blinking = "Off"
+
+[selection]
+save_to_clipboard = true

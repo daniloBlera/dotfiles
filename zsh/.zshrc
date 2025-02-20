@@ -1,7 +1,9 @@
 # Configuring how the prompt should look
 #   '[<user>@<host> <cwd-last-segment>]<prompt> '
 PROMPT='%n@%m:%1~%# '
-[ -n "$NNNLVL" ] && PROMPT="N$NNNLVL $PROMPT"
+
+# show the level of shell nesting from nnn
+[ -n "$NNNLVL" ] && PROMPT="N$NNNLVL:$PROMPT"
 
 # The following lines were added by compinstall
 
@@ -16,6 +18,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# use emacs mode keybindings
+bindkey -e
+
 # Check if file exists before trying to source it
 source_if_exists() {
     [ -f "$1" ] && source "$1"
@@ -23,7 +28,7 @@ source_if_exists() {
 
 # If the directory exists and is not included in PATH, return TRUE
 not_in_path() {
-    [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]] && return 0 || return 1
+    [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]
 }
 
 prepend_to_path() {
@@ -51,7 +56,7 @@ source /usr/share/zsh/site-functions/_pyenv
 # direnv hook
 eval "$(direnv hook zsh)"
 
-# enable zoxide
+# setup zoxide
 eval "$(zoxide init zsh)"
 
 # Extra stuff
@@ -61,7 +66,6 @@ SAVEHIST=1000
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt autocd
-bindkey -e
 
 stty -ixon
 

@@ -18,15 +18,10 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export PYTHON_GIL=1     # enable old GIL
 export PYTHON_JIT=1     # enable the experimental JIT
 
-# configure the debugger to call on `breakpoint`
 export PYTHONBREAKPOINT='pudb.set_trace'
-
-# running windows stuff
-export WINEPREFIX="$XDG_CACHE_HOME/wine"
-export WINEARCH="win32"
-
 export PYENV_ROOT="$XDG_CACHE_HOME/pyenv"
-export GHCUP_USE_XDG_DIRS="set to non-empty to use XDG-ish directories - https://ghcup.readthedocs.io/en/latest/guide/#xdg-support"
+
+export GHCUP_USE_XDG_DIRS="set to non-empty to use XDG directories - https://ghcup.readthedocs.io/en/latest/guide/#xdg-support"
 
 # enable pinentry on the terminal instead of using GTK2
 export GPG_TTY="$(tty)"
@@ -46,7 +41,7 @@ export QT_STYLE_OVERRIDE=kvantum
 export NNN_OPTS='AdeoRUr'
 export NNN_OPENER='/usr/bin/xdg-open'
 export NNN_BMS='c:~/.config;C:~/.cache;l:~/.local;d:~/Downloads;b:~/Programs/source-builds;p:~/Pictures'
-export NNN_PLUG='v:viewimgs;x:delete-stuff;s:simplify-single;S:simplify-multiple;a:!mpv --no-video "$nnn";A:!mpv --no-video --loop "$nnn"'
+export NNN_PLUG='i:viewimgs;x:delete-stuff;s:simplify-single;S:simplify-multiple;a:!mpv --no-video "$nnn";A:!mpv --no-video --loop "$nnn"'
 export NNN_COLORS='6532'
 export NNN_TRASH=1  # use trash instead of `rm` -- 1: 'trash-cli', 2: `gio`
 export NNN_SEL='/tmp/nnn_sel'

@@ -56,7 +56,6 @@ alias ,pyenvls='pyenv install --list | fzf --reverse'
 
 ## Wrap REPLs with readline for history and other stuff
 alias ,cl='rlwrap sbcl'
-alias ,erl='rlwrap --always-readline erl'
 
 ## To insert STDIN contents to both PRIMARY and CLIPBOARD
 ## usage: <something-stdout> | ,clipin

@@ -42,29 +42,38 @@ return {
         vim.g.goyo_width = 100
     end,
     keys = {
-      { "<leader>vz", "<cmd>Goyo<cr>", desc = "Toggle Goyo mode" },
+      { "<leader>z", "<cmd>Goyo<cr>", desc = "Toggle Goyo mode" },
     },
   },
 
-  -- reduce visibility of text away from the cursor
+  -- reduce the visibility of distant text
   {
     "junegunn/limelight.vim",
     lazy = false,
     keys = {
-        { "<leader>vf", "<cmd>Limelight!! 0.8<cr>", desc = "Toggle Limelight" },
+        { "<leader>f", "<cmd>Limelight!! 0.8<cr>", desc = "Toggle Limelight" },
     },
   },
 
-  -- the colorscheme should be available when starting Neovim
+  -- a dark theme lazy.nvim people like
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = false,
+    priority = 1000,
     config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight]])
+      vim.cmd([[colorscheme tokyonight-night]])
     end,
   },
+
+  -- pretty, not-so-dark colours
+	{
+		"theacodes/witchhazel",
+		lazy = false,
+		priority = 1000,
+		-- config = function()
+		-- 	vim.cmd([[colorscheme witchhazel-hypercolor]])
+		-- end,
+	},
 
   -- show available keybindings in a popup
   {
@@ -84,14 +93,5 @@ return {
         desc = "Buffer Local Keymaps (which-key)",
       },
     },
-  },
-
-  -- manage matching pairs
-  {
-    'echasnovski/mini.pairs',
-    version = false,
-    config = function()
-      require('mini.pairs').setup()
-    end
   },
 }

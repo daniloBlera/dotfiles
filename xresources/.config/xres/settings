@@ -1,13 +1,13 @@
 ! X Resources configuration file
 ! Patched nerd fonts with working font-awesome glyphs
-UXTerm.vt100.font:      xft:ComicShannsMono Nerd Font Mono:size=10:style=regular:antialias=true
-UXTerm.vt100.boldFont:  xft:ComicShannsMono Nerd Font Mono:size=10:style=bold:antialias=true
-XTerm.vt100.font:       xft:ComicShannsMono Nerd Font Mono:size=10:style=regular:antialias=true
-XTerm.vt100.boldFont:   xft:ComicShannsMono Nerd Font Mono:size=10:style=bold:antialias=true
+UXTerm.vt100.font:      xft:0xProto Nerd Font Mono:size=10:style=regular:antialias=true
+UXTerm.vt100.boldFont:  xft:0xProto Nerd Font Mono:size=10:style=bold:antialias=true
+XTerm.vt100.font:       xft:0xProto Nerd Font Mono:size=10:style=regular:antialias=true
+XTerm.vt100.boldFont:   xft:0xProto Nerd Font Mono:size=10:style=bold:antialias=true
 
 ! For st terminal
-*.font:                 ComicShannsMono Nerd Font Mono:size=10:style=regular:antialias=true
-*.font.boldFont:        ComicShannsMono Nerd Font Mono:size=10:style=bold:antialias=true
+*.font:                 0xProto Nerd Font Mono:size=10:style=regular:antialias=true
+*.font.boldFont:        0xProto Nerd Font Mono:size=10:style=bold:antialias=true
 
 ! Dmenu related configs
 dmenu.font: UbuntuMono Nerd Font Mono:size=11
