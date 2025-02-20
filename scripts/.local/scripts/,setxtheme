@@ -7,7 +7,7 @@ notify() {
 }
 
 THEMES_DIR="$XDG_CONFIG_HOME/xres/themes"
-fname=$(find "$THEMES_DIR" -printf '%f\n' | sort | dmenu_xres 'Which colourscheme?')
+fname=$(find "$THEMES_DIR" -printf '%f\n' | sort | ,dmenu_xres 'Which colourscheme?')
 
 if [ ! -f "$THEMES_DIR/$fname" ]; then
     echo "Invalid '$fname' theme, doing nothing..."
@@ -16,6 +16,6 @@ fi
 
 cp "$THEMES_DIR/$fname" ~/.config/xresources-term
 xrdb ~/.config/xres/settings
-xrdb -merge ~/.config/xresources-term
-xrdb -merge ~/.config/xresources-dwm
+[ -f ~/.config/xresources-term ] && xrdb -merge ~/.config/xresources-term
+[ -f ~/.config/xresources-dwm ] && xrdb -merge ~/.config/xresources-dwm
 notify "$fname"

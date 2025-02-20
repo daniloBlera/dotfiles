@@ -8,7 +8,6 @@
 # XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 
 CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
-SCRIPTS="$HOME/.local/scripts"
 
 # shared terminal configs and colourschemes
 [ -f "$CONFIG/xres/settings" ] && xrdb "$CONFIG/xres/settings"
@@ -16,20 +15,18 @@ SCRIPTS="$HOME/.local/scripts"
 [ -f "$CONFIG/xresources-dwm" ] && xrdb -merge "$CONFIG/xresources-dwm"
 
 # set the background wallpaper or solid color
-#IMG="$CONFIG/wallpaper"
 if [ -f "${IMAGE:=$CONFIG/wallpaper}" ]
 then
-    # xwallpaper --zoom "$IMAGE"
-    hsetroot -cover "$IMAGE"
+    hsetroot -cover "$IMAGE" > /dev/null
 else
     hsetroot -solid '#170420'
 fi
 
 # enable compositing
-if ! pidof -x picom > /dev/null
-then
-    picom --daemon
-fi
+#if ! pidof -x picom > /dev/null
+#then
+#    picom --daemon
+#fi
 
 # associate keyboard and mouse events in X with commands
 if ! pidof -x xbindkeys > /dev/null
@@ -71,4 +68,4 @@ then
 fi
 
 # configure auto-repeat delay, rate, and which keys should repeat when held down
-. $SCRIPTS/configure-autorepeat.sh &
+. $HOME/.local/scripts/configure-autorepeat.sh &
