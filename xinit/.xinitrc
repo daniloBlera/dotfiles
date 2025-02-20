@@ -13,8 +13,9 @@
 #
 #   startx ~/.xinitrc rio
 
-# configure the Xorg-related environment
-~/.local/scripts/,autostart-config
+# configure the Xorg environment
+session_setup="$HOME/.local/scripts/,autostart-config"
+[ -f "$session_setup" ] && . $session_setup
 
 window_manager="${1:-stumpwm}"
 terminal=st
@@ -26,14 +27,12 @@ case $window_manager in
     dwm)
         dwmblocks &
         exec dwm 2> "$XDG_CACHE_HOME/dwm.log";;
-    twm)
-        exec twm;;
-    9wm)
-        exec 9wm -term "${terminal}" -active white -inactive grey 2> "$XDG_CACHE_HOME/9wm.log";;
     rio)
         exec rio -term "${terminal}" -virtuals 9 2> "$XDG_CACHE_HOME/rio.log";;
     openbox)
         exec openbox;;
+    icewm)
+        exec icewm-session;;
     *)
         exec "${window_manager}";;
 esac

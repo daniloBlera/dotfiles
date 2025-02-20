@@ -1,0 +1,123 @@
+menu "Development" folder {
+    prog "Acme" - acme -a
+    prog "CMake" - cmake-gui
+    prog "CMake curses GUI (ccmake)" - st -e ccmake
+    prog "Erlang Shell" - st -e rlwrap --always-readline erl
+    prog "GDB" - st -e gdb
+    prog "IDLE (Python IDE)" - idle
+    prog "KDiff3" - kdiff3
+    prog "Meld" - meld
+    prog "pycrust" - pycrust
+    prog "Qt4 Assistant" - assistant
+    prog "Qt4 Designer" - designer
+    prog "Qt4 Linguist" - linguist
+    prog "Tclsh8.6" - xterm -e tclsh8.6
+    prog "Zeal" - zeal
+}
+menu "Editors" folder {
+    prog "Emacs" - emacs
+    prog "Neovim" - st -e nvim
+    prog "Sam" - sam
+}
+menu "Graphics" folder {
+    prog "Flameshot" - flameshot gui
+    prog "GIMP" - gimp
+}
+menu "Multimedia" folder {
+    prog "ALSA mixer" - xterm -e alsamixer
+    prog "Audacity" - audacity
+    prog "Audacity" - env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity
+    prog "mpv Media Player" - mpv --player-operation-mode=pseudo-gui
+    prog "Qt V4L2 test Utility" - qv4l2
+    prog "Qt V4L2 video capture utility" - qvidcap
+    prog "VLC media player" - vlc
+    prog "VLC media player" - qvlc
+    prog "Volume Control" - pavucontrol
+}
+menu "Network" folder {
+    prog "Avahi SSH Server Browser" - bssh
+    prog "Avahi VNC Server Browser" - bvnc
+    prog "Chromium" - chromium
+    prog "FireFox" - firefox
+    prog "FTP" - xterm -e ftp
+    prog "IRC" - ,irc
+    prog "LibreWolf" - librewolf
+    prog "Pidgin" - pidgin
+    prog "qBittorrent" - qbittorrent
+    prog "qutebrowser" - qutebrowser
+    prog "Talk" - xterm -e talk
+    prog "Telnet" - xterm -e telnet
+    prog "TkVNC" - xterm -e tkvnc
+    prog "Tor Browser" - torbrowser-launcher
+    prog "Tor Browser Launcher Settings" - torbrowser-launcher --settings
+    prog "Transmission" - transmission-gtk
+    prog "W3m" - xterm -e w3m
+    prog "w3m" - xterm -e w3m /usr/share/doc/w3m/MANUAL.html
+    prog "Zen Browser" - zen-bin
+    prog "Zwrite" - xterm -e read -p 'Zwrite to users: ' u ; zwrite $u
+}
+menu "Science" folder {
+    prog "bc" - st -t 'bc calc' -e bc 
+    prog "dc" - st -t 'dc calc' -e dc 
+    prog "KiCad" - kicad
+    prog "KiCad Gerber Viewer" - gerbview
+    prog "KiCad Image Converter" - bitmap2component
+    prog "KiCad PCB Calculator" - pcb_calculator
+    prog "KiCad PCB Editor (Standalone)" - pcbnew
+    prog "KiCad Schematic Editor (Standalone)" - eeschema
+    prog "XDot" - xdot
+}
+menu "Shells" folder {
+    prog "9Term" - 9term rc
+    prog "Alacritty" - alacritty
+    prog "Ghostty" - ghostty --title='ghostty'
+    prog "nnn" - st -e nnn
+    prog "Python" - st -e python
+    prog "SBCL" - st -e rlwrap sbcl
+    prog "St" - st
+    prog "Xterm" - xterm
+}
+menu "System" folder {
+    menu "Settings" folder {
+        menu "GNOME" folder {
+            prog "XScreenSaver Settings" - xscreensaver-settings
+        }
+        prog "ARandR" - arandr
+        prog "Customize Look and Feel" - lxappearance
+        prog "Kvantum Manager" - kvantummanager
+        prog "Openbox Configuration Manager" - obconf
+        prog "Print Settings" - system-config-printer
+        prog "Qt5 Settings" - qt5ct
+        prog "Qt6 Settings" - qt6ct
+        prog "XScreenSaver" - xscreensaver
+    }
+    prog "Avahi Zeroconf Browser" - avahi-discover
+    prog "btop++" - st -e btop
+    prog "GParted" - gparted
+    prog "Hardware Locality lstopo" - lstopo
+    prog "KeePassXC" - keepassxc
+    prog "LSHW" - gtk-lshw
+    prog "pstree" - xterm -e /usr/bin/pstree.x11
+    prog "pstree" - xterm -e pstree
+    prog "Pstree" - xterm -e pstree.x11
+    prog "Top" - st -e top
+}
+menu "Utilities" folder {
+    prog "Activate ScreenSaver (Next)" - xscreensaver-command -next
+    prog "Activate ScreenSaver (Previous)" - xscreensaver-command -prev
+    prog "Activate ScreenSaver (Random)" - xscreensaver-command -activate
+    prog "Colour chooser" - xcolorsel
+    prog "Demo Screen Hacks" - xscreensaver-command -demo
+    prog "Disable XScreenSaver" - xscreensaver-command -exit
+    prog "Info" - st -e info
+    prog "Lock Screen (XScreenSaver)" - xscreensaver-command -lock
+    prog "Reinitialize XScreenSaver" - xscreensaver-command -restart
+    prog "ScreenSaver Preferences" - xscreensaver-command -prefs
+    prog "Units" - xterm -e units
+    prog "Xclock (analog)" - xclock -analog
+    prog "Xclock (digital)" - xclock -digital
+    prog "Xev" - st -e xev
+    prog "Xev (keyboard)" - st -e xev -event keyboard
+    prog "XFontSel" - xfontsel
+    prog "Xkill" - xkill
+}
