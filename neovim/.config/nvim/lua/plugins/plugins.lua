@@ -11,7 +11,7 @@ return {
   -- status and tab bars
   "itchyny/lightline.vim",
 
-  -- text motions based on single or double characters
+  -- text motions based on single or two characters
   {
     "justinmk/vim-sneak",
     keys = {
@@ -55,17 +55,17 @@ return {
     },
   },
 
-  -- a dark theme lazy.nvim people like
+  -- a dark theme lazy people seem to like
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme tokyonight-night]])
-    end,
+    -- config = function()
+    --   vim.cmd([[colorscheme tokyonight-night]])
+    -- end,
   },
 
-  -- pretty, not-so-dark colours
+  -- pretty purple colors
 	{
 		"theacodes/witchhazel",
 		lazy = false,
@@ -74,6 +74,28 @@ return {
 		-- 	vim.cmd([[colorscheme witchhazel-hypercolor]])
 		-- end,
 	},
+
+  -- a nice set of light and dark themes that are easy on the eyes
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- light themes: dayfox, dawnfox
+      -- dark themes: duskfox, nightfox, nordfox, carbonfox
+      vim.cmd([[colorscheme duskfox]])
+    end,
+  },
+
+  -- you've probably seen these before
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    -- config = function()
+    --   vim.cmd([[colorscheme catppuccin-mocha]])
+    -- end,
+  },
 
   -- show available keybindings in a popup
   {
