@@ -15,7 +15,6 @@ print_info() {
 
 [ "$#" -eq 0 ] && exit
 
-for arg in "$@"
-do
+for arg in "$@"; do
     print_info "$arg"
 done
