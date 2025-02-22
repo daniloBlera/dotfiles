@@ -33,6 +33,9 @@ case $window_manager in
         exec openbox;;
     icewm)
         exec icewm-session;;
+    xmonad)
+        xmobar &
+        exec xmonad;;
     stumpwm)
         exec stumpwm;;
     *)
