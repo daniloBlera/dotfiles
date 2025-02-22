@@ -1,6 +1,19 @@
-# Configuring how the prompt should look
-#   '[<user>@<host> <cwd-last-segment>]<prompt> '
+# zsh configuration file
+
+# configuring how the prompt should look
+#
+# the common approach
+# '[user@host:last_dir] % '
 PROMPT='%n@%m:%1~%# '
+
+# user prompt on the line below
+# [user@host:~/sub/dir]
+# % 
+# PROMPT=$'[%n@%m:%~]\n%# '
+
+# going simple with just the prompt, rc-style
+# '% '
+# PROMPT='%# '
 
 # show the level of shell nesting from nnn
 [ -n "$NNNLVL" ] && PROMPT="N$NNNLVL:$PROMPT"
@@ -49,15 +62,19 @@ source_if_exists '/usr/share/fzf/key-bindings.zsh'
 source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
 source_if_exists "$HOME/.config/nnn/misc/quitcd.bash_sh_zsh"
 
-# pyenv stuff
-eval "$(pyenv init - --no-rehash)"
-source /usr/share/zsh/site-functions/_pyenv
+# setup commands if they're installed and can be found somewhere in PATH
+if [ -x "$(command -v pyenv)" ]; then
+    eval "$(pyenv init - --no-rehash)"
+    [ -f /usr/share/zsh/site-functions/_pyenv ] && source /usr/share/zsh/site-functions/_pyenv
+fi
 
-# direnv hook
-eval "$(direnv hook zsh)"
+if [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook zsh)"
+fi
 
-# setup zoxide
-eval "$(zoxide init zsh)"
+if [ -x "$(command -v zoxide)" ]; then
+    eval "$(zoxide init zsh)"
+fi
 
 # Extra stuff
 HISTFILE="${XDG_STATE_HOME:-~/.local}/zsh_history"

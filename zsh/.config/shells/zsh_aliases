@@ -1,4 +1,4 @@
 # Put here your zsh exclusive aliases
 
 # reload zsh's config
-alias ,reloadcfg="echo 'sourcing ~/.zshrc...'; source ~/.zshrc; echo 'done!'"
+alias ,reloadcfg="source ~/.zshrc; echo '* sourced zshrc'"
