@@ -1,7 +1,7 @@
 [general]
 import = [
     # from https://github.com/alacritty/alacritty-theme
-    "~/.config/alacritty/themes/themes/gnome_terminal.toml"
+    "~/.config/alacritty/alacritty-theme/themes/gnome_terminal.toml"
 ]
 
 [font]
