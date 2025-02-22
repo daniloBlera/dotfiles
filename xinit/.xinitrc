@@ -33,6 +33,8 @@ case $window_manager in
         exec openbox;;
     icewm)
         exec icewm-session;;
+    stumpwm)
+        exec stumpwm;;
     *)
         exec "${window_manager}";;
 esac
