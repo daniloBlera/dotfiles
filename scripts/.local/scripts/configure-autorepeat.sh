@@ -2,9 +2,6 @@
 # Enable keyboard auto repeat for specific keys
 # note: you can use `xev -event keyboard` to find individual keycodes
 
-# faster keyboard autorepeat rate -- values: ms_delay Hz
-xset r rate 200 50
-
 # disable autorepeat for keycodes 8-255
 seq 8 255 | xargs -n 1 xset -r
 
