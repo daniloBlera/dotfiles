@@ -74,13 +74,13 @@
 (defcommand prompt-poweroff () ()
   "Prompt the user to confirm powering off"
   (if (y-or-n-p "Power off? ")
-      (uiop:launch-program "poweroff")
+      (uiop:launch-program "systemctl poweroff")
       (xlib:unmap-window (screen-message-window (current-screen)))))
 
 (defcommand prompt-reboot () ()
   "Prompt the user to confirm rebooting"
   (if (y-or-n-p "Reboot? ")
-      (uiop:launch-program "reboot")
+      (uiop:launch-program "systemctl reboot")
       (xlib:unmap-window (screen-message-window (current-screen)))))
 
 (defcommand prompt-lockscreen () ()
