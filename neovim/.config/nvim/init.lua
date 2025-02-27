@@ -68,7 +68,7 @@ else
   -- probably using something like the linux TTY
   vim.opt.termguicolors = false
   vim.cmd("set t_Co=8")
-  vim.cmd("colorscheme slate")
+  vim.cmd("colorscheme koehler")
 
   -- indicator that the line is visually wrapped
   vim.opt.showbreak ='> '
