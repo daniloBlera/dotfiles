@@ -47,7 +47,7 @@ if ! pidof -x dunst >/dev/null && [ -x "$(command -v dunst)" ]; then
     dunst &
 fi
 
-# screensaver, screen locker, and display power -- configs in `~/.xscreensaver`
+# screensaver, locker, and display power -- configs in `~/.xscreensaver`
 if ! pidof -x xscreensaver >/dev/null && [ -x "$(command -v xscreensaver)" ]; then
     xscreensaver --no-splash &
 fi
@@ -62,7 +62,7 @@ if ! pidof -x redshift >/dev/null && [ -x "$(command -v redshift)" ]; then
     redshift &
 fi
 
-# configure auto-repeat delay, rate, and which keys should repeat when held down
+# configure which keys should repeat when held down
 if [ -f "$HOME/.local/scripts/configure-autorepeat.sh" ]; then
     . $HOME/.local/scripts/configure-autorepeat.sh &
 fi
