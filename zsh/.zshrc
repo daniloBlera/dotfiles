@@ -4,7 +4,7 @@
 #
 # the common approach
 # '[user@host:last_dir] % '
-PROMPT='%n@%m:%1~%# '
+PROMPT='[%n@%m:%1~]%# '
 
 # user prompt on the line below
 # [user@host:~/sub/dir]
@@ -62,10 +62,10 @@ source_if_exists '/usr/share/fzf/key-bindings.zsh'
 source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
 source_if_exists "$HOME/.config/nnn/misc/quitcd.bash_sh_zsh"
 
-# setup commands if they're installed and can be found somewhere in PATH
-if [ -x "$(command -v pyenv)" ]; then
-    eval "$(pyenv init - --no-rehash)"
-    [ -f /usr/share/zsh/site-functions/_pyenv ] && source /usr/share/zsh/site-functions/_pyenv
+
+# setup commands if they're installed somewhere in PATH
+if [ -x "$(command -v $PYENV_ROOT/bin/pyenv)" ]; then
+    eval "$($PYENV_ROOT/bin/pyenv init - --no-rehash)"
 fi
 
 if [ -x "$(command -v direnv)" ]; then
