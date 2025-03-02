@@ -58,10 +58,8 @@ export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/config"
 # PATH insertions
 prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
-prepend_to_path "$XDG_CONFIG_HOME/emacs/bin"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
-prepend_to_path "$HOME/.cache/roswell/bin"
 prepend_to_path "$HOME/.cache/rebar3/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
