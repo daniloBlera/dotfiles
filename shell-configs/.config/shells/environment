@@ -21,7 +21,9 @@ export PYTHON_JIT=1     # enable the experimental JIT
 export PYTHONBREAKPOINT='pudb.set_trace'
 export PYENV_ROOT="$HOME/source/pyenv"
 
-export GHCUP_USE_XDG_DIRS="set to non-empty to use XDG directories - https://ghcup.readthedocs.io/en/latest/guide/#xdg-support"
+# set to non-empty to use the XDG Base Directory Specification
+export GHCUP_USE_XDG_DIRS='https://ghcup.readthedocs.io/en/latest/guide/#xdg-support'
+export STACK_XDG='https://docs.haskellstack.org/en/stable/configure/yaml/#location-of-global-configuration'
 
 # enable pinentry on the terminal instead of using GTK2
 export GPG_TTY="$(tty)"
