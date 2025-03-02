@@ -1,71 +1,65 @@
 #!/bin/sh
-# The commands to run when starting window managers.
-#
-# obs.: With the `pidof` checks, this file should be safe to be executed multiple times
-# without restaring multiple copies of the same processes.
-#
-# set xdg home locally, if not already set externally
-# XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+# The commands to run before the window manager starts
 
 CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 # shared terminal configs and colourschemes
-[ -f "$CONFIG/xres/settings" ] && xrdb "$CONFIG/xres/settings"
-[ -f "$CONFIG/xresources-term" ] && xrdb -merge "$CONFIG/xresources-term"
-[ -f "$CONFIG/xresources-dwm" ] && xrdb -merge "$CONFIG/xresources-dwm"
+if [ -x "$(command -v xrdb)" ]; then
+    [ -f "$CONFIG/xres/settings" ] && xrdb "$CONFIG/xres/settings"
+    [ -f "$CONFIG/xresources-term" ] && xrdb -merge "$CONFIG/xresources-term"
+    [ -f "$CONFIG/xresources-dwm" ] && xrdb -merge "$CONFIG/xresources-dwm"
+fi
 
 # set the background wallpaper or solid color
-if [ -f "${IMAGE:=$CONFIG/wallpaper}" ]
-then
-    hsetroot -cover "$IMAGE" > /dev/null
-else
-    hsetroot -solid '#170420'
+if [ -x "$(command -v hsetroot)" ]; then
+    if [ -f "${IMAGE:=$CONFIG/wallpaper}" ]; then
+        hsetroot -cover "$IMAGE"
+    else
+        hsetroot -solid '#170420'
+    fi
 fi
 
 # enable compositing
-#if ! pidof -x picom > /dev/null
-#then
-#    picom --daemon
-#fi
+if ! pidof -x picom > /dev/null && [ -x "$(command -v picom)" ]; then
+    picom --daemon
+fi
 
 # associate keyboard and mouse events in X with commands
-if ! pidof -x xbindkeys > /dev/null
-then
+if ! pidof -x xbindkeys >/dev/null && [ -x "$(command -v xbindkeys)" ]; then
     xbindkeys --file "$CONFIG/xres/xbindkeysrc"
 fi
 
 # hide the cursor after a period of inactivity
-if ! pidof -x unclutter > /dev/null
-then
+if ! pidof -x unclutter >/dev/null && [ -x "$(command -v unclutter)" ]; then
     unclutter --timeout 10 &
 fi
 
 # synchronize Xorg's primary and clipboard selections
-if ! pidof -x autocutsel > /dev/null
-then
+if ! pidof -x autocutsel >/dev/null && [ -x "$(command -v autocutsel)" ]; then
     autocutsel -s CLIPBOARD &
 fi
 
 # notifications daemon
-if ! pidof -x dunst > /dev/null
-then
+if ! pidof -x dunst >/dev/null && [ -x "$(command -v dunst)" ]; then
     dunst &
 fi
 
-# screensaver, screen locker, and display power -- configs in `~/.xscreensaver`
-if ! pidof -x xscreensaver > /dev/null
-then
+# screensaver, locker, and display power -- configuration in `~/.xscreensaver`
+if ! pidof -x xscreensaver >/dev/null && [ -x "$(command -v xscreensaver)" ]; then
     xscreensaver --no-splash &
 fi
 
-# enable left pointer as the cursor
-xsetroot -cursor_name left_ptr
-
-# change the screen's color temperature -- configs in `~/.config/redshift.conf`
-if ! pidof -x redshift > /dev/null
-then
+# change the screen's color temperature -- configuration in `~/.config/redshift.conf`
+if ! pidof -x redshift >/dev/null && [ -x "$(command -v redshift)" ]; then
     redshift &
 fi
 
-# configure auto-repeat delay, rate, and which keys should repeat when held down
-. $HOME/.local/scripts/configure-autorepeat.sh &
+# enable left pointer as the cursor
+if [ -x "$(command -v xsetroot)" ]; then
+    xsetroot -cursor_name left_ptr
+fi
+
+# configure which keys should repeat when held down
+if [ -f "${script:=$HOME/.local/scripts/configure-autorepeat.sh}" ]; then
+    . $script
+fi

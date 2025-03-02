@@ -14,8 +14,9 @@
 #   startx ~/.xinitrc rio
 
 # configure the Xorg environment
-session_setup="$HOME/.local/scripts/,autostart-config"
-[ -f "$session_setup" ] && . $session_setup
+if [ -f "${session_setup:=$HOME/.xprofile}" ]; then
+    . $session_setup
+fi
 
 window_manager="${1:-stumpwm}"
 terminal=st

@@ -7,7 +7,7 @@ Close DWM
 Reboot
 Power-off'
 
-option=$(echo "$OPTIONS" | dmenu_xres 'What now, chief?')
+option=$(echo "$OPTIONS" | dmenu-xres 'What now, chief?')
 case "$option" in
     'Lock screen')
         xscreensaver-command --lock;;
