@@ -19,7 +19,7 @@ export PYTHON_GIL=1     # enable old GIL
 export PYTHON_JIT=1     # enable the experimental JIT
 
 export PYTHONBREAKPOINT='pudb.set_trace'
-export PYENV_ROOT="$XDG_CACHE_HOME/pyenv"
+export PYENV_ROOT="$HOME/source/pyenv"
 
 export GHCUP_USE_XDG_DIRS="set to non-empty to use XDG directories - https://ghcup.readthedocs.io/en/latest/guide/#xdg-support"
 
