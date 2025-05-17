@@ -1,0 +1,13 @@
+! X Resources configuration file
+
+! colourscheme for nsxiv
+Nsxiv.bar.font: xft:0xProto Nerd Font Mono:size=10:style=regular:antialias=true
+Nsxiv.window.background: #282828
+Nsxiv.window.foreground: #33b2ff
+Nsxiv.bar.background: #282828
+Nsxiv.bar.foreground: #dadada
+Nsxiv.mark.foreground: #33ff90
+
+! emacs background and foreground colors during initialization -- to avoid the flashbangs
+emacs.background: #282828
+emacs.foreground: #dadada

@@ -5,9 +5,7 @@ CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 # shared terminal configs and colourschemes
 if [ -x "$(command -v xrdb)" ]; then
-    [ -f "$CONFIG/xres/settings" ] && xrdb "$CONFIG/xres/settings"
-    [ -f "$CONFIG/xresources-term" ] && xrdb -merge "$CONFIG/xresources-term"
-    [ -f "$CONFIG/xresources-dwm" ] && xrdb -merge "$CONFIG/xresources-dwm"
+    [ -f "${config:=$CONFIG/xresources/config}" ] && xrdb "$config"
 fi
 
 # set the background wallpaper or solid color
