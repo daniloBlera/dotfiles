@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -18,6 +19,7 @@
  '(electric-pair-mode t)
  '(fill-column 90)
  '(frame-resize-pixelwise t)
+ '(global-auto-revert-mode t)
  '(global-display-fill-column-indicator-mode t)
  '(global-display-line-numbers-mode t)
  '(global-hl-line-mode t)
@@ -29,13 +31,17 @@
  '(inhibit-startup-screen t)
  '(initial-scratch-message
    ";;; Scratch area for Emacs lisp\12;; * movement\12;; `backward-sexp' (C-M-b)\12;; `forward-sexp' (C-M-f)\12;; `forward-list' (C-M-n)\12;; `backward-list' (C-M-p)\12;;\12;; * selection\12;; `mark-defun' (C-M-h)\12;; `mark-sexp' (C-M-SPC)\12;;\12;; * evaluation\12;; `eval-buffer' (C-c e)\12;; `eval-last-sexp' (C-x C-e)\12;; `eval-defun'\12;; `eval-print-last-sexp'\12;; `eval-expression' (M-:)\12;; `eval-region'\12")
- '(menu-bar-mode nil)
+ '(kill-ring-deindent-mode t)
+ '(menu-bar-mode t)
  '(mode-line-compact 'long)
  '(mouse-wheel-progressive-speed nil)
+ '(org-M-RET-may-split-line '((default)))
  '(org-startup-folded 'content)
  '(package-selected-packages nil)
  '(require-final-newline t)
  '(scroll-bar-mode nil)
+ '(scroll-conservatively 100)
+ '(scroll-margin 10)
  '(tab-bar-mode t)
  '(tab-bar-show 1)
  '(tab-bar-tab-hints t)

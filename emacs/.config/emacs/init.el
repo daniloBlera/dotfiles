@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; The journey into structured editing begins here
 ;;;
 ;;; obs.: The first time running this file should download all the necessary packages and
@@ -29,10 +30,12 @@
   :ensure t
   :hook (prog-mode . breadcrumb-mode))
 
-(use-package company
+(use-package completion-preview
   :ensure t
-  :init (setq company-lighter "")
-  :hook (after-init . global-company-mode))
+  :init (global-completion-preview-mode t)
+  :config (setq completion-preview-minimum-symbol-length 2)
+  :bind (("M-n" . completion-preview-next-candidate)
+         ("M-p" . completion-preview-prev-candidate)))
 
 (use-package ef-themes
   :ensure t)
@@ -46,9 +49,6 @@
  :defer t
  :mode ("\\.erl\\'" . erlang-ts-mode))
 
-(use-package company-erlang
-  :ensure t)
-
 (use-package flycheck
   :ensure t
   :defer t)
@@ -59,13 +59,32 @@
   :config (setq-default format-all-mode-lighter "FMT"
                         format-all-formatters '(("Python" black isort))))
 
+(use-package git-link
+  :ensure t
+  :bind (("C-c g l" . git-link)))       ; use `C-u C-c g l' to select the remote
+
 (use-package htmlize
   :ensure t
   :defer t)
 
+(use-package imenu
+  :hook ((prog-mode org-mode) . imenu-add-menubar-index)
+  :config (setq imenu-sort-function 'imenu--sort-by-name))
+
+(use-package indent-bars
+  :ensure t
+  :config (setq indent-bars-prefer-character t)
+  :hook (python-ts-mode . indent-bars-mode))
+
 (use-package jinx
   :ensure t
   :hook ((prog-mode text-mode) . jinx-mode))
+
+(use-package magit
+  :ensure t)
+
+(use-package markdown-mode
+  :ensure t)
 
 (use-package lua-mode
   :ensure t
@@ -78,6 +97,7 @@
   :init (setq olivetti-body-width 100
               olivetti-style 'fancy
               olivetti-lighter "")
+  :bind (("C-c t o" . olivetti-mode))
   :hook ((org-mode prog-mode text-mode) . olivetti-mode))
 
 (use-package rainbow-delimiters
@@ -99,11 +119,16 @@
 
 (use-package transpose-frame
   :ensure t
-  :bind (("C-c t t" . transpose-frame)
-         ("C-c t c" . rotate-frame-clockwise)
-         ("C-c t C" . rotate-frame-anticlockwise)
-         ("C-c t v" . flip-frame)
-         ("C-c t h" . flop-frame)))
+  :bind (("C-c r t" . transpose-frame)
+         ("C-c r c" . rotate-frame-clockwise)
+         ("C-c r C" . rotate-frame-anticlockwise)
+         ("C-c r v" . flip-frame)
+         ("C-c r h" . flop-frame)))
+
+(use-package unfill
+  :ensure t
+  ;; replace `fill-paragraph', normally under `M-q', with `unfill-toggle'
+  :bind ([remap fill-paragraph] . unfill-toggle))
 
 (use-package unicode-fonts
   :ensure t
@@ -112,7 +137,7 @@
 
 (use-package vundo
   :ensure t
-  :bind ("C-x u" . vundo))
+  :bind ("C-z" . vundo))
 
 ;;; General configuration
 ;; specify the file for `customize` and friends
@@ -128,10 +153,7 @@
       kept-old-versions 2)
 
 ;; setting the default font
-(add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-10"))
-
-;; do not recenter the window after moving the cursor beyond the view
-(setq scroll-conservatively 100)
+(add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-13"))
 
 (defun my/daylight-p ()
   "Check if the current time is in the 6:00am-6:00pm window."
@@ -139,12 +161,11 @@
 
 ;; set light or dark theme depending on the time
 (let ((light-theme 'ef-summer)
-      (dark-theme (if (display-graphic-p) 'shades-of-purple 'ef-maris-dark)))
+      (dark-theme 'ef-cherie))
   (load-theme (if (my/daylight-p) light-theme dark-theme) t))
 
 ;;; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
-(add-hook 'text-mode-hook #'auto-fill-mode)
 
 ;;; Tree-Sitter configuration
 ;; mapping major modes to their tree-sitter variants
@@ -178,15 +199,11 @@
     (unless (treesit-language-available-p language)
       (treesit-install-language-grammar language))))
 
-;; configure eglot's language server protocol servers
-(with-eval-after-load 'eglot
-  ;; (add-to-list 'eglot-server-programs '(python-ts-mode . ("pylsp")))
-  (add-to-list 'eglot-server-programs '(python-ts-mode . ("pyright-langserver" "--stdio"))))
-
 ;; org stuff
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((python . t)))
+ '((emacs-lisp . t)
+   (python . t)))
 
 ;; screenshots of emacs
 (defun my/screenshot-svg ()
@@ -201,14 +218,15 @@ Saves to a temp file and puts the filename in the kill ring."
     (kill-new filename)
     (message filename)))
 
-;;; Keymaps
-(keymap-global-set "C-c e" #'eval-buffer)
-(keymap-global-set "C-c f" #'fill-region)
-(keymap-global-set "C-c s" #'my/screenshot-svg)
-(keymap-global-set "C-c v" #'view-mode)
-(keymap-global-set "C-c ;" #'comment-dwim)
-(keymap-global-set "C-x C-b" #'ibuffer)
-(global-unset-key (kbd "C-z"))  ; disable suspend
+;;; Global keymaps
+(global-set-key (kbd "C-c e") #'eval-buffer)
+(global-set-key (kbd "C-c s") #'my/screenshot-svg)
+(global-set-key (kbd "C-c t v") #'view-mode)
+(global-set-key (kbd "C-c t b") #'menu-bar-mode)
+(global-set-key (kbd "C-x C-b") #'ibuffer)
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
 
 ;; re-enable uppercase and lowercase region commands
 (put 'upcase-region 'disabled nil)      ; C-x C-u
