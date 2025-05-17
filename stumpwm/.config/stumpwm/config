@@ -15,6 +15,7 @@
 
 ;; cpu information on the mode-line
 (load-module "cpu")
+(load-module "battery-portable")
 
 ;; turn groups/workspaces into a 3d coordinate system
 (load-module "spatial-groups")
@@ -56,19 +57,18 @@
 (defun display-brightness-message ()
   "Get the integer part of the brightness value"
   (let ((*record-last-msg-override* t))
-    (message "Brightness: ~a~%"
-             (floor (read-from-string
-                     (uiop:run-program (list "xbacklight" "-get")
-                                       :output '(:string :stripped t)))))))
+    (message "Brightness: ~,1F~%"
+             (read-from-string (uiop:run-program (list "xbacklight" "-get")
+                                                 :output '(:string :stripped t))))))
 
-(defcommand brightness- () ()
-  "Decrease the monitor's brightness by 10%"
-  (uiop:run-program (list "xbacklight" "-dec" "10"))
+(defcommand brightness-dec () ()
+  "Decrease the monitor's brightness by 5%"
+  (uiop:run-program (list "xbacklight" "-dec" "5"))
   (display-brightness-message))
 
-(defcommand brightness+ () ()
-  "Increase the monitor's brightness by 10%"
-  (uiop:run-program (list "xbacklight" "-inc" "10"))
+(defcommand brightness-inc () ()
+  "Increase the monitor's brightness by 5%"
+  (uiop:run-program (list "xbacklight" "-inc" "5"))
   (display-brightness-message))
 
 (defcommand prompt-poweroff () ()
@@ -104,37 +104,40 @@
   (unless (null num)
     (if (>= num 0)
         (renumber num)
-        (repack-window-numbers))))
+        (repack-window-numbers))
+    (message "Repacked window numbers")))
 
 (defun set-background-color (color)
   (uiop:run-program (list "hsetroot" "-solid" color)))
 
-(defun set-background-image (path)
+(defun set-background-image (path &optional fallback-color)
   (if (probe-file path)
       (uiop:run-program (list "hsetroot" "-cover" (uiop:native-namestring path)))
-      (set-background-color (nth 0 *colors*))))
+    (if (null fallback-color)
+        (set-background-color (nth 0 *colors*))
+      (set-background-color fallback-color))))
 
 ;;; 3 VISUAL AND COLOURS
 (setf *colors* (list
-                "#170420"               ;  0 black   (background)
-                "#b5bd68"               ;  1 green
-                "#f0c674"               ;  2 yellow
-                "#81a2be"               ;  3 blue
-                "#ea1646"               ;  4 magenta (purple)
-                "#8abeb7"               ;  5 cyan    (aqua)
-                "#c5c8c6"               ;  6 white   (foreground)
+                "#282828"                   ;  0 black   (background)
+                "#b5bd68"                   ;  1 green
+                "#f0c674"                   ;  2 yellow
+                "#81a2be"                   ;  3 blue
+                "#ea1646"                   ;  4 magenta (purple)
+                "#8abeb7"                   ;  5 cyan    (aqua)
+                "#dadada"                   ;  6 white   (foreground)
 
-                "#969896"               ;  7 gray    (comment)
-                "#282a2e"               ;  8 (current line)
-                "#373b41"               ;  9 (selection)
-                "#de935f"               ; 10 (orange)
+                "#8c8c8c"                   ;  7 gray    (comment)
+                "#282a2e"                   ;  8 (current line)
+                "#373b41"                   ;  9 (selection)
+                "#de935f"                   ; 10 (orange)
                 ))
 
 (set-fg-color (nth 6 *colors*))             ; message/input bar foreground color
 (set-bg-color (nth 0 *colors*))             ; message/input bar background color
 (set-border-color (nth 6 *colors*))         ; message/input bar border color
-(set-focus-color (nth 4 *colors*))          ; focused window border color
-(set-unfocus-color (nth 1 *colors*))        ; unfocused windows border color
+(set-focus-color (nth 6 *colors*))          ; focused window border color
+(set-unfocus-color (nth 7 *colors*))        ; unfocused windows border color
 (set-float-focus-color (nth 4 *colors*))    ; focused floating window border color
 (set-float-unfocus-color (nth 1 *colors*))  ; unfocused floating window border color
 (set-win-bg-color (nth 0 *colors*))
@@ -157,25 +160,28 @@
     (set-font "9x15bold"))
 
 ;;; 5 MODE-LINE
-;; the windows module
-;; check available segments in stumpwm's `primitives.lisp`
+;; the windows module -- check available segments in stumpwm's `primitives.lisp`
 (setf *window-format* "%m%n%s%c")
 
-;; the datetime module
+;; the date-time module
 ;;   <day-of-week-abbr>, <DD> <month-name> <YYYY> - <HH>:<MM>
 (setf *time-modeline-string* "%a, %d %B %Y - %R")
 
 ;; setting the modules to display
-;;   %n     current group module (configured with `stumpwm::*group-format*`)
-;;   %W     windows module for the current group (configured with `stumpwm::*window-format*`)
-;;   %^>    justify right the rest of the string
-;;   %C     CPU module (requires the `cpu` contrib module configured with `cpu::*cpu-modeline-fmt*`)
-;;   %d     datetime module (configured with `stumpwm::*time-modeline-string*`)
-(setf *screen-mode-line-format* (list "[%n]" "%W" "^>" "%C" " | " "%d"))
+(setf *screen-mode-line-format*
+      (list
+       "[%n]"     ; current group (configured with `stumpwm::*group-format*')
+       "%W"       ; group's windows (configured with `stumpwm::*window-format*')
+       "^>"       ; right justify the next
+       "BAT: %B"  ; battery module ("battery-portable" contrib package)
+       " | "      ; spacer
+       "%C"       ; CPU module ("cpu" contrib package)
+       " | "      ; spacer
+       "%d"))     ; date-time (configured with `stumpwm::*time-modeline-string*')
 
 ;; colours
 (setf *mode-line-background-color* (nth 0 *colors*))
-(setf *mode-line-foreground-color* (nth 4 *colors*))
+(setf *mode-line-foreground-color* (nth 7 *colors*))
 (setf *mode-line-border-color* (nth 4 *colors*))
 (setf *mode-line-border-width* 0)
 (setf *mode-line-position* :bottom)
@@ -198,8 +204,8 @@
 (define-key *root-map* (kbd "t") "toggle-status-bar")
 
 ;; change window numbering
-(define-key *root-map* (kbd "DEL") "change-window-number")
-(define-key *root-map* (kbd "Delete") "change-window-number -1")
+(define-key *root-map* (kbd "DEL") "change-window-number -1")
+(define-key *root-map* (kbd "Delete") "change-window-number")
 
 ;; rearranging default keybindings
 ;; remove root-leval keybinding for xterm
@@ -232,20 +238,21 @@
 ;; running commands
 ;; defining a user commands keymap
 (defvar *programs-map* (make-sparse-keymap))
-(define-key *programs-map* (kbd "b") "exec torbrowser-launcher")
+(define-key *programs-map* (kbd "b") "exec librewolf")
 (define-key *programs-map* (kbd "B") "exec qutebrowser")
-(define-key *programs-map* (kbd "c") "exec chromium")
+(define-key *programs-map* (kbd "C-b") "exec thorium-browser")
+(define-key *programs-map* (kbd "C-B") "exec torbrowser-launcher")
 (define-key *programs-map* (kbd "e") "exec emacs")
 (define-key *programs-map* (kbd "i") "exec ,irc")
 (define-key *programs-map* (kbd "k") "exec keepassxc")
-(define-key *programs-map* (kbd "m") "exec ,dmenu_run_xres")
+(define-key *programs-map* (kbd "m") "exec dmenu_run -p 'Run this'")
 (define-key *programs-map* (kbd "n") "exec xournalpp")
 (define-key *programs-map* (kbd "p") "exec st -e python")
 (define-key *programs-map* (kbd "P") "exec st -e bpython")
-(define-key *programs-map* (kbd "t") "exec st")
-(define-key *programs-map* (kbd "T") "exec alacritty")
-(define-key *programs-map* (kbd "C-t") "exec 9term rc")
 (define-key *programs-map* (kbd "z") "exec zeal")
+(define-key *programs-map* (kbd "RET") "exec st")
+(define-key *programs-map* (kbd "S-RET") "exec alacritty")
+(define-key *programs-map* (kbd "C-RET") "exec 9term rc")
 (define-key *programs-map* (kbd "C-g") "abort")
 (define-key *programs-map* (kbd "ESC") "abort")
 
@@ -271,8 +278,8 @@
 (define-key *top-map* (kbd "XF86AudioMute") "toggle-mute")
 
 ;; screen brightness controls
-(define-key *top-map* (kbd "XF86MonBrightnessDown") "brightness-")
-(define-key *top-map* (kbd "XF86MonBrightnessUp") "brightness+")
+(define-key *top-map* (kbd "XF86MonBrightnessDown") "brightness-dec")
+(define-key *top-map* (kbd "XF86MonBrightnessUp") "brightness-inc")
 
 ;; screenshots
 (define-key *top-map* (kbd "SunPrint_Screen") "exec flameshot screen -p ~/Pictures/screenshots")
