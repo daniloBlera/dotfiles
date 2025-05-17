@@ -36,4 +36,4 @@ map [normal] <A-\>> goto bottom
 map [normal] <A-\<> goto top
 
 # Theme
-include mountains-on-mars
+include fibonacci-ruler

@@ -6,5 +6,5 @@
 #   $2: Absolute path to the hovered file
 WINDOW_ID="$(xdo id)"
 xdo hide
-find "$2" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\)$' | sort -g | nsxiv -iqtp > /dev/null 2>&1
+find "$2" -maxdepth 1 -type f -iregex '.*\(bmp\|gif\|jpe?g\|png\|webp\)$' | sort -g | nsxiv --stdin --private --quiet --thumbnail > /dev/null 2>&1
 xdo show "$WINDOW_ID"

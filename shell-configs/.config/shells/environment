@@ -21,7 +21,10 @@ export PYTHON_JIT=1     # enable the experimental JIT
 export PYTHONBREAKPOINT='pudb.set_trace'
 export PYENV_ROOT="$HOME/source/pyenv"
 
-# set to non-empty to use the XDG Base Directory Specification
+# where to save python's REPL history
+export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
+
+# set to non-empty to use the XDG Base Directory Specification instead of your user's home
 export GHCUP_USE_XDG_DIRS='https://ghcup.readthedocs.io/en/latest/guide/#xdg-support'
 export STACK_XDG='https://docs.haskellstack.org/en/stable/configure/yaml/#location-of-global-configuration'
 
@@ -42,8 +45,8 @@ export QT_STYLE_OVERRIDE=kvantum
 # nnn file manager configuration
 export NNN_OPTS='AdeoRUr'
 export NNN_OPENER='/usr/bin/xdg-open'
-export NNN_BMS='c:~/.config;C:~/.cache;l:~/.local;d:~/Downloads;b:~/Programs/source-builds;p:~/Pictures'
-export NNN_PLUG='i:viewimgs;x:delete-stuff;s:simplify-single;S:simplify-multiple;a:!mpv --no-video "$nnn";A:!mpv --no-video --loop "$nnn"'
+export NNN_BMS='c:~/.config;C:~/.cache;l:~/.local;d:~/Downloads;p:~/Pictures;s:~/.local/scripts'
+export NNN_PLUG='i:viewimgs;x:delete-stuff;a:!mpv --no-video "$nnn";A:!mpv --no-video --loop "$nnn"'
 export NNN_COLORS='6532'
 export NNN_TRASH=1  # use trash instead of `rm` -- 1: 'trash-cli', 2: `gio`
 export NNN_SEL='/tmp/nnn_sel'

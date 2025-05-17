@@ -44,7 +44,7 @@ if ! pidof -x dunst >/dev/null && [ -x "$(command -v dunst)" ]; then
     dunst &
 fi
 
-# screensaver, locker, and display power -- configuration in `~/.xscreensaver`
+# screensaver, locker, and display standby -- configuration in `~/.xscreensaver`
 if ! pidof -x xscreensaver >/dev/null && [ -x "$(command -v xscreensaver)" ]; then
     xscreensaver --no-splash &
 fi

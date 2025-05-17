@@ -57,12 +57,9 @@ alias ,pyenvls='pyenv install --list | fzf --reverse'
 ## Wrap REPLs with readline for history and other stuff
 alias ,cl='rlwrap sbcl'
 
-## To insert STDIN contents to both PRIMARY and CLIPBOARD
+## To insert STDIN contents to both PRIMARY, SECONDARY, and CLIPBOARD selections
 ## usage: <something-stdout> | ,clipin
 alias ,clipin='xclip -i -f -selection primary | xclip -i -f -selection secondary | xclip -i -selection clipboard'
-
-## The Zen of Python
-alias ,zen='python -m this'
 
 ## Source a python venv on the current directory
 alias ,v='[ ! -d .venv ] && { echo "creating venv... pls wait"; python -m venv .venv }; source .venv/bin/activate'

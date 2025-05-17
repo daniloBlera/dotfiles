@@ -1,0 +1,27 @@
+# The colourscheme configuration
+set completion-bg               rgba(40,40,40,0.8)
+set completion-fg               rgba(218,218,218,1.0)
+set completion-highlight-bg     rgba(218,218,218,0.8)
+set completion-highlight-fg     rgba(0,0,0,1.0)
+
+## Input/status bar
+set inputbar-bg                 rgba(40,40,40,1.0)
+set inputbar-fg                 rgba(218,218,218,1.0)
+set statusbar-bg                rgba(40,40,40,1.0)
+set statusbar-fg                rgba(218,218,218,1.0)
+
+# Index/Table of contents
+set index-active-bg             rgba(218,218,218,1.0)
+set index-active-fg             rgba(40,40,40,1.0)
+set index-bg                    rgba(40,40,40,1.0)
+set index-fg                    rgba(218,218,218,1.0)
+
+## Search highlight
+set highlight-fg                rgba(40,40,40,1.0)       # text colour of all search highlight results
+set highlight-color             rgba(252,203,0,0.8)      # background of all search highlight results
+set highlight-active-color      rgba(51,255,144,0.8)     # background of the current highlight
+
+## Configuring recoloring of light and dark colours for a less bright reading
+set recolor-keephue             true
+set recolor-lightcolor          rgba(40,40,40,1.0)
+set recolor-darkcolor           rgba(218,218,218,1.0)

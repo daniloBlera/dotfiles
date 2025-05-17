@@ -1,19 +1,19 @@
 # zsh configuration file
 
 # configuring how the prompt should look
-#
-# the common approach
+
+# 1 - the common approach
 # '[user@host:last_dir] % '
 PROMPT='[%n@%m:%1~]%# '
 
-# user prompt on the line below
+# 2 - user prompt on the line below
 # [user@host:~/sub/dir]
-# % 
-# PROMPT=$'[%n@%m:%~]\n%# '
+# %
+#PROMPT=$'[%n@%m:%~]\n%# '
 
-# going simple with just the prompt, rc-style
+# 3 - going simple with just the prompt, rc-style
 # '% '
-# PROMPT='%# '
+#PROMPT='%# '
 
 # show the level of shell nesting from nnn
 [ -n "$NNNLVL" ] && PROMPT="N$NNNLVL:$PROMPT"
@@ -25,7 +25,7 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
 zstyle ':completion:*' menu select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle :compinstall filename '/home/dcb/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -77,9 +77,9 @@ if [ -x "$(command -v zoxide)" ]; then
 fi
 
 # Extra stuff
-HISTFILE="${XDG_STATE_HOME:-~/.local}/zsh_history"
-HISTSIZE=1000
-SAVEHIST=1000
+HISTFILE="${XDG_STATE_HOME:-~/.local/state}/zsh_history"
+HISTSIZE=500
+SAVEHIST=500
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt autocd
