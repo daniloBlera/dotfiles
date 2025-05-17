@@ -58,9 +58,7 @@ user's `$HOME` (but please, backup your files before doing anything).
 
 ## Manual installation
 
-1. clone the repository;
-2. copy the contents of a package into your user's home;
-3. be happy.
+This is a matter of copying the contents of a package directly into your user's home.
 
 ## Installation using GNU Stow
 
@@ -78,8 +76,8 @@ stow [--no-folding] -d SOURCE -t TARGET PACKAGE [PACKAGE ...]
 
 where `SOURCE` is the path to the root of the cloned repository, `TARGET` is the root to
 where the files should be installed (the user's home in the case for this repository) and
-`--no-folding` is an option if you would want to disable folding (more on the section
-[About directory folding](#target-directory-folding)).
+`--no-folding` is an option if you would want to disable
+[folding](#about-directory-folding)
 
 As an example, to install configuration files for `neovim`, `tmux`, and `zsh`, do:
 
@@ -115,7 +113,7 @@ disabled:
     ├── init.lua -> ../../Programs/dotfiles/neovim/.config/nvim/init.lua
     └── lua
         ├── config
-        │   └── lazy.lua -> ../../../../Programs/dotfiles/neovim/.config/nvim/lua/config/lazy.lua
+        │   └── lazy.lua -> ../../../../Programs/dotfiles/neovim/.config/nvim/lua/config/lazy.lua
         └── plugins
             └── plugins.lua -> ../../../../Programs/dotfiles/neovim/.config/nvim/lua/plugins/plugins.lua
 ```
