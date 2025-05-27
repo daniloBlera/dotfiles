@@ -30,6 +30,10 @@
   :ensure t
   :hook (prog-mode . breadcrumb-mode))
 
+(use-package comment-dwim-2
+  :ensure t
+  :bind ("M-;" . comment-dwim-2))
+
 (use-package completion-preview
   :ensure t
   :init (global-completion-preview-mode t)
@@ -83,6 +87,12 @@
 (use-package magit
   :ensure t)
 
+(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+  :init (marginalia-mode))
+
 (use-package markdown-mode
   :ensure t)
 
@@ -99,6 +109,12 @@
               olivetti-lighter "")
   :bind (("C-c t o" . olivetti-mode))
   :hook ((org-mode prog-mode text-mode) . olivetti-mode))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -135,6 +151,10 @@
   :defer t
   :config (unicode-fonts-setup))
 
+(use-package vertico
+  :ensure t
+  :init (vertico-mode))
+
 (use-package vundo
   :ensure t
   :bind ("C-z" . vundo))
@@ -155,14 +175,19 @@
 ;; setting the default font
 (add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-13"))
 
+;; setting the theme based on current time
 (defun my/daylight-p ()
-  "Check if the current time is in the 6:00am-6:00pm window."
+  "Check if the current time is within a \"it's bright outside\" window."
   (< 5 (string-to-number (format-time-string "%H")) 17))
 
-;; set light or dark theme depending on the time
-(let ((light-theme 'ef-summer)
-      (dark-theme 'ef-cherie))
-  (load-theme (if (my/daylight-p) light-theme dark-theme) t))
+(defun my/adjust-theme-light ()
+  "Set light or dark theme according to the current time"
+  (interactive)
+  (let ((light-theme 'ef-summer)
+        (dark-theme 'ef-winter))
+    (load-theme (if (my/daylight-p) light-theme dark-theme))))
+
+(my/adjust-theme-light)
 
 ;;; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
