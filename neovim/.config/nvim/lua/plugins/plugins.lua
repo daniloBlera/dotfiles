@@ -82,8 +82,8 @@ return {
     priority = 1000,
     config = function()
       -- light themes: dayfox, dawnfox
-      -- dark themes: duskfox, nightfox, nordfox, carbonfox
-      vim.cmd([[colorscheme duskfox]])
+      -- dark themes: duskfox, nightfox, nordfox, terafox, carbonfox
+      vim.cmd([[colorscheme terafox]])
     end,
   },
 

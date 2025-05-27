@@ -1,12 +1,13 @@
 -- Neovim's configuration file
+-- written in lua!!1!one! :O
 
 -- PLUGIN MANAGER
 require("config.lazy")
 
 -- GENERAL OPTIONS
-vim.opt.shadafile = "NONE"
-vim.opt.virtualedit = 'onemore'     -- enable moving the cursor past the last char in normal mode
-vim.opt.clipboard = 'unnamedplus'   -- use system's clipboard
+vim.opt.shadafile = "NONE"          -- disable reading or writing shada files
+vim.opt.virtualedit = 'onemore'     -- allow the cursor to move past the end of the line
+vim.opt.clipboard = 'unnamedplus'   -- use system's clipboard for all selection operations
 vim.opt.tabstop = 4                 -- number of spaces a TAB counts for
 vim.opt.shiftwidth = 4              -- number of spaces to use for each step of (auto)indent.
 vim.opt.softtabstop = 4             -- number of spaces a TAB counts on edit operations
@@ -17,16 +18,16 @@ vim.opt.linebreak = true            -- enable visual line wrapping
 vim.opt.textwidth = 90
 vim.opt.ignorecase = true           -- ignore case when searching
 vim.opt.smartcase = true            -- unless the search pattern has uppercase chars
-vim.opt.splitbelow = true
-vim.opt.number = true               -- set line numbering on
+vim.opt.splitbelow = true           -- new window splits will be placed below
+vim.opt.number = true               -- enable line numbering on
 vim.opt.relativenumber = true       -- set numbering relative to the current line
-vim.opt.scrolloff = 10              -- min lines above/below the cursor
-vim.opt.sidescrolloff = 5           -- min columns to the left/right of the cursor
+vim.opt.scrolloff = 10              -- min lines above and below the cursor
+vim.opt.sidescrolloff = 5           -- min columns to the left and right of the cursor
 vim.opt.showcmd = true              -- show partial commands on the status line
-vim.opt.list = true                 -- display special chars
+vim.opt.list = true                 -- display special chars (spaces, tabs, newlines, etc)
 vim.opt.wrapscan = false            -- disable cycles when searching
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = false
+vim.opt.cursorline = true           -- enable higlighting the cusor's line
+vim.opt.cursorcolumn = false        -- disable highlighting the cursor's column
 
 -- disable auto-wrapping of text and comments
 vim.opt.formatoptions = { t = false, c = false, }
@@ -180,3 +181,12 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.shiftwidth = 2
   end,
 })
+
+-- LSP configuration
+vim.lsp.config['ls-python'] = {
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' }
+}
+
+-- enable lsp configurations
+vim.lsp.enable('ls-python')
