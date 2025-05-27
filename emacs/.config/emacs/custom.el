@@ -67,4 +67,4 @@
  '(whitespace-missing-newline-at-eof ((t nil)))
  '(whitespace-newline ((t (:foreground "gold" :weight bold))))
  '(whitespace-space ((t (:foreground "gold" :weight bold))))
- '(whitespace-tab ((t (:background "grey22" :foreground "darkgray" :weight bold)))))
+ '(whitespace-tab ((t (:foreground "dodger blue" :weight bold)))))
