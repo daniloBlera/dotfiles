@@ -296,17 +296,24 @@
 (define-key *groups-map* (kbd "Down") "coord-down")
 (define-key *groups-map* (kbd "Up") "coord-up")
 (define-key *groups-map* (kbd "Right") "coord-right")
+(define-key *top-map* (kbd "s-Left") "coord-left")
+(define-key *top-map* (kbd "s-Down") "coord-down")
+(define-key *top-map* (kbd "s-Up") "coord-up")
+(define-key *top-map* (kbd "s-Right") "coord-right")
 
 ;; move betwen desktops (z axis)
 (define-key *groups-map* (kbd "p") "coord-taskleft")
 (define-key *groups-map* (kbd "n") "coord-taskright")
+(define-key *top-map* (kbd "s-P") "coord-taskleft")
+(define-key *top-map* (kbd "s-N") "coord-taskright")
 
 ;; jump to the current desktop's origin group (x: 0, y: 0)
 (define-key *groups-map* (kbd "c") "coord-taskorigin")
+(define-key *groups-map* (kbd "s-c") "coord-taskorigin")
 
 ;; jump to the previous group
-(define-key *top-map* (kbd "s-TAB") "coord-taskpop")
 (define-key *groups-map* (kbd "TAB") "coord-taskpop")
+(define-key *top-map* (kbd "s-TAB") "coord-taskpop")
 
 ;; kill all windows in the current group
 (define-key *groups-map* (kbd "K") "kill-windows-current-group")
