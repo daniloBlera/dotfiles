@@ -39,15 +39,17 @@ source_if_exists() {
     [ -f "$1" ] && source "$1"
 }
 
-# If the directory exists and is not included in PATH, return TRUE
+# Check if argument is in PATH
 not_in_path() {
-    [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]
+    [[ ":$PATH:" != *":$1:"* ]]
 }
 
+# Insert path to the beginning of PATH
 prepend_to_path() {
     not_in_path "$1" && export PATH="$1:$PATH"
 }
 
+# Insert path to the end of PATH
 append_to_path() {
     not_in_path "$1" && export PATH="$PATH:$1"
 }
@@ -61,7 +63,6 @@ source_if_exists '/usr/share/fzf/completion.zsh'
 source_if_exists '/usr/share/fzf/key-bindings.zsh'
 source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
 source_if_exists "$HOME/.config/nnn/misc/quitcd.bash_sh_zsh"
-
 
 # setup commands if they're installed somewhere in PATH
 if [ -x "$(command -v $PYENV_ROOT/bin/pyenv)" ]; then
@@ -77,7 +78,7 @@ if [ -x "$(command -v zoxide)" ]; then
 fi
 
 # Extra stuff
-HISTFILE="${XDG_STATE_HOME:-~/.local/state}/zsh_history"
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh_history"
 HISTSIZE=500
 SAVEHIST=500
 setopt HIST_IGNORE_DUPS
