@@ -129,13 +129,10 @@
   :bind ("C-c o" . occur)
   :hook (occur . (lambda () (switch-to-buffer-other-window "*Occur*"))))
 
-(use-package shades-of-purple-theme
-  :ensure t)
-
 (use-package sly
   :ensure t
   :init (setq inferior-lisp-program "sbcl")
-  :bind ("M-h" . 'sly-documentation-lookup)
+  :bind ("M-h" . sly-documentation-lookup)
   :hook (lisp-mode . sly-editing-mode))
 
 (use-package transpose-frame
@@ -158,7 +155,8 @@
 
 (use-package vertico
   :ensure t
-  :init (vertico-mode))
+  :init (vertico-mode)
+  :config (keymap-set vertico-map "TAB" #'minibuffer-complete))
 
 (use-package vundo
   :ensure t
@@ -186,7 +184,7 @@
   (< 5 (string-to-number (format-time-string "%H")) 17))
 
 (defun my/adjust-theme-light ()
-  "Set light or dark theme according to the current time"
+  "Set light or dark theme according to the current time."
   (interactive)
   (let ((light-theme 'ef-summer)
         (dark-theme 'ef-winter))
@@ -259,6 +257,11 @@ Saves to a temp file and puts the filename in the kill ring."
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
+(global-set-key (kbd "C-c f s") #'isearch-forward)
+(global-set-key (kbd "C-c f S") #'isearch-backward)
+(global-set-key (kbd "C-c f r") #'isearch-forward-regexp)
+(global-set-key (kbd "C-c f R") #'isearch-backward-regexp)
+(global-set-key (kbd "C-c f w") #'isearch-forward-word)
 
 ;; re-enable uppercase and lowercase region commands
 (put 'upcase-region 'disabled nil)      ; C-x C-u
