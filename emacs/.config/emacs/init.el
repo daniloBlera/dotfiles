@@ -67,6 +67,11 @@
   :ensure t
   :bind (("C-c g l" . git-link)))       ; use `C-u C-c g l' to select the remote
 
+(use-package go-mode
+  :ensure t
+  :mode ("\\.go\\'" . go-mode)
+  :config (setq-default go-ts-mode-indent-offset 4))
+
 (use-package htmlize
   :ensure t
   :defer t)
@@ -198,6 +203,7 @@
       '((bash-mode . bash-ts-mode)
         (c-mode . c-ts-mode)
         (erlang-mode . erlang-ts-mode)
+        (go-mode . go-ts-mode)
         (html-mode . html-ts-mode)
         (json-mode . json-ts-mode)
         (lua-mode . lua-ts-mode)
@@ -211,6 +217,7 @@
         (c "https://github.com/tree-sitter/tree-sitter-c")
         (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
         (erlang "https://github.com/WhatsApp/tree-sitter-erlang")
+        (go "https://github.com/tree-sitter/tree-sitter-go")
         (html "https://github.com/tree-sitter/tree-sitter-html")
         (json "https://github.com/tree-sitter/tree-sitter-json")
         (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")

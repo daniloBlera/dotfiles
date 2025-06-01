@@ -64,6 +64,7 @@ prepend_to_path "$XDG_DATA_HOME/applications"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
 prepend_to_path "$HOME/.cache/rebar3/bin"
+prepend_to_path "${GOPATH:-$HOME/go}/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
