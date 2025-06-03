@@ -7,7 +7,7 @@ find useful.
 ## The tl;dr version
 
 * individual tools have their separated directory tree;
-* uses [GNU Stow][stow].
+* uses [stow][stow].
 
 ## About the repository structure
 

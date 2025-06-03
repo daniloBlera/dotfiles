@@ -51,7 +51,7 @@ if supports_truecolor() then
   vim.cmd("set t_Co=256")
 
   -- indicator that the line is visually wrapped
-  vim.opt.showbreak ='↳ '
+  vim.opt.showbreak = '↳ '
 
   -- unicode listchars
   vim.opt.listchars = {

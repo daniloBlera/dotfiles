@@ -8,6 +8,6 @@ Nsxiv.bar.background: #282828
 Nsxiv.bar.foreground: #dadada
 Nsxiv.mark.foreground: #33ff90
 
-! emacs background and foreground colors during initialization -- to avoid the flashbangs
+! set emacs colors during initialization to avoid late night flashbangs
 emacs.background: #282828
 emacs.foreground: #dadada
