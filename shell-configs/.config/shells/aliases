@@ -62,4 +62,5 @@ alias ,cl='rlwrap sbcl'
 alias ,clipin='xclip -i -f -selection primary | xclip -i -f -selection secondary | xclip -i -selection clipboard'
 
 ## Source a python venv on the current directory
-alias ,v='[ ! -d .venv ] && { echo "creating venv... pls wait"; python -m venv .venv }; source .venv/bin/activate'
+alias ,v='[ ! -d .venv ] && { echo "* creating venv, pls wait..."; python -m venv .venv }; source .venv/bin/activate'
+alias ,vv='[ ! -d .venv ] && { echo "* creating updated venv, pls wait..."; python -m venv .venv; .venv/bin/pip install --upgrade pip setuptools}; source .venv/bin/activate'
