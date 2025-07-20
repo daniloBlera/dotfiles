@@ -23,6 +23,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+import os.path
 
 from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
@@ -31,6 +32,9 @@ from libqtile.widget import backlight, volume
 
 mod = "mod4"
 terminal = "st"
+
+_screenshot_cmd = f"flameshot screen -p {os.path.expanduser('~/Pictures/screenshots')}"
+_screenshot_cmd_alt = f"flameshot gui"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -101,6 +105,13 @@ keys = [
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +25%"),
     ),
     Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Toggle audio mute"),
+    Key([], "Print", lazy.spawn(_screenshot_cmd), desc="Capture the screen"),
+    Key(
+        ["shift"],
+        "Print",
+        lazy.spawn(_screenshot_cmd_alt),
+        desc="Launch screenshot selector",
+    ),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -118,6 +129,12 @@ keys = [
         lazy.spawn("alacritty"),
         desc="Launch secondary terminal",
     ),
+    Key(
+        [mod, "control"],
+        "Return",
+        lazy.spawn("9term rc"),
+        desc="Launch Plan 9's terminal and shell",
+    ),
     Key([mod], "b", lazy.spawn("librewolf"), desc="Launch main browser"),
     Key([mod, "shift"], "b", lazy.spawn("qutebrowser"), desc="Launch qutebrowser"),
     Key(
@@ -133,12 +150,12 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Switch to specific layouts -- indexes correspond to the `layouts` list defined below
     Key(
-        [mod], "c", lazy.to_layout_index(0), desc="Switch to the manual columns layout"
+        [mod], "c", lazy.to_layout_index(1), desc="Switch to the manual columns layout"
     ),
     Key(
         [mod],
         "s",
-        lazy.to_layout_index(1),
+        lazy.to_layout_index(0),
         desc="Switch to the master and stack layout",
     ),
     Key([mod], "m", lazy.to_layout_index(2), desc="Switch to the single window layout"),
@@ -172,7 +189,7 @@ for vt in range(1, 8):
         )
     )
 
-for group in [Group(e) for e in "123456789"]:
+for group in [Group(n) for n in "123456789"]:
     keys.extend(
         [
             # mod + group number = switch to group
@@ -183,42 +200,50 @@ for group in [Group(e) for e in "123456789"]:
                 desc=f"Switch to group {group.name}",
             ),
             # mod + shift + group number = switch to & move focused window to group
+            # Key(
+            #     [mod, "shift"],
+            #     group.name,
+            #     lazy.window.togroup(group.name, switch_group=True),
+            #     desc=f"Switch to & move focused window to group {group.name}",
+            # ),
+            # Or, use below if you prefer not to switch to that group.
+            # # mod + shift + group number = move focused window to group
             Key(
                 [mod, "shift"],
                 group.name,
-                lazy.window.togroup(group.name, switch_group=True),
-                desc=f"Switch to & move focused window to group {group.name}",
+                lazy.window.togroup(group.name),
+                desc="move focused window to group {}".format(group.name),
             ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod + shift + group number = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
         ]
     )
 
-colors = {
+_colors = {
     "bright": "#dadada",
-    "dim": "#4c4c4c",
+    "dim": "#444444",
     "dark": "#282828",
+    "red": "#ea1646",
+    "grey": "#808080",
+    "white": "#ffffff",
+    "blue": "#1e90ff",
 }
 
 layouts = [
-    layout.Columns(
-        border_focus=colors["bright"],
-        border_normal=colors["dim"],
-        border_width=1,
-        insert_position=1,
-        num_columns=2,
-    ),
     layout.MonadTall(
-        align=1,
+        align=0,  # where to position the master: 0 = left, 1 = right
         auto_maximize=True,
-        border_focus=colors["bright"],
-        border_normal=colors["dim"],
+        border_focus=_colors["grey"],
+        border_normal=_colors["dim"],
         border_width=1,
-        new_client_position="before_current",
+        new_client_position="after_current",
         ratio=0.6,
         single_border_width=0,
+    ),
+    layout.Columns(
+        border_focus=_colors["grey"],
+        border_normal=_colors["dim"],
+        border_width=1,
+        insert_position=1,  # new windows after the current
+        num_columns=2,
     ),
     layout.Max(),
 ]
@@ -231,17 +256,42 @@ widget_defaults = {
 
 extension_defaults = widget_defaults.copy()
 
+
+def _truncate(text: str) -> str:
+    """Truncate long text with ellipsis"""
+    return text if len(text) < 50 else text[:51] + "..."
+
+
 screens = [
     Screen(
         bottom=bar.Bar(
             [
                 widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
+                widget.GroupBox(
+                    active=_colors["bright"],
+                    inactive=_colors["dim"],
+                    highlight_method="line",
+                    # obs.: `highlight_color` must be a `list`, not a `tuple`.  the two
+                    # colors form a gradient there the first and second values indicate
+                    # the top and bottom colors, respectively. This is for
+                    # `highlight_method='line'` only.
+                    highlight_color=[_colors["dark"], _colors["dark"]],
+                    this_current_screen_border=_colors["red"],
+                ),
+                widget.Prompt(
+                    background=_colors["red"],
+                    fmt="<b>{}</b>",
+                    foreground=_colors["dark"],
+                    cursor_color=_colors["dark"],
+                ),
+                widget.WindowTabs(
+                    foreground=_colors["grey"],
+                    parse_text=_truncate,
+                    selected=(f"<span foreground={_colors['bright']!r}>", "</span>"),
+                ),
                 widget.Chord(
                     chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
+                        "launch": (_colors["red"], _colors["white"]),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
@@ -253,8 +303,9 @@ screens = [
                 ),
                 widget.Sep(),
                 widget.Volume(
-                    fmt="VOL: {}",
-                    mute_format="(mute) {volume}%",
+                    fmt="Vol: {}",
+                    step=5,
+                    mute_format=f"<span foreground={_colors['grey']!r}>{{volume}}%</span>",
                 ),
                 widget.Sep(),
                 # NB Systray is incompatible with Wayland, consider using
@@ -266,7 +317,7 @@ screens = [
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-            background=colors["dark"],
+            background=_colors["dark"],
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is
         # laggy. By default we handle these events delayed to already improve performance,
