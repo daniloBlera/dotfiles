@@ -41,6 +41,9 @@
   :bind (("M-n" . completion-preview-next-candidate)
          ("M-p" . completion-preview-prev-candidate)))
 
+(use-package doric-themes
+  :ensure t)
+
 (use-package ef-themes
   :ensure t)
 
@@ -55,7 +58,8 @@
 
 (use-package flycheck
   :ensure t
-  :defer t)
+  :defer t
+  :bind (("C-c t c" . flycheck-mode)))
 
 (use-package format-all
   :ensure t
@@ -87,7 +91,9 @@
 
 (use-package jinx
   :ensure t
-  :hook ((prog-mode text-mode) . jinx-mode))
+  :hook (emacs-startup . global-jinx-mode)
+  :bind (("M-$" . #'jinx-correct)
+         ("C-M-$" . jinx-languages)))
 
 (use-package magit
   :ensure t)
@@ -105,7 +111,7 @@
   :ensure t
   :mode ("\\.lua\\'" . lua-ts-mode)
   :interpreter ("lua" . lua-ts-mode)
-  :config (setq lua-indent-nested-calls t))
+  :config (setq-default lua-indent-nested-calls t))
 
 (use-package olivetti
   :ensure t
@@ -124,6 +130,10 @@
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package recentf
+  :bind (("C-x C-r" . recentf-open-files))
+  :config (recentf-mode t))
 
 (use-package replace
   :bind ("C-c o" . occur)
@@ -176,7 +186,7 @@
       kept-old-versions 2)
 
 ;; setting the default font
-(add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-13"))
+(add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-11"))
 
 ;; setting the theme based on current time
 (defun my/daylight-p ()
@@ -235,7 +245,7 @@
  '((emacs-lisp . t)
    (python . t)))
 
-;; screenshots of emacs
+;; screenshots of Emacs
 (defun my/screenshot-svg ()
   "Save a screenshot of the current frame as an SVG image.
 
@@ -248,7 +258,7 @@ Saves to a temp file and puts the filename in the kill ring."
     (kill-new filename)
     (message filename)))
 
-;;; Global keymaps
+;;; Global key bindings
 (global-set-key (kbd "C-c e") #'eval-buffer)
 (global-set-key (kbd "C-c s") #'my/screenshot-svg)
 (global-set-key (kbd "C-c t v") #'view-mode)
@@ -262,6 +272,7 @@ Saves to a temp file and puts the filename in the kill ring."
 (global-set-key (kbd "C-c f r") #'isearch-forward-regexp)
 (global-set-key (kbd "C-c f R") #'isearch-backward-regexp)
 (global-set-key (kbd "C-c f w") #'isearch-forward-word)
+(global-set-key (kbd "C-h a") #'apropos)
 
 ;; re-enable uppercase and lowercase region commands
 (put 'upcase-region 'disabled nil)      ; C-x C-u

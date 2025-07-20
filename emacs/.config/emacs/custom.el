@@ -30,14 +30,17 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message
-   ";;; Scratch area for Emacs lisp\12;; * movement\12;; `backward-sexp' (C-M-b)\12;; `forward-sexp' (C-M-f)\12;; `forward-list' (C-M-n)\12;; `backward-list' (C-M-p)\12;;\12;; * selection\12;; `mark-defun' (C-M-h)\12;; `mark-sexp' (C-M-SPC)\12;;\12;; * evaluation\12;; `eval-buffer' (C-c e)\12;; `eval-last-sexp' (C-x C-e)\12;; `eval-defun'\12;; `eval-print-last-sexp'\12;; `eval-expression' (M-:)\12;; `eval-region'\12")
+   ";;; Scratch area for Emacs lisp\12;; * movement\12;; `backward-sexp' (C-M-b)\12;; `forward-sexp' (C-M-f)\12;; `forward-list' (C-M-n)\12;; `backward-list' (C-M-p)\12;;\12;; * selection\12;; `mark-defun' (C-M-h)\12;; `mark-sexp' (C-M-SPC)\12;;\12;; * evaluation\12;; `eval-buffer' (C-c e)\12;; `eval-last-sexp' (C-x C-e)\12;; `eval-defun' (C-M-x)\12;; `eval-print-last-sexp' (C-j)\12;; `eval-expression' (M-:)\12;; `eval-region'\12")
  '(kill-ring-deindent-mode t)
  '(menu-bar-mode t)
- '(mode-line-compact 'long)
+ '(mode-line-collapse-minor-modes t)
+ '(mode-line-compact t)
+ '(mode-line-position-column-line-format '(" (%l,%C)"))
  '(mouse-wheel-progressive-speed nil)
  '(org-M-RET-may-split-line '((default)))
  '(org-startup-folded 'content)
  '(package-selected-packages nil)
+ '(repeat-mode t)
  '(require-final-newline t)
  '(scroll-bar-mode nil)
  '(scroll-conservatively 100)
@@ -48,7 +51,6 @@
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(which-key-idle-delay 0.5)
- '(which-key-lighter "")
  '(which-key-mode t)
  '(whitespace-style
    '(face trailing tabs spaces newline missing-newline-at-eof empty indentation
