@@ -213,7 +213,7 @@
         (erlang-mode . erlang-ts-mode)
         (go-mode . go-ts-mode)
         (html-mode . html-ts-mode)
-        (json-mode . json-ts-mode)
+        (js-json-mode . json-ts-mode)
         (lua-mode . lua-ts-mode)
         (python-mode . python-ts-mode)
         (toml-mode . toml-ts-mode)
