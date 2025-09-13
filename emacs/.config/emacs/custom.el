@@ -17,7 +17,7 @@
  '(display-line-numbers-width 3)
  '(editorconfig-mode t)
  '(electric-pair-mode t)
- '(fill-column 90)
+ '(fill-column 100)
  '(frame-resize-pixelwise t)
  '(global-auto-revert-mode t)
  '(global-display-fill-column-indicator-mode t)

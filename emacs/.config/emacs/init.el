@@ -115,7 +115,7 @@
 
 (use-package olivetti
   :ensure t
-  :init (setq olivetti-body-width 100
+  :init (setq olivetti-body-width 110
               olivetti-style 'fancy
               olivetti-lighter "")
   :bind (("C-c t o" . olivetti-mode))
@@ -278,7 +278,7 @@ Saves to a temp file and puts the filename in the kill ring."
 (put 'upcase-region 'disabled nil)      ; C-x C-u
 (put 'downcase-region 'disabled nil)    ; C-x C-l
 
-;; re-enable narrowing region -- check C-x n {d,n,p,w}
+;; re-enable narrowing region -- check C-x n [dnpw]
 (put 'narrow-to-region 'disabled nil)   ; C-x n n
 
 ;;; Features to disable
