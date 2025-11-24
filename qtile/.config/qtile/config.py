@@ -33,8 +33,9 @@ from libqtile.widget import backlight, volume
 mod = "mod4"
 terminal = "st"
 
-_screenshot_cmd = f"flameshot screen -p {os.path.expanduser('~/Pictures/screenshots')}"
-_screenshot_cmd_alt = f"flameshot gui"
+_screenshots_path = os.path.expanduser('~/Pictures/screenshots')
+_screenshot_cmd = f"flameshot screen -p '{_screenshots_path}'"
+_screenshot_cmd_alt = "flameshot gui"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -47,26 +48,14 @@ keys = [
     Key([mod], "o", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key(
-        [mod, "shift"], "j", lazy.layout.shuffle_left(), desc="Move window to the left"
-    ),
-    Key(
-        [mod, "shift"],
-        "semicolon",
-        lazy.layout.shuffle_right(),
-        desc="Move window to the right",
-    ),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod, "shift"], "semicolon", lazy.layout.shuffle_right(), desc="Move window to the right",),
     Key([mod, "shift"], "k", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "j", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key(
-        [mod, "control"],
-        "semicolon",
-        lazy.layout.grow_right(),
-        desc="Grow window to the right",
-    ),
+    Key([mod, "control"], "semicolon", lazy.layout.grow_right(), desc="Grow window to the right",),
     Key([mod, "control"], "k", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "l", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
@@ -143,34 +132,18 @@ keys = [
         lazy.spawn("thorium-browser"),
         desc="Launch google-friendly browser",
     ),
+    Key([mod, "mod1"], "b", lazy.spawn("torbrowser-launcher"), desc="Lauch Tor Browser"),
     Key([mod], "e", lazy.spawn("emacs"), desc="Launch emacs"),
     Key([mod], "i", lazy.spawn(",irc"), desc="Launch IRC client"),
     Key([mod], "z", lazy.spawn("zeal"), desc="Launch Zeal documentation"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Switch to specific layouts -- indexes correspond to the `layouts` list defined below
-    Key(
-        [mod], "c", lazy.to_layout_index(1), desc="Switch to the manual columns layout"
-    ),
-    Key(
-        [mod],
-        "s",
-        lazy.to_layout_index(0),
-        desc="Switch to the master and stack layout",
-    ),
-    Key([mod], "m", lazy.to_layout_index(2), desc="Switch to the single window layout"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
-    Key(
-        [mod],
-        "t",
-        lazy.window.toggle_floating(),
-        desc="Toggle floating on the focused window",
-    ),
+    Key([mod], "c", lazy.to_layout_index(2), desc="Switch to the manual columns layout"),
+    Key([mod], "s", lazy.to_layout_index(1), desc="Switch to the master and stack layout",),
+    Key([mod], "m", lazy.to_layout_index(0), desc="Switch to the single window layout"),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window",),
+    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window",),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
@@ -228,6 +201,7 @@ _colors = {
 }
 
 layouts = [
+    layout.Max(),
     layout.MonadTall(
         align=0,  # where to position the master: 0 = left, 1 = right
         auto_maximize=True,
@@ -245,7 +219,6 @@ layouts = [
         insert_position=1,  # new windows after the current
         num_columns=2,
     ),
-    layout.Max(),
 ]
 
 widget_defaults = {
