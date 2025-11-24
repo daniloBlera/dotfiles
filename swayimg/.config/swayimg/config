@@ -1,0 +1,26 @@
+# Configuration for the Swayimg viewer.
+# For more information, check `man 5 swayimgrc`
+
+[general]
+overlay = no
+
+[info]
+show = no
+
+[keys.viewer]
+h = zoom height
+w = zoom width
+n = next_file
+p = prev_file
+comma = first_file
+period = last_file
+Shift+less = rotate_left
+Shift+greater = rotate_right
+
+[keys.gallery]
+b = step_left
+n = step_down
+p = step_up
+f = step_right
+comma = first_file
+period = last_file

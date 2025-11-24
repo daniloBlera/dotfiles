@@ -1,0 +1,7 @@
+#!/bin/sh
+# nnn plugin -- Open all images from the current directory
+#
+# Args:
+#   $1: Hovered filename (not used)
+#   $2: Absolute path to the hovered file
+swayimg --gallery "$2"

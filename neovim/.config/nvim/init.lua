@@ -41,6 +41,7 @@ local function supports_truecolor()
     or term:match("xterm") 
     or term:match("st") 
     or term:match("alacritty")
+    or term:match("foot")
   )
 end
 
