@@ -66,7 +66,7 @@ source_if_exists "$HOME/.config/nnn/misc/quitcd.bash_sh_zsh"
 
 # setup commands if they're installed somewhere in PATH
 if [ -x "$(command -v $PYENV_ROOT/bin/pyenv)" ]; then
-    eval "$($PYENV_ROOT/bin/pyenv init - --no-rehash)"
+    eval "$($PYENV_ROOT/bin/pyenv init - zsh --no-rehash)"
 fi
 
 if [ -x "$(command -v direnv)" ]; then
@@ -86,6 +86,7 @@ setopt HIST_IGNORE_SPACE
 setopt autocd
 
 stty -ixon
+# disable flow control -- when enabled, C-s stops output to the terminal, C-q resumes
 
 # Disable overwriting files with redirection
 set -o noclobber
