@@ -15,6 +15,10 @@
  '(delete-selection-mode t)
  '(display-line-numbers-type 'relative)
  '(display-line-numbers-width 3)
+ '(ediff-keep-variants nil)
+ '(ediff-show-clashes-only t)
+ '(ediff-split-window-function 'split-window-horizontally)
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(editorconfig-mode t)
  '(electric-pair-mode t)
  '(fill-column 100)
@@ -50,6 +54,7 @@
  '(tab-bar-tab-hints t)
  '(tab-width 4)
  '(tool-bar-mode nil)
+ '(vc-follow-symlinks nil)
  '(which-key-idle-delay 0.5)
  '(which-key-mode t)
  '(whitespace-style

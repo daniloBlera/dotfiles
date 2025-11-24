@@ -15,7 +15,9 @@
 
 (use-package ace-window
   :ensure t
-  :bind ("M-o" . ace-window))
+  :bind ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?j ?k ?l ?\; ?h)))
 
 (use-package avy
   :ensure t
@@ -73,8 +75,11 @@
 
 (use-package go-mode
   :ensure t
-  :mode ("\\.go\\'" . go-mode)
-  :config (setq-default go-ts-mode-indent-offset 4))
+  :defer t)
+
+(use-package haskell-mode
+  :ensure t
+  :defer t)
 
 (use-package htmlize
   :ensure t
@@ -127,6 +132,24 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+(use-package popper
+  :ensure t
+  :bind (("C-`" . popper-toggle)
+         ("M-`" . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :config
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "\\*Output\\*"
+          "\\*Async Shell Command\\*"
+          "\\*Apropos\\*"
+          "\\*Python\\*"
+          "\\*sly-mrepl for sbcl\\*"
+          help-mode
+          compilation-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))
+
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -150,8 +173,8 @@
   :bind (("C-c r t" . transpose-frame)
          ("C-c r c" . rotate-frame-clockwise)
          ("C-c r C" . rotate-frame-anticlockwise)
-         ("C-c r v" . flip-frame)
-         ("C-c r h" . flop-frame)))
+         ("C-c r -" . flip-frame)
+         ("C-c r /" . flop-frame)))
 
 (use-package unfill
   :ensure t
@@ -167,6 +190,9 @@
   :ensure t
   :init (vertico-mode)
   :config (keymap-set vertico-map "TAB" #'minibuffer-complete))
+
+(use-package vlf
+  :ensure t)
 
 (use-package vundo
   :ensure t
@@ -238,6 +264,13 @@
   (let ((language (car grammar)))
     (unless (treesit-language-available-p language)
       (treesit-install-language-grammar language))))
+
+;; open files under specific directories as read-only
+(add-hook 'find-file-hook
+          (lambda ()
+            (dolist (pattern '("~/.config/glirc/logs/.*" "~/.config/glirc/logs-acer/.*"))
+              (if (string-match (expand-file-name pattern) buffer-file-name)
+                  (read-only-mode)))))
 
 ;; org stuff
 (org-babel-do-load-languages

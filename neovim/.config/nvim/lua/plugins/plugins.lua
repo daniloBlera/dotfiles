@@ -42,7 +42,7 @@ return {
         vim.g.goyo_width = 100
     end,
     keys = {
-      { "<leader>z", "<cmd>Goyo<cr>", desc = "Toggle Goyo mode" },
+      { "<leader>vz", "<cmd>Goyo<cr>", desc = "Toggle Goyo mode" },
     },
   },
 
@@ -51,7 +51,7 @@ return {
     "junegunn/limelight.vim",
     lazy = false,
     keys = {
-        { "<leader>f", "<cmd>Limelight!! 0.8<cr>", desc = "Toggle Limelight" },
+        { "<leader>vl", "<cmd>Limelight!! 0.8<cr>", desc = "Toggle Limelight" },
     },
   },
 
@@ -81,9 +81,9 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      -- light themes: dayfox, dawnfox
-      -- dark themes: duskfox, nightfox, nordfox, terafox, carbonfox
-      vim.cmd([[colorscheme terafox]])
+      -- light themes: dayfox and dawnfox
+      -- dark themes: duskfox, nightfox, nordfox, terafox, and carbonfox
+      vim.cmd([[colorscheme duskfox]])
     end,
   },
 
@@ -115,5 +115,16 @@ return {
         desc = "Buffer Local Keymaps (which-key)",
       },
     },
+  },
+
+  -- pattern-match files for opening in read-only mode
+  {
+    'bgaillard/readonly.nvim',
+    opts = {
+      pattern = {
+        vim.fn.expand('~') .. '/.config/glirc/logs/**/*',
+      }
+    },
+    lazy = false,
   },
 }
