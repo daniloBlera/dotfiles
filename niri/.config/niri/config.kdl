@@ -297,7 +297,7 @@ prefer-no-csd
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/Screenshots/screenshot-%Y-%m-%d %H-%M-%S.png"
 
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
@@ -384,8 +384,10 @@ binds {
     // Using spawn-sh allows to pass multiple arguments together with the command.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.25+"; }
+    Shift+XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.25-"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
@@ -400,16 +402,16 @@ binds {
     Mod+Q repeat=false hotkey-overlay-title="Close window" { close-window; }
 
     // Move focus inside a workspace - horizontal: between columns, vertical: between windows
-    Mod+J                       { focus-column-left; }
-    Mod+K                       { focus-window-down; }
-    Mod+L                       { focus-window-up; }
-    Mod+Semicolon               { focus-column-right; }
+    Mod+J                           { focus-column-left; }
+    Mod+K                           { focus-window-down; }
+    Mod+L                           { focus-window-up; }
+    Mod+Semicolon                   { focus-column-right; }
 
     // Move whole columns
-    Mod+Ctrl+J                  { move-column-left; }
-    Mod+Ctrl+K                  { move-window-down; }
-    Mod+Ctrl+L                  { move-window-up; }
-    Mod+Ctrl+Semicolon          { move-column-right; }
+    Mod+Ctrl+J                      { move-column-left; }
+    Mod+Ctrl+K                      { move-window-down; }
+    Mod+Ctrl+L                      { move-window-up; }
+    Mod+Ctrl+Semicolon              { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
@@ -418,22 +420,22 @@ binds {
     // Mod+Ctrl+K     { move-window-down-or-to-workspace-down; }
     // Mod+Ctrl+L     { move-window-up-or-to-workspace-up; }
 
-    Mod+Home                    { focus-column-first; }
-    Mod+End                     { focus-column-last; }
-    Mod+Ctrl+Home               { move-column-to-first; }
-    Mod+Ctrl+End                { move-column-to-last; }
+    Mod+Home                        { focus-column-first; }
+    Mod+End                         { focus-column-last; }
+    Mod+Ctrl+Home                   { move-column-to-first; }
+    Mod+Ctrl+End                    { move-column-to-last; }
 
     // Change monitor focus
-    Mod+Shift+J                 { focus-monitor-left; }
-    Mod+Shift+K                 { focus-monitor-down; }
-    Mod+Shift+L                 { focus-monitor-up; }
-    Mod+Shift+Semicolon         { focus-monitor-right; }
+    Mod+Shift+J                     { focus-monitor-left; }
+    Mod+Shift+K                     { focus-monitor-down; }
+    Mod+Shift+L                     { focus-monitor-up; }
+    Mod+Shift+Semicolon             { focus-monitor-right; }
 
     // Move whole column to other monitors
-    Mod+Shift+Ctrl+J            { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+K            { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+L            { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+Semicolon    { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+J                { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+K                { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+L                { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Semicolon        { move-column-to-monitor-right; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
@@ -444,20 +446,20 @@ binds {
     // ...
 
     // Change workspace focus
-    Mod+N                       { focus-workspace-down; }
-    Mod+P                       { focus-workspace-up; }
+    Mod+N                           { focus-workspace-down; }
+    Mod+P                           { focus-workspace-up; }
 
     // Move whole columns to other workspaces
-    Mod+Ctrl+N                  { move-column-to-workspace-down; }
-    Mod+Ctrl+P                  { move-column-to-workspace-up; }
+    Mod+Ctrl+N                      { move-column-to-workspace-down; }
+    Mod+Ctrl+P                      { move-column-to-workspace-up; }
 
     // Move individual windows to other workspaces
-    Mod+Ctrl+Page_Down          { move-window-to-workspace-down; }
-    Mod+Ctrl+Page_Up            { move-window-to-workspace-up; }
+    Mod+Ctrl+Page_Down              { move-window-to-workspace-down; }
+    Mod+Ctrl+Page_Up                { move-window-to-workspace-up; }
 
     // Swap workspaces
-    Mod+Shift+N                 { move-workspace-down; }
-    Mod+Shift+P                 { move-workspace-up; }
+    Mod+Shift+N                     { move-workspace-down; }
+    Mod+Shift+P                     { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -470,17 +472,17 @@ binds {
     Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+    Mod+WheelScrollRight            { focus-column-right; }
+    Mod+WheelScrollLeft             { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight       { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft        { move-column-left; }
 
     // Usually scrolling up and down with Shift in applications results in
     // horizontal scrolling; these binds replicate that.
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
-    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+    Mod+Shift+WheelScrollDown       { focus-column-right; }
+    Mod+Shift+WheelScrollUp         { focus-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown  { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp    { move-column-left; }
 
     // Similarly, you can bind touchpad scroll "ticks".
     // Touchpad scrolling is continuous, so for these binds it is split into
@@ -522,7 +524,7 @@ binds {
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    // Mod+Tab { focus-workspace-previous; }
+    Mod+Tab { focus-workspace-previous; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.

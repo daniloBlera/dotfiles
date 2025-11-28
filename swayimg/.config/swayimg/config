@@ -1,13 +1,23 @@
 # Configuration for the Swayimg viewer.
 # For more information, check `man 5 swayimgrc`
 
-[general]
-overlay = no
+[viewer]
+window = #282828ff
+
+[gallery]
+window = #282828ff
+shadow = #000000dd
+
+[font]
+color = #ffffffff
+shadow = #00000000
+background = #000000bb
 
 [info]
 show = no
 
 [keys.viewer]
+Shift+question = help
 h = zoom height
 w = zoom width
 n = next_file
@@ -18,6 +28,7 @@ Shift+less = rotate_left
 Shift+greater = rotate_right
 
 [keys.gallery]
+Shift+question = help
 b = step_left
 n = step_down
 p = step_up
