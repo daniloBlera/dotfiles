@@ -1,20 +1,27 @@
-# General
+# Configuration file for the zathura document viewer
+# for more information check zathurarc(5)
+
+# options - girara
 set font                    'ComicShannsMono Nerd Font Mono 10'
-set incremental-search      true
-set page-padding            5
-set window-title-basename   true
-set statusbar-home-tilde    true
-set selection-clipboard     clipboard
-set database                sqlite
+set guioptions              "shv"
+
+# options - zathura
 set adjust-open             best-fit
+set database                sqlite
+set incremental-search      true
+set page-v-padding          4
+set page-h-padding          4
 set recolor                 false
-set statusbar-page-percent  true
 set scroll-full-overlap     0.2
 set scroll-page-aware       true
-set zoom-step 5
+set selection-clipboard     clipboard
+set statusbar-home-tilde    true
+set statusbar-page-percent  true
+set window-title-basename   true
+set window-title-page       true
+set zoom-step               5
 
-
-# emacs bindings
+# emacs-ish bindings
 map [normal] <C-g> abort
 map [insert] <C-g> abort
 
@@ -35,5 +42,10 @@ map [normal] <A-p> scroll full-up
 map [normal] <A-\>> goto bottom
 map [normal] <A-\<> goto top
 
-# Theme
+map [index] n navigate_index down
+map [index] p navigate_index up
+map [index] f navigate_index expand
+map [index] b navigate_index collapse
+
+# theme
 include fibonacci-ruler

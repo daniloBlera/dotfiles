@@ -21,6 +21,9 @@ set highlight-fg                rgba(40,40,40,1.0)       # text colour of all se
 set highlight-color             rgba(252,203,0,0.8)      # background of all search highlight results
 set highlight-active-color      rgba(51,255,144,0.8)     # background of the current highlight
 
+## The colour of the background between pages
+set default-bg                  "#222222"
+
 ## Configuring recoloring of light and dark colours for a less bright reading
 set recolor-keephue             true
 set recolor-lightcolor          rgba(40,40,40,1.0)
