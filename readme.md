@@ -1,11 +1,11 @@
 # A bunch of .files
 
-A place to backup my system's configuration. This is the place I keep my personal configuration
-files, currently an arch Linux machine. Feel free to adapt anything you find useful.
+A place to backup my system's configuration. Currently an arch linux machine (btw). Fell free to
+adapt anything you find useful.
 
-## The tl;dr version
+## TL;DR
 
-* individual tools have their separated directory tree;
+* individual tools have their own, separate directory tree;
 * uses [stow][stow].
 
 ## About the repository structure
