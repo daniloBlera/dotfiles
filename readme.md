@@ -1,7 +1,6 @@
 # A bunch of .files
 
-A place to backup my system's configuration. Currently an arch linux machine (btw). Fell free to
-adapt anything you find useful.
+A place to backup my system's configuration (it's arch linux, btw).
 
 ## TL;DR
 
