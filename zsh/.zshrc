@@ -79,8 +79,8 @@ fi
 
 # Extra stuff
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh_history"
-HISTSIZE=500
-SAVEHIST=500
+HISTSIZE=1000
+SAVEHIST=1000
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt autocd

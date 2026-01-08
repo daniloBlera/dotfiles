@@ -18,14 +18,21 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export PYTHON_GIL=1     # enable old GIL
 export PYTHON_JIT=1     # enable the experimental JIT
 
-export PYTHONBREAKPOINT='pudb.set_trace'
+# require pip to run on a venv
+#   https://pip.pypa.io/en/latest/cli/pip/#cmdoption-require-virtualenv
+export PIP_REQUIRE_VENV=1
+
+# where the pyenv binary is located
 export PYENV_ROOT="$HOME/source/pyenv"
 
 # where to save python's REPL history
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
 
 # where to resolve import statements
+# check https://go.dev/wiki/SettingGOPATH or `go help gopath`
+# p.s.: by default it's set to ~/go but let's not clutter our HOME
 export GOPATH="$HOME/.cache/go"
+
 # set to non-empty to use the XDG Base Directory Specification instead of your user's home
 export GHCUP_USE_XDG_DIRS='https://ghcup.readthedocs.io/en/latest/guide/#xdg-support'
 export STACK_XDG='https://docs.haskellstack.org/en/stable/configure/yaml/#location-of-global-configuration'
@@ -48,7 +55,7 @@ export QT_STYLE_OVERRIDE=kvantum
 export NNN_OPTS='AdeoRUr'
 export NNN_OPENER='/usr/bin/xdg-open'
 export NNN_BMS='c:~/.config;C:~/.cache;l:~/.local;d:~/Downloads;p:~/Pictures;s:~/.local/scripts'
-export NNN_PLUG='i:viewimgs-wl;x:delete-stuff;a:!mpv --no-video "$nnn"'
+export NNN_PLUG='i:viewimgs-wl;x:delete-stuff;a:!mpv --no-video "$nnn";v:!bat --paging=always "$nnn"'
 export NNN_COLORS='6532'
 export NNN_TRASH=1  # use trash instead of `rm` -- 1: 'trash-cli', 2: `gio`
 export NNN_SEL='/tmp/nnn_sel'
@@ -65,8 +72,7 @@ prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
-prepend_to_path "$HOME/.cache/rebar3/bin"
-prepend_to_path "${GOPATH:-$HOME/go}/bin"
+prepend_to_path "${GOPATH:-$XDG_CACHE_HOME/go}/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
