@@ -6,6 +6,11 @@
 ;;;
 ;;; tested under Emacs version 31.0.50
 
+;; Load private configurations that shouldn't be found in vcs
+(let ((user-settings (expand-file-name "default.el" user-emacs-directory)))
+  (if (file-exists-p user-settings)
+      (load-file user-settings)))
+
 ;;; Packages
 ;; add MELPA repository
 (use-package package
@@ -92,12 +97,12 @@
 (use-package indent-bars
   :ensure t
   :config (setq indent-bars-prefer-character t)
-  :hook (python-ts-mode . indent-bars-mode))
+  :hook ((python-ts-mode lua-ts-mode json-ts-mode) . indent-bars-mode))
 
 (use-package jinx
   :ensure t
   :hook (emacs-startup . global-jinx-mode)
-  :bind (("M-$" . #'jinx-correct)
+  :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages)))
 
 (use-package magit
@@ -105,8 +110,7 @@
 
 (use-package marginalia
   :ensure t
-  :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle))
+  :bind (:map minibuffer-local-map ("M-A" . marginalia-cycle))
   :init (marginalia-mode))
 
 (use-package markdown-mode
@@ -145,6 +149,8 @@
           "\\*Apropos\\*"
           "\\*Python\\*"
           "\\*sly-mrepl for sbcl\\*"
+          "\\*sly-description\\*"
+          "\\*sly-scratch\\*"
           help-mode
           compilation-mode))
   (popper-mode +1)
@@ -162,10 +168,14 @@
   :bind ("C-c o" . occur)
   :hook (occur . (lambda () (switch-to-buffer-other-window "*Occur*"))))
 
+(use-package side-hustle
+  :ensure t
+  :bind (("M-s l" . side-hustle-toggle)))
+
 (use-package sly
   :ensure t
   :init (setq inferior-lisp-program "sbcl")
-  :bind ("M-h" . sly-documentation-lookup)
+  :bind (:map sly-mode-map ("M-h" . sly-documentation-lookup))
   :hook (lisp-mode . sly-editing-mode))
 
 (use-package transpose-frame
@@ -189,7 +199,7 @@
 (use-package vertico
   :ensure t
   :init (vertico-mode)
-  :config (keymap-set vertico-map "TAB" #'minibuffer-complete))
+  :bind (:map vertico-map ("TAB" . minibuffer-complete)))
 
 (use-package vlf
   :ensure t)
@@ -214,19 +224,32 @@
 ;; setting the default font
 (add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-11"))
 
-;; setting the theme based on current time
+;; helpers to check if the current time is inside a sunrise-sunset window -- p.s.: try circadian.el
+(require 'solar)
+
+(defun my/sunrise-sunset-hours ()
+  "Get the sunrise and sunset hours, if configured."
+  (if (and calendar-latitude calendar-longitude)
+      (cl-destructuring-bind ((sunrise-hour _) (sunset-hour _) _)
+          (solar-sunrise-sunset (calendar-current-date))
+        (list sunrise-hour sunset-hour))
+    (list 5 17)))
+
 (defun my/daylight-p ()
-  "Check if the current time is within a \"it's bright outside\" window."
-  (< 5 (string-to-number (format-time-string "%H")) 17))
+  "Check if the current time is between sunrise and sunset."
+  (cl-destructuring-bind (_ current-minutes current-hour &rest params) (decode-time)
+    (cl-destructuring-bind (sunrise-hour sunset-hour) (my/sunrise-sunset-hours)
+      (< (* sunrise-hour 60)
+         (+ (* current-hour 60) current-minutes)
+         (* sunset-hour 60)))))
 
-(defun my/adjust-theme-light ()
-  "Set light or dark theme according to the current time."
+(defun my/set-theme-type ()
+  "Set a light or a dark theme according to the current time."
   (interactive)
-  (let ((light-theme 'ef-summer)
-        (dark-theme 'ef-winter))
-    (load-theme (if (my/daylight-p) light-theme dark-theme))))
+  (load-theme (if (my/daylight-p) 'ef-summer 'ef-winter)))
 
-(my/adjust-theme-light)
+;; and setting the theme according to the time
+(my/set-theme-type)
 
 ;;; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
