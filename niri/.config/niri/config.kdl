@@ -20,6 +20,7 @@ input {
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
             layout "us"
+            variant "altgr-intl"
             options "compose:ralt"
         }
         repeat-delay 220
@@ -140,6 +141,15 @@ layout {
         // fixed 1920
     }
 
+    // Indicator when a column is in tabbed column display mode
+    tab-indicator {
+        width 4
+        gap 4
+        length total-proportion=1.0
+        position "top"
+        place-within-column
+    }
+
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
     // preset-window-heights { }
 
@@ -162,7 +172,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        // off
+        off
 
         // How many logical pixels the ring extends out from the windows.
         width 4
@@ -201,7 +211,7 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        off
+        // off
 
         width 4
         // active-color "#ffc87f"
@@ -215,6 +225,8 @@ layout {
         //
         active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
         inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
     // You can enable drop shadows for windows.
@@ -282,7 +294,10 @@ layout {
 spawn-sh-at-startup "waybar"
 
 // Setting the wallpaper
-spawn-sh-at-startup "swaybg --mode fill --i $HOME/.config/wallpaper"
+spawn-sh-at-startup "swaybg --mode fill --i ~/.config/wallpaper"
+
+// Enable clipboard management
+spawn-sh-at-startup "wl-paste --watch cliphist store"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -297,7 +312,7 @@ prefer-no-csd
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
-screenshot-path "~/Pictures/Screenshots/screenshot-%Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/screenshots/screenshot-%Y-%m-%d_%H-%M-%S.png"
 
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
@@ -370,9 +385,12 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+B hotkey-overlay-title="Open Librewolf" { spawn "librewolf"; }
     Mod+Shift+B hotkey-overlay-title="Open Qutebrowser" { spawn "qutebrowser"; }
+    Mod+Ctrl+B hotkey-overlay-title="Open Thorium" { spawn "thorium-browser"; }
     Mod+I hotkey-overlay-title="Open IRC Client" { spawn ",irc"; }
     Mod+Z hotkey-overlay-title="Open Zeal Documentation" { spawn "zeal"; }
     Mod+E hotkey-overlay-title="Open Emacs" { spawn "emacs"; }
+    Mod+Shift+C hotkey-overlay-title="Select clipboard entries" { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+    Mod+Alt+C hotkey-overlay-title="Clear clipboard contents" { spawn "cliphist" "wipe"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -382,8 +400,8 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
     Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.25+"; }
     Shift+XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.25-"; }
     XF86AudioMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
@@ -524,16 +542,16 @@ binds {
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    Mod+Tab { focus-workspace-previous; }
+    // Mod+Tab hotkey-overlay-title="Focus previous workspace" { focus-workspace-previous; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    Mod+Comma hotkey-overlay-title="Consume next window into column" { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    Mod+Period hotkey-overlay-title="Expel last window from column" { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
     // Cycling through the presets in reverse order is also possible.
@@ -604,7 +622,22 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    // Mod+Shift+P { power-off-monitors; }
+    Mod+Alt+P hotkey-overlay-title="Power-off monitors" { power-off-monitors; }
+}
+
+recent-windows {
+    // Cycle through open windows
+
+    // disable the switcher
+    // off
+
+    binds {
+        // Cycle through open windows with the same id as the currently selected window.
+        // This could help finding all librewolf windows. You can use the s, a, w, and o
+        // keys to change the focus of the windows search.
+        Mod+Tab { next-window filter="app-id"; }
+        Mod+Shift+Tab { previous-window filter="app-id"; }
+    }
 }
 
 cursor {

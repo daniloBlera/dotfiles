@@ -3,8 +3,10 @@
 
 [viewer]
 window = #282828ff
+loop = no
 
 [gallery]
+pstore = no
 window = #282828ff
 shadow = #000000dd
 
@@ -22,10 +24,11 @@ h = zoom height
 w = zoom width
 n = next_file
 p = prev_file
+h = flip_horizontal
+v = flip_vertical
+m = none
 comma = first_file
 period = last_file
-Shift+less = rotate_left
-Shift+greater = rotate_right
 
 [keys.gallery]
 Shift+question = help
