@@ -16,21 +16,21 @@ return {
     "justinmk/vim-sneak",
     keys = {
       -- two characters jump
-      { 's', '<Plug>Sneak_s', mode = 'n' },
-      { 'S', '<Plug>Sneak_S', mode = 'n' },
-      { 's', '<Plug>Sneak_s', mode = 'x' },
-      { 'S', '<Plug>Sneak_S', mode = 'x' },
+      { 's', '<plug>Sneak_s', mode = 'n' },
+      { 'S', '<plug>Sneak_S', mode = 'n' },
+      { 's', '<plug>Sneak_s', mode = 'x' },
+      { 'S', '<plug>Sneak_S', mode = 'x' },
 
       -- replacing the f and t built-ins
-      { 'f', '<Plug>Sneak_f', mode = 'n' },
-      { 'F', '<Plug>Sneak_F', mode = 'n' },
-      { 'f', '<Plug>Sneak_f', mode = 'x' },
-      { 'F', '<Plug>Sneak_F', mode = 'x' },
+      { 'f', '<plug>Sneak_f', mode = 'n' },
+      { 'F', '<plug>Sneak_F', mode = 'n' },
+      { 'f', '<plug>Sneak_f', mode = 'x' },
+      { 'F', '<plug>Sneak_F', mode = 'x' },
 
-      { 't', '<Plug>Sneak_t', mode = 'n' },
-      { 'T', '<Plug>Sneak_T', mode = 'n' },
-      { 't', '<Plug>Sneak_t', mode = 'x' },
-      { 'T', '<Plug>Sneak_T', mode = 'x' },
+      { 't', '<plug>Sneak_t', mode = 'n' },
+      { 'T', '<plug>Sneak_T', mode = 'n' },
+      { 't', '<plug>Sneak_t', mode = 'x' },
+      { 'T', '<plug>Sneak_T', mode = 'x' },
     },
   },
 
@@ -51,7 +51,7 @@ return {
     "junegunn/limelight.vim",
     lazy = false,
     keys = {
-        { "<leader>vl", "<cmd>Limelight!! 0.8<cr>", desc = "Toggle Limelight" },
+        { "<leader>vL", "<cmd>Limelight!! 0.8<cr>", desc = "Toggle Limelight" },
     },
   },
 
@@ -137,8 +137,12 @@ return {
   {
     'bgaillard/readonly.nvim',
     opts = {
+      display_modes = {
+        command_line = { enabled = false },
+      },
       pattern = {
-        vim.fn.expand('~') .. '/.config/glirc/logs/**/*',
+        vim.fn.expand('~') .. '/.config/glirc/logs/*',
+        vim.fn.expand('~') .. '/.ssh/*',
       }
     },
     lazy = false,
