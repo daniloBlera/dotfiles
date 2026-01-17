@@ -63,6 +63,9 @@
  :defer t
  :mode ("\\.erl\\'" . erlang-ts-mode))
 
+(use-package ffap
+  :hook (after-init . ffap-bindings))
+
 (use-package flycheck
   :ensure t
   :defer t
