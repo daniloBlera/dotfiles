@@ -40,6 +40,7 @@
   :ensure t
   :hook (prog-mode . breadcrumb-mode))
 
+;; smarter commenting
 (use-package comment-dwim-2
   :ensure t
   :bind ("M-;" . comment-dwim-2))
@@ -48,9 +49,14 @@
 (use-package completion-preview
   :ensure t
   :init (global-completion-preview-mode t)
-  :config (setq completion-preview-minimum-symbol-length 2)
-  :bind (("M-n" . completion-preview-next-candidate)
-         ("M-p" . completion-preview-prev-candidate)))
+  :config
+  (setq completion-preview-minimum-symbol-length 2)
+  (push 'org-self-insert-command completion-preview-commands)
+  (push 'paredit-backward-delete completion-preview-commands)
+  :bind ((:map completion-preview-active-mode-map
+               ("M-n" . completion-preview-next-candidate)
+               ("M-p" . completion-preview-prev-candidate)
+               ("M-i" . completion-preview-insert))))
 
 ;; simpler themes
 (use-package doric-themes
@@ -170,7 +176,8 @@
 ;; structural editing that avoids unbalanced parenthesis, square brackets, curly braces, etc.
 (use-package paredit
   :ensure t
-  :hook ((M-mode-hook) . enable-paredit-mode))
+  :hook
+  ((emacs-lisp-mode lisp-mode inferior-emacs-lisp-mode sly-mrepl-mode) . enable-paredit-mode))
 
 ;; quickly toggle buffers
 (use-package popper
@@ -234,11 +241,6 @@
   :ensure t
   :bind ([remap fill-paragraph] . unfill-toggle))
 
-(use-package unicode-fonts
-  :ensure t
-  :defer t
-  :config (unicode-fonts-setup))
-
 ;; vertical completion system
 (use-package vertico
   :ensure t
@@ -270,7 +272,8 @@
 ;; setting the default font
 (add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-11"))
 
-;; helpers to check if the current time is inside a sunrise-sunset window -- p.s.: try circadian.el
+;; helpers to check if the current time is inside a sunrise-sunset window -- alternatively, to
+;; automatically change themes check `circadian.el'
 (require 'solar)
 
 (defun my/sunrise-sunset-hours ()
