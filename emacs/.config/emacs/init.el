@@ -18,12 +18,14 @@
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (package-initialize))
 
+;; window selection motions
 (use-package ace-window
   :ensure t
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?j ?k ?l ?\; ?h)))
 
+;; text motions
 (use-package avy
   :ensure t
   :hook (after-init . avy-setup-default)
@@ -33,6 +35,7 @@
          ("C-c g ;" . avy-goto-line)
          ("C-c g r" . avy-resume)))
 
+;; display a trail of function definitions relative to the cursor
 (use-package breadcrumb
   :ensure t
   :hook (prog-mode . breadcrumb-mode))
@@ -41,6 +44,7 @@
   :ensure t
   :bind ("M-;" . comment-dwim-2))
 
+;; simpler completions through inline previews
 (use-package completion-preview
   :ensure t
   :init (global-completion-preview-mode t)
@@ -48,97 +52,127 @@
   :bind (("M-n" . completion-preview-next-candidate)
          ("M-p" . completion-preview-prev-candidate)))
 
+;; simpler themes
 (use-package doric-themes
   :ensure t)
 
+;; fancier themes
 (use-package ef-themes
   :ensure t)
 
+;; support to direnv
 (use-package envrc
   :ensure t
   :hook (after-init . envrc-global-mode))
 
+;; erlang's tree-sitter mode
 (use-package erlang-ts
- :ensure t
- :defer t
- :mode ("\\.erl\\'" . erlang-ts-mode))
+  :ensure t
+  :mode ("\\.erl\\'" . erlang-ts-mode))
 
+;; modify `find-file' to auto complete file paths under the cursor
 (use-package ffap
   :hook (after-init . ffap-bindings))
 
+;; better syntax checking
 (use-package flycheck
   :ensure t
-  :defer t
   :bind (("C-c t c" . flycheck-mode)))
 
+;; `flycheck' support for eglot
+(use-package flycheck-eglot
+  :ensure t
+  :after (flycheck eglot)
+  :config (global-flycheck-eglot-mode 1))
+
+;; run formatters on buffers based on their major-mode
 (use-package format-all
   :ensure t
   :defer t
   :config (setq-default format-all-mode-lighter "FMT"
                         format-all-formatters '(("Python" black isort))))
 
+;; get the remote URL for the buffer location
 (use-package git-link
   :ensure t
   :bind (("C-c g l" . git-link)))       ; use `C-u C-c g l' to select the remote
 
+;; major mode for Go
 (use-package go-mode
   :ensure t
   :defer t)
 
+;; major mode for Haskell
 (use-package haskell-mode
   :ensure t
   :defer t)
 
+;; convert buffer contents to html
 (use-package htmlize
   :ensure t
   :defer t)
 
+;; (built-in) list buffer definitions (functions, variables, etc.) on the minibuffer
 (use-package imenu
   :hook ((prog-mode org-mode) . imenu-add-menubar-index)
   :config (setq imenu-sort-function 'imenu--sort-by-name))
 
+;; indent guides
 (use-package indent-bars
   :ensure t
   :config (setq indent-bars-prefer-character t)
-  :hook ((python-ts-mode lua-ts-mode json-ts-mode) . indent-bars-mode))
+  :hook ((python-ts-mode lua-ts-mode json-ts-mode yaml-ts-mode) . indent-bars-mode))
 
+;; better, just-in-time spell-checker
 (use-package jinx
   :ensure t
   :hook (emacs-startup . global-jinx-mode)
   :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages)))
 
+;; a great git interface, integrated right where you need it
 (use-package magit
   :ensure t)
 
+;; display information about minibufer entries
 (use-package marginalia
   :ensure t
   :bind (:map minibuffer-local-map ("M-A" . marginalia-cycle))
   :init (marginalia-mode))
 
+;; major mode for markdown
 (use-package markdown-mode
   :ensure t)
 
+;; major mode for lua
 (use-package lua-mode
   :ensure t
   :mode ("\\.lua\\'" . lua-ts-mode)
   :interpreter ("lua" . lua-ts-mode)
   :config (setq-default lua-indent-nested-calls t))
 
+;; balance window margins so you don't have to look all the way to the left
 (use-package olivetti
   :ensure t
   :init (setq olivetti-body-width 110
               olivetti-style 'fancy
               olivetti-lighter "")
   :bind (("C-c t o" . olivetti-mode))
-  :hook ((org-mode prog-mode text-mode) . olivetti-mode))
+  :hook ((org-mode prog-mode text-mode Info-mode) . olivetti-mode))
 
+;; a more flexible completion style that matches any order
 (use-package orderless
   :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;; structural editing that avoids unbalanced parenthesis, square brackets, curly braces, etc.
+(use-package paredit
+  :ensure t
+  :hook ((M-mode-hook) . enable-paredit-mode))
+
+;; quickly toggle buffers
 (use-package popper
   :ensure t
   :bind (("C-`" . popper-toggle)
@@ -159,28 +193,34 @@
   (popper-mode +1)
   (popper-echo-mode +1))
 
+;; color-code matching pair delimiters like parenthesis, brackets, braces, etc.
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; (built-in) list recently opened files
 (use-package recentf
   :bind (("C-x C-r" . recentf-open-files))
   :config (recentf-mode t))
 
+;; (built-in) list all lines matching pattern
 (use-package replace
   :bind ("C-c o" . occur)
   :hook (occur . (lambda () (switch-to-buffer-other-window "*Occur*"))))
 
+;; move through `imenu' entries in a side-bar
 (use-package side-hustle
   :ensure t
-  :bind (("M-s l" . side-hustle-toggle)))
+  :bind (("C-c t s" . side-hustle-toggle)))
 
+;; a common lisp development environment
 (use-package sly
   :ensure t
   :init (setq inferior-lisp-program "sbcl")
   :bind (:map sly-mode-map ("M-h" . sly-documentation-lookup))
   :hook (lisp-mode . sly-editing-mode))
 
+;; swap frame positions
 (use-package transpose-frame
   :ensure t
   :bind (("C-c r t" . transpose-frame)
@@ -189,9 +229,9 @@
          ("C-c r -" . flip-frame)
          ("C-c r /" . flop-frame)))
 
+;; undo the filling/breaking of paragraphs
 (use-package unfill
   :ensure t
-  ;; replace `fill-paragraph', normally under `M-q', with `unfill-toggle'
   :bind ([remap fill-paragraph] . unfill-toggle))
 
 (use-package unicode-fonts
@@ -199,14 +239,17 @@
   :defer t
   :config (unicode-fonts-setup))
 
+;; vertical completion system
 (use-package vertico
   :ensure t
   :init (vertico-mode)
   :bind (:map vertico-map ("TAB" . minibuffer-complete)))
 
+;; open files larger than your system's memory
 (use-package vlf
   :ensure t)
 
+;; navigate an undo tree
 (use-package vundo
   :ensure t
   :bind ("C-z" . vundo))
