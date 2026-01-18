@@ -1,15 +1,21 @@
 return {
-  -- readline-based motions for insert mode <3
+  -- readline-based motions for insert mode
   "tpope/vim-rsi",
-  
-  -- comment all the stuff
+
+  -- comment lines
   "tpope/vim-commentary",
 
   -- surround regions with matching pairs of quotes, brackets, etc.
   "tpope/vim-surround",
 
   -- status and tab bars
-  "itchyny/lightline.vim",
+  -- "itchyny/lightline.vim",
+
+  -- status line
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
 
   -- text motions based on single or two characters
   {
@@ -34,7 +40,7 @@ return {
     },
   },
 
-  -- highway to the distraction-free zone
+  -- distraction-free, "zen" mode
   {
     "junegunn/goyo.vim",
     lazy = false,
@@ -55,7 +61,7 @@ return {
     },
   },
 
-  -- a dark theme lazy people seem to like
+  -- a dark theme lazy.n?vim people seem to like
   {
     "folke/tokyonight.nvim",
     lazy = false,
@@ -65,7 +71,7 @@ return {
     -- end,
   },
 
-  -- pretty purple colors
+  -- pretty purple theme
 	{
 		"theacodes/witchhazel",
 		lazy = false,
@@ -102,9 +108,6 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
     },
     keys = {
       {

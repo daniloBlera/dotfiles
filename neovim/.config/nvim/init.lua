@@ -8,40 +8,40 @@ require("config.lazy")
 vim.opt.shadafile = "NONE"          -- disable reading or writing shada files
 vim.opt.virtualedit = 'onemore'     -- allow the cursor to move past the end of the line
 vim.opt.clipboard = 'unnamedplus'   -- use system's clipboard for all selection operations
-vim.opt.tabstop = 4                 -- number of spaces a TAB counts for
+vim.opt.tabstop = 8                 -- number of spaces a TAB counts for
 vim.opt.shiftwidth = 4              -- number of spaces to use for each step of (auto)indent.
 vim.opt.softtabstop = 4             -- number of spaces a TAB counts on edit operations
-vim.opt.expandtab = true            -- tabs insert spaces
+vim.opt.expandtab = true            -- pressing tab inserts spaces
 vim.opt.shiftround = true           -- round indent to a multiple of 'shiftwidth'
 vim.opt.autoindent = true           -- copy the indent of the current line
 vim.opt.linebreak = true            -- enable visual line wrapping
-vim.opt.textwidth = 90
-vim.opt.ignorecase = true           -- ignore case when searching
-vim.opt.smartcase = true            -- unless the search pattern has uppercase chars
+vim.opt.textwidth = 90              -- for "ninety-ish" hard wrapping
+vim.opt.ignorecase = true           -- case-insensitive search...
+vim.opt.smartcase = true            -- ... unless the search pattern has uppercase characters
 vim.opt.splitbelow = true           -- new window splits will be placed below
-vim.opt.number = true               -- enable line numbering on
-vim.opt.relativenumber = true       -- set numbering relative to the current line
-vim.opt.scrolloff = 10              -- min lines above and below the cursor
-vim.opt.sidescrolloff = 5           -- min columns to the left and right of the cursor
+vim.opt.number = true               -- enable line numbering
+vim.opt.relativenumber = true       -- line numbering relative to the current line
+vim.opt.scrolloff = 10              -- minimum lines above and below the cursor
+vim.opt.sidescrolloff = 5           -- minimum columns to the left and right of the cursor
 vim.opt.showcmd = true              -- show partial commands on the status line
 vim.opt.list = true                 -- display special chars (spaces, tabs, newlines, etc)
-vim.opt.wrapscan = false            -- disable wrap around the ends when searching
-vim.opt.cursorline = true           -- enable higlighting the cusor's line
-vim.opt.cursorcolumn = false        -- disable highlighting the cursor's column
+vim.opt.wrapscan = false            -- disable wrap around search
+vim.opt.cursorline = true           -- highlight the cursor's line
+vim.opt.cursorcolumn = true         -- highlight the cursor's column
 
 -- disable auto-wrapping of text and comments
 vim.opt.formatoptions = { t = false, c = false, }
 
--- our check for terminal support for pretty colours and unicode glyps
+-- our check for terminal support for 256 colors and unicode glyps
 local function supports_truecolor()
   local term = os.getenv("TERM")
   return term and (
-    term:match("256color") 
-    or term:match("truecolor") 
-    or term:match("xterm") 
+    term:match("256color")
     or term:match("st") 
     or term:match("alacritty")
     or term:match("foot")
+    or term:match("truecolor") 
+    or term:match("xterm") 
   )
 end
 
@@ -54,7 +54,7 @@ if supports_truecolor() then
   -- indicator that the line is visually wrapped
   vim.opt.showbreak = '↳ '
 
-  -- unicode listchars
+  -- prettier listchars
   vim.opt.listchars = {
     eol = '¬',
     tab = '-->',
@@ -67,7 +67,7 @@ if supports_truecolor() then
     nbsp = '◊',
   }
 else
-  -- maybe using something like the linux TTY
+  -- use a simpler colourscheme
   vim.opt.termguicolors = false
   vim.cmd("set t_Co=8")
   vim.cmd("colorscheme koehler")
@@ -85,11 +85,11 @@ else
     trail = '-',
     extends = '>',
     precedes = '<',
-    nbsp = '§',
+    nbsp = '¤',
   }
 end
 
--- Keybindings
+-- KEYBINDINGS
 -- use `<space>` as leader
 vim.g.mapleader = ' '
 
@@ -112,7 +112,7 @@ vim.keymap.set('i', '<F11>', '<nop>')
 vim.keymap.set('i', '<F12>', '<nop>')
 
 -- stop the cursor moving one character left when exiting insert mode
--- vim.keymap.set('i', '<esc>', '<C-O>:stopinsert<cr>')
+vim.keymap.set('i', '<esc>', '<C-O>:stopinsert<cr>')
 
 -- clear search highlight on Esc
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
@@ -176,12 +176,29 @@ vim.keymap.set('n', '<leader>vw', '<cmd>set wrap!<cr>')
 -- line highlight
 vim.keymap.set('n', '<leader>vh', '<cmd>set cursorline!<cr>')
 
--- language-specific indents
+-- FILETYPE-SPECIFIC SETTINGS
+-- indentation
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "lua", "markdown", "haskell", "xml" },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
     vim.opt_local.shiftwidth = 2
+  end,
+})
+
+-- PLUGIN CONFIGURATION
+-- toggles limelight when entering or exiting goyo
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GoyoEnter",
+  callback = function()
+    vim.cmd("Limelight")
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GoyoLeave",
+  callback = function()
+    vim.cmd("Limelight!")
   end,
 })
