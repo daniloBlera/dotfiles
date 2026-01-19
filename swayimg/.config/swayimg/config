@@ -8,7 +8,6 @@ loop = no
 [gallery]
 pstore = no
 window = #282828ff
-shadow = #000000dd
 
 [font]
 color = #ffffffff
