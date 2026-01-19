@@ -1,5 +1,5 @@
 # Configuration for the Swayimg viewer.
-# For more information, check `man 5 swayimgrc`
+# For more information, check swayimgrc (5) and swayimg (1) manpages.
 
 [viewer]
 window = #282828ff
