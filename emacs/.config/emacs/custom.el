@@ -60,8 +60,8 @@
  '(which-key-idle-delay 0.5)
  '(which-key-mode t)
  '(whitespace-style
-   '(face trailing tabs spaces newline missing-newline-at-eof empty indentation
-          space-after-tab space-before-tab space-mark tab-mark newline-mark)))
+   '(face trailing tabs spaces newline missing-newline-at-eof empty indentation space-after-tab
+          space-before-tab space-mark tab-mark newline-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
