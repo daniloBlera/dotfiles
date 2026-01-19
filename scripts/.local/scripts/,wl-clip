@@ -1,0 +1,9 @@
+#!/bin/sh
+# A script to select entries from the clipboard's history on wayland
+#
+# obs.: requires `fuzzel` and `cliphist`
+
+entry="$(cliphist list | fuzzel --placeholder 'clipboard entry to select' --dmenu)"
+if [ -n "$entry" ]; then
+    echo "$entry" | cliphist decode | wl-copy
+fi

@@ -1,0 +1,7 @@
+#!/bin/sh
+# Clear wayland's clipboard's history
+#
+# obs.: requires `cliphist`
+
+cliphist wipe
+notify-send -u low -t 3000 'Clipboard' 'contents cleared'
