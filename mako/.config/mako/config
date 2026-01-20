@@ -1,0 +1,8 @@
+# Configuration for mako, a notification daemon for wayland
+# for more information, check `mako(1)` and `mako(5)`
+
+font=Ubuntu Nerd Font 10
+background-color=#282828ff
+text-color=#ccccccff
+border-size=3
+border-color=#ccccccff
