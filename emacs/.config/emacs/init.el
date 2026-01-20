@@ -6,7 +6,13 @@
 ;;;
 ;;; tested under Emacs version 31.0.50
 
-;; Load private configurations that shouldn't be found in vcs
+;;; Loading extra files
+;; specify the file for `customize' and friends
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(if (file-exists-p custom-file)
+    (load custom-file))
+
+;; load private configurations that shouldn't be found in vcs
 (let ((user-settings (expand-file-name "default.el" user-emacs-directory)))
   (if (file-exists-p user-settings)
       (load-file user-settings)))
@@ -104,19 +110,13 @@
   :bind (("C-c g l" . git-link)))       ; use `C-u C-c g l' to select the remote
 
 ;; major mode for Go
-(use-package go-mode
-  :ensure t
-  :defer t)
+(use-package go-mode :ensure t :defer t)
 
 ;; major mode for Haskell
-(use-package haskell-mode
-  :ensure t
-  :defer t)
+(use-package haskell-mode :ensure t :defer t)
 
 ;; convert buffer contents to html
-(use-package htmlize
-  :ensure t
-  :defer t)
+(use-package htmlize :ensure t :defer t)
 
 ;; (built-in) list buffer definitions (functions, variables, etc.) on the minibuffer
 (use-package imenu
@@ -136,9 +136,8 @@
   :bind (("M-$" . jinx-correct)
          ("C-M-$" . jinx-languages)))
 
-;; a great git interface, integrated right where you need it
-(use-package magit
-  :ensure t)
+;; a great git interface integrated right where you need it
+(use-package magit :ensure t :defer t)
 
 ;; display information about minibufer entries
 (use-package marginalia
@@ -147,8 +146,7 @@
   :init (marginalia-mode))
 
 ;; major mode for markdown
-(use-package markdown-mode
-  :ensure t)
+(use-package markdown-mode :ensure t)
 
 ;; major mode for lua
 (use-package lua-mode
@@ -248,8 +246,7 @@
   :bind (:map vertico-map ("TAB" . minibuffer-complete)))
 
 ;; open files larger than your system's memory
-(use-package vlf
-  :ensure t)
+(use-package vlf :ensure t)
 
 ;; navigate an undo tree
 (use-package vundo
@@ -257,10 +254,6 @@
   :bind ("C-z" . vundo))
 
 ;;; General configuration
-;; specify the file for `customize` and friends
-(setq custom-file "~/.config/emacs/custom.el")
-(load custom-file)
-
 ;; backup edited files under a centralized location
 (setq backup-directory-alist '(("." . "~/.cache/emacs/backups"))
       backup-by-copying t

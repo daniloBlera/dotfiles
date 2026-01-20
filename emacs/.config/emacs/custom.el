@@ -10,7 +10,6 @@
  '(context-menu-mode t)
  '(cursor-in-non-selected-windows 'hollow)
  '(cursor-type 'bar)
- '(custom-enabled-themes nil)
  '(delete-by-moving-to-trash t)
  '(delete-selection-mode t)
  '(display-line-numbers-type 'absolute)
