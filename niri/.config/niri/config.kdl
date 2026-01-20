@@ -291,13 +291,19 @@ layout {
 // See the binds section below for more spawn examples.
 
 // Initializing the status bar - configuration under `~/.config/waybar/config`
-spawn-sh-at-startup "waybar"
+spawn-at-startup "waybar"
 
 // Setting the wallpaper
 spawn-sh-at-startup "swaybg --mode fill --i ~/.config/wallpaper"
 
 // Enable clipboard management
-spawn-sh-at-startup "wl-paste --watch cliphist store"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+
+// The desktop notifications daemon -- configuration under `~/.config/mako/config`
+spawn-at-startup "mako"
+
+// Idle management daemon
+spawn-at-startup "swayidle" "-w" "timeout" "300" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
