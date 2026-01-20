@@ -43,8 +43,7 @@
     },
 
     "custom/power": {
-        // "format": " ⏻ ",
-        "format": "Session",
+        "format": " ⏻ ",
         "tooltip": false,
         "menu": "on-click",
         "menu-file": "$HOME/.config/waybar/power_menu.xml",
@@ -52,7 +51,10 @@
             "reboot": "reboot",
             "poweroff": "poweroff",
             "suspend": "systemctl suspend",
-            "hibernate": "systemcdl hibernate"
+            "hibernate": "systemcdl hibernate",
+            "lockscreen": "swaylock",
+            "poweroff-monitors": "niri msg action 'power-off-monitors'",
+            "exit": "niri msg action 'quit'"
         }
     }
 }
