@@ -24,6 +24,22 @@
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (package-initialize))
 
+;; simpler themes
+(use-package doric-themes :ensure t :defer t)
+
+;; fancier themes
+(use-package ef-themes :ensure t :defer t)
+
+;; automatically change themes based on time -- or sunrise and sunset, if configured
+(use-package circadian
+  :ensure t
+  :config
+  (setq circadian-themes '(("4:00" . ef-owl)
+                           ("6:00" . ef-trio-light)
+                           ("16:00" . ef-owl)
+                           ("18:00" . ef-trio-dark)))
+  (circadian-setup))
+
 ;; window selection motions
 (use-package ace-window
   :ensure t
@@ -63,14 +79,6 @@
                ("M-n" . completion-preview-next-candidate)
                ("M-p" . completion-preview-prev-candidate)
                ("M-i" . completion-preview-insert))))
-
-;; simpler themes
-(use-package doric-themes
-  :ensure t)
-
-;; fancier themes
-(use-package ef-themes
-  :ensure t)
 
 ;; support to direnv
 (use-package envrc
@@ -264,34 +272,6 @@
 
 ;; setting the default font
 (add-to-list 'default-frame-alist '(font . "0xProto Nerd Font Mono-11"))
-
-;; helpers to check if the current time is inside a sunrise-sunset window -- alternatively, to
-;; automatically change themes check `circadian.el'
-(require 'solar)
-
-(defun my/sunrise-sunset-hours ()
-  "Get the sunrise and sunset hours, if configured."
-  (if (and calendar-latitude calendar-longitude)
-      (cl-destructuring-bind ((sunrise-hour _) (sunset-hour _) _)
-          (solar-sunrise-sunset (calendar-current-date))
-        (list sunrise-hour sunset-hour))
-    (list 5 17)))
-
-(defun my/daylight-p ()
-  "Check if the current time is between sunrise and sunset."
-  (cl-destructuring-bind (_ current-minutes current-hour &rest params) (decode-time)
-    (cl-destructuring-bind (sunrise-hour sunset-hour) (my/sunrise-sunset-hours)
-      (< (* sunrise-hour 60)
-         (+ (* current-hour 60) current-minutes)
-         (* sunset-hour 60)))))
-
-(defun my/set-theme-type ()
-  "Set a light or a dark theme according to the current time."
-  (interactive)
-  (load-theme (if (my/daylight-p) 'ef-summer 'ef-winter)))
-
-;; and setting the theme according to the time
-(my/set-theme-type)
 
 ;;; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
