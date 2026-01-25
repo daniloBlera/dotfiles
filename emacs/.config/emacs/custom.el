@@ -20,7 +20,7 @@
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(editorconfig-mode t)
  '(electric-pair-mode t)
- '(fill-column 100)
+ '(fill-column 95)
  '(frame-resize-pixelwise t)
  '(global-auto-revert-mode t)
  '(global-display-fill-column-indicator-mode t)

@@ -20,7 +20,6 @@ vim.opt.ignorecase = true           -- case-insensitive search...
 vim.opt.smartcase = true            -- ... unless the search pattern has uppercase characters
 vim.opt.splitbelow = true           -- new window splits will be placed below
 vim.opt.number = true               -- enable line numbering
-vim.opt.relativenumber = true       -- line numbering relative to the current line
 vim.opt.scrolloff = 10              -- minimum lines above and below the cursor
 vim.opt.sidescrolloff = 5           -- minimum columns to the left and right of the cursor
 vim.opt.showcmd = true              -- show partial commands on the status line

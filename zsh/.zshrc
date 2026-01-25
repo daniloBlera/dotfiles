@@ -9,11 +9,11 @@ PROMPT='[%n@%m:%1~]%# '
 # 2 - user prompt on the line below
 # [user@host:~/sub/dir]
 # %
-#PROMPT=$'[%n@%m:%~]\n%# '
+# PROMPT=$'[%n@%m:%~]\n%# '
 
 # 3 - going simple with just the prompt, rc-style
 # '% '
-#PROMPT='%# '
+# PROMPT='%# '
 
 # show the level of shell nesting from nnn
 [ -n "$NNNLVL" ] && PROMPT="N$NNNLVL:$PROMPT"

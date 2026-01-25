@@ -7,7 +7,7 @@
 ;;; tested under Emacs version 31.0.50
 
 ;;; Loading extra files
-;; specify the file for `customize' and friends
+;; specify the file for `customize' and its friends
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (if (file-exists-p custom-file)
     (load custom-file))
@@ -34,18 +34,17 @@
 (use-package circadian
   :ensure t
   :config
-  (setq circadian-themes '(("4:00" . ef-owl)
+  (setq circadian-themes '(("4:00" . ef-dream)
                            ("6:00" . ef-trio-light)
-                           ("16:00" . ef-owl)
-                           ("18:00" . ef-trio-dark)))
+                           ("16:00" . ef-dream)
+                           ("18:00" . ef-cherie)))
   (circadian-setup))
 
 ;; window selection motions
 (use-package ace-window
   :ensure t
   :bind ("M-o" . ace-window)
-  :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?j ?k ?l ?\; ?h)))
+  :config (setq aw-keys '(?a ?s ?d ?f ?g ?j ?k ?l ?\; ?h)))
 
 ;; text motions
 (use-package avy
@@ -75,10 +74,11 @@
   (setq completion-preview-minimum-symbol-length 2)
   (push 'org-self-insert-command completion-preview-commands)
   (push 'paredit-backward-delete completion-preview-commands)
-  :bind ((:map completion-preview-active-mode-map
-               ("M-n" . completion-preview-next-candidate)
-               ("M-p" . completion-preview-prev-candidate)
-               ("M-i" . completion-preview-insert))))
+  :bind
+  ((:map completion-preview-active-mode-map
+         ("M-n" . completion-preview-next-candidate)
+         ("M-p" . completion-preview-prev-candidate)
+         ("M-i" . completion-preview-insert))))
 
 ;; support to direnv
 (use-package envrc
@@ -327,7 +327,7 @@
 (defun my/screenshot-svg ()
   "Save a screenshot of the current frame as an SVG image.
 
-Saves to a temp file and puts the filename in the kill ring."
+Create a screenshot under /tmp and put the filename in the kill ring."
   (interactive)
   (let* ((filename (make-temp-file "emacs" nil ".svg"))
          (data (x-export-frames nil 'svg)))
