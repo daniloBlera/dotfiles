@@ -178,7 +178,7 @@ vim.keymap.set('n', '<leader>vh', '<cmd>set cursorline!<cr>')
 -- FILETYPE-SPECIFIC SETTINGS
 -- indentation
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "lua", "markdown", "haskell", "xml" },
+  pattern = { "lua", "markdown", "haskell", "xml", "org" },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
