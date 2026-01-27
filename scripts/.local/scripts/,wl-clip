@@ -1,9 +1,64 @@
 #!/bin/sh
-# A script to select entries from the clipboard's history on wayland
-#
-# obs.: requires `fuzzel` and `cliphist`
+# Manage wayland's clipboard history
 
-entry="$(cliphist list | fuzzel --placeholder 'clipboard entry to select' --dmenu)"
-if [ -n "$entry" ]; then
-    echo "$entry" | cliphist decode | wl-copy
+print_usage() {
+    echo '''Usage: ,wl-clip [-h|--help] [select|remove-entry|clear]
+
+Options:
+    -h --help           print this help message and exit
+    select              select an entry from the clipboard history
+    remove              remove an entry from the history
+    clear               clear the clipboard history'''
+}
+
+search_clipboard() {
+    echo "$(cliphist list | fuzzel --width 80 --placeholder "$1" --dmenu)"
+}
+
+select_entry() {
+    entry="$(search_clipboard 'search clipboard history')"
+
+    if [ -n "$entry" ]; then
+        echo "$entry" | cliphist decode | wl-copy
+    fi
+}
+
+remove_entry() {
+    entry="$(search_clipboard 'remove from clipboard history')"
+
+    if [ -n "$entry" ]; then
+        echo "$entry" | cliphist delete
+    fi
+}
+
+clear_history() {
+    cliphist wipe
+    notify-send -u low -t 3000 'Clipboard' 'history contents cleared'
+}
+
+if [ $# -eq 0 ]; then
+    select_entry
+elif [ $# -eq 1 ]; then
+    case $1 in
+        -h|--help)
+            print_usage
+            exit 0;;
+        select)
+            select_entry
+            exit 0;;
+        remove)
+            remove_entry
+            exit 0;;
+        clear)
+            clear_history
+            exit 0;;
+        *)
+            printf "error: unrecognized option '%s'.\n\n" "$1"
+            print_usage
+            exit 1;;
+    esac
+else
+    printf "error: ,wl-clip expects either 0 or 1 arguments but received %s.\n\n" "$#"
+    print_usage
+    exit 1
 fi

@@ -395,8 +395,11 @@ binds {
     Mod+I hotkey-overlay-title="Open IRC Client" { spawn ",irc"; }
     Mod+Z hotkey-overlay-title="Open Zeal Documentation" { spawn "zeal"; }
     Mod+E hotkey-overlay-title="Open Emacs" { spawn "emacs"; }
-    Mod+Shift+C hotkey-overlay-title="Select clipboard entries" { spawn ",wl-clip"; }
-    Mod+Alt+C hotkey-overlay-title="Clear clipboard contents" { spawn ",wl-clipcl"; }
+
+    // manage clipboard history
+    Mod+Shift+C { spawn ",wl-clip"; }
+    Mod+Shift+Control+C { spawn ",wl-clip" "remove"; }
+    // Mod+Shift+Control+Alt+C { spawn ",wl-clip" "clear"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
