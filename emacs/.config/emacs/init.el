@@ -50,11 +50,9 @@
 (use-package avy
   :ensure t
   :hook (after-init . avy-setup-default)
-  :bind (("C-c g c" . avy-goto-char)
-         ("C-c g C" . avy-goto-char-2)
-         ("C-c g t" . avy-goto-char-timer)
-         ("C-c g ;" . avy-goto-line)
-         ("C-c g r" . avy-resume)))
+  :bind (("C-;" . avy-goto-char-timer)
+         ("C-/" . avy-goto-line)
+         ("C-_" . avy-goto-line)))
 
 ;; display a trail of function definitions relative to the cursor
 (use-package breadcrumb
@@ -122,6 +120,16 @@
 
 ;; major mode for Haskell
 (use-package haskell-mode :ensure t :defer t)
+
+;; an even more helpful help
+(use-package helpful
+  :ensure t
+  :bind (("C-h f" . 'helpful-callable)
+         ("C-h F" . 'helpful-function)
+         ("C-h v" . 'helpful-variable)
+         ("C-h k" . 'helpful-key)
+         ("C-h x" . 'helpful-command)
+         ("C-c C-d" . 'helpful-at-point)))
 
 ;; convert buffer contents to html
 (use-package htmlize :ensure t :defer t)
