@@ -1,38 +1,92 @@
 #!/bin/sh
+#
 # Manage wayland's clipboard history
+#
+# Requires:
+#   fuzzel
+#   cliphist
+#   wl-copy
 
+#######################################
+# Print help and usage message.
+# Arguments:
+#   None
+# Outputs:
+#   Usage message to STDOUT.
+#######################################
 print_usage() {
-    echo '''Usage: ,wl-clip [-h|--help] [select|remove-entry|clear]
+    echo \
+'Usage: ,wl-clip [-h|--help] [select|remove-entry|clear]
 
 Options:
     -h --help           print this help message and exit
     select              select an entry from the clipboard history
     remove              remove an entry from the history
-    clear               clear the clipboard history'''
+    clear               clear the clipboard history'
 }
 
+#######################################
+# Spawn a picker to select a single entry from the history database.
+# Arguments:
+#   The placeholder text to be displayed while the prompt is empty.
+# Outputs:
+#   The selected entry to STDOUT.
+#######################################
 search_clipboard() {
-    echo "$(cliphist list | fuzzel --width 80 --placeholder "$1" --dmenu)"
+    cliphist list | fuzzel --width 80 --placeholder "$1" --dmenu
 }
 
+#######################################
+# Select an entry from the history and push it to the clipboard.
+# Arguments:
+#   None
+#######################################
 select_entry() {
     entry="$(search_clipboard 'search clipboard history')"
 
     if [ -n "$entry" ]; then
-        echo "$entry" | cliphist decode | wl-copy
+        printf '%s' "$entry" | cliphist decode | wl-copy
     fi
 }
 
+#######################################
+# Sync clipboard to the history's top entry.
+# Arguments:
+#   None
+#######################################
+sync_clipboard() {
+    clipboard_entry="$(cliphist list | head -n 1)"
+
+    if [ -n "$clipboard_entry" ]; then
+        printf '%s' "$clipboard_entry" | cliphist decode | wl-copy
+    else
+        wl-copy --clear
+    fi
+}
+
+#######################################
+# Remove entry from the history and sync the clipboard to the top entry.
+# Arguments:
+#   None
+#######################################
 remove_entry() {
     entry="$(search_clipboard 'remove from clipboard history')"
 
     if [ -n "$entry" ]; then
-        echo "$entry" | cliphist delete
+        printf '%s' "$entry" | cliphist delete
     fi
+
+    sync_clipboard
 }
 
+#######################################
+# Clear the clipboard's contents and history.
+# Arguments:
+#   None
+#######################################
 clear_history() {
     cliphist wipe
+    wl-copy --clear
     notify-send -u low -t 3000 'Clipboard' 'history contents cleared'
 }
 
@@ -58,7 +112,7 @@ elif [ $# -eq 1 ]; then
             exit 1;;
     esac
 else
-    printf "error: ,wl-clip expects either 0 or 1 arguments but received %s.\n\n" "$#"
+    printf "Error: ,wl-clip expects either 0 or 1 arguments but received %s.\n\n" "$#"
     print_usage
     exit 1
 fi

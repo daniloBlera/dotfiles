@@ -1,0 +1,4 @@
+# Configuration file for `cliphist`, a clipboard history manager for wayland.
+
+# discard clipboard history between boots
+db-path /tmp/cliphist-db
