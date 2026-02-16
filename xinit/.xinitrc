@@ -30,8 +30,6 @@ case $window_manager in
         exec dwm 2> "$XDG_CACHE_HOME/dwm.log";;
     rio)
         exec rio -term "${terminal}" -virtuals 9 2> "$XDG_CACHE_HOME/rio.log";;
-    openbox)
-        exec openbox;;
     icewm)
         exec icewm-session;;
     qtile)
