@@ -26,7 +26,7 @@ export PIP_REQUIRE_VENV=1
 export PYENV_ROOT="$HOME/source/pyenv"
 
 # where to save python's REPL history
-export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 
 # where to resolve import statements
 # check https://go.dev/wiki/SettingGOPATH or `go help gopath`
@@ -44,6 +44,9 @@ export GPG_TTY="$(tty)"
 export SUDO_EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 export EDITOR='/usr/bin/nvim'
+
+# use neovim as a manpager
+export MANPAGER='nvim +Man!'
 
 # GNU indent configuration profile for C formatting
 export INDENT_PROFILE="$XDG_CONFIG_HOME/indent/indent.pro"
@@ -63,6 +66,10 @@ export NNN_FIFO='/tmp/nnn_fifo'
 export NNN_LOCKER='/usr/bin/bash-pipes'
 export NNN_HELP='fortune'
 
+# zoxide related
+export _ZO_EXCLUDE_DIRS="$HOME/Desktop/*:$HOME/Downloads/*"
+export _ZO_ECHO=1
+
 # FZF's options
 export FZF_DEFAULT_COMMAND='fd --hidden --type file'
 export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME/fzf/config"
@@ -72,7 +79,7 @@ prepend_to_path "$HOME/.local/bin"
 prepend_to_path "$XDG_DATA_HOME/applications"
 prepend_to_path "$PYENV_ROOT/bin"
 prepend_to_path "$HOME/.local/scripts"
-prepend_to_path "${GOPATH:-$XDG_CACHE_HOME/go}/bin"
+prepend_to_path "$GOPATH/bin"
 
 # Handling incompatibilities between DWM and java GUI programs
 #   https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
