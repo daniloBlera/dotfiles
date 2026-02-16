@@ -56,14 +56,14 @@ if supports_truecolor() then
   -- prettier listchars
   vim.opt.listchars = {
     eol = '¬',
-    tab = '-->',
+    tab = '‹-',
     space = '•',
     multispace = '•••+',
     leadmultispace = '│•••',
     trail = '•',
     extends = '⟩',
     precedes = '⟨',
-    nbsp = '◊',
+    nbsp = '^',
   }
 else
   -- use a simpler colourscheme
@@ -84,7 +84,7 @@ else
     trail = '-',
     extends = '>',
     precedes = '<',
-    nbsp = '¤',
+    nbsp = '^',
   }
 end
 
