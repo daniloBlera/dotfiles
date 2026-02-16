@@ -20,9 +20,9 @@ print_usage() {
 
 Options:
     -h --help           print this help message and exit
-    -s- -select         select an entry from the clipboard history
-    -r- -remove         remove an entry from the history
-    -c- -clear          clear the clipboard history'
+    -s --select         select an entry from the clipboard history
+    -r --remove         remove an entry from the history
+    -c --clear          clear the clipboard history'
 }
 
 #######################################
