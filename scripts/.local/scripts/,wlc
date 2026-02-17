@@ -1,0 +1,80 @@
+#!/bin/sh
+#
+# fzf utility to remove multiple entries from the clipboard's history.
+
+#######################################
+# Print help and usage message.
+# Arguments:
+#   None
+# Outputs:
+#   Usage message.
+#######################################
+print_usage() {
+    echo \
+'Usage: ,wl-clip [OPTION]
+
+Options:
+    -h --help           print this help message and exit
+    -r --remove         remove entries from the history
+    -c --clear          clear the clipboard history'
+}
+
+#######################################
+# Remove one or more entries from the history.
+# Arguments:
+#   None
+#######################################
+remove_entries() {
+    cliphist list | fzf -m | cliphist delete
+}
+
+#######################################
+# Sync clipboard to the history's top entry.
+# Arguments:
+#   None
+#######################################
+sync_clipboard() {
+    entry="$(cliphist list | head -1)"
+
+    if [ -n "$entry" ]; then
+        printf '%s' "$entry" | cliphist decode | wl-copy
+    else
+        wl-copy --clear
+    fi
+}
+
+#######################################
+# Clear the clipboard's contents and history.
+# Arguments:
+#   None
+#######################################
+clear_history() {
+    cliphist wipe
+    wl-copy --clear
+    echo "Clipboard history contents cleared"
+}
+
+if [ $# -eq 0 ]; then
+    remove_entries
+elif [ $# -eq 1 ]; then
+    case $1 in
+        -h|--help)
+            print_usage
+            exit 0;;
+        -r|--remove)
+            remove_entries
+            sync_clipboard
+            exit 0;;
+        -c|--clear)
+            clear_history
+            exit 0;;
+        *)
+            printf "Error: unrecognized option '%s'. \n\n" "$1"
+            print_usage
+            exit 1;;
+    esac
+else
+    printf "Error: ,wl-clip expects either 0 or 1 arguments but received %s.\n\n" "$#"
+    print_usage
+    exit 1
+fi
