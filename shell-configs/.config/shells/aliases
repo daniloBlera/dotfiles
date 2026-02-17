@@ -48,8 +48,9 @@ alias ,fdu='fd --unrestricted'
 ## Grep the window class string for WM workspace assignment
 alias ,xpwmc='xprop | grep -i "WM_CLASS(STRING)"'
 
-## Shortcut to xev keyboard events
+## Display keyboard events on xorg and wayland
 alias ,xek='xev -event keyboard'
+alias ,wek='wev -f wl_keyboard'
 
 ## Fuzzy-search available python interpreter versions
 alias ,pyenvls='pyenv install --list | fzf --reverse'
