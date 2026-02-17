@@ -65,7 +65,7 @@ sync_clipboard() {
 }
 
 #######################################
-# Remove entry from the history and sync the clipboard to the top entry.
+# Remove entry from the history database.
 # Arguments:
 #   None
 #######################################
@@ -75,8 +75,6 @@ remove_entry() {
     if [ -n "$entry" ]; then
         printf '%s' "$entry" | cliphist delete
     fi
-
-    sync_clipboard
 }
 
 #######################################
@@ -102,6 +100,7 @@ elif [ $# -eq 1 ]; then
             exit 0;;
         -r|--remove)
             remove_entry
+            sync_clipboard
             exit 0;;
         -c|--clear)
             clear_history
