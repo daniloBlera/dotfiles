@@ -187,14 +187,18 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- PLUGIN CONFIGURATION
--- toggles limelight when entering or exiting goyo
+-- commands to run upon enabling goyo
 vim.api.nvim_create_autocmd("User", {
   pattern = "GoyoEnter",
   callback = function()
-    vim.cmd("Limelight")
+    vim.cmd("Limelight0.8")
+    vim.cmd("set nolist")
+    vim.cmd("set nocursorline")
+    vim.cmd("set nocursorcolumn")
   end,
 })
 
+-- commands to run when exiting goyo
 vim.api.nvim_create_autocmd("User", {
   pattern = "GoyoLeave",
   callback = function()
