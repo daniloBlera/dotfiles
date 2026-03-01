@@ -24,7 +24,7 @@ fi
 
 # associate keyboard and mouse events in X with commands
 if ! pidof -x xbindkeys >/dev/null && [ -x "$(command -v xbindkeys)" ]; then
-    xbindkeys --file "$CONFIG/xres/xbindkeysrc"
+    xbindkeys --file "$CONFIG/xbindkeys/xbindkeysrc"
 fi
 
 # hide the cursor after a period of inactivity
