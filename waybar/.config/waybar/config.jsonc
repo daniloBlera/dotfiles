@@ -4,7 +4,7 @@
     "position": "bottom",
     "modules-left": ["custom/power", "niri/workspaces"],
     "modules-center": ["niri/window"],
-    "modules-right": ["memory", "cpu", "battery", "battery#bat2", "pulseaudio", "backlight", "clock", "tray"],
+    "modules-right": ["memory", "cpu", "temperature", "battery", "battery#bat2", "pulseaudio", "backlight", "clock", "tray"],
     "disable-scroll": true,
 
     // configuring the modules
