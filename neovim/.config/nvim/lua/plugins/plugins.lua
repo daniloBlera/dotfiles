@@ -1,15 +1,9 @@
 return {
   -- readline-based motions for insert mode
-  "tpope/vim-rsi",
+  'tpope/vim-rsi',
 
   -- comment lines
-  "tpope/vim-commentary",
-
-  -- surround regions with matching pairs of quotes, brackets, etc.
-  "tpope/vim-surround",
-
-  -- status and tab bars
-  -- "itchyny/lightline.vim",
+  'tpope/vim-commentary',
 
   -- status line
   {
@@ -19,7 +13,7 @@ return {
 
   -- text motions based on single or two characters
   {
-    "justinmk/vim-sneak",
+    'justinmk/vim-sneak',
     keys = {
       -- two characters jump
       { 's', '<plug>Sneak_s', mode = 'n' },
@@ -39,6 +33,9 @@ return {
       { 'T', '<plug>Sneak_T', mode = 'x' },
     },
   },
+
+  -- colour-code matching pairs of brackets
+  'hiphish/rainbow-delimiters.nvim',
 
   -- distraction-free, "zen" mode
   {
@@ -105,17 +102,16 @@ return {
 
   -- show available keybindings in a popup
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-    },
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {},
     keys = {
       {
-        "<leader>?",
+        '<leader>?',
         function()
-          require("which-key").show({ global = false })
+          require('which-key').show({ global = false })
         end,
-        desc = "Buffer Local Keymaps (which-key)",
+        desc = 'Buffer Local Keymaps (which-key)',
       },
     },
   },
@@ -125,7 +121,7 @@ return {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     config = function()
       local builtin = require('telescope.builtin')
@@ -136,7 +132,7 @@ return {
     end
   },
 
-  -- pattern-match files for opening in read-only mode
+  -- pattern-match files to open in read-only mode
   {
     'bgaillard/readonly.nvim',
     opts = {
@@ -146,7 +142,7 @@ return {
       pattern = {
         vim.fn.expand('~') .. '/.config/glirc/logs/*',
         vim.fn.expand('~') .. '/.ssh/*',
-      }
+      },
     },
     lazy = false,
   },

@@ -1,11 +1,11 @@
 -- Neovim's configuration file
--- written in lua!!1!one! :O
+-- written in lua
 
 -- PLUGIN MANAGER
-require("config.lazy")
+require('config.lazy')
 
 -- GENERAL OPTIONS
-vim.opt.shadafile = "NONE"          -- disable reading or writing shada files
+vim.opt.shadafile = 'NONE'          -- disable reading or writing shada files
 vim.opt.virtualedit = 'onemore'     -- allow the cursor to move past the end of the line
 vim.opt.clipboard = 'unnamedplus'   -- use system's clipboard for all selection operations
 vim.opt.tabstop = 8                 -- number of spaces a TAB counts for
@@ -15,9 +15,10 @@ vim.opt.expandtab = true            -- pressing tab inserts spaces
 vim.opt.shiftround = true           -- round indent to a multiple of 'shiftwidth'
 vim.opt.autoindent = true           -- copy the indent of the current line
 vim.opt.linebreak = true            -- enable visual line wrapping
-vim.opt.textwidth = 90              -- for "ninety-ish" hard wrapping
-vim.opt.ignorecase = true           -- case-insensitive search...
-vim.opt.smartcase = true            -- ... unless the search pattern has uppercase characters
+vim.opt.textwidth = 90              -- for "ninety-ish" columns hard wrapping
+vim.opt.colorcolumn = '90'          -- set an indicator at the wrapping column
+vim.opt.ignorecase = true           -- enable case-insensitive search
+vim.opt.smartcase = true            -- ... unless the pattern includes uppercase characters
 vim.opt.splitbelow = true           -- new window splits will be placed below
 vim.opt.number = true               -- enable line numbering
 vim.opt.scrolloff = 10              -- minimum lines above and below the cursor
@@ -26,21 +27,23 @@ vim.opt.showcmd = true              -- show partial commands on the status line
 vim.opt.list = true                 -- display special chars (spaces, tabs, newlines, etc)
 vim.opt.wrapscan = false            -- disable wrap around search
 vim.opt.cursorline = true           -- highlight the cursor's line
-vim.opt.cursorcolumn = true         -- highlight the cursor's column
+vim.opt.cursorcolumn = false        -- highlight the cursor's column
+vim.opt.foldenable = false          -- folds start open
+vim.opt.foldmethod = 'marker'       -- enable folding regions between {{{ and }}} markers
 
 -- disable auto-wrapping of text and comments
 vim.opt.formatoptions = { t = false, c = false, }
 
 -- our check for terminal support for 256 colors and unicode glyps
 local function supports_truecolor()
-  local term = os.getenv("TERM")
+  local term = os.getenv('TERM')
   return term and (
-    term:match("256color")
-    or term:match("st") 
-    or term:match("alacritty")
-    or term:match("foot")
-    or term:match("truecolor") 
-    or term:match("xterm") 
+    term:match('256color')
+    or term:match('st') 
+    or term:match('alacritty')
+    or term:match('foot')
+    or term:match('truecolor') 
+    or term:match('xterm') 
   )
 end
 
@@ -176,10 +179,10 @@ vim.keymap.set('n', '<leader>vw', '<cmd>set wrap!<cr>')
 -- line highlight
 vim.keymap.set('n', '<leader>vh', '<cmd>set cursorline!<cr>')
 
--- FILETYPE-SPECIFIC SETTINGS
--- indentation
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "lua", "markdown", "haskell", "xml", "org" },
+-- FILETYPE AND LANGUAGE SETTINGS
+-- tab width in spaces
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'lua', 'markdown', 'org', 'haskell', 'xml', 'yaml' },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
@@ -187,3 +190,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- this should prevent the ~2sec delay to open a python source file
+if vim.fn.executable('python3') > 0 then
+  vim.g.python3_host_prog = vim.fn.system('which python')
+end
