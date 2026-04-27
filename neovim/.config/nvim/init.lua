@@ -48,7 +48,8 @@ end
 if supports_truecolor() then
   -- enable truecolor
   vim.opt.termguicolors = true
-  vim.cmd("set t_Co=256")
+  vim.cmd('set t_Co=256')
+  vim.cmd('colorscheme catppuccin-mocha')
 
   -- indicator that the line is visually wrapped
   vim.opt.showbreak = '↳ '
@@ -68,8 +69,8 @@ if supports_truecolor() then
 else
   -- use a simpler colourscheme
   vim.opt.termguicolors = false
-  vim.cmd("set t_Co=8")
-  vim.cmd("colorscheme koehler")
+  vim.cmd('set t_Co=8')
+  vim.cmd('colorscheme koehler')
 
   -- indicator that the line is visually wrapped
   vim.opt.showbreak ='> '
@@ -186,22 +187,3 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- PLUGIN CONFIGURATION
--- commands to run upon enabling goyo
-vim.api.nvim_create_autocmd("User", {
-  pattern = "GoyoEnter",
-  callback = function()
-    vim.cmd("Limelight0.8")
-    vim.cmd("set nolist")
-    vim.cmd("set nocursorline")
-    vim.cmd("set nocursorcolumn")
-  end,
-})
-
--- commands to run when exiting goyo
-vim.api.nvim_create_autocmd("User", {
-  pattern = "GoyoLeave",
-  callback = function()
-    vim.cmd("Limelight!")
-  end,
-})

@@ -42,65 +42,65 @@ return {
 
   -- distraction-free, "zen" mode
   {
-    "junegunn/goyo.vim",
+    'junegunn/goyo.vim',
+    dependencies = {
+      -- dim text blocks outside the cursor
+      'junegunn/limelight.vim'
+    },
     lazy = false,
     config = function()
-        vim.g.goyo_width = 100
+        vim.g.goyo_width = 110
+
+        -- settings when enabling goyo
+        vim.api.nvim_create_autocmd('User', {
+          pattern = 'GoyoEnter',
+          callback = function()
+            vim.cmd('Limelight0.8')
+            vim.cmd('set nolist')
+            vim.cmd('set nocursorline')
+            vim.cmd('set nocursorcolumn')
+          end,
+        })
+
+        -- settings when disabling goyo
+        vim.api.nvim_create_autocmd('User', {
+          pattern = 'GoyoLeave',
+          callback = function()
+            vim.cmd('Limelight!')
+          end,
+        })
     end,
     keys = {
-      { "<leader>vz", "<cmd>Goyo<cr>", desc = "Toggle Goyo mode" },
+      { '<leader>vz', '<cmd>Goyo<cr>', desc = 'Toggle Goyo mode' },
     },
   },
 
-  -- reduce the visibility of distant text
+  -- a dark theme people seem to like
   {
-    "junegunn/limelight.vim",
-    lazy = false,
-    keys = {
-        { "<leader>vL", "<cmd>Limelight!! 0.8<cr>", desc = "Toggle Limelight" },
-    },
-  },
-
-  -- a dark theme lazy.n?vim people seem to like
-  {
-    "folke/tokyonight.nvim",
+    'folke/tokyonight.nvim',
     lazy = false,
     priority = 1000,
-    -- config = function()
-    --   vim.cmd([[colorscheme tokyonight-night]])
-    -- end,
   },
 
   -- pretty purple theme
-	{
-		"theacodes/witchhazel",
-		lazy = false,
-		priority = 1000,
-		-- config = function()
-		-- 	vim.cmd([[colorscheme witchhazel-hypercolor]])
-		-- end,
-	},
+  {
+    'theacodes/witchhazel',
+    lazy = false,
+    priority = 1000,
+  },
 
   -- a nice set of light and dark themes that are easy on the eyes
   {
-    "EdenEast/nightfox.nvim",
+    'EdenEast/nightfox.nvim',
     lazy = false,
     priority = 1000,
-    config = function()
-      -- light themes: dayfox and dawnfox
-      -- dark themes: duskfox, nightfox, nordfox, terafox, and carbonfox
-      vim.cmd([[colorscheme duskfox]])
-    end,
   },
 
   -- you've probably seen these before
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd([[colorscheme catppuccin-mocha]])
-    -- end,
   },
 
   -- show available keybindings in a popup
