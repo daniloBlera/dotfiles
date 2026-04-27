@@ -30,14 +30,17 @@
 ;; fancier themes
 (use-package ef-themes :ensure t :defer t)
 
+;; the beige-and-blue looks from plan 9
+(use-package acme-theme :ensure t :defer t)
+
 ;; automatically change themes based on time -- or sunrise and sunset, if configured
 (use-package circadian
   :ensure t
   :config
   (setq circadian-themes '(("4:00" . ef-dream)
-                           ("6:00" . ef-trio-light)
+                           ("6:00" . acme)
                            ("16:00" . ef-dream)
-                           ("18:00" . ef-cherie)))
+                           ("18:00" . ef-trio-dark)))
   (circadian-setup))
 
 ;; window selection motions
@@ -187,6 +190,27 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;; for note-taking and knowledge graphs
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (concat org-directory "/roam-notes"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :custom
+  (org-roam-capture-templates
+   '(("d" "default" plain "%?" :target
+      (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+startup: num\n")
+      :unnarrowed t)))
+  :config
+  (setq org-ropam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode)
+  (require 'org-roam-protocol))
+
 ;; structural editing that avoids unbalanced parenthesis, square brackets, curly braces, etc.
 (use-package paredit
   :ensure t
@@ -269,6 +293,15 @@
   :ensure t
   :bind ("C-z" . vundo))
 
+;; the official snippets collection
+(use-package yasnippet-snippets :ensure t :defer t)
+
+;; snippet template system
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
+
 ;;; General configuration
 ;; backup edited files under a centralized location
 (setq backup-directory-alist '(("." . "~/.cache/emacs/backups"))
@@ -349,6 +382,7 @@ Create a screenshot under /tmp and put the filename in the kill ring."
 (global-set-key (kbd "C-c s") #'my/screenshot-svg)
 (global-set-key (kbd "C-c t v") #'view-mode)
 (global-set-key (kbd "C-c t b") #'menu-bar-mode)
+(global-set-key (kbd "C-c t w") #'whitespace-mode)
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
@@ -359,6 +393,7 @@ Create a screenshot under /tmp and put the filename in the kill ring."
 (global-set-key (kbd "C-c f R") #'isearch-backward-regexp)
 (global-set-key (kbd "C-c f w") #'isearch-forward-word)
 (global-set-key (kbd "C-h a") #'apropos)
+(global-set-key (kbd "C-c d p") #'check-parens)
 
 ;; re-enable uppercase and lowercase region commands
 (put 'upcase-region 'disabled nil)      ; C-x C-u

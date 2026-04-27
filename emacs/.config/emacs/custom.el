@@ -5,6 +5,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-cursor-blinks 0)
+ '(browse-url-browser-function 'browse-url-generic)
+ '(browse-url-generic-program "librewolf")
  '(column-number-mode t)
  '(confirm-kill-emacs 'yes-or-no-p)
  '(context-menu-mode t)
@@ -37,10 +39,11 @@
  '(kill-ring-deindent-mode t)
  '(menu-bar-mode t)
  '(mode-line-collapse-minor-modes t)
- '(mode-line-compact t)
- '(mode-line-position-column-line-format '(" (%l,%C)"))
+ '(mode-line-position-column-line-format '(" (%l,%c)"))
  '(mouse-wheel-progressive-speed nil)
+ '(next-line-add-newlines t)
  '(org-M-RET-may-split-line '((default)))
+ '(org-directory "~/Documents/org")
  '(org-startup-folded 'content)
  '(package-selected-packages nil)
  '(repeat-mode t)
