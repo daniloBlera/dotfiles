@@ -22,7 +22,7 @@
 
     "clock": {
         "format": "{:%R}",
-        "tooltip-format": "{:%A, %B %d, %Y, (%z)}"
+        "tooltip-format": "{:%A, %d %B %Y, (UTC %Z)}"
     },
 
     "cpu": {

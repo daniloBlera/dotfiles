@@ -177,7 +177,7 @@ layout {
 
     // Borders config for all windows
     border {
-        width 1
+        width 2
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
@@ -316,7 +316,7 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also do a four-finger swipe up on a touchpad.
     Mod+O repeat=false hotkey-overlay-title="Toggle windows overlay" { toggle-overview; }
-    Mod+Q repeat=false hotkey-overlay-title="Close window" { close-window; }
+    Mod+Shift+Q repeat=false hotkey-overlay-title="Close window" { close-window; }
 
     // Move focus inside a workspace - horizontal: between columns, vertical: between windows
     Mod+J                           { focus-column-left; }

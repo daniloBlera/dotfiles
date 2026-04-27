@@ -1,8 +1,10 @@
 # Configuration for mako, a notification daemon for wayland
 # for more information, check `mako(1)` and `mako(5)`
 
+# use `pango-list` to get all available fonts with pango's format
 font=Ubuntu Nerd Font 10
 background-color=#282828ff
 text-color=#ccccccff
 border-size=3
 border-color=#ccccccff
+default-timeout=5000
