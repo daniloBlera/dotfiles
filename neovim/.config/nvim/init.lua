@@ -1,41 +1,40 @@
 -- Neovim's configuration file
 -- written in lua
 
--- PLUGIN MANAGER
-require('config.lazy')
-
 -- GENERAL OPTIONS
-vim.opt.shadafile = 'NONE'          -- disable reading or writing shada files
-vim.opt.virtualedit = 'onemore'     -- allow the cursor to move past the end of the line
-vim.opt.clipboard = 'unnamedplus'   -- use system's clipboard for all selection operations
-vim.opt.tabstop = 8                 -- number of spaces a TAB counts for
-vim.opt.shiftwidth = 4              -- number of spaces to use for each step of (auto)indent.
-vim.opt.softtabstop = 4             -- number of spaces a TAB counts on edit operations
-vim.opt.expandtab = true            -- pressing tab inserts spaces
-vim.opt.shiftround = true           -- round indent to a multiple of 'shiftwidth'
-vim.opt.autoindent = true           -- copy the indent of the current line
-vim.opt.linebreak = true            -- enable visual line wrapping
-vim.opt.textwidth = 90              -- for "ninety-ish" columns hard wrapping
-vim.opt.colorcolumn = '90'          -- set an indicator at the wrapping column
-vim.opt.ignorecase = true           -- enable case-insensitive search
-vim.opt.smartcase = true            -- ... unless the pattern includes uppercase characters
-vim.opt.splitbelow = true           -- new window splits will be placed below
-vim.opt.number = true               -- enable line numbering
-vim.opt.scrolloff = 10              -- minimum lines above and below the cursor
-vim.opt.sidescrolloff = 5           -- minimum columns to the left and right of the cursor
-vim.opt.showcmd = true              -- show partial commands on the status line
-vim.opt.list = true                 -- display special chars (spaces, tabs, newlines, etc)
-vim.opt.wrapscan = false            -- disable wrap around search
-vim.opt.cursorline = true           -- highlight the cursor's line
-vim.opt.cursorcolumn = false        -- highlight the cursor's column
-vim.opt.foldenable = false          -- folds start open
-vim.opt.foldmethod = 'marker'       -- enable folding regions between {{{ and }}} markers
+vim.o.undofile = false
+vim.o.shadafile = 'NONE'          -- disable reading or writing shada files
+vim.o.virtualedit = 'onemore'     -- allow the cursor to move past the end of the line
+vim.o.clipboard = 'unnamedplus'   -- use system's clipboard for all selection operations
+vim.o.tabstop = 8                 -- number of spaces a TAB counts for
+vim.o.shiftwidth = 4              -- number of spaces to use for each step of (auto)indent.
+vim.o.softtabstop = 4             -- number of spaces a TAB counts on edit operations
+vim.o.expandtab = true            -- pressing tab inserts spaces
+vim.o.shiftround = true           -- round indent to a multiple of 'shiftwidth'
+vim.o.autoindent = true           -- copy the indent of the current line
+vim.o.linebreak = true            -- enable visual line wrapping
+vim.o.textwidth = 90              -- for "ninety-ish" columns hard wrapping
+vim.o.colorcolumn = '90'          -- set an indicator at the wrapping column
+vim.o.ignorecase = true           -- enable case-insensitive search
+vim.o.smartcase = true            -- ... unless the pattern includes uppercase characters
+vim.o.splitbelow = true           -- new window splits will be placed below
+vim.o.number = true               -- enable line numbering
+vim.o.scrolloff = 10              -- minimum lines above and below the cursor
+vim.o.sidescrolloff = 5           -- minimum columns to the left and right of the cursor
+vim.o.showcmd = true              -- show partial commands on the status line
+vim.o.list = true                 -- display special chars (spaces, tabs, newlines, etc)
+vim.o.wrapscan = false            -- disable wrap around search
+vim.o.cursorline = true           -- highlight the cursor's line
+vim.o.cursorcolumn = false        -- highlight the cursor's column
+vim.o.foldenable = false          -- folds start open
+vim.o.foldmethod = 'marker'       -- enable folding regions between {{{ and }}} markers
+vim.o.winborder = 'single'        -- single line border around floating windows 
 
 -- disable auto-wrapping of text and comments
 vim.opt.formatoptions = { t = false, c = false, }
 
 -- our check for terminal support for 256 colors and unicode glyps
-local function supports_truecolor()
+local function usingFancyTerm()
   local term = os.getenv('TERM')
   return term and (
     term:match('256color')
@@ -48,16 +47,12 @@ local function supports_truecolor()
 end
 
 -- setting colors and list mode chars based on truecolor and unicode support
-if supports_truecolor() then
-  -- enable truecolor
-  vim.opt.termguicolors = true
+if usingFancyTerm() then
+  -- fancier chars and colors
+  vim.o.termguicolors = true
   vim.cmd('set t_Co=256')
-  vim.cmd('colorscheme catppuccin-mocha')
+  vim.o.showbreak = '↳ '
 
-  -- indicator that the line is visually wrapped
-  vim.opt.showbreak = '↳ '
-
-  -- prettier listchars
   vim.opt.listchars = {
     eol = '¬',
     tab = '‹-',
@@ -70,15 +65,11 @@ if supports_truecolor() then
     nbsp = '^',
   }
 else
-  -- use a simpler colourscheme
-  vim.opt.termguicolors = false
+  -- simpler chars and colours
+  vim.o.termguicolors = false
   vim.cmd('set t_Co=8')
-  vim.cmd('colorscheme koehler')
+  vim.o.showbreak ='> '
 
-  -- indicator that the line is visually wrapped
-  vim.opt.showbreak ='> '
-
-  -- ASCII listchars
   vim.opt.listchars = {
     eol = '$',
     tab = '-->',
@@ -99,7 +90,7 @@ vim.g.mapleader = ' '
 -- disable moving to the next char when pressing `space`
 vim.keymap.set('n', '<space>', '<nop>')
 
--- unbinding F-keys
+-- unbinding function keys
 vim.keymap.set('n', '<F1>', '<nop>')
 vim.keymap.set('i', '<F1>', '<nop>')
 vim.keymap.set('i', '<F2>', '<nop>')
@@ -117,46 +108,41 @@ vim.keymap.set('i', '<F12>', '<nop>')
 -- stop the cursor moving back one character when exiting insert mode
 vim.keymap.set('i', '<esc>', '<C-O>:stopinsert<cr>')
 
--- clear search highlight
-vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
-
--- line selection
-vim.keymap.set('n', '<leader>l', 'vg_')   -- from the cursor to before newline 
-vim.keymap.set('n', '<leader>L', '^vg_')  -- whole visible line
-
--- copy the current visible line (except the newline)
-vim.keymap.set('n', 'yY', '^vg_y')
+vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>', { desc = 'Clear search highlight' })
+vim.keymap.set('n', '<leader>l', 'vg_', { desc = 'Select from cursor to the end of the line' }) 
+vim.keymap.set('n', '<leader>L', '^vg_', { desc = 'Select whole visible line' })
+vim.keymap.set('n', 'yY', '^vg_y', { desc = 'Copy visible line' })
 
 -- tab commands
-vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<cr>')
-vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>')
-vim.keymap.set('n', '<leader>tc', '<cmd>tabnew<cr>')
-vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>')
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<cr>', { desc = 'Next tab' })
+vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>', { desc = 'Previous tab' })
+vim.keymap.set('n', '<leader>tc', '<cmd>tabnew<cr>', { desc = 'Create new tab' })
+vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', { desc = 'Close current tab' })
 
 -- buffer commands
-vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>')
-vim.keymap.set('n', '<leader>bp', '<cmd>bprev<cr>')
-vim.keymap.set('n', '<leader>bi', '<cmd>buffers<cr>:buffer<space>')
-vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<cr>')
-vim.keymap.set('n', '<leader>bD', '<cmd>bdelete!<cr>')
-vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>')
-vim.keymap.set('n', '<leader>bx', '<cmd>x<cr>')
+vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Open next buffer' })
+vim.keymap.set('n', '<leader>bp', '<cmd>bprev<cr>', { desc = 'Open previous buffer' })
+vim.keymap.set('n', '<leader>bi', '<cmd>buffers<cr>:buffer<space>', { desc = 'Select buffer' })
+vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>bD', '<cmd>bdelete!<cr>', { desc = 'Close current buffer (force)' })
+vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>', { desc = 'Save buffer contents' })
+vim.keymap.set('n', '<leader>bx', '<cmd>x<cr>', { desc = 'Save buffer contents and close it' })
 
 -- window/split commands
 vim.keymap.set('n', '<c-left>', '<cmd>wincmd h<cr>')
 vim.keymap.set('n', '<c-down>', '<cmd>wincmd j<cr>')
 vim.keymap.set('n', '<c-up>', '<cmd>wincmd k<cr>')
 vim.keymap.set('n', '<c-right>', '<cmd>wincmd l<cr>')
-vim.keymap.set('n', '<leader>w<left>', '<cmd>wincmd h<cr>')
-vim.keymap.set('n', '<leader>w<down>', '<cmd>wincmd j<cr>')
-vim.keymap.set('n', '<leader>w<up>', '<cmd>wincmd k<cr>')
-vim.keymap.set('n', '<leader>w<right>', '<cmd>wincmd l<cr>')
-vim.keymap.set('n', '<leader>w/', ':vsplit<space>')   -- new split to the right
-vim.keymap.set('n', '<leader>w-', ':split<space>')    -- new split below
-vim.keymap.set('n', '<leader>wd', '<cmd>close<cr>')
-vim.keymap.set('n', '<leader>wD', '<cmd>close!<cr>')
-vim.keymap.set('n', '<leader>wq', '<cmd>qa<cr>')
-vim.keymap.set('n', '<leader>wQ', '<cmd>qa!<cr>')
+vim.keymap.set('n', '<leader>w<left>', '<cmd>wincmd h<cr>', { desc = 'Move to left split' })
+vim.keymap.set('n', '<leader>w<down>', '<cmd>wincmd j<cr>', { desc = 'Move to split below' })
+vim.keymap.set('n', '<leader>w<up>', '<cmd>wincmd k<cr>', { desc = 'Move to split above' })
+vim.keymap.set('n', '<leader>w<right>', '<cmd>wincmd l<cr>', { desc = 'Move to right split' })
+vim.keymap.set('n', '<leader>w/', ':vsplit<space>', { desc = 'New split to the right' })
+vim.keymap.set('n', '<leader>w-', ':split<space>', { desc = 'New split below' })
+vim.keymap.set('n', '<leader>wd', '<cmd>close<cr>', { desc = 'Close window' })
+vim.keymap.set('n', '<leader>wD', '<cmd>close!<cr>', { desc = 'Close window (force)' })
+vim.keymap.set('n', '<leader>wq', '<cmd>qa<cr>', { desc = 'Quit' })
+vim.keymap.set('n', '<leader>wQ', '<cmd>qa!<cr>', { desc = 'Quit (force)' })
 
 -- center the screen on the cursor after a jump
 vim.keymap.set('n', 'G', 'Gzz')
@@ -169,23 +155,23 @@ vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', '<down>', 'g<down>')
 vim.keymap.set('n', '<up>', 'g<up>')
 
--- toggle list mode, soft line wrapping, and cursor line highlight
-vim.keymap.set('n', '<leader>vl', '<cmd>set list!<cr>')
-vim.keymap.set('n', '<leader>vw', '<cmd>set wrap!<cr>')
-vim.keymap.set('n', '<leader>vh', '<cmd>set cursorline!<cr>')
+-- toggle visuals
+vim.keymap.set('n', '<leader>vl', '<cmd>set list!<cr>', { desc = 'Toggle list mode' })
+vim.keymap.set('n', '<leader>vw', '<cmd>set wrap!<cr>', { desc = 'Toggle soft line wrap' })
+vim.keymap.set('n', '<leader>vh', '<cmd>set cursorline!<cr>', { desc = 'Toggle cursor line highlight' })
 
 -- FILETYPE AND LANGUAGE SETTINGS
--- tab width in spaces
+-- configure tab width in spaces
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'lua', 'markdown', 'org', 'haskell', 'xml', 'yaml' },
   callback = function()
-    vim.opt_local.tabstop = 2
-    vim.opt_local.softtabstop = 2
-    vim.opt_local.shiftwidth = 2
+    vim.o.tabstop = 2
+    vim.o.softtabstop = 2
+    vim.o.shiftwidth = 2
   end,
 })
 
--- this should prevent the ~2sec delay to open a python source file
+-- this should prevent the ~2sec delay when opening a python source file
 if vim.fn.executable('python3') > 0 then
   vim.g.python3_host_prog = vim.fn.system('which python')
 end

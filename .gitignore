@@ -4,4 +4,4 @@
 \#*\#
 
 # lazy.nvim package manager
-neovim/.config/nvim/lazy-lock.json
+neovim/.config/nvim/nvim-pack-lock.json
