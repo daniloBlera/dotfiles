@@ -114,29 +114,35 @@ vim.keymap.set('i', '<F10>', '<nop>')
 vim.keymap.set('i', '<F11>', '<nop>')
 vim.keymap.set('i', '<F12>', '<nop>')
 
--- stop the cursor moving one character left when exiting insert mode
+-- stop the cursor moving back one character when exiting insert mode
 vim.keymap.set('i', '<esc>', '<C-O>:stopinsert<cr>')
 
--- clear search highlight on Esc
+-- clear search highlight
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
 
--- select the current line
-vim.keymap.set('n', '<leader>l', 'vg_')
-vim.keymap.set('n', '<leader>L', '^vg_')
+-- line selection
+vim.keymap.set('n', '<leader>l', 'vg_')   -- from the cursor to before newline 
+vim.keymap.set('n', '<leader>L', '^vg_')  -- whole visible line
 
--- copy the current line (minus newline)
+-- copy the current visible line (except the newline)
 vim.keymap.set('n', 'yY', '^vg_y')
 
--- navigate tabs
+-- tab commands
 vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<cr>')
 vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>')
+vim.keymap.set('n', '<leader>tc', '<cmd>tabnew<cr>')
+vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>')
 
--- navigate buffers
+-- buffer commands
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>')
 vim.keymap.set('n', '<leader>bp', '<cmd>bprev<cr>')
 vim.keymap.set('n', '<leader>bi', '<cmd>buffers<cr>:buffer<space>')
+vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<cr>')
+vim.keymap.set('n', '<leader>bD', '<cmd>bdelete!<cr>')
+vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>')
+vim.keymap.set('n', '<leader>bx', '<cmd>x<cr>')
 
--- navigate windows
+-- window/split commands
 vim.keymap.set('n', '<c-left>', '<cmd>wincmd h<cr>')
 vim.keymap.set('n', '<c-down>', '<cmd>wincmd j<cr>')
 vim.keymap.set('n', '<c-up>', '<cmd>wincmd k<cr>')
@@ -145,38 +151,27 @@ vim.keymap.set('n', '<leader>w<left>', '<cmd>wincmd h<cr>')
 vim.keymap.set('n', '<leader>w<down>', '<cmd>wincmd j<cr>')
 vim.keymap.set('n', '<leader>w<up>', '<cmd>wincmd k<cr>')
 vim.keymap.set('n', '<leader>w<right>', '<cmd>wincmd l<cr>')
-
--- split current window (open new ones to the right and below, respectively)
-vim.keymap.set('n', '<leader>w/', ':vsplit<space>')
-vim.keymap.set('n', '<leader>w-', ':split<space>')
-
--- close current buffer, tab, and window
-vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<cr>')
-vim.keymap.set('n', '<leader>bD', '<cmd>bdelete!<cr>')
-vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>')
+vim.keymap.set('n', '<leader>w/', ':vsplit<space>')   -- new split to the right
+vim.keymap.set('n', '<leader>w-', ':split<space>')    -- new split below
 vim.keymap.set('n', '<leader>wd', '<cmd>close<cr>')
 vim.keymap.set('n', '<leader>wD', '<cmd>close!<cr>')
 vim.keymap.set('n', '<leader>wq', '<cmd>qa<cr>')
 vim.keymap.set('n', '<leader>wQ', '<cmd>qa!<cr>')
-vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>')
-vim.keymap.set('n', '<leader>bx', '<cmd>x<cr>')
 
--- center the screen on the cursor's line after a jump
+-- center the screen on the cursor after a jump
 vim.keymap.set('n', 'G', 'Gzz')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
--- enable moving cursor through soft-wrapped lines
+-- cursor moves through soft-wrapped lines
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('n', '<down>', 'g<down>')
 vim.keymap.set('n', '<up>', 'g<up>')
 
--- toggle list mode and soft line wrapping
+-- toggle list mode, soft line wrapping, and cursor line highlight
 vim.keymap.set('n', '<leader>vl', '<cmd>set list!<cr>')
 vim.keymap.set('n', '<leader>vw', '<cmd>set wrap!<cr>')
-
--- line highlight
 vim.keymap.set('n', '<leader>vh', '<cmd>set cursorline!<cr>')
 
 -- FILETYPE AND LANGUAGE SETTINGS
