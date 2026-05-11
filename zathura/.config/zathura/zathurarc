@@ -47,5 +47,12 @@ map [index] p navigate_index up
 map [index] f navigate_index expand
 map [index] b navigate_index collapse
 
+# remap fit to height and width
+# unmap [normal] s
+# unmap [normal] a
+map [normal] w adjust_window width
+map [normal] h adjust_window best-fit
+
+
 # theme
 include fibonacci-ruler
