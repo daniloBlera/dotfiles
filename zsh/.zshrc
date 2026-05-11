@@ -1,19 +1,7 @@
 # zsh configuration file
 
 # configuring how the prompt should look
-
-# 1 - the common approach
-# '[user@host:last_dir] % '
-PROMPT='[%n@%m:%1~]%# '
-
-# 2 - user prompt on the line below
-# [user@host:~/sub/dir]
-# %
-# PROMPT=$'[%n@%m:%~]\n%# '
-
-# 3 - going simple with just the prompt, rc-style
-# '% '
-# PROMPT='%# '
+PROMPT='%# '
 
 # show the level of shell nesting from nnn
 [ -n "$NNNLVL" ] && PROMPT="N$NNNLVL:$PROMPT"
@@ -61,7 +49,6 @@ source_if_exists "$HOME/.config/shells/zsh_aliases"
 source_if_exists "$HOME/.config/shells/zsh_keybindings"
 source_if_exists '/usr/share/fzf/completion.zsh'
 source_if_exists '/usr/share/fzf/key-bindings.zsh'
-source_if_exists "$HOME/.local/scripts/fuzzyfuncs.sh"
 source_if_exists "$HOME/.config/nnn/misc/quitcd.bash_sh_zsh"
 
 # setup commands if they're installed somewhere in PATH
@@ -85,8 +72,15 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt autocd
 
+# Add prompt indicator for zmx
+if [[ -n $ZMX_SESSION ]]; then
+    export PS1="[$ZMX_SESSION] ${PS1}"
+fi
+
+# flow control -- when *enabled*, output to the terminal can be stopped and resumed with
+# =C-s= and =C-q=, respectively. Prefixing the `ixon` input setting of stty with a minus
+# *disables* it.
 stty -ixon
-# disable flow control -- when enabled, C-s stops output to the terminal, C-q resumes
 
 # Disable overwriting files with redirection
 set -o noclobber
