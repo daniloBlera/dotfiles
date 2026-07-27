@@ -1,38 +1,33 @@
--- Example config for Swayimg.
--- This file contains the default configuration used by the application.
-
--- The viewer searches for the config file in the following locations:
--- 1. $XDG_CONFIG_HOME/swayimg/init.lua
--- 2. $HOME/.config/swayimg/init.lua
--- 3. $XDG_CONFIG_DIRS/swayimg/init.lua
--- 4. /etc/xdg/swayimg/init.lua
+-- Configuration file for swayimg
 
 -- colourscheme
 color1 = 0xffdadada
 color2 = 0xff282828
-color3 = 0xbb000000
-color4 = 0xffffd700
+color3 = 0xff404040
+color4 = 0xbb000000
+color5 = 0xffD3F527
 
 -- General config
-swayimg.set_mode("viewer")
+swayimg.set_mode("gallery")
 swayimg.enable_antialiasing(true)
 swayimg.enable_decoration(false)
 swayimg.enable_overlay(false)
+swayimg.enable_exif_orientation(true)
 swayimg.set_dnd_button("MouseRight")
 
 -- Image list configuration
-swayimg.imagelist.set_order("alpha")
+swayimg.imagelist.set_order("numeric")
 swayimg.imagelist.enable_reverse(false)
 swayimg.imagelist.enable_recursive(false)
 swayimg.imagelist.enable_adjacent(false)
 
 -- Text overlay configuration
 swayimg.text.set_font("monospace")
-swayimg.text.set_size(20)
+swayimg.text.set_size(15)
 swayimg.text.set_padding(10)
 swayimg.text.set_foreground(color1)
-swayimg.text.set_background(color3)
-swayimg.text.set_shadow(0x0d000000)
+swayimg.text.set_background(color4)
+swayimg.text.set_shadow(color4)
 swayimg.text.set_timeout(3)
 swayimg.text.set_status_timeout(3)
 swayimg.text.hide()
@@ -42,11 +37,11 @@ swayimg.viewer.set_default_scale("optimal")
 swayimg.viewer.set_default_position("center")
 swayimg.viewer.set_drag_button("MouseLeft")
 swayimg.viewer.set_window_background(color2)
-swayimg.viewer.set_image_chessboard(20, 0xff333333, 0xff4c4c4c)
+swayimg.viewer.set_image_chessboard(25, color1, color3)
 swayimg.viewer.enable_centering(true)
 swayimg.viewer.enable_loop(false)
 swayimg.viewer.limit_preload(1)
-swayimg.viewer.set_mark_color(color4)
+swayimg.viewer.set_mark_color(color5)
 swayimg.viewer.set_text("topleft", {
   "File: {name}",
   "Format: {format}",
@@ -86,6 +81,7 @@ function move_viewport (direction)
 end
 
 -- move the viewport of the image
+-- arrow keys
 swayimg.viewer.on_key("Left", function()
   move_viewport("left")
 end)
@@ -99,6 +95,23 @@ swayimg.viewer.on_key("Up", function()
 end)
 
 swayimg.viewer.on_key("Right", function()
+  move_viewport("right")
+end)
+
+-- jkl;
+swayimg.viewer.on_key("j", function()
+  move_viewport("left")
+end)
+
+swayimg.viewer.on_key("k", function()
+  move_viewport("down")
+end)
+
+swayimg.viewer.on_key("l", function()
+  move_viewport("up")
+end)
+
+swayimg.viewer.on_key("semicolon", function()
   move_viewport("right")
 end)
 
@@ -159,7 +172,11 @@ swayimg.viewer.on_key("r", function()
 end)
 
 -- rotation and flipping
-swayimg.viewer.on_key("Shift-r", function()
+swayimg.viewer.on_key("Shift-less", function()
+  swayimg.viewer.rotate(270)
+end)
+
+swayimg.viewer.on_key("Shift-greater", function()
   swayimg.viewer.rotate(90)
 end)
 
@@ -192,16 +209,16 @@ swayimg.slideshow.on_key("q", function()
 end)
 
 -- Gallery mode
-swayimg.gallery.set_aspect("fill")
+swayimg.gallery.set_aspect("fit")
 swayimg.gallery.set_thumb_size(200)
 swayimg.gallery.set_padding_size(5)
 swayimg.gallery.set_border_size(5)
 swayimg.gallery.set_border_color(color1)
 swayimg.gallery.set_selected_scale(1.15)
-swayimg.gallery.set_selected_color(0xff00aa99)
+swayimg.gallery.set_selected_color(color3)
 swayimg.gallery.set_unselected_color(color2)
 swayimg.gallery.set_window_color(color2)
-swayimg.gallery.set_mark_color(color4)
+swayimg.gallery.set_mark_color(color5)
 swayimg.gallery.limit_cache(100)
 swayimg.gallery.enable_preload(false)
 swayimg.gallery.enable_pstore(false)
@@ -269,16 +286,11 @@ end)
 --
 
 -- force set scale mode on window resize (useful for tiling compositors)
--- swayimg.on_window_resize(function()
---   swayimg.viewer.set_fix_scale("optimal")
--- end)
-
--- bind the Delete key in slide show mode to delete the current file and display a status message
--- swayimg.slideshow.on_key("Delete", function()
---   local image = swayimg.slideshow.get_image()
---   os.remove(image.path)
---   swayimg.text.set_status("File "..image.path.." removed")
--- end)
+swayimg.on_window_resize(function()
+  if swayimg.get_mode() == "viewer" then
+    swayimg.viewer.set_fix_scale("optimal")
+  end
+end)
 
 -- set a custom window title in gallery mode
 -- swayimg.gallery.on_image_change(function()
