@@ -19,6 +19,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# remove problematic completion for some `todo` command
+compdef -d todo
+
 # use emacs mode keybindings
 bindkey -e
 
