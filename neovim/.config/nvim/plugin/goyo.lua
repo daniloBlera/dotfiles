@@ -1,7 +1,10 @@
 -- zen-ish mode
-vim.pack.add({ 'https://github.com/junegunn/limelight.vim' })
-vim.pack.add({ 'https://github.com/junegunn/goyo.vim' })
+vim.pack.add({
+  'https://github.com/junegunn/limelight.vim',
+  'https://github.com/junegunn/goyo.vim'
+})
 
+-- set how wide the editing area should be
 vim.g.goyo_width = 110
 
 -- when enabling goyo
@@ -23,4 +26,5 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+-- toggle goyo (and limelight)
 vim.keymap.set('n', '<leader>vz', '<cmd>Goyo<cr>', { desc = 'Toggle Goyo mode' })

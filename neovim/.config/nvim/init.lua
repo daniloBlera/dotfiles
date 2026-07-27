@@ -2,21 +2,35 @@
 -- written in lua
 
 -- GENERAL OPTIONS
-vim.o.undofile = false
+-- state and history
+vim.o.undofile = false            -- do not create undo files
 vim.o.shadafile = 'NONE'          -- disable reading or writing shada files
-vim.o.virtualedit = 'onemore'     -- allow the cursor to move past the end of the line
-vim.o.clipboard = 'unnamedplus'   -- use system's clipboard for all selection operations
+
+-- tabs and indentation
 vim.o.tabstop = 8                 -- number of spaces a TAB counts for
 vim.o.shiftwidth = 4              -- number of spaces to use for each step of (auto)indent.
 vim.o.softtabstop = 4             -- number of spaces a TAB counts on edit operations
 vim.o.expandtab = true            -- pressing tab inserts spaces
 vim.o.shiftround = true           -- round indent to a multiple of 'shiftwidth'
 vim.o.autoindent = true           -- copy the indent of the current line
-vim.o.linebreak = true            -- enable visual line wrapping
+
+-- line breaks and wrapping
+vim.o.linebreak = true            -- wrap lines at breakat instead of exactly max column
+vim.o.wrap = true                 -- enable visual line wrapping
 vim.o.textwidth = 90              -- for "ninety-ish" columns hard wrapping
 vim.o.colorcolumn = '90'          -- set an indicator at the wrapping column
+vim.opt.formatoptions = {         -- disable automatic line breaking on
+  t = false,                      -- text
+  c = false,                      -- comments
+}
+
+-- search
 vim.o.ignorecase = true           -- enable case-insensitive search
 vim.o.smartcase = true            -- ... unless the pattern includes uppercase characters
+
+-- visual and behaviour
+vim.o.virtualedit = 'onemore'     -- allow the cursor to move past the end of the line
+vim.o.clipboard = 'unnamedplus'   -- use system's clipboard for all selection operations
 vim.o.splitbelow = true           -- new window splits will be placed below
 vim.o.number = true               -- enable line numbering
 vim.o.scrolloff = 10              -- minimum lines above and below the cursor
@@ -29,11 +43,9 @@ vim.o.cursorcolumn = false        -- highlight the cursor's column
 vim.o.foldenable = false          -- folds start open
 vim.o.foldmethod = 'marker'       -- enable folding regions between {{{ and }}} markers
 vim.o.winborder = 'single'        -- single line border around floating windows 
+vim.opt.whichwrap = 'b,s,<,>,[,]' -- movements allowed to jump to next/previous line
 
--- disable auto-wrapping of text and comments
-vim.opt.formatoptions = { t = false, c = false, }
-
--- our check for terminal support for 256 colors and unicode glyps
+-- simple check for "fancy" (truecolor) terminals
 local function usingFancyTerm()
   local term = os.getenv('TERM')
   return term and (
@@ -106,7 +118,7 @@ vim.keymap.set('i', '<F11>', '<nop>')
 vim.keymap.set('i', '<F12>', '<nop>')
 
 -- stop the cursor moving back one character when exiting insert mode
-vim.keymap.set('i', '<esc>', '<C-O>:stopinsert<cr>')
+-- vim.keymap.set('i', '<esc>', '<C-O>:stopinsert<cr>')
 
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>', { desc = 'Clear search highlight' })
 vim.keymap.set('n', '<leader>l', 'vg_', { desc = 'Select from cursor to the end of the line' }) 
