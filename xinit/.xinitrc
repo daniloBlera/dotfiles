@@ -13,6 +13,21 @@
 #
 #   startx ~/.xinitrc rio
 
+##################################################
+# copied from the default `/etc/X11/xinit/xinitrc`
+#   https://wiki.archlinux.org/title/Xinit#xinitrc
+xinitdir="/etc/X11/xinit"
+
+# start some nice programs
+
+if [ -d "$xinitdir"/xinitrc.d ] ; then
+    for f in "$xinitdir/xinitrc.d"/?*.sh ; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
+fi
+##################################################
+
 # configure the Xorg environment
 if [ -f "${session_setup:=$HOME/.xprofile}" ]; then
     . $session_setup
@@ -23,7 +38,6 @@ terminal=st
 
 case $window_manager in
     bspwm)
-        sxhkd &
         exec bspwm;;
     dwm)
         dwmblocks &
