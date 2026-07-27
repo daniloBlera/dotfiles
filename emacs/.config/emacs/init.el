@@ -4,7 +4,7 @@
 ;;; obs.: The first time running this file should download all the necessary packages and
 ;;; tree-sitter grammars
 ;;;
-;;; tested under Emacs version 31.0.50
+;;; version 32.0.50
 
 ;;; Loading extra files
 ;; specify the file for `customize' and its friends
@@ -33,7 +33,7 @@
 ;; the beige-and-blue looks from plan 9
 (use-package acme-theme :ensure t :defer t)
 
-;; automatically change themes based on time -- or sunrise and sunset, if configured
+;; automatically change themes based on time
 (use-package circadian
   :ensure t
   :config
@@ -57,10 +57,14 @@
          ("C-/" . avy-goto-line)
          ("C-_" . avy-goto-line)))
 
-;; display a trail of function definitions relative to the cursor
+;; display a trail of function definitions relative to the cursor's location on the buffer
 (use-package breadcrumb
   :ensure t
   :hook (prog-mode . breadcrumb-mode))
+
+;; clojure-related
+(use-package cider :ensure t)
+(use-package clojure-mode :ensure t)
 
 ;; smarter commenting
 (use-package comment-dwim-2
@@ -74,7 +78,6 @@
   :config
   (setq completion-preview-minimum-symbol-length 2)
   (push 'org-self-insert-command completion-preview-commands)
-  (push 'paredit-backward-delete completion-preview-commands)
   :bind
   ((:map completion-preview-active-mode-map
          ("M-n" . completion-preview-next-candidate)
@@ -106,7 +109,7 @@
   :after (flycheck eglot)
   :config (global-flycheck-eglot-mode 1))
 
-;; run formatters on buffers based on their major-mode
+;; run mode-specific formatters
 (use-package format-all
   :ensure t
   :defer t
@@ -137,7 +140,7 @@
 ;; convert buffer contents to html
 (use-package htmlize :ensure t :defer t)
 
-;; (built-in) list buffer definitions (functions, variables, etc.) on the minibuffer
+;; list buffer definitions (functions, variables, etc.) on the minibuffer
 (use-package imenu
   :hook ((prog-mode org-mode) . imenu-add-menubar-index)
   :config (setq imenu-sort-function 'imenu--sort-by-name))
@@ -166,6 +169,14 @@
 
 ;; major mode for markdown
 (use-package markdown-mode :ensure t)
+(use-package markdown-ts-mode :ensure nil :defer t)
+
+;; nyan cat buffer position indicator
+(use-package nyan-mode
+  :ensure t
+  :config
+  (setq nyan-wavy-trail nil)
+  (nyan-mode))
 
 ;; major mode for lua
 (use-package lua-mode
@@ -174,7 +185,7 @@
   :interpreter ("lua" . lua-ts-mode)
   :config (setq-default lua-indent-nested-calls t))
 
-;; balance window margins so you don't have to look all the way to the left
+;; balance window margins so you don't always look to the left
 (use-package olivetti
   :ensure t
   :init (setq olivetti-body-width 110
@@ -183,14 +194,16 @@
   :bind (("C-c t o" . olivetti-mode))
   :hook ((org-mode prog-mode text-mode Info-mode) . olivetti-mode))
 
-;; a more flexible completion style that matches any order
+;; a completion style that matches space-separated components on any order
 (use-package orderless
   :ensure t
   :custom
   (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil) ;; Disable defaults, use our settings
+  (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
 
-;; for note-taking and knowledge graphs
+;; a plain text personal knowledge management system
 (use-package org-roam
   :ensure t
   :custom
@@ -211,13 +224,7 @@
   (org-roam-db-autosync-mode)
   (require 'org-roam-protocol))
 
-;; structural editing that avoids unbalanced parenthesis, square brackets, curly braces, etc.
-(use-package paredit
-  :ensure t
-  :hook
-  ((emacs-lisp-mode lisp-mode inferior-emacs-lisp-mode sly-mrepl-mode) . enable-paredit-mode))
-
-;; quickly toggle buffers
+;; toggle buffer visibility
 (use-package popper
   :ensure t
   :bind (("C-`" . popper-toggle)
@@ -238,17 +245,17 @@
   (popper-mode +1)
   (popper-echo-mode +1))
 
-;; color-code matching pair delimiters like parenthesis, brackets, braces, etc.
+;; color-code matching paired delimiters like parenthesis, brackets, braces, etc.
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; (built-in) list recently opened files
+;; list recently opened files
 (use-package recentf
   :bind (("C-x C-r" . recentf-open-files))
   :config (recentf-mode t))
 
-;; (built-in) list all lines matching pattern
+;; list all lines matching pattern
 (use-package replace
   :bind ("C-c o" . occur)
   :hook (occur . (lambda () (switch-to-buffer-other-window "*Occur*"))))
@@ -279,7 +286,7 @@
   :ensure t
   :bind ([remap fill-paragraph] . unfill-toggle))
 
-;; vertical completion system
+;; display completions vertically
 (use-package vertico
   :ensure t
   :init (vertico-mode)
@@ -293,7 +300,7 @@
   :ensure t
   :bind ("C-z" . vundo))
 
-;; the official snippets collection
+;; the official snippets collection for yasnippet
 (use-package yasnippet-snippets :ensure t :defer t)
 
 ;; snippet template system
@@ -317,40 +324,6 @@
 ;;; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
-;;; Tree-Sitter configuration
-;; mapping major modes to their tree-sitter variants
-(setq major-mode-remap-alist
-      '((bash-mode . bash-ts-mode)
-        (c-mode . c-ts-mode)
-        (erlang-mode . erlang-ts-mode)
-        (go-mode . go-ts-mode)
-        (html-mode . html-ts-mode)
-        (js-json-mode . json-ts-mode)
-        (lua-mode . lua-ts-mode)
-        (python-mode . python-ts-mode)
-        (toml-mode . toml-ts-mode)
-        (yaml-mode . yaml-ts-mode)))
-
-;; defining the grammar sources
-(setq treesit-language-source-alist
-      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-        (c "https://github.com/tree-sitter/tree-sitter-c")
-        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-        (erlang "https://github.com/WhatsApp/tree-sitter-erlang")
-        (go "https://github.com/tree-sitter/tree-sitter-go")
-        (html "https://github.com/tree-sitter/tree-sitter-html")
-        (json "https://github.com/tree-sitter/tree-sitter-json")
-        (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
-        (python "https://github.com/tree-sitter/tree-sitter-python")
-        (toml "https://github.com/tree-sitter-grammars/tree-sitter-toml")
-        (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml")))
-
-;; download missing grammars
-(dolist (grammar treesit-language-source-alist)
-  (let ((language (car grammar)))
-    (unless (treesit-language-available-p language)
-      (treesit-install-language-grammar language))))
-
 ;; open files under specific directories as read-only
 (add-hook 'find-file-hook
           (lambda ()
@@ -362,7 +335,8 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (python . t)))
+   (python . t)
+   (clojure . t)))
 
 ;; screenshots of Emacs
 (defun my/screenshot-svg ()
